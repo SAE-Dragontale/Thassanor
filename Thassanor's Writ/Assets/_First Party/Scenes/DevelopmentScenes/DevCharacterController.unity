@@ -628,8 +628,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4015d83d218f3147b4f5f534e5c3c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _kcBooleanButtons: 
-  _axisButtons: []
+  _akcButtonsBoolean: 1b0000000d000000
+  _asuButtonsAxis:
+  - _kcPositive: 119
+    _kcNegative: 115
+  - _kcPositive: 97
+    _kcNegative: 100
 --- !u!114 &1226689449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,11 +642,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1226689444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9748dccc7350b654a9eeca2ec38a27d7, type: 3}
+  m_Script: {fileID: 11500000, guid: e0d973c62bc8e7145bf5f3ce8866ae96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itAxesCount: 0
-  _itButtonCount: 0
+  _itAxesCount: 2
+  _itButtonCount: 2
 --- !u!1 &1390930825
 GameObject:
   m_ObjectHideFlags: 0

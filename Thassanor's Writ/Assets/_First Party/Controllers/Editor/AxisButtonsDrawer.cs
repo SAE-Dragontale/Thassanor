@@ -5,6 +5,7 @@
    Description: 	Used to extend the AxisButtons Struct and make it more easily viewable in the Unity Editor. 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+/*
 using UnityEngine;
 using UnityEditor;
 
@@ -49,3 +50,4 @@ public class AxisButtonsDrawer : PropertyDrawer {
 	}
 
 }
+*/

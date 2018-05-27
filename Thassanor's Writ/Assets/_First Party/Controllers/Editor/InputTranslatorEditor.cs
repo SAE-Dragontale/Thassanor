@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslatorEditor.cs
-   Version:			0.0.0
+   Version:			0.2.0
    Description: 	Automatically updates the Keyboard Tracker Script with changed variables on Editor.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -11,19 +11,31 @@ using UnityEditor;
 [CustomEditor(typeof(InputTranslator))]
 public class InputTranslatorEditor : Editor {
 
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Initialisation
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	private InputTranslator inputTranslator;
+
+	private void OnEnable() {
+		inputTranslator = target as InputTranslator;
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Window Interface
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 	public override void OnInspectorGUI() {
 
-		// "target" is the current OnInspectorGUI, so in this case we're making a reference to "this", or "gameobject."
-		InputTranslator inputTranslator = target as InputTranslator;
+		GUILayout.Space(10);
 
-		EditorGUI.BeginChangeCheck();
-
+		EditorGUILayout.BeginVertical("box");
+		EditorGUILayout.HelpBox("The original script looked like...", MessageType.Info);
 		base.OnInspectorGUI();
+		EditorGUILayout.EndVertical();
 
-		if (EditorGUI.EndChangeCheck()) {
-			inputTranslator.RefreshKeybindingParams();
-		}
-
+		EditorGUILayout.LabelField("Created by Hayden Reeve", EditorStyles.centeredGreyMiniLabel, GUILayout.ExpandWidth(true));
+		GUILayout.Space(1);
 
 	}
 

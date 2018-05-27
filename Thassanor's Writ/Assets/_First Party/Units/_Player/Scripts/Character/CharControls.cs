@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour {
+public class CharControls : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

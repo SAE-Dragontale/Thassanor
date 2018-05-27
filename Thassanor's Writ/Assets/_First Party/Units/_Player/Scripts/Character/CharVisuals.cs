@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellTyper : MonoBehaviour {
+public class CharVisuals : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

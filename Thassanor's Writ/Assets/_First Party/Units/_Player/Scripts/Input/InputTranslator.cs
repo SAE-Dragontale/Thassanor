@@ -9,9 +9,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharVisuals))]
+// We send information to:
 [RequireComponent(typeof(CharSpells))]
 [RequireComponent(typeof(CharControls))]
+
 public class InputTranslator : MonoBehaviour {
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -21,7 +22,6 @@ public class InputTranslator : MonoBehaviour {
     // The scripts that control the player's movement, spellcasting, and visual functions. and basic control functionality.
     private CharControls _scControl;
     private CharSpells _scSpell;
-    private CharVisuals _scVisual;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -37,7 +37,6 @@ public class InputTranslator : MonoBehaviour {
 
         _scControl = GetComponent<CharControls>();
         _scSpell = GetComponent<CharSpells>();
-        _scVisual = GetComponent<CharVisuals>();
 
     }
 
@@ -48,13 +47,12 @@ public class InputTranslator : MonoBehaviour {
 	// A call that recieves inputs from the associated scripts. Any Inputs we're recieving are presented here and then translated into function-calls.
 	public void TranslateInput(RawDataInput rdi) {
 
-        Debug.LogAssertion("Testing");
+        Debug.Log("--------------------");
         Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
-		Debug.Log($"Buttons Pressed: Escape [input._ablButtons[0]], Enter [{rdi._ablButtons[1]}].");
-
+		Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
         
+        _scControl.TrajectoryChange(rdi._aflAxes);
 		
 	}
 
 }
-

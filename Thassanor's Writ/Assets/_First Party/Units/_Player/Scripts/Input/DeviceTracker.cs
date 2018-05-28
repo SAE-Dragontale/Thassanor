@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			DeviceTracker.cs
-   Version:			0.0.0
+   Version:			0.0.1
    Description: 	An alternative to Unity's inbuilt keybindings system and provides monitoring for custom keybindings.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -9,7 +9,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// We send information to:
 [RequireComponent(typeof(InputTranslator))]
+
 public abstract class DeviceTracker : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //

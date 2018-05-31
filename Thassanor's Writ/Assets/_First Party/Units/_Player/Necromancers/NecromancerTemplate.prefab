@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4685090158607888}
   - component: {fileID: 212193929223599066}
+  - component: {fileID: 95938449824835750}
+  - component: {fileID: 114165933582967266}
   m_Layer: 0
   m_Name: NecromancerSprite
   m_TagString: Untagged
@@ -69,13 +71,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1416335583972482}
-  m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.9396927, z: 0.3420201, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4019881473060584}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -40, y: 180, z: 0}
 --- !u!54 &54529023689077764
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -84,7 +86,7 @@ Rigidbody:
   m_GameObject: {fileID: 1971498217547674}
   serializedVersion: 2
   m_Mass: 60
-  m_Drag: 1
+  m_Drag: 12
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -103,6 +105,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.9, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95938449824835750
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416335583972482}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06e3e0cbbddbb6e4e92ae6a8e0a82ec0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114165933582967266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416335583972482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trCamera: {fileID: 0}
+  _flSeverity: 4
 --- !u!114 &114187701728421928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,8 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4b6655a35a40a42a1208193aec9b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flSpeedMax: 4
-  _flSpeedIncrease: 0
+  _flMovementSpeed: 1.2
 --- !u!212 &212193929223599066
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -203,9 +235,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95b0fd9c6ba9f4f4bb1cc34102a1744a, type: 3}
+  m_Sprite: {fileID: 21300004, guid: caf9d1f720f6bd241ab5248bd4e306a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32, y: 0.35}

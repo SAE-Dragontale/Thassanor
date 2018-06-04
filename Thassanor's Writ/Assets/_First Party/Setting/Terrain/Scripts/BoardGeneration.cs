@@ -72,8 +72,8 @@ public class BoardGeneration : MonoBehaviour {
 				//here to say if we're on an outer edge tile, instantiate nothing on top of the existing tile instead a town or etc
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
 				{
-					// 3% chance to spawn water tile on top of normal
-					if (Random.value <= .03f) 
+					// 1% chance to spawn water tile on top of normal
+					if (Random.value <= .01f) 
 					{
 						InstantiateWater (_waterTiles, x, z);
 					}
@@ -269,53 +269,50 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	private int waterNo = 0;
-	void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
+    public List<GameObject> listWaterTiles = new List<GameObject>();
+    void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		List<Vector3> waterPosCheck = new List<Vector3> ();
-		Debug.Log("Start making water");
 
 		//random index is for sprite to display - this wont use multiple water sprites, might not matter though
-		int randomIndex = Random.Range(0, prefabs.Length);
+		//int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord,.02f, zCoord);
 
-		for (int it = 0; it < 4; it++) 
-		{
-			//instantiate a new tile of water
-			GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+		for (int it = 0; it < 4; it++)
+        {
+            //instantiate a tile because it's position is not being used, and therefore is unique
+            //instantiate a new tile of water at newpos
+            GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
 
-			//get a temp newPos for the tile
-			Vector3 newPos = tileInstance.transform.position;
+            //add this position to a list to check against
+            listWaterTiles.Add(tileInstance);
 
-			//set the tile position with random adjustment in a direction
-			newPos = newPos + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
+            //set the position with random adjustment in a direction
+            position = position + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
 
-			//set the new position and assign it to exisiting position, which is now the base for the next tile
-			tileInstance.transform.position = newPos;
-			position = newPos;
-
-			waterPosCheck.Add (newPos);
-
-			//Do a check to make sure water doesnt overlap itself or other objects
-			foreach (Vector3 myPos in waterPosCheck) 
+            //Do a check to make sure water doesnt overlap itself or other objects
+            foreach (GameObject tile in listWaterTiles) 
 			{
-				Debug.Log ("For each loop");
+                //if the position i want to use as a new tile's position, exsists in this pool of water~
+				if (position == tile.transform.position)
+                {
+                    Debug.Log("Remove additional tile at: " + position);
+                    //remove the new game object that overlaps
+                    Destroy(tileInstance);
+                    waterNo--;
+                } 
+				else
+                {
+                    //name the tiles to keep track of them
+                    tileInstance.name = "Water_#" + waterNo;
+                    waterNo++;
 
-				if (newPos == myPos) 
-				{				
-					Debug.Log (newPos + " == " + myPos);
-				} 
-				else 
-				{
-				}
-			}
+                    //adds the tile to the universal tile list
+                    _tileList.Add(tileInstance);
+                    tileInstance.transform.parent = _boardHolder.transform;
 
-			tileInstance.name = "Water_#" + waterNo;
-			waterNo++;
+                }
+            }
+        }
 
-			_tileList.Add (tileInstance);
-			tileInstance.transform.parent = _boardHolder.transform;
-            waterPosCheck.Clear();
-
-		}
-	}
+    }
 }

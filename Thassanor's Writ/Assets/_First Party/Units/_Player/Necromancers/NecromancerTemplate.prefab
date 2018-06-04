@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 65163875320831758}
   m_Layer: 0
   m_Name: NecromancerTemplate
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trCamera: {fileID: 0}
-  _flSeverity: 4
 --- !u!114 &114187701728421928
 MonoBehaviour:
   m_ObjectHideFlags: 1

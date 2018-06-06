@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BoardGeneration : MonoBehaviour {
 	
 	// The type of tile that will be laid in a specific position.
@@ -11,13 +12,16 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	[Space]
-	// An array of outer wall tile prefabs.
+	//player reference
 	public GameObject _playerRef;
 
-	[Header("Grid Components")]
-	public int _columns = 12;                                 // The number of columns on the board (how wide it will be).
-	public int _rows = 12;                                    // The number of rows on the board (how tall it will be).
-	public GameObject[] _floorTiles;                           // An array of floor tile prefabs.
+    [Header("Grid Components")]	
+    public int _itSeed;    					    				//grid seed for generation
+    OpenSimplexNoise _simplexNoise;								//reference to simplex noise script to get grid style
+    float _fltPerlinValue;
+    public int _columns = 12;                                   // The number of columns on the board (how wide it will be).
+	public int _rows = 12;                                      // The number of rows on the board (how tall it will be).
+	public GameObject[] _floorTiles;                            // An array of floor tile prefabs.
 	public GameObject[] _townTiles;        
 	public GameObject[] _waterTiles;                            
 	public GameObject[] _outerWallTiles;  
@@ -28,12 +32,16 @@ public class BoardGeneration : MonoBehaviour {
 	[SerializeField] private int _curTownCount = 0;	
 	public GameObject _boardHolder;                           // GameObject that acts as a container for all other tiles.
 	public List<GameObject> _tileList = new List<GameObject>();
+	public List<GameObject> _wallList = new List<GameObject>();
+	public List<GameObject> _propList = new List<GameObject>();
+    public List<GameObject> _waterList = new List<GameObject>();
 	private TileType[][] _tiles;                               // A jagged array of tile types representing the board, like a grid.
 
 
 
 	private void Start ()
 	{
+        _simplexNoise = new OpenSimplexNoise(_itSeed);
 		_playerRef = GameObject.FindGameObjectWithTag ("Player");
 		// Create the board holder.
 		_boardHolder = new GameObject("BoardHolder");
@@ -41,7 +49,9 @@ public class BoardGeneration : MonoBehaviour {
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
-		InstantiateOuterWalls ();
+		InstantiateOuterWalls (); 		
+		
+
 	}
 
 	//Function to set length of grid directions
@@ -64,25 +74,29 @@ public class BoardGeneration : MonoBehaviour {
 		for (int x = 0; x < _tiles.Length; x++)
 		{
 			for (int z = 0; z < _tiles[x].Length; z++)
-			{	
-				
+            { 
+                
+				_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
+                //_fltPerlinValue = Mathf.PerlinNoise(_itSeed * sampleX * 0.005f, _itSeed / sampleY * 0.005f);
+                
 				//creates the floor for the whole grid
 				InstantiateFromArray (_floorTiles, x, z);
 
 				//here to say if we're on an outer edge tile, instantiate nothing on top of the existing tile instead a town or etc
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
 				{
-					// 1% chance to spawn water tile on top of normal
-					if (Random.value <= .01f) 
+					if (_fltPerlinValue > .5f) 
 					{
 						InstantiateWater (_waterTiles, x, z);
 					}
 
-					// 3% chance to spawn town tile on top of normal
-					if (Random.value <= .03f && _curTownCount != _MaxTownCount) 
-					{		
-						InstantiateTown (_townTiles, x, z);
-					} 
+					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f) 
+					{
+                        if (_curTownCount != _MaxTownCount)
+                        {
+                            InstantiateTown(_townTiles, x, z);
+                        }
+                    } 
 				} 
 			}
 		}
@@ -212,7 +226,7 @@ public class BoardGeneration : MonoBehaviour {
 		}
 
 		tileInstance.name = "Wall _x-" + xCoord + " _z-" + zCoord;
-		_tileList.Add (tileInstance);
+		_wallList.Add (tileInstance);
 
 		// Set the tile's parent to the board holder.
 		tileInstance.transform.parent = _boardHolder.transform;
@@ -261,7 +275,7 @@ public class BoardGeneration : MonoBehaviour {
 		_curTownCount++;
 
 		//adds the tile generated into a list for a reference to each of them
-		_tileList.Add (tileInstance);
+		_propList.Add (tileInstance);
 		// Set the tile's parent to the board holder.
 		tileInstance.transform.parent = _boardHolder.transform;
 		//tileInstance.transform.rotation = Quaternion.Euler(new Vector3(_isometricAngle.x, _isometricAngle.y, _isometricAngle.z));
@@ -269,10 +283,9 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	private int waterNo = 0;
-    public List<GameObject> listWaterTiles = new List<GameObject>();
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-
+		string itemToRemove = "";
 		//random index is for sprite to display - this wont use multiple water sprites, might not matter though
 		//int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord,.02f, zCoord);
@@ -282,37 +295,38 @@ public class BoardGeneration : MonoBehaviour {
             //instantiate a tile because it's position is not being used, and therefore is unique
             //instantiate a new tile of water at newpos
             GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
+			tileInstance.name = "Water_#" + waterNo;
 
             //add this position to a list to check against
-            listWaterTiles.Add(tileInstance);
+            _waterList.Add(tileInstance);
 
             //set the position with random adjustment in a direction
             position = position + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
 
             //Do a check to make sure water doesnt overlap itself or other objects
-            foreach (GameObject tile in listWaterTiles) 
+            foreach (GameObject tile in _waterList) 
 			{
                 //if the position i want to use as a new tile's position, exsists in this pool of water~
 				if (position == tile.transform.position)
                 {
-                    Debug.Log("Remove additional tile at: " + position);
-                    //remove the new game object that overlaps
+					itemToRemove = tileInstance.name;
+					Debug.Log("Remove " +itemToRemove);
+				    GameObject t1 = GameObject.Find(itemToRemove);
+					//_waterList.Remove(t1); 
+					Debug.Log("Destroy " + itemToRemove);
                     Destroy(tileInstance);
-                    waterNo--;
+					
                 } 
 				else
                 {
                     //name the tiles to keep track of them
-                    tileInstance.name = "Water_#" + waterNo;
-                    waterNo++;
 
                     //adds the tile to the universal tile list
-                    _tileList.Add(tileInstance);
                     tileInstance.transform.parent = _boardHolder.transform;
 
                 }
             }
+			waterNo++;
         }
-
     }
 }

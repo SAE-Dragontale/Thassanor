@@ -53,6 +53,13 @@ public class CharControls : MonoBehaviour {
 
 	}
 
+	public void TrajectoryHalt() {
+
+		// We're simply just blanking our Trajectory Vector here, so that no new commands are processed.
+		_v3Trajectory = new Vector3 (0f, _v3Trajectory.y, 0f);
+
+	}
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Runtime
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */

@@ -258,8 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
-  _columns: 40
-  _rows: 40
+  _itSeed: 48327
+  _columns: 10
+  _rows: 10
   _floorTiles:
   - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
   - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
@@ -280,6 +281,9 @@ MonoBehaviour:
   _curTownCount: 0
   _boardHolder: {fileID: 0}
   _tileList: []
+  _wallList: []
+  _propList: []
+  _waterList: []
 --- !u!4 &1227436589
 Transform:
   m_ObjectHideFlags: 0

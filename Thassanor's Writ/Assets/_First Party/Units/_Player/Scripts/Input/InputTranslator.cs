@@ -27,9 +27,9 @@ public class InputTranslator : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-    enum PlayerState {Idle, Spellcasting, Paused};
-    PlayerState _enPlayerState;
-    PlayerState _enLastState;
+    private enum PlayerState {Idle, Spellcasting, Paused};
+    private PlayerState _enPlayerState;
+    private PlayerState _enLastState;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -53,50 +53,79 @@ public class InputTranslator : MonoBehaviour {
     public void TranslateInput(RawDataInput rdi) {
 
         // Some simple debugging that was originally useful.
-        // Debug.Log("--------------------");
-        // Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
-        // Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
+        Debug.Log("--------------------");
+        Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
+        Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
 
-        // Pressing the ESC key should come first in our processes.
-        if (rdi._ablButtons[0]) {
+		// Check the current player state and execute arguments based on it.
+		switch (_enPlayerState) {
 
-            switch (_enPlayerState) {
+			/* ----------------------------------------------------------------------------- */
+			case (PlayerState.Idle):
 
-				// If we're idle, pause the game.
-				case (PlayerState.Idle):
-                    _enLastState = _enPlayerState;
-                    _enPlayerState = PlayerState.Paused;
-					break;
+				// Pressing Escape
+				if (rdi._ablButtons[0]) {
+					_enLastState = _enPlayerState;
+					_enPlayerState = PlayerState.Paused;
+				}
 
-				// If we're casting a spell, stop casting.
-                case (PlayerState.Spellcasting):
-                    _enPlayerState = PlayerState.Idle;
+				// Pressing Enter
+				else if (rdi._ablButtons[1]) {
+
+				}
+
+				// If no commands are being pressed, process movement commands
+				else {
+					_scControl.TrajectoryChange(rdi._aflAxes);
+				}
+					
+				break;
+
+			/* ----------------------------------------------------------------------------- */
+			case (PlayerState.Spellcasting):
+
+				// Pressing Escape
+				if (rdi._ablButtons[0]) {
+					_enPlayerState = PlayerState.Idle;
 					// TODO: We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
-                    break;
+				}
 
-				// If we're paused, unpause the game.
-                case (PlayerState.Paused):
-                    _enPlayerState = _enLastState;
-                    break;
+				// Pressing Enter
+				else if (rdi._ablButtons[1]) {
 
-            }
+				}
 
-        }
+				// If no commands are being pressed, process movement commands
+				else {
+					
+				}
 
-		// Now, we should be checking each game state, as different states call for different actions.
-        switch (_enPlayerState) {
+				break;
 
-			// If we're Idle, we want to process in-game commands.
-            case (PlayerState.Idle):
-                _scControl.TrajectoryChange(rdi._aflAxes);
-                break;
+			/* ----------------------------------------------------------------------------- */
+			case (PlayerState.Paused):
 
-			// If we're Spellcasting, we only really want to process final input as the keyboard is used for typing.
-            case (PlayerState.Spellcasting):
-                break;
+				// Pressing Escape
+				if (rdi._ablButtons[0]) {
+					_enPlayerState = _enLastState;
+				}
 
-        }
+				// Pressing Enter
+				else if (rdi._ablButtons[1]) {
+
+				}
+
+				// If no commands are being pressed, process movement commands
+				else {
+
+				}
+				
+				break;
+
+		}
 		
 	}
 
 }
+ 
+ 

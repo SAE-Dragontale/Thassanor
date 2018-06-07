@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharControls.cs
-   Version:			0.1.0
+   Version:			0.2.0
    Description: 	Recieves movement input and controls the player's position.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -57,17 +57,13 @@ public class CharControls : MonoBehaviour {
 
 		// We're simply just blanking our Trajectory Vector here, so that no new commands are processed.
 		_v3Trajectory = new Vector3 (0f, _v3Trajectory.y, 0f);
+		_charVisuals.AnimMovement();
 
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Runtime
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Update is called once per frame.
-	private void Update () {
-		
-	}
 
 	// Fixed Update is called once per fixed frame.
 	private void FixedUpdate() {

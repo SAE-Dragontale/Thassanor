@@ -71,6 +71,13 @@ public class BoardGeneration : MonoBehaviour {
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
+		//the amount of tiles which spreads the towns apart
+		int townSpreadCur = 0;
+		int townSpread = 90;
+		//keeps this a constant size compared to the grid/map size
+		townSpread = Mathf.Max(_columns,_rows) * 6;
+
+
 		for (int x = 0; x < _tiles.Length; x++)
 		{
 			for (int z = 0; z < _tiles[x].Length; z++)
@@ -85,19 +92,27 @@ public class BoardGeneration : MonoBehaviour {
 				//here to say if we're on an outer edge tile, instantiate nothing on top of the existing tile instead a town or etc
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
 				{
-					if (_fltPerlinValue > .5f) 
+					//perlin value for water
+					if (_fltPerlinValue > .75f) 
 					{
 						InstantiateWater (_waterTiles, x, z);
 					}
 
-					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f) 
+					//perlin value for towns
+					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f && townSpreadCur == townSpread) 
 					{
                         if (_curTownCount != _MaxTownCount)
                         {
                             InstantiateTown(_townTiles, x, z);
+							townSpreadCur = 0;
                         }
                     } 
 				} 
+				if(townSpreadCur < townSpread)
+				{
+				townSpreadCur++;		
+
+				}
 			}
 		}
 	}
@@ -107,9 +122,9 @@ public class BoardGeneration : MonoBehaviour {
 	{
 		// The outer walls are one unit left, right, up and down from the board.
 		float leftEdgeX = -1f;
-		float rightEdgeX = _columns + 0f;
+		float rightEdgeX = _columns;
 		float bottomEdgeZ = -1f;
-		float topEdgeZ = _rows + 0f;
+		float topEdgeZ = _rows;
 
 		// Instantiate both vertical walls (one on each side).
 		InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeZ, topEdgeZ);
@@ -161,12 +176,11 @@ public class BoardGeneration : MonoBehaviour {
 		// The position to be instantiated at is based on the coordinates.
 		Vector3 position = new Vector3(xCoord, 0f , zCoord);
 
-		// Create an instance of the prefab from the random index of the array.
+		//checks left wall
 		if (xCoord == -1) 
 		{
-
 			//this checks the left wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _tiles.Length || zCoord == -1) 
+			if (zCoord == _tiles[0].Length || zCoord == -1) 
 			{			
 				if (zCoord == _tiles.Length) 
 				{
@@ -182,17 +196,20 @@ public class BoardGeneration : MonoBehaviour {
 				tileInstance = Instantiate (prefabs [1], position, Quaternion.identity) as GameObject;
 			}
 		} 
+		//checks right wall
 		else if (xCoord == _tiles.Length) 
 		{
 			//this checks the right wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _tiles.Length || zCoord == -1) 
+			if (zCoord == _tiles[0].Length || zCoord == -1) 
 			{			
 				if (zCoord == _tiles.Length) 
 				{
+					//create corner tile at length
 					tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
 				if (zCoord == -1) 
 				{
+					//create corner tile at start
 					tileInstance = Instantiate (prefabs [5], position, Quaternion.identity) as GameObject;
 				}
 			} 
@@ -202,9 +219,10 @@ public class BoardGeneration : MonoBehaviour {
 
 			}
 		}
+		//checks front wall
 		if (zCoord == -1) 
 		{
-			//this stops tiles from generating at the two ends of the front line of walls
+			//this stops tiles from generating at the corners of the front line of walls
 			if (xCoord == _tiles.Length || xCoord == -1) 
 			{		
 			}  
@@ -213,18 +231,30 @@ public class BoardGeneration : MonoBehaviour {
 				tileInstance = Instantiate (prefabs [0], position, Quaternion.identity) as GameObject;
 			}
 		} 
-		else if (zCoord == _tiles.Length) 
+		//checks back wall with the second element in the jagged array
+		else if (zCoord == _tiles[0].Length) 
 		{
-			//this stops tiles from generating at the two ends of the back line of walls
+			//this stops tiles from generating at the corners of the back line of walls
 			if (xCoord == _tiles.Length || xCoord == -1) 
-			{	
+			{			
+				if (xCoord == _tiles.Length) 
+				{
+					//create corner tile at length
+					tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
+				}	
+				if (xCoord == -1) 
+				{
+					//create corner tile at start
+					tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
+				}
 			} 
 			else 
 			{
 				tileInstance = Instantiate (prefabs [2], position, Quaternion.identity) as GameObject;
+
 			}
 		}
-
+		
 		tileInstance.name = "Wall _x-" + xCoord + " _z-" + zCoord;
 		_wallList.Add (tileInstance);
 
@@ -263,14 +293,13 @@ public class BoardGeneration : MonoBehaviour {
 		int randomIndex = Random.Range(0, prefabs.Length);
 
 		Vector3 position = new Vector3(xCoord, 0.03f, zCoord);
-
 		// Create an instance of the prefab from the random index of the array.
 		GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
 
 		//towncount is to keep track of how many towns have been created
 		Vector3 newPos = tileInstance.transform.position;
+		newPos = newPos + new Vector3(0,1,0);
 		tileInstance.transform.position = newPos;
-
 		tileInstance.name = "Town_#" + _curTownCount;
 		_curTownCount++;
 
@@ -290,8 +319,8 @@ public class BoardGeneration : MonoBehaviour {
 		//int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord,.02f, zCoord);
 
-		for (int it = 0; it < 4; it++)
-        {
+		//for (int it = 0; it < 4; it++)
+       // {
             //instantiate a tile because it's position is not being used, and therefore is unique
             //instantiate a new tile of water at newpos
             GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
@@ -301,8 +330,8 @@ public class BoardGeneration : MonoBehaviour {
             _waterList.Add(tileInstance);
 
             //set the position with random adjustment in a direction
-            position = position + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
-
+           //position = position + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
+			
             //Do a check to make sure water doesnt overlap itself or other objects
             foreach (GameObject tile in _waterList) 
 			{
@@ -310,11 +339,9 @@ public class BoardGeneration : MonoBehaviour {
 				if (position == tile.transform.position)
                 {
 					itemToRemove = tileInstance.name;
-					Debug.Log("Remove " +itemToRemove);
 				    GameObject t1 = GameObject.Find(itemToRemove);
 					//_waterList.Remove(t1); 
-					Debug.Log("Destroy " + itemToRemove);
-                    Destroy(tileInstance);
+                    //Destroy(tileInstance);
 					
                 } 
 				else
@@ -327,6 +354,6 @@ public class BoardGeneration : MonoBehaviour {
                 }
             }
 			waterNo++;
-        }
+      //  }
     }
 }

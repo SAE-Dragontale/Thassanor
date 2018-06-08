@@ -68,6 +68,12 @@ public class CharControls : MonoBehaviour {
 	// Fixed Update is called once per fixed frame.
 	private void FixedUpdate() {
 
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position,-Vector3.up, out hit) && hit.transform.tag == "Water")
+		{
+			Debug.Log("Water");
+		}
+
 		// Apply new Vector3 to velocity.
 		_rb.velocity += _v3Trajectory.normalized;
 

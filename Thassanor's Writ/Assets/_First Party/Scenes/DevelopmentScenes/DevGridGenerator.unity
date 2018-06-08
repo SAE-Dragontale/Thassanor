@@ -215,13 +215,32 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4019881473060584, guid: 2410feb7441a09f498ef12ca8a5294f6, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114165933582967266, guid: 2410feb7441a09f498ef12ca8a5294f6,
         type: 2}
       propertyPath: _trCamera
       value: 
       objectReference: {fileID: 1953673543}
+    - target: {fileID: 224464758129653270, guid: 2410feb7441a09f498ef12ca8a5294f6,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685090158607888, guid: 2410feb7441a09f498ef12ca8a5294f6, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114761110485666608, guid: 2410feb7441a09f498ef12ca8a5294f6,
+        type: 2}
+      propertyPath: _gboRaycastObj
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114761110485666608, guid: 2410feb7441a09f498ef12ca8a5294f6,
+        type: 2}
+      propertyPath: _gboRaycast
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2410feb7441a09f498ef12ca8a5294f6, type: 2}
   m_IsPrefabParent: 0
@@ -258,14 +277,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
-  _itSeed: 48327
-  _columns: 10
-  _rows: 10
+  _itSeed: 1
+  _columns: 20
+  _rows: 20
   _floorTiles:
   - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
   - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
   _townTiles:
-  - {fileID: 1959668555495680, guid: cf00702d831eaac45aa06f6c175dc708, type: 2}
+  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
   _waterTiles:
   - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
   _outerWallTiles:
@@ -295,7 +314,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1953673536
 Prefab:

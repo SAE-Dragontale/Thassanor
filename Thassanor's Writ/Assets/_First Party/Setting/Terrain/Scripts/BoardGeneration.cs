@@ -16,7 +16,9 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject _playerRef;
 
     [Header("Grid Components")]	
-    public int _itSeed;    					    				//grid seed for generation
+    public int _itSeed;                                         //grid seed for generation
+    [Range(2, 9)]
+    [SerializeField] int _townSpread;
     OpenSimplexNoise _simplexNoise;								//reference to simplex noise script to get grid style
     float _fltPerlinValue;
     public int _columns = 12;                                   // The number of columns on the board (how wide it will be).
@@ -73,9 +75,8 @@ public class BoardGeneration : MonoBehaviour {
 	{		
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
-		int townSpread = 90;
 		//keeps this a constant size compared to the grid/map size
-		townSpread = Mathf.Max(_columns,_rows) * 6;
+		_townSpread = Mathf.Max(_columns,_rows) * _townSpread;
 
 
 		for (int x = 0; x < _tiles.Length; x++)
@@ -99,7 +100,7 @@ public class BoardGeneration : MonoBehaviour {
 					}
 
 					//perlin value for towns
-					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f && townSpreadCur == townSpread) 
+					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f && townSpreadCur == _townSpread) 
 					{
                         if (_curTownCount != _MaxTownCount)
                         {
@@ -108,7 +109,7 @@ public class BoardGeneration : MonoBehaviour {
                         }
                     } 
 				} 
-				if(townSpreadCur < townSpread)
+				if(townSpreadCur < _townSpread)
 				{
 				townSpreadCur++;		
 

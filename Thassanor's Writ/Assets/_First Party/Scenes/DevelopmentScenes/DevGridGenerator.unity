@@ -278,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
   _itSeed: 1
+  _townSpread: 6
   _columns: 20
   _rows: 20
   _floorTiles:

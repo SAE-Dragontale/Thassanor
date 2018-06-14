@@ -1,42 +1,59 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
-   File:			SpellSummon.cs
-   Version:			0.1.0
-   Description: 	The basic spell modification that summons the undead. This spell handles killing, and resurrecting neutral actors.
+   File:			Unit.cs
+   Version:			0.0.0
+   Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Summon Minion", menuName = "Spells/Summon")]
-public class SpellSummon : Spell {
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
+
+public abstract class Unit : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public enum SummonType {Necromancy, Resurrection};
+	protected Animator _an;
+	protected SpriteRenderer _sr;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The number of targets that this spell can target at maximum.")]
-	public int _itTargets;
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Instantation
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The time the spell takes to complete after it has been cast in seconds.")]
-	public float _flTimeToComplete;
+	// Called before Start().
+	private void Awake() {
+		
+		_an = GetComponent<Animator>();
+		_sr = GetComponent<SpriteRenderer>();
 
-	[Tooltip("The Summon-Type this spell is. Necromancy kills alive units and resurrects them. Resurrection simply revives previously undead units.")]
-	public SummonType _enSummonType;
+	}
+
+	// Called before class calls or functions.
+	private void Start () {
+		
+	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public override void CastSpell () {
-
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Class Functions
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+	
+	// Update is called once per frame.
+	private void Update () {
+		
 	}
 
 	/* ----------------------------------------------------------------------------- */

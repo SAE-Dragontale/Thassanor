@@ -1,42 +1,44 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
-   File:			SpellSummon.cs
-   Version:			0.1.0
-   Description: 	The basic spell modification that summons the undead. This spell handles killing, and resurrecting neutral actors.
+   File:			PeasantGroup.cs
+   Version:			0.0.0
+   Description: 	The most basic non-player actor. This unit-group is attached to a Hamlet usually, and contains all currently instantiated peasants.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Summon Minion", menuName = "Spells/Summon")]
-public class SpellSummon : Spell {
+public class PeasantGroup : LivingGroup {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public enum SummonType {Necromancy, Resurrection};
-
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The number of targets that this spell can target at maximum.")]
-	public int _itTargets;
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Instantation
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The time the spell takes to complete after it has been cast in seconds.")]
-	public float _flTimeToComplete;
-
-	[Tooltip("The Summon-Type this spell is. Necromancy kills alive units and resurrects them. Resurrection simply revives previously undead units.")]
-	public SummonType _enSummonType;
+	// Called before class calls or functions.
+	private void Start () {
+		
+	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public override void CastSpell () {
-
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Class Functions
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+	
+	// Update is called once per frame.
+	private void Update () {
+		
 	}
 
 	/* ----------------------------------------------------------------------------- */

@@ -83,7 +83,12 @@ public class BoardGeneration : MonoBehaviour {
 		{
 			for (int z = 0; z < _tiles[x].Length; z++)
             { 
-                
+				//--------------------------------------------------------------------------------------------------------------------------------
+				
+                //do a check for half length / height - then duplicate tiles in reverse order based on already existing tiles in list
+
+				//--------------------------------------------------------------------------------------------------------------------------------
+
 				_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
                 //_fltPerlinValue = Mathf.PerlinNoise(_itSeed * sampleX * 0.005f, _itSeed / sampleY * 0.005f);
                 

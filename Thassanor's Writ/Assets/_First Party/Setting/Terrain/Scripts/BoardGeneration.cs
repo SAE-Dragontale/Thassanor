@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// Script: BoardGeneration.cs
+// Date Updated: 15/06/2018
+// Author & Contributors: Eric Cox
+// Purpose: The creation and design details of the maps for the game. Water/Towns/Props/Size. etc.  
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +17,39 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	[Space]
+	
 	//player reference
 	public GameObject _playerRef;
 
     [Header("Grid Components")]	
     public int _itSeed;                                         //grid seed for generation
-    [Range(2, 9)]
-    [SerializeField] int _townSpread;
     OpenSimplexNoise _simplexNoise;								//reference to simplex noise script to get grid style
     float _fltPerlinValue;
+
+	[Space]
+
+    [Tooltip("Width.")]
     public int _columns = 12;                                   // The number of columns on the board (how wide it will be).
+    [Tooltip("Height.")]
 	public int _rows = 12;                                      // The number of rows on the board (how tall it will be).
+
+	[Space]
+
+    [Range(-.5f,.5f)]
+    public float _waterDensity;
+    [Range(1, 9)]
+    public int _waterSize;
+
+	[Space]
+
+    [Tooltip("This value is multiplied by the column size or row size, whichever is biggest. This keeps size & spread dynamic.")]
+    [Range(2, 9)]
+    public int _townSpread;
+	public int _MaxTownCount = 4;	
+	[SerializeField] private int _curTownCount = 0;	
+
+	[Space]
+	
 	public GameObject[] _floorTiles;                            // An array of floor tile prefabs.
 	public GameObject[] _townTiles;        
 	public GameObject[] _waterTiles;                            
@@ -30,8 +57,6 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 	[Header("Board Components")]
-	[SerializeField] private int _MaxTownCount = 4;	
-	[SerializeField] private int _curTownCount = 0;	
 	public GameObject _boardHolder;                           // GameObject that acts as a container for all other tiles.
 	public List<GameObject> _tileList = new List<GameObject>();
 	public List<GameObject> _wallList = new List<GameObject>();
@@ -51,8 +76,7 @@ public class BoardGeneration : MonoBehaviour {
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
-		InstantiateOuterWalls (); 		
-		
+		InstantiateOuterWalls (); 			
 
 	}
 
@@ -83,18 +107,23 @@ public class BoardGeneration : MonoBehaviour {
 		{
 			for (int z = 0; z < _tiles[x].Length; z++)
             { 
-                
+                //THIS WILL RETURN -1 TO 1
 				_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
                 //_fltPerlinValue = Mathf.PerlinNoise(_itSeed * sampleX * 0.005f, _itSeed / sampleY * 0.005f);
-                
+
+				//---------------------------------------------------------------------------------------------------------------------------------------------------//
+				//say at half the rows have generated, stop, and duplicate tiles but in reverse to mirror the two halves
+				//---------------------------------------------------------------------------------------------------------------------------------------------------//
+
 				//creates the floor for the whole grid
 				InstantiateFromArray (_floorTiles, x, z);
+				
 
 				//here to say if we're on an outer edge tile, instantiate nothing on top of the existing tile instead a town or etc
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
 				{
 					//perlin value for water
-					if (_fltPerlinValue > .75f) 
+					if (_fltPerlinValue < _waterDensity) 
 					{
 						InstantiateWater (_waterTiles, x, z);
 					}
@@ -121,6 +150,16 @@ public class BoardGeneration : MonoBehaviour {
 	//creates the border
 	void InstantiateOuterWalls ()
 	{
+		//Array Elements - 8
+		// 0 - Bottom
+		// 1 - Left
+		// 2 - Top
+		// 3 - Right
+		// 4 - Bottom Left Corner
+		// 5 - Bottom Right Corner
+		// 6 - Top Left Corner
+		// 7 - Top Right Corner
+
 		// The outer walls are one unit left, right, up and down from the board.
 		float leftEdgeX = -1f;
 		float rightEdgeX = _columns;
@@ -152,7 +191,6 @@ public class BoardGeneration : MonoBehaviour {
 			currentZ++;
 		}
 	}
-
 
 	//creates the border on the top and bottom sides
 	void InstantiateHorizontalOuterWall (float startingX, float endingX, float zCoord)
@@ -220,6 +258,7 @@ public class BoardGeneration : MonoBehaviour {
 
 			}
 		}
+		
 		//checks front wall
 		if (zCoord == -1) 
 		{
@@ -266,9 +305,11 @@ public class BoardGeneration : MonoBehaviour {
 
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{
+
+		//sets the player position to the first tile
 		if (xCoord == 0 && zCoord == 0) 
 		{
-			//	_playerRef.transform.position = new Vector3(0,1f,0f);
+			_playerRef.transform.position = new Vector3(0,.6f,0f);
 		}
 
 		// Create a random index for the instantiated tile.
@@ -320,8 +361,10 @@ public class BoardGeneration : MonoBehaviour {
 		//int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord,.02f, zCoord);
 
-		//for (int it = 0; it < 4; it++)
-       // {
+		//enable for loop to create water pools
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		for (int it = 0; it < _waterSize; it++)
+        {
             //instantiate a tile because it's position is not being used, and therefore is unique
             //instantiate a new tile of water at newpos
             GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
@@ -330,8 +373,10 @@ public class BoardGeneration : MonoBehaviour {
             //add this position to a list to check against
             _waterList.Add(tileInstance);
 
-            //set the position with random adjustment in a direction
-           //position = position + new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
+			//enable the 'position = position ...' code to get tile's branching/reaching
+			//------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //set the position with random adjustment in a direction - change to make it less random or have no randomness for the same seed
+           	position = position + new Vector3(Random.Range(-1,2),0,Random.Range(-1,2));
 			
             //Do a check to make sure water doesnt overlap itself or other objects
             foreach (GameObject tile in _waterList) 
@@ -349,12 +394,11 @@ public class BoardGeneration : MonoBehaviour {
                 {
                     //name the tiles to keep track of them
 
-                    //adds the tile to the universal tile list
                     tileInstance.transform.parent = _boardHolder.transform;
 
                 }
             }
 			waterNo++;
-      //  }
+        }
     }
 }

@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1100133362470680}
+  m_IsPrefabParent: 1
+--- !u!1 &1100133362470680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4257883264827294}
+  - component: {fileID: 114206768219623590}
+  m_Layer: 0
+  m_Name: BoardGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4257883264827294
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100133362470680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.869618, y: -2.1646907, z: 7.0540648}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114206768219623590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100133362470680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8aebb4a24bf1949971a2dbdc5c4c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRef: {fileID: 0}
+  _itSeed: 1
+  _townSpread: 6
+  _columns: 20
+  _rows: 20
+  _floorTiles:
+  - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
+  - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
+  _townTiles:
+  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
+  _waterTiles:
+  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
+  _outerWallTiles:
+  - {fileID: 1186601872910216, guid: 1277f7cd2c078cc42a5794276b936303, type: 2}
+  - {fileID: 1685684480237132, guid: e120c643a46a8904994fe3b98904d4d6, type: 2}
+  - {fileID: 1116095052213986, guid: 49c0c60c93ee71145ac7151e07057dcd, type: 2}
+  - {fileID: 1066849792915064, guid: dd0e5ab261ea27149b4d292b9db77f88, type: 2}
+  - {fileID: 1464540072501024, guid: 21293c9dfe16f614d889ef609914f527, type: 2}
+  - {fileID: 1983483496402210, guid: 271268433e20c234388d9370ee8b64be, type: 2}
+  - {fileID: 1416450918642328, guid: 70cbd3e0a88529d4c81c9b75768e546d, type: 2}
+  - {fileID: 1999686806469958, guid: cfe68b27fc1c47d47896a5ea832e1997, type: 2}
+  _MaxTownCount: 4
+  _curTownCount: 0
+  _boardHolder: {fileID: 0}
+  _tileList: []
+  _wallList: []
+  _propList: []
+  _waterList: []

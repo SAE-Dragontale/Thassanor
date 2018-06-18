@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class BoardGeneration : MonoBehaviour {
@@ -17,7 +18,7 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	[Space]
-	
+
 	//player reference
 	public GameObject _playerRef;
 
@@ -65,6 +66,12 @@ public class BoardGeneration : MonoBehaviour {
 	private TileType[][] _tiles;                               // A jagged array of tile types representing the board, like a grid.
 
 
+	[Space]
+	[Header("UI Components")]
+	public Text _txtBoardSize;
+	public Text _txtWaterCount;
+	public Text _txtTownCount;
+
 
 	private void Start ()
 	{
@@ -78,6 +85,10 @@ public class BoardGeneration : MonoBehaviour {
 		InstantiateTiles ();
 		InstantiateOuterWalls (); 			
 
+		_txtBoardSize.text = "Board Size: " + _columns + " x " + _rows + " = " + _rows*_columns;		
+		_txtTownCount.text = "Towns: " + _curTownCount;	
+		_txtWaterCount.text = "Individual Water Tiles: " + _waterList.Count;
+		
 	}
 
 	//Function to set length of grid directions
@@ -95,6 +106,7 @@ public class BoardGeneration : MonoBehaviour {
 	}
 
 	//Function to create a tile
+	bool hasInstantiated = false;
 	void InstantiateTiles ()
 	{		
 		//the amount of tiles which spreads the towns apart
@@ -107,6 +119,7 @@ public class BoardGeneration : MonoBehaviour {
 		{
 			for (int z = 0; z < _tiles[x].Length; z++)
             { 
+				hasInstantiated = false;
                 //THIS WILL RETURN -1 TO 1
 				_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
                 //_fltPerlinValue = Mathf.PerlinNoise(_itSeed * sampleX * 0.005f, _itSeed / sampleY * 0.005f);
@@ -116,19 +129,19 @@ public class BoardGeneration : MonoBehaviour {
 				//---------------------------------------------------------------------------------------------------------------------------------------------------//
 
 				//creates the floor for the whole grid
-				InstantiateFromArray (_floorTiles, x, z);
-				
+				InstantiateFromArray (_floorTiles, x, z);				
 
-				//here to say if we're on an outer edge tile, instantiate nothing on top of the existing tile instead a town or etc
+				//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
 				{
 					//perlin value for water
 					if (_fltPerlinValue < _waterDensity) 
 					{
 						InstantiateWater (_waterTiles, x, z);
+						
 					}
 
-					//perlin value for towns
+					//perlin value for towns to spawn
 					if (_fltPerlinValue < .4f && _fltPerlinValue > .35f && townSpreadCur == _townSpread) 
 					{
                         if (_curTownCount != _MaxTownCount)
@@ -138,6 +151,8 @@ public class BoardGeneration : MonoBehaviour {
                         }
                     } 
 				} 
+
+				//adds 1 to the townspread step per tile
 				if(townSpreadCur < _townSpread)
 				{
 				townSpreadCur++;		
@@ -145,6 +160,10 @@ public class BoardGeneration : MonoBehaviour {
 				}
 			}
 		}
+
+		//_waterList.RemoveAll(GameObject => GameObject != null);
+		//_waterList.RemoveAll(GameObject => GameObject == GameObject.exists);
+
 	}
 
 	//creates the border
@@ -353,52 +372,43 @@ public class BoardGeneration : MonoBehaviour {
 
 	}
 
-	private int waterNo = 0;
+	private int waterNo = 0;	
+	
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		string itemToRemove = "";
-		//random index is for sprite to display - this wont use multiple water sprites, might not matter though
-		//int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord,.02f, zCoord);
 
-		//enable for loop to create water pools
-		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//loop to grow the pool
 		for (int it = 0; it < _waterSize; it++)
         {
-            //instantiate a tile because it's position is not being used, and therefore is unique
-            //instantiate a new tile of water at newpos
             GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
 			tileInstance.name = "Water_#" + waterNo;
 
             //add this position to a list to check against
             _waterList.Add(tileInstance);
 
-			//enable the 'position = position ...' code to get tile's branching/reaching
-			//------------------------------------------------------------------------------------------------------------------------------------------------------------
             //set the position with random adjustment in a direction - change to make it less random or have no randomness for the same seed
-           	position = position + new Vector3(Random.Range(-1,2),0,Random.Range(-1,2));
-			
+            position = position + new Vector3(Random.Range(-1,2),0,Random.Range(-1,2));
+			//Debug.Log( position = position + new Vector3(Mathf.RoundToInt(_fltPerlinValue),0,Mathf.RoundToInt(_fltPerlinValue)));
+
             //Do a check to make sure water doesnt overlap itself or other objects
+		
+
             foreach (GameObject tile in _waterList) 
 			{
-                //if the position i want to use as a new tile's position, exsists in this pool of water~
+				
 				if (position == tile.transform.position)
                 {
-					itemToRemove = tileInstance.name;
-				    GameObject t1 = GameObject.Find(itemToRemove);
-					//_waterList.Remove(t1); 
-                    //Destroy(tileInstance);
-					
+					Destroy(tileInstance);
                 } 
 				else
                 {
-                    //name the tiles to keep track of them
-
                     tileInstance.transform.parent = _boardHolder.transform;
-
                 }
             }
 			waterNo++;
         }
+			
     }
+
 }

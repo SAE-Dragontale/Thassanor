@@ -85,9 +85,9 @@ public class BoardGeneration : MonoBehaviour {
 		InstantiateTiles ();
 		InstantiateOuterWalls (); 			
 
-		_txtBoardSize.text = "Board Size: " + _columns + " x " + _rows + " = " + _rows*_columns;		
+		_txtBoardSize.text = "Columns: " + _columns + " | Rows: " + _rows + " | Ground Tiles: " + _tileList.Count;		
 		_txtTownCount.text = "Towns: " + _curTownCount;	
-		_txtWaterCount.text = "Individual Water Tiles: " + _waterList.Count;
+		_txtWaterCount.text = "Water Tiles: " + _waterList.Count;
 		
 	}
 
@@ -127,9 +127,7 @@ public class BoardGeneration : MonoBehaviour {
 				//---------------------------------------------------------------------------------------------------------------------------------------------------//
 				//say at half the rows have generated, stop, and duplicate tiles but in reverse to mirror the two halves
 				//---------------------------------------------------------------------------------------------------------------------------------------------------//
-
-				//creates the floor for the whole grid
-				InstantiateFromArray (_floorTiles, x, z);				
+			
 
 				//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
 				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles.Length-1) 
@@ -138,6 +136,7 @@ public class BoardGeneration : MonoBehaviour {
 					if (_fltPerlinValue < _waterDensity) 
 					{
 						InstantiateWater (_waterTiles, x, z);
+						hasInstantiated = true;
 						
 					}
 
@@ -152,11 +151,17 @@ public class BoardGeneration : MonoBehaviour {
                     } 
 				} 
 
+
+				if(hasInstantiated == false)
+				{
+					InstantiateFromArray (_floorTiles, x, z);	
+				}
+				hasInstantiated = false;
+				
 				//adds 1 to the townspread step per tile
 				if(townSpreadCur < _townSpread)
 				{
-				townSpreadCur++;		
-
+					townSpreadCur++;
 				}
 			}
 		}
@@ -376,7 +381,7 @@ public class BoardGeneration : MonoBehaviour {
 	
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		Vector3 position = new Vector3(xCoord,.02f, zCoord);
+		Vector3 position = new Vector3(xCoord,0f, zCoord);
 
 		//loop to grow the pool
 		for (int it = 0; it < _waterSize; it++)
@@ -399,7 +404,9 @@ public class BoardGeneration : MonoBehaviour {
 				
 				if (position == tile.transform.position)
                 {
+					//destroys overlapping tile and instantiates ground tile in place
 					Destroy(tileInstance);
+					InstantiateFromArray (_floorTiles, xCoord, zCoord);
                 } 
 				else
                 {

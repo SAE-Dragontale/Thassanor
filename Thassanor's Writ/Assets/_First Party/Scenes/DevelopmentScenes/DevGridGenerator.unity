@@ -388,6 +388,36 @@ Prefab:
       propertyPath: _txtTownCount
       value: 
       objectReference: {fileID: 1298079728}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _columns
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _rows
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _MaxTownCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _townSpread
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterDensity
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_IsPrefabAsset: 0

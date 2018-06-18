@@ -74,9 +74,10 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 	[Header("GameObject References")]
 	public BorderGeneration _borderGenRef;
-	
+
 	public GameObject tileInstance;
 		
+ //------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 	private void Start ()
 	{
@@ -122,9 +123,9 @@ public class BoardGeneration : MonoBehaviour {
 		_townSpread = Mathf.Max(_columns,_rows) * _townSpread;
 
 
-		for (int x = 0; x < _tiles.Length; x++)
+		for (int z = 0; z < _tiles.Length; z++)
 		{
-			for (int z = 0; z < _tiles[x].Length; z++)
+			for (int x = 0; x < _tiles[z].Length; x++)
             { 
 				hasInstantiated = false;
                 //THIS WILL RETURN -1 TO 1
@@ -143,8 +144,7 @@ public class BoardGeneration : MonoBehaviour {
 					if (_fltPerlinValue < _waterDensity) 
 					{
 						InstantiateWater (_waterTiles, x, z);
-						hasInstantiated = true;
-						
+						hasInstantiated = true;						
 					}
 
 					//perlin value for towns to spawn
@@ -161,6 +161,11 @@ public class BoardGeneration : MonoBehaviour {
 
 				if(hasInstantiated == false)
 				{
+					//Less than because rows is an array
+					if(z < _rows/2)
+					{
+						Debug.Log("X: " + x + " | " + "Z: " + z);
+					}
 					InstantiateFromArray (_floorTiles, x, z);	
 				}
 				hasInstantiated = false;
@@ -252,8 +257,7 @@ public class BoardGeneration : MonoBehaviour {
 		
 
             foreach (GameObject tile in _waterList) 
-			{
-				
+			{				
 				if (position == tile.transform.position)
                 {
 					//destroys overlapping tile and instantiates ground tile in place
@@ -262,7 +266,15 @@ public class BoardGeneration : MonoBehaviour {
                 } 
 				else
                 {
-                    tileInstance.transform.parent = _boardHolder.transform;
+					//if water is out of bounds, destroy
+					if (tileInstance.transform.position.x < 0 || tileInstance.transform.position.z < 0 || tileInstance.transform.position.x > _tiles.Length-1 || tileInstance.transform.position.z > _tiles.Length-1) 
+					{						
+						Destroy(tileInstance);
+					}
+					else
+					{
+                   		tileInstance.transform.parent = _boardHolder.transform;
+					}
                 }
             }
 			waterNo++;

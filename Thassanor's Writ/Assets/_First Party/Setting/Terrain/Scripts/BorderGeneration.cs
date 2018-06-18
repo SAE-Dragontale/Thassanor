@@ -8,9 +8,9 @@ public class BorderGeneration : MonoBehaviour {
 	public GameObject[] _outerWallTiles;  
 	public List<GameObject> _wallList = new List<GameObject>();
 
-	private void Start() 
+	private void Awake() 
 	{
-		_boardGeneratorRef = GameObject.Find("BoardGenerator").GetComponent<BoardGeneration>();
+		_boardGeneratorRef = gameObject.GetComponent<BoardGeneration>();
 	}
 
 

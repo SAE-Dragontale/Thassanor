@@ -1569,6 +1569,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114554390299236114, guid: 13eef5ed021714c4fbc7c2f7d1981a43,
+        type: 2}
+      propertyPath: _necromancerStyle
+      value: 
+      objectReference: {fileID: 11400000, guid: d6d11ad0c0bd0bf44b7b3a8ebf372e4d,
+        type: 2}
+    - target: {fileID: 212067286586462678, guid: 13eef5ed021714c4fbc7c2f7d1981a43,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 341dd58888f8a84438ae5e87532ff56b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13eef5ed021714c4fbc7c2f7d1981a43, type: 2}
   m_IsPrefabAsset: 0

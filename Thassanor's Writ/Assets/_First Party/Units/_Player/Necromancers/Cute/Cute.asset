@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Cute
   m_EditorClassIdentifier: 
   _stUnitName: Acacia Rico
-  _animatorController: {fileID: 0}
+  _animatorController: {fileID: 9100000, guid: 8151c3eb43325744b973c6c2935ed111, type: 2}

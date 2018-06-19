@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WorldGenerator
+  m_Name: WorldGrassy
   m_Shader: {fileID: 4800000, guid: f23936946f1a7cb4a9cbce63d7ed0647, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -19,9 +19,14 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_26FC9C7B: 0.01
-    - Vector1_7E5DE867: 0.399
+    - Vector1_26FC9C7B: 0.1
+    - Vector1_7E5DE867: 0.424
     - Vector1_8329417D: 0.05
-    - Vector1_C4DCDF38: 0.033
-    - Vector1_C8C334F4: 65
-    m_Colors: []
+    - Vector1_C4DCDF38: 0.025
+    - Vector1_C8C334F4: 30
+    m_Colors:
+    - Color_43E83E28: {r: 0.2, g: 0.3686275, b: 0.772549, a: 0}
+    - Color_9D3EC88C: {r: 0.2138559, g: 0.4716981, b: 0.1802243, a: 0}
+    - Color_AC7A9895: {r: 0.2156863, g: 0.4745098, b: 0.6980392, a: 0}
+    - Color_DE5645E9: {r: 0.3962264, g: 0.2748309, b: 0.2224101, a: 0}
+    - Vector2_3541CE4C: {r: 0, g: 4, b: 0, a: 0}

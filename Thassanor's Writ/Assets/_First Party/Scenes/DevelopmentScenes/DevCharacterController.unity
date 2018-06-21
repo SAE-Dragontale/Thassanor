@@ -2770,45 +2770,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114073451767157236, guid: 8f2df666557352148b13e0dbae23fa7f,
-        type: 2}
-      propertyPath: _trCamera
-      value: 
-      objectReference: {fileID: 464881926}
-    - target: {fileID: 114276413852647662, guid: 8f2df666557352148b13e0dbae23fa7f,
-        type: 2}
-      propertyPath: _trCamera
-      value: 
-      objectReference: {fileID: 464881926}
-    - target: {fileID: 114108797955720572, guid: 8f2df666557352148b13e0dbae23fa7f,
-        type: 2}
-      propertyPath: _trCamera
-      value: 
-      objectReference: {fileID: 464881926}
-    - target: {fileID: 114878186340701248, guid: 8f2df666557352148b13e0dbae23fa7f,
-        type: 2}
-      propertyPath: _trCamera
-      value: 
-      objectReference: {fileID: 464881926}
-    - target: {fileID: 114972443848708390, guid: 8f2df666557352148b13e0dbae23fa7f,
-        type: 2}
-      propertyPath: _trCamera
-      value: 
-      objectReference: {fileID: 464881926}
     - target: {fileID: 1573149162391448, guid: 8f2df666557352148b13e0dbae23fa7f, type: 2}
       propertyPath: m_Name
       value: Basic (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 1573149162391448, guid: 8f2df666557352148b13e0dbae23fa7f, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2df666557352148b13e0dbae23fa7f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1739207617 stripped

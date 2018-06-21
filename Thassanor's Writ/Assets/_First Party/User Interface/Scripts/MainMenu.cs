@@ -13,12 +13,14 @@ public class MainMenu : MonoBehaviour {
     public GameObject loreMenu;
     public GameObject helpMenu;
     public GameObject audioMenu;
+    public GameObject screenMenu;
 
     [Header("Focus Buttons")]
     //buttons to focus on (after menu change)
     public GameObject hotkeysButton;
     public GameObject playButton;
     public GameObject audioSlider;
+    public GameObject resolutionDropdown;
 
     public void PlayButton()
     {
@@ -61,10 +63,24 @@ public class MainMenu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
     }
 
+    public void BackButtonScreen()
+    {
+        screenMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(hotkeysButton);
+    }
+
     public void AudioButton()
     {
         optionsMenu.SetActive(false);
         audioMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(audioSlider);
+    }
+
+    public void ScreenButtonOptions()
+    {
+        optionsMenu.SetActive(false);
+        screenMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(resolutionDropdown);
     }
 }

@@ -27,7 +27,7 @@ public class CharSpells : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Foobar
+	private bool _isActive = false;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -47,20 +47,20 @@ public class CharSpells : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
 	// Called when we're starting to type. Contains all activation code and executes any runtime requirements.
-	public void TypeStatus(bool isActive) {
+	public void TypeStatus(bool shouldActivate) {
 
-		_trTypingComponent.gameObject.SetActive(isActive);
+		// Firstly, we need to make sure we've got a safeguard in case the player clicks away from the textbox.
+		_isActive = shouldActivate;
 
-	}
+		// Just quickly toggle each component of the typing field.
+		_trTypingComponent.gameObject.SetActive(shouldActivate);
+		_inputField.interactable = shouldActivate;
 
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Runtime
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+		if (!shouldActivate) {
 
-	// Update is called once per frame
-	void Update () {
-	
-		
+			// TODO: Spell Stuff.
+
+		}
 
 	}
 

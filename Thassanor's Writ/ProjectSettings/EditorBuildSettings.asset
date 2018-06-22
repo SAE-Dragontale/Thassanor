@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_First Party/Scenes/DevelopmentScenes/DevGridGenerator.unity
     guid: dd26024ca9b7b38449ccbb10eb9383ac
+  - enabled: 1
+    path: Assets/_First Party/Scenes/DevelopmentScenes/DevCharacterController.unity
+    guid: 9a6abbda220be2c498568c7206298c3b
   m_configObjects: {}

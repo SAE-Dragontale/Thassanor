@@ -27,19 +27,19 @@ public class InputTranslator : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Class Settings
-	//[SerializeField] private float _flAnimationLock;
-
 	// PlayerState Containers.
-    private enum PlayerState {Idle, Spellcasting, Paused};
+    private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
     private PlayerState _enPlayerState;
     private PlayerState _enLastState;
 
-    /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+	// Class Settings
+	//[SerializeField] private float _flAnimationLock;
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-    public void Awake() {
+	public void Awake() {
 
         _scControl = GetComponent<CharControls>();
         _scSpell = GetComponent<CharSpells>();
@@ -49,12 +49,18 @@ public class InputTranslator : MonoBehaviour {
 
     }
 
-    /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+	public void Start() {
+
+		SetCursorTo(false);
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-    // A call that recieves inputs from the associated scripts. Any Inputs we're recieving are presented here and then translated into function-calls.
-    public void TranslateInput(RawDataInput rdi) {
+	// A call that recieves inputs from the associated scripts. Any Inputs we're recieving are presented here and then translated into function-calls.
+	public void TranslateInput(RawDataInput rdi) {
 
         // Some simple debugging that was originally useful.
         Debug.Log("--------------------");
@@ -75,7 +81,10 @@ public class InputTranslator : MonoBehaviour {
 
 					// Save our old state, set our new state, and halt movement.
 					_enLastState = _enPlayerState;
+
 					_enPlayerState = PlayerState.Paused;
+					SetCursorTo(true);
+
 					_scControl.TrajectoryHalt();
 
 				}
@@ -140,6 +149,7 @@ public class InputTranslator : MonoBehaviour {
 
 					// Load the state that the player was in before this function was called.
 					_enPlayerState = _enLastState;
+					SetCursorTo(false);
 
 				}
 				
@@ -151,16 +161,30 @@ public class InputTranslator : MonoBehaviour {
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	// When we need to assign the player's cursor to either active or inactive within the hierarchy.
+	private void SetCursorTo(bool isCursor) {
+
+		Cursor.visible = isCursor;
+		Cursor.lockState = isCursor ? CursorLockMode.Confined : CursorLockMode.Locked;
+
+	}
+
 	// A small helper function to include an animation lock to State Switching in some circumstances.
 	private IEnumerator AnimationLock(PlayerState _enNewState, RawDataInput rdi, float flWait) {
 
+		// Make sure we can't further issue commands while we're locked into something.
+		_enPlayerState = PlayerState.Disabled;
+
 		yield return new WaitForSeconds(flWait);
 		
+		// Change to the newly issued state and correct movement to the last pressed Axis-Keys.
 		_enPlayerState = _enNewState;
 		_scControl.TrajectoryChange(rdi._aflAxes);
 
 	}
 
 }
- 
+
+
+
  

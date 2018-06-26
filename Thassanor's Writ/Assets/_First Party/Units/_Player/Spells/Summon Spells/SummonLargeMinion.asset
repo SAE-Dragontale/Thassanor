@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e19a55c45699dd45839a17e2a21c201, type: 3}
   m_Name: SummonLargeMinion
   m_EditorClassIdentifier: 
-  astSpellPhrase:
+  _stSpellName: Large Minion
+  _flManaCost: 0
+  _astSpellPhrase:
   - 
   - 
-  - 
+  - I summon thee, wrathful diety of flesh!
   - 
   _itTargets: 0
   _flTimeToComplete: 0

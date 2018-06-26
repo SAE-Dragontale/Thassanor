@@ -76,7 +76,7 @@ public class InputTranslator : MonoBehaviour {
 				// Pressing Escape
 				if (rdi._ablButtons[0]) {
 
-					// TODO: Implement pause menu here.
+					// #TODO: Implement pause menu here.
 					// This should be done through additive loading, and called as a function in another script from this class.
 
 					// Save our old state, set our new state, and halt movement.
@@ -92,7 +92,7 @@ public class InputTranslator : MonoBehaviour {
 				// Pressing Enter
 				else if (rdi._ablButtons[1]) {
 
-					// TODO: Implement spellcasting trigger.
+					// #TODO: Implement spellcasting trigger.
 					// Communicate with CharSpells.cs and begin the 'Spellcasting Phase' from this point.
 					_scSpell.TypeStatus(true);
 
@@ -115,19 +115,19 @@ public class InputTranslator : MonoBehaviour {
 				// Pressing Escape
 				if (rdi._ablButtons[0]) {
 
-					// TODO: Implement spellcasting 'Abort'.
+					// #TODO: Implement spellcasting 'Abort'.
 					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
-					_scSpell.TypeStatus(false);
+					_scSpell.TypeStatus(false, true);
 
 					// Begin the sequence to exit SpellCasting mode. This should be fast when aborting.
-					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0.5f) );
+					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0f) );
 
 				}
 
 				// Pressing Enter
 				else if (rdi._ablButtons[1]) {
 
-					// TODO: Implement spellcasting 'Cast'.
+					// #TODO: Implement spellcasting 'Cast'.
 					// We don't want to instantly transition here. Include an Animation Lock.
 					_scSpell.TypeStatus(false);
 
@@ -144,7 +144,7 @@ public class InputTranslator : MonoBehaviour {
 				// Pressing Escape
 				if (rdi._ablButtons[0]) {
 
-					// TODO: Implement ability to dismiss pause menu here.
+					// #TODO: Implement ability to dismiss pause menu here.
 					// Same as the sister function above, except we also want to be able to deload the pause menu. Function should be called from here.
 
 					// Load the state that the player was in before this function was called.

@@ -17,20 +17,17 @@ public class CharSpells : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// This is the base root we'll be working with. From here on out we can reference _tr[etc] rather than transform.
-	private Transform _trTypingComponent;
+	private Transform _trTypingComponent; // This is the base root we'll be working with for the Input System.
+	private TMP_InputField _inputField; // This is the player's Input Field.
 
-	// These are the sub-components that we're gathering from the root dir above.
-	private TMP_InputField _inputField;
-
-	// The list of spells in our loadout. These should generally be assigned at runtime, however if they aren't, then the defaults are assigned in the inspector.
-	[SerializeField] private Spell[] _spellLoadout;
+	private CharVisuals _scVisual; // The Visual Controller script for the character.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	
+	// The list of spells in our loadout. These should generally be assigned at runtime, however if they aren't, then the defaults are assigned in the inspector.
+	[SerializeField] private Spell[] _spellLoadout;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -40,8 +37,9 @@ public class CharSpells : MonoBehaviour {
 	private void Awake() {
 
 		// Grab the script project root and it's associated references.
-		_trTypingComponent = transform.Find("Visual/PlayerUI");
+		_trTypingComponent = transform.Find("PlayerCanvas");
 		_inputField = _trTypingComponent.GetComponentInChildren<TMP_InputField>();
+		_scVisual = GetComponent<CharVisuals>();
 
 	}
 
@@ -76,9 +74,15 @@ public class CharSpells : MonoBehaviour {
 			} else {
 
 				_inputField.text = "";
+				_scVisual.CharacterZoom(true);
 				FocusCursor();
 
 			}
+
+		} else {
+
+			_scVisual.CharacterZoom(false);
+
 		}
 
 	}
@@ -108,6 +112,7 @@ public class CharSpells : MonoBehaviour {
 	private void CastSpell() {
 
 		// #TODO: Cast the closest matching spell.
+		_scVisual.CharacterZoom(false);
 
 	}
 

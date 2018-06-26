@@ -21,8 +21,11 @@ public class CameraPlayer : CameraBase {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// The Camera Offset being applied to the position.
-	[SerializeField] private Vector3 _v3CameraOffset;
+	// The Camera Offset(s) being applied to the position.
+	[SerializeField] private Vector3 _v3CameraLocation; // Considered Offset. Added before LookAt().
+	[HideInInspector] public Vector3 _v3Offset; // Additional Offset for programmatical purposes. This is added to _v3Offset.
+
+	[HideInInspector] public Vector3 _v3Panning; // Flat offset. Added last, after LookAt() for a panning effect.
 
 	// The speed at which the camera snaps to the target its viewing.
 	[SerializeField] private float _flCameraSnap;
@@ -31,12 +34,16 @@ public class CameraPlayer : CameraBase {
 		Initialisation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Foobar
+	private void Start() {
+
+		_ltrCameraFocus.RemoveAll(vector => vector == null);
+
+	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-	
+
 	// Foobar
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -44,7 +51,7 @@ public class CameraPlayer : CameraBase {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	private void FixedUpdate () {
 
 		Vector3 v3Desired = new Vector3 (0,0,0);
 
@@ -59,17 +66,18 @@ public class CameraPlayer : CameraBase {
 			}
 		}
 
-		v3Desired = v3Desired / (_ltrCameraFocus.Count -itNullCount);
+		// As long as there are elements within the array.
+		if (itNullCount != _ltrCameraFocus.Count)
+			v3Desired = v3Desired / (_ltrCameraFocus.Count - itNullCount);
 
-		// Now, we can have the camera point towards, and look at, the player. We do this before adding offset.
-		transform.LookAt (v3Desired);
+		// First, we need to lerp the panning of the camera, to allow us to offset it from the target transform.
+		v3Desired += _v3Panning;
+		transform.LookAt(v3Desired);
 
-		// Then, add any current Camera Offsets (Camera Shake, Offset, etc.)
-		v3Desired += _v3CameraOffset;
-
-		// Finally, lerp to the desired position.
-		transform.position = Vector3.Lerp (transform.position, v3Desired, Time.deltaTime * _flCameraSnap);
-		
+		// Now, after we've panned and aimed our camera at the transform, we can offset and lerp to our camera rotation.
+		v3Desired += _v3CameraLocation + _v3Offset;
+		transform.position = Vector3.Lerp(transform.position, v3Desired, Time.deltaTime * _flCameraSnap);
 
 	}
+
 }

@@ -132,7 +132,7 @@ public class InputTranslator : MonoBehaviour {
 					_scSpell.TypeStatus(false);
 
 					// Begin the sequence to exit SpellCasting mode. This should be animation-dependant.
-					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 1f) );
+					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0.5f) );
 
 				}
 

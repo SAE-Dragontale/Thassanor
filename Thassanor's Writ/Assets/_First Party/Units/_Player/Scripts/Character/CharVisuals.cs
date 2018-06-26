@@ -18,13 +18,18 @@ public class CharVisuals : MonoBehaviour {
 	// Hierarchy Components
 	private Animator _an;
 	private SpriteRenderer _sr;
+	private CameraPlayer _cp;
 
-	// Variable Components.
+	[Space] [Header("References")]
 	[SerializeField] private NecromancerStyle _necromancerStyle;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	[Space] [Header("Character Zoom")]
+	[SerializeField] private Vector3 _v3PlayerZoom = new Vector3(0,0,0);
+	[SerializeField] private Vector3 _v3PlayerZoomPanning = new Vector3(0, 0, 0);
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -44,6 +49,7 @@ public class CharVisuals : MonoBehaviour {
 		// Component Grab.
 		_an = GetComponentInChildren<Animator>();
 		_sr = GetComponentInChildren<SpriteRenderer>();
+		_cp = Camera.main.GetComponent<CameraPlayer>();
 
 		// Assign Style to Character.
 		_an.runtimeAnimatorController = _necromancerStyle._animatorController;
@@ -53,6 +59,9 @@ public class CharVisuals : MonoBehaviour {
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	/* ----------------------------------------------------------------------------- */
+	// Animation Controllers
 
 	public void AnimMovement(float[] aflMovement = null) {
 	
@@ -72,5 +81,13 @@ public class CharVisuals : MonoBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
+	// Camera Calls
+
+	public void CharacterZoom(bool isZooming) {
+
+		_cp._v3Offset = isZooming ? _v3PlayerZoom : new Vector3 (0,0,0);
+		_cp._v3Panning = isZooming ? _v3PlayerZoomPanning : new Vector3(0, 0, 0);
+
+	}
 
 }

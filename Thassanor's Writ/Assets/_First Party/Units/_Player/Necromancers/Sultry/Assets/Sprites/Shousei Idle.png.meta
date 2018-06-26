@@ -1,15 +1,19 @@
 fileFormatVersion: 2
-guid: 0f754259294f9264e8bf1ba3db2310ca
+guid: 4cdf708b611411b41815fc201850c87c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shousei-run_Proper_0
-    21300002: Shousei-run_Proper_1
-    21300004: Shousei-run_Proper_2
-    21300006: Shousei-run_Proper_3
-    21300008: Shousei-run_Proper_4
-    21300010: Shousei-run_Proper_5
-    21300012: Shousei-run_Proper_6
-    21300014: Shousei-run_Proper_7
+    21300000: Shousei-Idle-NEW_0
+    21300002: Shousei-Idle-NEW_1
+    21300004: Shousei-Idle-NEW_2
+    21300006: Shousei-Idle-NEW_3
+    21300008: Shousei-Idle-NEW_4
+    21300010: Shousei-Idle-NEW_5
+    21300012: Shousei Idle_0
+    21300014: Shousei Idle_1
+    21300016: Shousei Idle_2
+    21300018: Shousei Idle_3
+    21300020: Shousei Idle_4
+    21300022: Shousei Idle_5
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -88,11 +92,33 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shousei-run_Proper_0
+      name: Shousei Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -100,19 +126,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25c3d21bd54491e48b6be2b7c0f0e872
+      spriteID: f0271a4089078924aa41db9f0d1fd8e0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_Proper_1
+      name: Shousei Idle_1
       rect:
         serializedVersion: 2
         x: 128
@@ -120,19 +146,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2e7c20e1b55eea488f84c225331e09e
+      spriteID: 918972ac6ae8cf94ca59d044810870e8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_Proper_2
+      name: Shousei Idle_2
       rect:
         serializedVersion: 2
         x: 256
@@ -140,19 +166,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e95619c5fdbf0924f861fb72f3b00d05
+      spriteID: a667be81895d6cd469ced80aa67fc25a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_Proper_3
+      name: Shousei Idle_3
       rect:
         serializedVersion: 2
         x: 384
@@ -160,19 +186,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ded38ee4392598243bd366456aa9f11e
+      spriteID: e61e99973e4acb64ab8fcb94e55a4849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_Proper_4
+      name: Shousei Idle_4
       rect:
         serializedVersion: 2
         x: 512
@@ -180,19 +206,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97d53fa95653bac4bbff56c4923799fe
+      spriteID: 34708a085f681c14f896696e3aca5162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_Proper_5
+      name: Shousei Idle_5
       rect:
         serializedVersion: 2
         x: 640
@@ -200,53 +226,13 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
+      pivot: {x: 0.5, y: 0.0234375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 911fb7957b3dfe448b7a031842adc594
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shousei-run_Proper_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aafd8668c2bcfbe428e1ecf90b4df196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shousei-run_Proper_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.03125}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50088e0d79203aa468a3b0a5d4066f3d
+      spriteID: 0b1c447de38078d4293e4967f3c3ed45
       vertices: []
       indices: 
       edges: []
@@ -254,7 +240,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 207ab47aff089c845b217f660a1df21b
+    spriteID: 896f2c36cb28e3b41b975e2c1f315a66
     vertices: []
     indices: 
     edges: []

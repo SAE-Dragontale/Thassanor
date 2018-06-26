@@ -1,5 +1,5 @@
-﻿// Script: BoardGeneration.cs
-// Date Updated: 26/06/2018
+// Script: BoardGeneration.cs
+// Date Updated: 15/06/2018
 // Author & Contributors: Eric Cox
 // Purpose: The creation and design details of the maps for the game. Water/Towns/Props/Size. etc.  
 
@@ -116,8 +116,7 @@ public class BoardGeneration : MonoBehaviour {
 
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-	List<GameObject> mirrorTileList = new List<GameObject>();
-	int mirrorListCount;
+	bool hasInstantiated = false;
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
@@ -125,97 +124,96 @@ public class BoardGeneration : MonoBehaviour {
 		int townSpreadCur = 0;
 		//keeps this a constant size compared to the grid/map size
 		_townSpread = Mathf.Max(_columns,_rows) * _townSpread;
-				
-		for (int z = 0; z < _tiles[0].Length; z++)
-		{	
-			//random half
-			if(z < _rows/2)
-			{
-				for (int x = 0; x < _tiles.Length; x++)
-				{ 
-					//THIS WILL RETURN -1 TO 1
-					_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
-				
-					InstantiateFromArray(_floorTiles,x,z);	
-					mirrorTileList.Add(floorTileInstance);
-					mirrorListCount++;	
 
-					//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
-					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
+		//ive had to use a jagged array and im not sure im referencing the second array appropriately??
+		for (int z = 0; z < _tiles[0].Length; z++)
+		{
+			for (int x = 0; x < _tiles.Length; x++)
+            { 
+				hasInstantiated = false;
+                //THIS WILL RETURN -1 TO 1
+				_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
+			
+
+				//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
+				if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
+				{
+					if(z < _rows/2)
 					{
 						//perlin value for water
 						if (_fltPerlinValue < _waterDensity) 
 						{
-							InstantiateWater (_waterTiles, x, z);									
+							InstantiateWater (_waterTiles, x, z);
+							//hasInstantiated = true;						
 						}
-						
+					}
+					
+					if(z < _rows/2)
+					{
 						//perlin value for towns to spawn
-						if (_fltPerlinValue < .3f && _fltPerlinValue > -.2f && townSpreadCur == _townSpread) 
+						if (_fltPerlinValue < .4f && _fltPerlinValue > .35f && townSpreadCur == _townSpread) 
 						{
 							if (_curTownCount != _MaxTownCount)
 							{
 								InstantiateTown(_townTiles, x, z);
 								townSpreadCur = 0;
 							}
-						} 						
-					} 					
-					//this is the check(s) for 'steps' between components
-					if(townSpreadCur < _townSpread)
-					{
-						townSpreadCur++;
+						} 
 					}
+				} 
+
+				if(hasInstantiated == false)
+				{
+					InstantiateFromArray(_floorTiles,x,z);					
 				}
-			}
-			else 		//non random half
-			{				
-				//for (int x = 0; x < _tiles.Length; x++)  this results in a vertical and horizontal flip, so x town will be to the right of both players
-				for (int x = _tiles.Length - 1; x >= 0; x--) //this results in a vertical flip, so x town will be to the right of one player, and to the left for the other
-				{ 						
-					Vector3 position = new Vector3(x, 0f, z);    
-
-					floorTileInstance = Instantiate(mirrorTileList[mirrorListCount - 1], position, Quaternion.identity) as GameObject;
-					floorTileInstance.name = mirrorTileList[mirrorListCount - 1].name;
-					_tileList.Add (floorTileInstance);
-					floorTileInstance.transform.parent = _boardHolder.transform;
-
-					mirrorListCount--;					
-					
-					
-					//this is the check(s) for 'steps' between components
-					if(townSpreadCur < _townSpread)
-					{
-						townSpreadCur++;
-					}
+				
+				//this is the check(s) for 'steps' between components
+				if(townSpreadCur < _townSpread)
+				{
+					townSpreadCur++;
 				}
-
+				hasInstantiated = false;
 			}
 		}
-		
 	}	
 
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-    
-	GameObject floorTileInstance;
+
+	public List<GameObject> mirrorTileList = new List<GameObject>();
+	int mirrorTileCount;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
-	{		
+	{
+		
 		//sets the player position to the first tile
-		if (xCoord == (_columns/2) && zCoord == 0) 
+		if (xCoord == 0 && zCoord == 0) 
 		{
-			_playerRef.transform.position = new Vector3(_columns/2,.6f,0f);
+			_playerRef.transform.position = new Vector3(0,.6f,0f);
 		}
 
 		// Create a random index for the instantiated tile.
 		int randomIndex = Random.Range(0, prefabs.Length);
-		Vector3 position = new Vector3(xCoord, 0f, zCoord);    
+
+		Vector3 position = new Vector3(xCoord, 0f, zCoord);        
+		// Create an instance of the prefab from the random index of the array.
 		int index = Mathf.RoundToInt(_fltPerlinValue);
 		if(index < 0)
 		{index = 0;}
 
+		GameObject townTileInstance;
+		if(zCoord < _rows/2)
+		{
+			townTileInstance = Instantiate(prefabs[index], position, Quaternion.identity) as GameObject;
+			mirrorTileList.Add(townTileInstance);
+			townTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
+		}
+		else
+		{			
+			townTileInstance = Instantiate(mirrorTileList[mirrorTileCount], position, Quaternion.identity) as GameObject;
+			mirrorTileCount++;
+		}
 
-		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity) as GameObject;
-		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
-		_tileList.Add (floorTileInstance);	
-		floorTileInstance.transform.parent = _boardHolder.transform;
+		_tileList.Add (townTileInstance);
+		townTileInstance.transform.parent = _boardHolder.transform;
 
 	}
 
@@ -225,53 +223,48 @@ public class BoardGeneration : MonoBehaviour {
 		// Create a random index for the instantiated tile.
 		int randomIndex = Random.Range(0, prefabs.Length);
 
-		Vector3 position = new Vector3(xCoord, 0, zCoord);
+		Vector3 position = new Vector3(xCoord, 0.03f, zCoord);
 		// Create an instance of the prefab from the random index of the array.
 		GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
 
+		//towncount is to keep track of how many towns have been created
 		Vector3 newPos = tileInstance.transform.position;
-		newPos = newPos + new Vector3(0,.95f,0);
+		newPos = newPos + new Vector3(0,1,0);
 		tileInstance.transform.position = newPos;
 		tileInstance.name = "Town_#" + _curTownCount;
 		_curTownCount++;
+
 		//adds the tile generated into a list for a reference to each of them
 		_propList.Add (tileInstance);
+		// Set the tile's parent to the board holder.
+		tileInstance.transform.parent = _boardHolder.transform;
+		//tileInstance.transform.rotation = Quaternion.Euler(new Vector3(_isometricAngle.x, _isometricAngle.y, _isometricAngle.z));
 
-		RaycastHit hit;
-		if (Physics.Raycast(tileInstance.transform.position,-Vector3.up, out hit) && hit.transform.tag == "Ground")
-		{
-			tileInstance.transform.parent = hit.transform;
-		}		
-		
 	}
 
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-	private int waterNo = 0;		
+	private int waterNo = 0;	
+	
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		Vector3 position = new Vector3(xCoord,0.05f, zCoord);
-		
+		Vector3 position = new Vector3(xCoord,0f, zCoord);
+
 		//loop to grow the pool
 		for (int it = 0; it < _waterSize; it++)
         {
             GameObject tileInstance = Instantiate(prefabs[0], position, Quaternion.identity) as GameObject;
 			tileInstance.name = "Water_#" + waterNo;
+
+            //add this position to a list to check against
             _waterList.Add(tileInstance);
 
             //set the position with random adjustment in a direction - change to make it less random or have no randomness for the same seed
-            position = position + new Vector3(Random.Range(-1,2),0,Random.Range(-1,2));		
+            position = position + new Vector3(Random.Range(-1,2),0,Random.Range(-1,2));
+			//Debug.Log( position = position + new Vector3(Mathf.RoundToInt(_fltPerlinValue),0,Mathf.RoundToInt(_fltPerlinValue)));
 
-			RaycastHit hit;
-			if (Physics.Raycast(tileInstance.transform.position,-Vector3.up, out hit) && hit.transform.tag == "Ground")
-			{			
-				tileInstance.transform.parent = hit.transform;
-			}
-			else
-			{
-				Destroy(tileInstance);
-			}
+            //Do a check to make sure water doesnt overlap itself or other objects
+		
 
-            //check to make sure water doesnt overlap itself or other objects
             foreach (GameObject tile in _waterList) 
 			{				
 				if (position == tile.transform.position)
@@ -286,6 +279,10 @@ public class BoardGeneration : MonoBehaviour {
 					if (tileInstance.transform.position.x < 0 || tileInstance.transform.position.z < 0 || tileInstance.transform.position.x > _tiles.Length-1 || tileInstance.transform.position.z > _tiles[0].Length-1) 
 					{						
 						Destroy(tileInstance);
+					}
+					else
+					{
+                   		tileInstance.transform.parent = _boardHolder.transform;
 					}
                 }
             }

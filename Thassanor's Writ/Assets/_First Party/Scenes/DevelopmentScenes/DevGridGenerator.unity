@@ -334,6 +334,47 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126699203}
   m_CullTransparentMesh: 0
+--- !u!1 &147502724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1100133362470680, guid: 8bcd844316c76b1479aaaba667ee844f,
+    type: 2}
+  m_PrefabInternal: {fileID: 331361342}
+--- !u!114 &147502725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 147502724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8aebb4a24bf1949971a2dbdc5c4c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRef: {fileID: 0}
+  _itSeed: 34
+  _columns: 12
+  _rows: 12
+  _waterDensity: -0.366
+  _waterSize: 2
+  _townSpread: 2
+  _MaxTownCount: 10
+  _curTownCount: 0
+  _floorTiles:
+  - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
+  - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
+  _townTiles:
+  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
+  _waterTiles:
+  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
+  _boardHolder: {fileID: 0}
+  _tileList: []
+  _propList: []
+  _waterList: []
+  _txtBoardSize: {fileID: 126699205}
+  _txtWaterCount: {fileID: 1802692216}
+  _txtTownCount: {fileID: 1298079728}
+  _borderGenRef: {fileID: 0}
+  _tileInstance: {fileID: 0}
 --- !u!1001 &331361342
 Prefab:
   m_ObjectHideFlags: 0
@@ -396,7 +437,7 @@ Prefab:
     - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _rows
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
@@ -418,7 +459,8 @@ Prefab:
       propertyPath: _waterDensity
       value: -0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114206768219623590, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1004028549

@@ -89,16 +89,16 @@ public class BorderGeneration : MonoBehaviour {
 			{			
 				if (zCoord == _boardGeneratorRef._tiles.Length) 
 				{
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
 				}	
 				if (zCoord == -1) 
 				{
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [4], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [4], position, Quaternion.identity) as GameObject;
 				}
 			} 
 			else 
 			{
-				_boardGeneratorRef.tileInstance = Instantiate (prefabs [1], position, Quaternion.identity) as GameObject;
+				_boardGeneratorRef._tileInstance = Instantiate (prefabs [1], position, Quaternion.identity) as GameObject;
 			}
 		} 
 		//checks right wall
@@ -110,17 +110,17 @@ public class BorderGeneration : MonoBehaviour {
 				if (zCoord == _boardGeneratorRef._tiles.Length) 
 				{
 					//create corner tile at length
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
 				if (zCoord == -1) 
 				{
 					//create corner tile at start
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [5], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [5], position, Quaternion.identity) as GameObject;
 				}
 			} 
 			else 
 			{
-				_boardGeneratorRef.tileInstance = Instantiate (prefabs [3], position, Quaternion.identity) as GameObject;
+				_boardGeneratorRef._tileInstance = Instantiate (prefabs [3], position, Quaternion.identity) as GameObject;
 
 			}
 		}
@@ -134,7 +134,7 @@ public class BorderGeneration : MonoBehaviour {
 			}  
 			else 
 			{
-				_boardGeneratorRef.tileInstance = Instantiate (prefabs [0], position, Quaternion.identity) as GameObject;
+				_boardGeneratorRef._tileInstance = Instantiate (prefabs [0], position, Quaternion.identity) as GameObject;
 			}
 		} 
 		//checks back wall with the second element in the jagged array
@@ -146,26 +146,26 @@ public class BorderGeneration : MonoBehaviour {
 				if (xCoord == _boardGeneratorRef._tiles.Length) 
 				{
 					//create corner tile at length
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
 				if (xCoord == -1) 
 				{
 					//create corner tile at start
-					_boardGeneratorRef.tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
+					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
 				}
 			} 
 			else 
 			{
-				_boardGeneratorRef.tileInstance = Instantiate (prefabs [2], position, Quaternion.identity) as GameObject;
+				_boardGeneratorRef._tileInstance = Instantiate (prefabs [2], position, Quaternion.identity) as GameObject;
 
 			}
 		}
 		
-		_boardGeneratorRef.tileInstance.name = "Wall _x-" + xCoord + " _z-" + zCoord;
-		_wallList.Add (_boardGeneratorRef.tileInstance);
+		_boardGeneratorRef._tileInstance.name = "Wall _x-" + xCoord + " _z-" + zCoord;
+		_wallList.Add (_boardGeneratorRef._tileInstance);
 
 		// Set the tile's parent to the board holder.
-		_boardGeneratorRef.tileInstance.transform.parent = _boardGeneratorRef._boardHolder.transform;
+		_boardGeneratorRef._tileInstance.transform.parent = _boardGeneratorRef._boardHolder.transform;
 	}
 
 }

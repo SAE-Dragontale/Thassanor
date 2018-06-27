@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "com.unity.2d.pixel-perfect": "1.0.0-preview",
+    "com.unity.2d.pixel-perfect": "1.0.1-preview",
     "com.unity.package-manager-ui": "1.9.9",
-    "com.unity.postprocessing": "2.0.5-preview",
+    "com.unity.postprocessing": "2.0.7-preview",
     "com.unity.probuilder": "3.0.8",
     "com.unity.progrids": "3.0.2-preview",
-    "com.unity.render-pipelines.high-definition": "2.0.3-preview",
-    "com.unity.textmeshpro": "1.2.2",
+    "com.unity.render-pipelines.lightweight": "2.0.4-preview",
+    "com.unity.textmeshpro": "1.2.3",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.2d.pixel-perfect": "1.0.1-preview",
+    "com.unity.2d.pixel-perfect": "1.0.0-preview",
     "com.unity.package-manager-ui": "1.9.9",
     "com.unity.postprocessing": "2.0.7-preview",
     "com.unity.probuilder": "3.0.8",

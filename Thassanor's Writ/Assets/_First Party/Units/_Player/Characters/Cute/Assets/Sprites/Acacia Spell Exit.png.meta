@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: 8a12ad67ab3d36e4ea1c36d26c6803e7
+guid: 5d13fb81d3aa35f4384ca5f580248573
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shousei-run_0
-    21300002: Shousei-run_1
-    21300004: Shousei-run_2
-    21300006: Shousei-run_3
-    21300008: Shousei-run_4
-    21300010: Shousei-run_5
-    21300012: Shousei-run_6
-    21300014: Shousei-run_7
+    21300000: Acacia-spellcast-exit_0
+    21300002: Acacia-spellcast-exit_1
+    21300004: Acacia-spellcast-exit_2
+    21300006: Acacia-spellcast-exit_3
+    21300008: Acacia-spellcast-exit_4
+    21300010: Acacia-spellcast-exit_5
+    21300012: Acacia-spellcast-exit_6
+    21300014: Acacia-spellcast-exit_7
+    21300016: Acacia-spellcast-exit_8
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -92,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shousei-run_0
+      name: Acacia-spellcast-exit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -106,13 +107,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dada03e411bc95c40b7a8eb7bc6481ad
+      spriteID: 3c16c78343546ac44b1fd63c880daead
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_1
+      name: Acacia-spellcast-exit_1
       rect:
         serializedVersion: 2
         x: 128
@@ -126,13 +127,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 038c0c1259a2a804993448928c617059
+      spriteID: 248ea0ba91b15ed418f5de75716d4e95
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_2
+      name: Acacia-spellcast-exit_2
       rect:
         serializedVersion: 2
         x: 256
@@ -146,13 +147,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a8c6956934ef846b4a1ba113c5694b
+      spriteID: 53a2dd260d0b13d4b8a72987dde8b670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_3
+      name: Acacia-spellcast-exit_3
       rect:
         serializedVersion: 2
         x: 384
@@ -166,13 +167,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3aeb3d6f2e6f30c4fb41a636fa9f8d42
+      spriteID: 83fc75ade3d408d45a0ef21ee5679f66
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_4
+      name: Acacia-spellcast-exit_4
       rect:
         serializedVersion: 2
         x: 512
@@ -186,13 +187,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74b7a9222a27216449e3258d48f90213
+      spriteID: 524ab408aa519714eb95ed6a56c1139f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_5
+      name: Acacia-spellcast-exit_5
       rect:
         serializedVersion: 2
         x: 640
@@ -206,13 +207,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bff5590e63b9a84ea9fd3f23e49e837
+      spriteID: 77bf8572ff71b764ca913ca1aea9e10b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_6
+      name: Acacia-spellcast-exit_6
       rect:
         serializedVersion: 2
         x: 768
@@ -226,13 +227,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac37564e7cc49164488888b395db6b73
+      spriteID: 84856f97ddf473a4ca3020c790d9184a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_7
+      name: Acacia-spellcast-exit_7
       rect:
         serializedVersion: 2
         x: 896
@@ -246,7 +247,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dde1a6d9101f3ab4ca21148206459bbc
+      spriteID: 14e6ab3d57aad3a43a2bb24e542def3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Acacia-spellcast-exit_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0234375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258695e15dde9d547a69ace89acdfb4a
       vertices: []
       indices: 
       edges: []
@@ -254,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 35c8023a0d4bab04594e24d9d0607f66
+    spriteID: 1ac649aafc146ac428bd3abcf25e1b6e
     vertices: []
     indices: 
     edges: []

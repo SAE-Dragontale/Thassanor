@@ -24,19 +24,18 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 	// Called before class calls or functions.
 	private void Start () {
-		
+
 		// First of all, if we are not the local player, we don't want this script to run. So we're going to destroy it.
 		if (!isLocalPlayer)
 			Destroy(this);
-		
+
+		// We're just quickly going to assign ourselves under the ActiveNetworkedPlayers group to keep the hierarchy tidy.
+		transform.parent = GameObject.Find("ActiveNetworkedPlayers")?.transform;
+		transform.name = $"Player {playerControllerId}";
+
 		// Now that we've confirmed we are the player, we can start running our Basic Player Setup.
 		CmdCreatePlayer();
-		
-		// TODO: We really want to be loading our player settings at some point. This should probably be done here, like this:
-		// PlayerSetup(CmdCreatePlayer());
-
-		// What this means, is we're going to need another CmdCreatePlayer() to return a script, or GameObject, after we've instantiated.
-		// Then, we're taking that information and calling another function to set values on that GameObject, such as the Style and Hotkeys.
+		RpcCreatePlayer();
 
 	}
 
@@ -49,14 +48,21 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 		// Then, we want to make sure that we are in sole control of our player.
 		player.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-		player.transform.parent = GameObject.Find("ActiveNetworkPlayers").transform;
+		player.transform.parent = transform;
 
 		// TODO: Customise Player with Style.
+
+		// Just to keep things tidy in the editor, we want to change the hierarchy name to the character we've selected.
+		player.name = player.GetComponent<CharVisuals>()._necromancerStyle._stUnitName;
 
 		// TODO: Customie Player with Loadout.
 
 		// Finally, we can ask the server to spawn the object under our control.
 		NetworkServer.Spawn(player);
+
+	}
+
+	[ClientRpc] private void RpcCreatePlayer() {
 
 	}
 

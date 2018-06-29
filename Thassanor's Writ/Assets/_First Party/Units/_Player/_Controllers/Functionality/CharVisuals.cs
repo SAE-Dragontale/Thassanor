@@ -21,7 +21,7 @@ public class CharVisuals : MonoBehaviour {
 	private CameraPlayer _cp;
 
 	[Space] [Header("References")]
-	[SerializeField] private NecromancerStyle _necromancerStyle;
+	[SerializeField] public NecromancerStyle _necromancerStyle;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables

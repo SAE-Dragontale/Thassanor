@@ -14,8 +14,6 @@ public class MainMenu : MonoBehaviour {
     public GameObject helpMenu;
     public GameObject audioMenu;
     public GameObject screenMenu;
-    public GameObject multiplayerMenu;
-    public GameObject playMenu;
 
     [Header("Focus Buttons")]
     //buttons to focus on (after menu change)
@@ -23,13 +21,10 @@ public class MainMenu : MonoBehaviour {
     public GameObject playButton;
     public GameObject audioSlider;
     public GameObject resolutionDropdown;
-    public GameObject newgameButton;
 
     public void PlayButton()
     {
-        mainMenu.SetActive(false);
-        playMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(newgameButton);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoreButton()
@@ -87,11 +82,5 @@ public class MainMenu : MonoBehaviour {
         optionsMenu.SetActive(false);
         screenMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(resolutionDropdown);
-    }
-
-    public void MultiplayerPlayButton()
-    {
-        playMenu.SetActive(false);
-        multiplayerMenu.SetActive(true);
     }
 }

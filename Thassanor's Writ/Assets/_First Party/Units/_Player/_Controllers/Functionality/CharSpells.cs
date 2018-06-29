@@ -75,6 +75,7 @@ public class CharSpells : MonoBehaviour {
 
 				_inputField.text = "";
 				_scVisual.CharacterZoom(true);
+				_scVisual.AnimCasting(true);
 				FocusCursor();
 
 			}
@@ -82,6 +83,7 @@ public class CharSpells : MonoBehaviour {
 		} else {
 
 			_scVisual.CharacterZoom(false);
+			_scVisual.AnimCasting(false);
 
 		}
 
@@ -113,6 +115,7 @@ public class CharSpells : MonoBehaviour {
 
 		// #TODO: Cast the closest matching spell.
 		_scVisual.CharacterZoom(false);
+		_scVisual.AnimCasting(false);
 
 	}
 

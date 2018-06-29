@@ -80,6 +80,13 @@ public class CharVisuals : MonoBehaviour {
 
 	}
 
+	public void AnimCasting(bool isSpelling = true) {
+
+		// Bandaid Code
+		_an.SetBool("isSpelling", isSpelling);
+
+	}
+
 	/* ----------------------------------------------------------------------------- */
 	// Camera Calls
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -149,10 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ltrCameraFocus:
-  - {fileID: 1936775642}
-  - {fileID: 985604113}
-  _v3CameraOffset: {x: 0, y: 10, z: -15}
-  _flCameraSnap: 10
+  - {fileID: 0}
+  - {fileID: 0}
+  _v3CameraLocation: {x: 0, y: 10, z: -15}
+  _v3Offset: {x: 0, y: 0, z: 0}
+  _v3Panning: {x: 0, y: 0, z: 0}
+  _flCameraSnap: 8
 --- !u!81 &257556417
 AudioListener:
   m_ObjectHideFlags: 0
@@ -259,52 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  clearColorMode: 1
-  backgroundColorHDR: {r: 0.047058824, g: 0.047058824, b: 0.047058824, a: 1}
-  clearDepth: 1
-  renderingPath: 0
-  volumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  aperture: 8
-  shutterSpeed: 0.005
-  iso: 400
-  m_FrameSettings:
-    enableShadow: 1
-    enableContactShadows: 1
-    enableSSR: 1
-    enableSSAO: 1
-    enableSubsurfaceScattering: 1
-    enableTransmission: 1
-    enableAtmosphericScattering: 1
-    enableVolumetric: 1
-    diffuseGlobalDimmer: 1
-    specularGlobalDimmer: 1
-    enableForwardRenderingOnly: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 1
-    enableMotionVectors: 1
-    enableObjectMotionVectors: 1
-    enableDBuffer: 1
-    enableRoughRefraction: 1
-    enableTransparentPostpass: 1
-    enableDistortion: 1
-    enablePostprocess: 1
-    enableStereo: 1
-    enableAsyncCompute: 1
-    enableOpaqueObjects: 1
-    enableTransparentObjects: 1
-    enableMSAA: 0
-    enableShadowMask: 1
-    lightLoopSettings:
-      enableTileAndCluster: 1
-      enableComputeLightEvaluation: 1
-      enableComputeLightVariants: 1
-      enableComputeMaterialVariants: 1
-      enableFptlForForwardOpaque: 1
-      enableBigTilePrepass: 1
-      isFptlEnabled: 1
 --- !u!20 &257556422
 Camera:
   m_ObjectHideFlags: 0
@@ -739,12 +695,12 @@ Prefab:
         type: 2}
       propertyPath: _ltrCameraFocus.Array.data[0]
       value: 
-      objectReference: {fileID: 1936775642}
+      objectReference: {fileID: 0}
     - target: {fileID: 114734754225507518, guid: 26bd4e0fcd4bbcf43b024a19c825b766,
         type: 2}
       propertyPath: _ltrCameraFocus.Array.data[1]
       value: 
-      objectReference: {fileID: 985604113}
+      objectReference: {fileID: 0}
     - target: {fileID: 114734754225507518, guid: 26bd4e0fcd4bbcf43b024a19c825b766,
         type: 2}
       propertyPath: _ltrCameraFocus.Array.data[2]
@@ -844,6 +800,21 @@ Prefab:
         type: 2}
       propertyPath: m_ShowCustomSorter
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114734754225507518, guid: 26bd4e0fcd4bbcf43b024a19c825b766,
+        type: 2}
+      propertyPath: _v3CameraLocation.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114734754225507518, guid: 26bd4e0fcd4bbcf43b024a19c825b766,
+        type: 2}
+      propertyPath: _v3CameraLocation.z
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114734754225507518, guid: 26bd4e0fcd4bbcf43b024a19c825b766,
+        type: 2}
+      propertyPath: _flCameraSnap
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26bd4e0fcd4bbcf43b024a19c825b766, type: 2}
@@ -971,29 +942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  directionalIntensity: 3.1415927
-  punctualIntensity: 600
-  areaIntensity: 200
-  enableSpotReflector: 0
-  m_InnerSpotPercent: 0
-  lightDimmer: 1
-  volumetricDimmer: 1
-  fadeDistance: 10000
-  affectDiffuse: 1
-  affectSpecular: 1
-  nonLightmappedOnly: 0
-  lightTypeExtent: 0
-  spotLightShape: 0
-  shapeWidth: 0.5
-  shapeHeight: 0.5
-  aspectRatio: 1
-  shapeRadius: 0
-  maxSmoothness: 1
-  applyRangeAttenuation: 1
-  useOldInspector: 0
-  featuresFoldout: 1
-  showAdditionalSettings: 0
 --- !u!1 &1936775639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,7 +1021,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1936775642

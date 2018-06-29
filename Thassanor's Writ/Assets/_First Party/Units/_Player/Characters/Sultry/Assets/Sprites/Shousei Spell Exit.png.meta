@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: 8a12ad67ab3d36e4ea1c36d26c6803e7
+guid: 1c095cfedbfe9084a8fe0025f9646a66
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shousei-run_0
-    21300002: Shousei-run_1
-    21300004: Shousei-run_2
-    21300006: Shousei-run_3
-    21300008: Shousei-run_4
-    21300010: Shousei-run_5
-    21300012: Shousei-run_6
-    21300014: Shousei-run_7
+    21300000: Shousei-spell-exit_0
+    21300002: Shousei-spell-exit_1
+    21300004: Shousei-spell-exit_2
+    21300006: Shousei-spell-exit_3
+    21300008: Shousei-spell-exit_4
+    21300010: Shousei-spell-exit_5
+    21300012: Shousei-spell-exit_6
+    21300014: Shousei-spell-exit_7
+    21300016: Shousei-spell-exit_8
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -92,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shousei-run_0
+      name: Shousei-spell-exit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -106,13 +107,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dada03e411bc95c40b7a8eb7bc6481ad
+      spriteID: 99baa98f80ca1c74b9a24e84584d4183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_1
+      name: Shousei-spell-exit_1
       rect:
         serializedVersion: 2
         x: 128
@@ -126,13 +127,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 038c0c1259a2a804993448928c617059
+      spriteID: 31ac00c54f1e14b4bba87019f722d147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_2
+      name: Shousei-spell-exit_2
       rect:
         serializedVersion: 2
         x: 256
@@ -146,13 +147,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a8c6956934ef846b4a1ba113c5694b
+      spriteID: 41fe8c73d018c6340b0a6fdcb943b22b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_3
+      name: Shousei-spell-exit_3
       rect:
         serializedVersion: 2
         x: 384
@@ -166,13 +167,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3aeb3d6f2e6f30c4fb41a636fa9f8d42
+      spriteID: 0f27f3e77b63ca2468bec34d1ec4823f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_4
+      name: Shousei-spell-exit_4
       rect:
         serializedVersion: 2
         x: 512
@@ -186,13 +187,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74b7a9222a27216449e3258d48f90213
+      spriteID: d8cee813ff31b9641841298df8b62846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_5
+      name: Shousei-spell-exit_5
       rect:
         serializedVersion: 2
         x: 640
@@ -206,13 +207,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bff5590e63b9a84ea9fd3f23e49e837
+      spriteID: b368a33ebf1aa034e8f10b40dba1e471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_6
+      name: Shousei-spell-exit_6
       rect:
         serializedVersion: 2
         x: 768
@@ -226,13 +227,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac37564e7cc49164488888b395db6b73
+      spriteID: f51c0c9a058663e4c81e2fd3b5051986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shousei-run_7
+      name: Shousei-spell-exit_7
       rect:
         serializedVersion: 2
         x: 896
@@ -246,7 +247,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dde1a6d9101f3ab4ca21148206459bbc
+      spriteID: a5eb5ceb7e4887549947763c51741e64
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shousei-spell-exit_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0234375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ee453bec3044c46a150a1b73695e4c
       vertices: []
       indices: 
       edges: []
@@ -254,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 35c8023a0d4bab04594e24d9d0607f66
+    spriteID: 0bd39b6dec9baa349b7f84f3f6c114ba
     vertices: []
     indices: 
     edges: []

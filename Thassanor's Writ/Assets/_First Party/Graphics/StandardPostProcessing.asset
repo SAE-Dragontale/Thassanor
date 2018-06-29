@@ -15,28 +15,6 @@ MonoBehaviour:
   - {fileID: 114266720301271112}
   - {fileID: 114619553616632774}
   - {fileID: 114301573069307886}
-  - {fileID: 114151070700506378}
---- !u!114 &114151070700506378
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  shutterAngle:
-    overrideState: 1
-    value: 310
-  sampleCount:
-    overrideState: 1
-    value: 16
 --- !u!114 &114266720301271112
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -66,10 +44,10 @@ MonoBehaviour:
     value: 0.55
   smoothness:
     overrideState: 1
-    value: 0.792
+    value: 0.8
   roundness:
     overrideState: 1
-    value: 0.01
+    value: 0.2
   rounded:
     overrideState: 1
     value: 0
@@ -134,8 +112,8 @@ MonoBehaviour:
     overrideState: 0
     value: 5
   tint:
-    overrideState: 1
-    value: 0
+    overrideState: 0
+    value: 10
   colorFilter:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
@@ -155,23 +133,23 @@ MonoBehaviour:
     overrideState: 1
     value: 15
   mixerRedOutRedIn:
-    overrideState: 1
-    value: 90
+    overrideState: 0
+    value: 110
   mixerRedOutGreenIn:
     overrideState: 0
     value: 0
   mixerRedOutBlueIn:
-    overrideState: 1
-    value: 10
+    overrideState: 0
+    value: -10
   mixerGreenOutRedIn:
     overrideState: 0
-    value: 0
+    value: -10
   mixerGreenOutGreenIn:
     overrideState: 0
-    value: 90
+    value: 110
   mixerGreenOutBlueIn:
     overrideState: 0
-    value: 0
+    value: -10
   mixerBlueOutRedIn:
     overrideState: 0
     value: 0
@@ -1413,7 +1391,7 @@ MonoBehaviour:
     value: 1
   softKnee:
     overrideState: 1
-    value: 0.63
+    value: 0.6
   clamp:
     overrideState: 0
     value: 65472

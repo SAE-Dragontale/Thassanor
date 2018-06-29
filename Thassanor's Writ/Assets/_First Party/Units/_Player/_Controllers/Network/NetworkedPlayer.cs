@@ -30,7 +30,7 @@ public class NetworkedPlayer : NetworkBehaviour {
 			Destroy(this);
 		
 		// Now that we've confirmed we are the player, we can start running our Basic Player Setup.
-		CmdFastCreatePlayer();
+		CmdCreatePlayer();
 		
 		// TODO: We really want to be loading our player settings at some point. This should probably be done here, like this:
 		// PlayerSetup(CmdCreatePlayer());
@@ -41,17 +41,21 @@ public class NetworkedPlayer : NetworkBehaviour {
 	}
 
 	// In order to properly instantiate our player, we need to call it through a Networked method.
-	[Command] private GameObject CmdCreatePlayer() {
+	// [Command] private GameObject CmdCreatePlayer() {
+	[Command] private void CmdCreatePlayer() {
 
 		// First, we need to instantiate our player and create a reference to it so we can network sync it.
 		GameObject player = Instantiate(_playerPrefab);
 
 		// Then, we want to make sure that we are in sole control of our player.
 		player.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+		player.transform.parent = GameObject.Find("ActiveNetworkPlayers").transform;
+
+		PlayerSetup(player);
 
 		// Finally, we can ask the server to spawn the object under our control.
 		NetworkServer.Spawn(player);
-		return (player);
+		// return (player);
 
 	}
 

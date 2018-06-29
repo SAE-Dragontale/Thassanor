@@ -63,9 +63,9 @@ public class InputTranslator : MonoBehaviour {
 	public void TranslateInput(RawDataInput rdi) {
 
         // Some simple debugging that was originally useful.
-        Debug.Log("--------------------");
-        Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
-        Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
+        // Debug.Log("--------------------");
+        // Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
+        // Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
 
 		// Check the current player state and execute arguments based on it.
 		switch (_enPlayerState) {

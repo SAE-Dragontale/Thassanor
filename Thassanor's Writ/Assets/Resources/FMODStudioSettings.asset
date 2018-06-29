@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  SourceProjectPathUnformatted: 
-  SourceBankPathUnformatted: 
+  sourceProjectPath: Assets\_First Party\FMOD\ThassanorAudio\ThassanorAudio.fspro
+  SourceProjectPathUnformatted: Assets\_First Party\FMOD\ThassanorAudio\ThassanorAudio.fspro
+  SourceBankPathUnformatted: Assets\_First Party\FMOD\ThassanorAudio\Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0

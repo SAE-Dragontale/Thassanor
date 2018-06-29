@@ -51,26 +51,12 @@ public class NetworkedPlayer : NetworkBehaviour {
 		player.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 		player.transform.parent = GameObject.Find("ActiveNetworkPlayers").transform;
 
-		PlayerSetup(player);
+		// TODO: Customise Player with Style.
+
+		// TODO: Customie Player with Loadout.
 
 		// Finally, we can ask the server to spawn the object under our control.
 		NetworkServer.Spawn(player);
-		// return (player);
-
-	}
-
-	// Instantiates our player without option-setting in a fast, shorthand method. This should provide a player spawned with default settings.
-	[Command] private void CmdFastCreatePlayer() {
-
-		// We're basically doing the same things here, except since we don't need a reference, we can shorthand our code.
-		NetworkServer.SpawnWithClientAuthority(Instantiate(_playerPrefab), connectionToClient);
-
-	}
-
-	// Allocates our PlayerSettings to the Player we've just spawned.
-	private void PlayerSetup(GameObject playerObject) {
-
-		// TODO: We need to assign our player settings from the Master Controller.
 
 	}
 

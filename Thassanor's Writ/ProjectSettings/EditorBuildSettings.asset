@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_First Party/Scenes/DevelopmentScenes/DevGridGenerator.unity
     guid: dd26024ca9b7b38449ccbb10eb9383ac
-  - enabled: 0
-    path: Assets/_First Party/Scenes/DevelopmentScenes/DevCharacterController.unity
-    guid: 9a6abbda220be2c498568c7206298c3b
   - enabled: 1
-    path: Assets/_First Party/User Interface/Scenes/MainMenu Test.unity
+    path: Assets/TemporaryAssets/Philip's JUNK/Scenes/MainMenu Test.unity
     guid: 50fb8d86fb649f741bb853a35fdadb14
+  - enabled: 1
+    path: Assets/TemporaryAssets/Hayden's Garbage/DevCharacterController.unity
+    guid: 9a6abbda220be2c498568c7206298c3b
   m_configObjects: {}

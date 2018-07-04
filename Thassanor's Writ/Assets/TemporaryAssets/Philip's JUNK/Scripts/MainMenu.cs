@@ -18,122 +18,80 @@ public class MainMenu : MonoBehaviour {
     public GameObject playMenu;
 
     [Header("Focus Buttons")]
-    [Tooltip("Store all Focus buttons here.")]
     //buttons to focus on (after menu change)
     public GameObject hotkeysButton;
     public GameObject playButton;
     public GameObject audioSlider;
     public GameObject resolutionDropdown;
     public GameObject newgameButton;
-    public GameObject createButton;
 
-    [Header("UI Windows")]
-    [Tooltip("Store all windows here, window named 'MainMenu' will be set active on runtime.")]
-    //array storing all the UI windows 
-    public GameObject[] windowsUI;
-
-    private void Awake()
-    {
-        MakeMainMenuActive();
-    }
-
-    public void ButtonPlay()
+    public void PlayButton()
     {
         mainMenu.SetActive(false);
         playMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(newgameButton);
     }
 
-    public void ButtonLore()
+    public void LoreButton()
     {
 
     }
 
-    public void ButtonHelp()
+    public void HelpButton()
     {
 
     }
 
-    public void ButtonOptions()
+    public void OptionsButton()
     {
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
     }
 
-    public void ButtonQuit()
+    public void QuitButton()
     {
         Application.Quit();
     }
 
-    public void ButtonBackOptions()
+    public void BackButtonOptions()
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(playButton);
     }
 
-    public void ButtonBackPlay()
-    {
-        playMenu.SetActive(false);
-        mainMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(playButton);
-    }
-
-    public void ButtonBackAudio()
+    public void BackButtonAudio()
     {
         audioMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
     }
 
-    public void ButtonBackScreen()
+    public void BackButtonScreen()
     {
         screenMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
     }
 
-    public void ButtonBackMultiplayer()
-    {
-        multiplayerMenu.SetActive(false);
-        playMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(newgameButton);
-    }
-
-    public void ButtonAudio()
+    public void AudioButton()
     {
         optionsMenu.SetActive(false);
         audioMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(audioSlider);
     }
 
-    public void ButtonScreenOptions()
+    public void ScreenButtonOptions()
     {
         optionsMenu.SetActive(false);
         screenMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(resolutionDropdown);
     }
 
-    public void ButtonMultiplayerPlay()
+    public void MultiplayerPlayButton()
     {
         playMenu.SetActive(false);
         multiplayerMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(createButton);
-    }
-
-    void MakeMainMenuActive()
-    {
-        foreach (GameObject windowUI in windowsUI)
-        {
-            if (windowUI.name != "MainMenu")
-            {
-                windowUI.SetActive(false);
-            }
-            else
-            {
-                windowUI.SetActive(true);
-            }
-        }
     }
 }

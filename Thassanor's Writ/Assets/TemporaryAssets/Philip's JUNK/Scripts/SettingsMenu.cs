@@ -15,13 +15,13 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        if (Screen.fullScreen == false)
+        if (Screen.fullScreen)
         {
-            windowedToggle.isOn = false;
+           return;
         }
         else
         {
-            windowedToggle.isOn = true;
+            windowedToggle.isOn = false;
         }
 
         resolutions = Screen.resolutions;

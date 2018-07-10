@@ -1,11 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CameraPlayer.cs
-   Version:			0.0.0
+   Version:			0.0.1
    Description: 	The player-follow camera. Has all basic functions to smoothly follow the player.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class CameraPlayer : CameraBase {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] List<Transform> _ltrCameraFocus;
+	[SerializeField] public List<Transform> _ltrCameraFocus;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables

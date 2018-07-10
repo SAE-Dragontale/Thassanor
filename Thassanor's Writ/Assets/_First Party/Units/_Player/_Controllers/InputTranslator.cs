@@ -1,19 +1,19 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.6.0
+   Version:			0.7.0
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 // We send information to:
 [RequireComponent(typeof(CharSpells))]
 [RequireComponent(typeof(CharControls))]
 
-public class InputTranslator : MonoBehaviour {
+public class InputTranslator : NetworkBehaviour {
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
@@ -31,9 +31,6 @@ public class InputTranslator : MonoBehaviour {
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
     private PlayerState _enPlayerState;
     private PlayerState _enLastState;
-
-	// Class Settings
-	//[SerializeField] private float _flAnimationLock;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -59,13 +56,16 @@ public class InputTranslator : MonoBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	[Command] public void CmdSyncStruct(RawDataInput inputData) {
+		RpcSyncStruct(inputData);
+	}
+
+	[ClientRpc] public void RpcSyncStruct(RawDataInput inputData) {
+		TranslateInput(inputData);
+	}
+
 	// A call that recieves inputs from the associated scripts. Any Inputs we're recieving are presented here and then translated into function-calls.
 	public void TranslateInput(RawDataInput rdi) {
-
-        // Some simple debugging that was originally useful.
-        // Debug.Log("--------------------");
-        // Debug.Log($"Movement: Vertical [{rdi._aflAxes[0]}], Horizontal [{rdi._aflAxes[1]}]");
-        // Debug.Log($"Buttons Pressed: Escape [{rdi._ablButtons[0]}], Enter [{rdi._ablButtons[1]}].");
 
 		// Check the current player state and execute arguments based on it.
 		switch (_enPlayerState) {

@@ -1,12 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			KeyboardTracker.cs
-   Version:			0.3.1
+   Version:			0.3.2
    Description: 	Inheriting from DeviceTracker.cs, this script extends functionality to track the player's Keyboard specifically.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyboardTracker : DeviceTracker {
@@ -125,13 +123,10 @@ public class KeyboardTracker : DeviceTracker {
 				_hasNewData = true;
 			}
 
-		}	
+		}
 
 		// If we have new Data, we need to act upon it, so we send it to the Input Translator to be processed.
-		if (_hasNewData) {
-			_inputTranslator.TranslateInput(_inputData);
-			_hasNewData = false;
-		}
+		CheckForNewData();
 
 	}
 

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Name: Resurrect
   m_EditorClassIdentifier: 
   _stSpellName: Resurrect
-  _flManaCost: 0
+  _flManaCost: 50
   _astSpellPhrase:
   - wake up and live
   - wake you up and bring you back to life
   - Wake you up inside, bring you back to life!
   - Resurrect Lorem
-  _itTargets: 0
-  _flTimeToComplete: 0
+  _itTargets: 3
+  _flTimeToComplete: 30
   _enSummonType: 1

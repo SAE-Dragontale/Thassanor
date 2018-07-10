@@ -1,18 +1,17 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			DeviceTracker.cs
-   Version:			0.0.1
+   Version:			0.1.0
    Description: 	An alternative to Unity's inbuilt keybindings system and provides monitoring for custom keybindings.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 // We send information to:
 [RequireComponent(typeof(InputTranslator))]
 
-public abstract class DeviceTracker : MonoBehaviour {
+public abstract class DeviceTracker : NetworkBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Player Input
@@ -31,6 +30,33 @@ public abstract class DeviceTracker : MonoBehaviour {
 	protected InputTranslator _inputTranslator;
 	protected RawDataInput _inputData;
 	protected bool _hasNewData;
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Instantiation
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// We can remove this script if we're not the owner of the object. 
+	// Instead, we'll inject input-commands directly to the translator over the network.
+	private void Start() {
+
+		if (!hasAuthority && !isServer)
+			Destroy(this);
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Main program
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// New data should be collected, packaged, and then sent over the network so that our inputs are processed on a network-wide scale.
+	protected void CheckForNewData() {
+
+		if (_hasNewData) {
+			_inputTranslator.CmdSyncStruct(_inputData);
+			_hasNewData = false;
+		}
+
+	}
 
 }
 

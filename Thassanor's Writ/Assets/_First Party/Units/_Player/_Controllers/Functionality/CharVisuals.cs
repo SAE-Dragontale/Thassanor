@@ -1,12 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.3.0
+   Version:			0.3.1
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharVisuals : MonoBehaviour {

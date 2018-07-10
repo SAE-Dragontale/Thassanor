@@ -103,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1580629114390070
 GameObject:
   m_ObjectHideFlags: 1
@@ -202,7 +202,7 @@ Animator:
   m_GameObject: {fileID: 1518705357735956}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 22aaf87980519f549a062425563b58f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8151c3eb43325744b973c6c2935ed111, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8402f2f09e2d0c049802975d94790bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _necromancerStyle: {fileID: 11400000, guid: b78c8dc28cedce347b9f11319d2f6c7b, type: 2}
+  _necromancerStyle: {fileID: 11400000, guid: d6d11ad0c0bd0bf44b7b3a8ebf372e4d, type: 2}
   _v3PlayerZoom: {x: 0, y: -8, z: 7}
   _v3PlayerZoomPanning: {x: 0, y: 0, z: 1.5}
 --- !u!114 &114051461296551960

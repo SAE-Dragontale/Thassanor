@@ -1,17 +1,16 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.1.1
+   Version:			0.2.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using TMPro;
 
 [RequireComponent(typeof(CharVisuals))]
-public class CharSpells : MonoBehaviour {
+public class CharSpells : NetworkBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
@@ -61,11 +60,14 @@ public class CharSpells : MonoBehaviour {
 	public void TypeStatus(bool shouldShow, bool wasCancelled = false) {
 
 		// Just quickly toggle each component of the typing field.
-		_trTypingComponent.gameObject.SetActive(shouldShow);
-		_inputField.interactable = shouldShow;
+		if (hasAuthority) {
+			_trTypingComponent.gameObject.SetActive(shouldShow);
+			_inputField.interactable = shouldShow;
+		}
 
 		// Then either disable the field or force focus onto the field.
 		if (!wasCancelled) {
+
 			if (!shouldShow) {
 
 				_inputField.DeactivateInputField();
@@ -76,6 +78,7 @@ public class CharSpells : MonoBehaviour {
 				_inputField.text = "";
 				_scVisual.CharacterZoom(true);
 				_scVisual.AnimCasting(true);
+
 				FocusCursor();
 
 			}
@@ -95,6 +98,9 @@ public class CharSpells : MonoBehaviour {
 	// We're using the existing Events within the InputField object to force focus onto the object until it's not needed anymore.
 	public void FocusCursor() {
 
+		if (!hasAuthority)
+			return;
+
 		_inputField.ActivateInputField();
 		_inputField.MoveTextEnd(false);
 
@@ -102,6 +108,9 @@ public class CharSpells : MonoBehaviour {
 
 	// The Prediction Model that we're using to match the player's currently entered text to the closest matching spell in their loadout.
 	public void PredictSpell() {
+
+		if (!hasAuthority)
+			return;
 
 		// #TODO: Predict the spell the player is typing and display it dynamically.
 

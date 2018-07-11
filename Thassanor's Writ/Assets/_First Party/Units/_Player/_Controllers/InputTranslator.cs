@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.1
+   Version:			0.7.2
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -46,8 +46,11 @@ public class InputTranslator : NetworkBehaviour {
 
     }
 
-	public void Start() {
+	// This function will trigger with a client gains authority over this object.
+	public override void OnStartAuthority() {
 
+		// So when we gain authority, we're enabling the DeviceTracker to monitor the player's input.
+		GetComponent<DeviceTracker>().enabled = true;
 		SetCursorTo(false);
 
 	}
@@ -56,8 +59,7 @@ public class InputTranslator : NetworkBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Command] public void CmdSyncStruct(RawDataInput inputData, bool didIhaveAuthority) {
-		Debug.Log($"I am {netId} and I have authority [{didIhaveAuthority}]");
+	[Command] public void CmdSyncStruct(RawDataInput inputData) {
 		RpcSyncStruct(inputData);
 	}
 

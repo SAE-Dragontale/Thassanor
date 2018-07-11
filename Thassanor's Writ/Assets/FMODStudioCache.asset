@@ -11,9 +11,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  MasterBankRef: {fileID: 0}
-  StringsBankRef: {fileID: 0}
-  stringsBankWriteTime: 0
+  EditorBanks:
+  - {fileID: 114409507885176388}
+  - {fileID: 114321212865488968}
+  EditorEvents:
+  - {fileID: 114641826960594762}
+  MasterBankRef: {fileID: 114321212865488968}
+  StringsBankRef: {fileID: 114409507885176388}
+  stringsBankWriteTime: 636669279362590769
   cacheVersion: 2
+--- !u!114 &114321212865488968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
+    Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.bank
+  lastModified: 636669279362492459
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 862112
+  Exists: 1
+--- !u!114 &114409507885176388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\_First Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636669279362590769
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 682
+  Exists: 1
+--- !u!114 &114641826960594762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  guid: 37be3c6f4f68bf47a84f1aa40a2ab248
+  Banks:
+  - {fileID: 114321212865488968}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 57600

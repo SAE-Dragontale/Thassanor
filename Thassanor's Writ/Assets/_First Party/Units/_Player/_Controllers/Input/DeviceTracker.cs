@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			DeviceTracker.cs
-   Version:			0.1.2
+   Version:			0.1.3
    Description: 	An alternative to Unity's inbuilt keybindings system and provides monitoring for custom keybindings.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -38,11 +38,8 @@ public abstract class DeviceTracker : NetworkBehaviour {
 	// New data should be collected, packaged, and then sent over the network so that our inputs are processed on a network-wide scale.
 	protected void CheckForNewData() {
 
-		if (!hasAuthority)
-			return;
-
 		if (_hasNewData) {
-			_inputTranslator.CmdSyncStruct(_inputData, hasAuthority);
+			_inputTranslator.CmdSyncStruct(_inputData);
 			_hasNewData = false;
 		}
 

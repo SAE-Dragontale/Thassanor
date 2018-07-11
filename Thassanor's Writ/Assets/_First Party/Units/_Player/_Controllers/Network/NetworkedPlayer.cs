@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			NetworkedPlayer.cs
-   Version:			0.1.2
+   Version:			0.1.3
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -40,8 +40,6 @@ public class NetworkedPlayer : NetworkBehaviour {
 	}
 
 	[ClientRpc] private void RpcCreatePlayer(GameObject player) {
-
-		Debug.Log($"I'm executing [RpcCreatePlayer] with {connectionToClient}");
 
 		// We're just quickly going to assign ourselves under the ActiveNetworkedPlayers group to keep the hierarchy tidy.
 		transform.parent = GameObject.Find("ActiveNetworkedPlayers")?.transform;

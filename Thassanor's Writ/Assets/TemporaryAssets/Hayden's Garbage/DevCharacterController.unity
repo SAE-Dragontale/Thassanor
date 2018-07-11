@@ -1228,6 +1228,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4429451216219886, guid: 8f2df666557352148b13e0dbae23fa7f,
     type: 2}
   m_PrefabInternal: {fileID: 2102187112}
+--- !u!1 &667857175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1168806606858486, guid: d00b353371ab433499df68251d664d52,
+    type: 2}
+  m_PrefabInternal: {fileID: 1362237051}
+--- !u!114 &667857178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 667857175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72507c9331ab3449be2de65689e5be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleKey: 96
+--- !u!4 &667857179 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4744917292810410, guid: d00b353371ab433499df68251d664d52,
+    type: 2}
+  m_PrefabInternal: {fileID: 1362237051}
 --- !u!4 &674221644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4429451216219886, guid: 8f2df666557352148b13e0dbae23fa7f,
@@ -1938,6 +1960,79 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a4407f4e0889d49bf6f8c71d33da17, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1292456962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1292456963}
+  - component: {fileID: 1292456965}
+  - component: {fileID: 1292456964}
+  m_Layer: 0
+  m_Name: WordOfThassanor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1292456963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1292456962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 667857179}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292456964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1292456962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc2e8e4a709fbb4cb2e7b66ec814cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1292456965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1292456962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1001 &1361943658
 Prefab:
   m_ObjectHideFlags: 0
@@ -2057,7 +2152,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114226993390560712, guid: d00b353371ab433499df68251d664d52,
+        type: 2}
+      propertyPath: m_AutoCreatePlayer
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114594437963189912, guid: d00b353371ab433499df68251d664d52, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d00b353371ab433499df68251d664d52, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1383891237 stripped

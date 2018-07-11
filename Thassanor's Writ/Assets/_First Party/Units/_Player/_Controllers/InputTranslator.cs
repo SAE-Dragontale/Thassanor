@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.0
+   Version:			0.7.1
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -29,8 +29,8 @@ public class InputTranslator : NetworkBehaviour {
 
 	// PlayerState Containers.
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
-    private PlayerState _enPlayerState;
-    private PlayerState _enLastState;
+    [SyncVar] private PlayerState _enPlayerState;
+    [SyncVar] private PlayerState _enLastState;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -56,7 +56,8 @@ public class InputTranslator : NetworkBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Command] public void CmdSyncStruct(RawDataInput inputData) {
+	[Command] public void CmdSyncStruct(RawDataInput inputData, bool didIhaveAuthority) {
+		Debug.Log($"I am {netId} and I have authority [{didIhaveAuthority}]");
 		RpcSyncStruct(inputData);
 	}
 

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			NetworkedPlayer.cs
-   Version:			0.1.1
+   Version:			0.1.2
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -21,10 +21,7 @@ public class NetworkedPlayer : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Called before class calls or functions.
-	private void Start() {
-
-		if (!isLocalPlayer)
-			return;
+	public override void OnStartAuthority() {
 
 		CmdCreatePlayer();
 
@@ -44,9 +41,11 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 	[ClientRpc] private void RpcCreatePlayer(GameObject player) {
 
+		Debug.Log($"I'm executing [RpcCreatePlayer] with {connectionToClient}");
+
 		// We're just quickly going to assign ourselves under the ActiveNetworkedPlayers group to keep the hierarchy tidy.
 		transform.parent = GameObject.Find("ActiveNetworkedPlayers")?.transform;
-		transform.name = $"Player {playerControllerId}";
+		transform.name = $"Player {connectionToClient}";
 
 		// Then we're going to do the same for our player object.
 		player.transform.parent = transform;
@@ -57,6 +56,13 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 	}
 
+	// 
+	private void OrganiseExistingPlayers() {
+
+
+
+	}
+
 	/* ----------------------------------------------------------------------------- */
-	
+
 }

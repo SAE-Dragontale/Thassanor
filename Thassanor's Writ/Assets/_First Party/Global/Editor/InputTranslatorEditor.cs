@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslatorEditor.cs
-   Version:			0.2.0
+   Version:			0.2.1
    Description: 	Automatically updates the Keyboard Tracker Script with changed variables on Editor.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -15,11 +15,11 @@ public class InputTranslatorEditor : Editor {
 		Initialisation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private InputTranslator inputTranslator;
+	//private InputTranslator inputTranslator;
 
-	private void OnEnable() {
-		inputTranslator = target as InputTranslator;
-	}
+	//private void OnEnable() {
+	//	inputTranslator = target as InputTranslator;
+	//}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Window Interface

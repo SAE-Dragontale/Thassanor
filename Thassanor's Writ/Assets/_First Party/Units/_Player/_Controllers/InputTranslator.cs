@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.3
+   Version:			0.7.4
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -52,6 +52,9 @@ public class InputTranslator : NetworkBehaviour {
 		// So when we gain authority, we're enabling the DeviceTracker to monitor the player's input.
 		GetComponent<DeviceTracker>().enabled = true;
 		SetCursorTo(false);
+
+		// Then, we also want to become the camera's primary transform tracker. We should be located on [0].
+		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
 
 	}
 

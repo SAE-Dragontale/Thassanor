@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.3.2
+   Version:			0.3.3
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -48,6 +48,10 @@ public class CharVisuals : MonoBehaviour {
 		_an = GetComponentInChildren<Animator>();
 		_sr = GetComponentInChildren<SpriteRenderer>();
 		_cp = Camera.main.GetComponent<CameraPlayer>();
+				
+	}
+
+	private void Start() {
 
 		// Assign Style to Character.
 		_an.runtimeAnimatorController = _necromancerStyle._animatorController;

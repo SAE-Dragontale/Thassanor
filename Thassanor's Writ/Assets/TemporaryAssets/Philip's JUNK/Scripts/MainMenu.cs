@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour {
     public GameObject screenMenu;
     public GameObject multiplayerMenu;
     public GameObject playMenu;
+    public GameObject hotkeyMenu;
 
     [Header("Focus Buttons")]
     [Tooltip("Store all Focus buttons here.")]
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour {
     public GameObject resolutionDropdown;
     public GameObject newgameButton;
     public GameObject createButton;
+    public GameObject keybindButton;
 
     [Header("UI Windows")]
     [Tooltip("Store all windows here, window named 'MainMenu' will be set active on runtime.")]
@@ -59,6 +61,13 @@ public class MainMenu : MonoBehaviour {
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
+    }
+
+    public void ButtonHoykeys()
+    {
+        optionsMenu.SetActive(false);
+        hotkeyMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(keybindButton);
     }
 
     public void ButtonQuit()

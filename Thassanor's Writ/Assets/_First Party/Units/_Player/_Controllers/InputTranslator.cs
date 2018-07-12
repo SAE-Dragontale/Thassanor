@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.2
+   Version:			0.7.3
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -88,7 +88,7 @@ public class InputTranslator : NetworkBehaviour {
 					_enPlayerState = PlayerState.Paused;
 					SetCursorTo(true);
 
-					_scControl.TrajectoryHalt();
+					_scControl.TrajectoryChange();
 
 				}
 
@@ -101,7 +101,7 @@ public class InputTranslator : NetworkBehaviour {
 
 					// Set our state to spellcasting and halt movement.
 					_enPlayerState = PlayerState.Spellcasting;
-					_scControl.TrajectoryHalt();
+					_scControl.TrajectoryChange();
 
 				}
 

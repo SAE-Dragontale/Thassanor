@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CameraPlayer.cs
-   Version:			0.0.1
+   Version:			0.0.2
    Description: 	The player-follow camera. Has all basic functions to smoothly follow the player.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -21,10 +21,10 @@ public class CameraPlayer : CameraBase {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// The Camera Offset(s) being applied to the position.
-	[SerializeField] private Vector3 _v3CameraLocation; // Considered Offset. Added before LookAt().
-	[HideInInspector] public Vector3 _v3Offset; // Additional Offset for programmatical purposes. This is added to _v3Offset.
+	[SerializeField] private Vector3 _v3CameraOffset;	// Considered Offset. Added before LookAt().
 
-	[HideInInspector] public Vector3 _v3Panning; // Flat offset. Added last, after LookAt() for a panning effect.
+	public Vector3 _v3PlayerOffset;		// Additional Offset for programmatical purposes. This is added to _v3Offset.
+	public Vector3 _v3PlayerPanning;	// Flat offset. Added last, after LookAt() for a panning effect.
 
 	// The speed at which the camera snaps to the target its viewing.
 	[SerializeField] private float _flCameraSnap;
@@ -35,15 +35,10 @@ public class CameraPlayer : CameraBase {
 
 	private void Start() {
 
-		_ltrCameraFocus.RemoveAll(vector => vector == null);
+		// Just culling null entities from the camera transform list.
+		_ltrCameraFocus.RemoveAll(Transform => Transform == null);
 
 	}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Calls
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Foobar
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Runtime
@@ -52,30 +47,50 @@ public class CameraPlayer : CameraBase {
 	// Update is called once per frame
 	private void FixedUpdate () {
 
-		Vector3 v3Desired = new Vector3 (0,0,0);
+		_v3Desired = new Vector3(0, 0, 0);
 
-		// Find the MidPoint of all listed variables.
-		int itNullCount = 0;
+		ValidatedTransforms();
+		OffsetDesired();
 
-		foreach (Transform tr in _ltrCameraFocus) {
-			if (tr != null) {
-				v3Desired += tr.position;
+		transform.position = Vector3.Lerp(transform.position, _v3Desired, Time.deltaTime * _flCameraSnap);
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Function Helpers
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// This quickly tries to validate all the transforms in the list, and if there are null values, it removes them.
+	private void ValidatedTransforms() {
+
+		for (int it = _ltrCameraFocus.Count -1; it > -1; it--) {
+
+			if (_ltrCameraFocus[it] == null) {
+				_ltrCameraFocus.RemoveAt(it);
+
 			} else {
-				itNullCount++;
+				_v3Desired += _ltrCameraFocus[it].position;
+
 			}
+
 		}
 
-		// As long as there are elements within the array.
-		if (itNullCount != _ltrCameraFocus.Count)
-			v3Desired = v3Desired / (_ltrCameraFocus.Count - itNullCount);
+		if (_ltrCameraFocus.Count != 0)
+			_v3Desired = _v3Desired / _ltrCameraFocus.Count;
 
-		// First, we need to lerp the panning of the camera, to allow us to offset it from the target transform.
-		v3Desired += _v3Panning;
-		transform.LookAt(v3Desired);
+	}
 
-		// Now, after we've panned and aimed our camera at the transform, we can offset and lerp to our camera rotation.
-		v3Desired += _v3CameraLocation + _v3Offset;
-		transform.position = Vector3.Lerp(transform.position, v3Desired, Time.deltaTime * _flCameraSnap);
+	// Apply all our required Offset Values to the Camera Position here.
+	private void OffsetDesired() {
+
+		// Player panning offset.
+		_v3Desired += _v3PlayerPanning;
+
+		// Look towards the player object.
+		transform.LookAt(_v3Desired);
+
+		// Apply any further offset values.
+		_v3Desired += _v3CameraOffset + _v3PlayerOffset;
 
 	}
 

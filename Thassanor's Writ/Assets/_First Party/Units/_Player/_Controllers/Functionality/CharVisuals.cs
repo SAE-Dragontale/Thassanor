@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.3.1
+   Version:			0.3.2
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -26,8 +26,8 @@ public class CharVisuals : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[Space] [Header("Character Zoom")]
-	[SerializeField] private Vector3 _v3PlayerZoom = new Vector3(0,0,0);
-	[SerializeField] private Vector3 _v3PlayerZoomPanning = new Vector3(0, 0, 0);
+	[SerializeField] private Vector3 _v3PlayerOffset = new Vector3(0,0,0);
+	[SerializeField] private Vector3 _v3PlayerPanning = new Vector3(0, 0, 0);
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -66,21 +66,20 @@ public class CharVisuals : MonoBehaviour {
 		// If no value is passed to the function we should substitute {0,0} instead.
 		aflMovement = aflMovement ?? new float[2];
 
-		// First we need to determine whether we're running or not.
+		// First we need to determine whether we're running or not and change our animator as needed.
 		_an.SetBool("isRunning", (aflMovement[0] != 0 || aflMovement[1] != 0) );
 
-		// Then we need to determine whether we've changed directions or not.
-		if (aflMovement[1] > 0) {
+		// Here we only want to change our facing direction if we've got implicit movement direction (0<) plugged in.
+		if (aflMovement[1] > 0)
 			_sr.flipX = false;
-		} else if (aflMovement[1] < 0) {
+
+		else if (aflMovement[1] < 0) 
 			_sr.flipX = true;
-		}
 
 	}
 
 	public void AnimCasting(bool isSpelling = true) {
 
-		// Bandaid Code
 		_an.SetBool("isSpelling", isSpelling);
 
 	}
@@ -90,8 +89,8 @@ public class CharVisuals : MonoBehaviour {
 
 	public void CharacterZoom(bool isZooming) {
 
-		_cp._v3Offset = isZooming ? _v3PlayerZoom : new Vector3 (0,0,0);
-		_cp._v3Panning = isZooming ? _v3PlayerZoomPanning : new Vector3(0, 0, 0);
+		_cp._v3PlayerOffset = isZooming ? _v3PlayerOffset : new Vector3 (0,0,0);
+		_cp._v3PlayerPanning = isZooming ? _v3PlayerPanning : new Vector3(0, 0, 0);
 
 	}
 

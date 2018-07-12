@@ -169,11 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26125627a096f7945b8830d6357fb820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ltrCameraFocus:
-  - {fileID: 0}
-  _v3CameraLocation: {x: 0, y: 10, z: -15}
-  _v3Offset: {x: 0, y: 10, z: -15}
-  _v3Panning: {x: 0, y: 0, z: 0}
+  _ltrCameraFocus: []
+  _v3CameraOffset: {x: 0, y: 10, z: -15}
+  _v3PlayerOffset: {x: 0, y: 0, z: 0}
+  _v3PlayerPanning: {x: 0, y: 0, z: 0}
   _flCameraSnap: 8
 --- !u!114 &114555080079329816
 MonoBehaviour:

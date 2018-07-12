@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2563,11 +2563,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114187193954205334, guid: fc8a43c235a91034aa11bf97e5e2a53a,
-        type: 2}
-      propertyPath: _ltrCameraFocus.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2599,11 +2594,6 @@ Prefab:
     - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114187193954205334, guid: fc8a43c235a91034aa11bf97e5e2a53a,
-        type: 2}
-      propertyPath: _ltrCameraFocus.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}

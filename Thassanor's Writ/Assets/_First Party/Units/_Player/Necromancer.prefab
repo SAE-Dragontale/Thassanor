@@ -222,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d973c62bc8e7145bf5f3ce8866ae96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enPlayerState: 3
 --- !u!114 &114041299481461328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,8 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _necromancerStyle: {fileID: 11400000, guid: d6d11ad0c0bd0bf44b7b3a8ebf372e4d, type: 2}
-  _v3PlayerZoom: {x: 0, y: -8, z: 7}
-  _v3PlayerZoomPanning: {x: 0, y: 0, z: 1.5}
+  _v3PlayerOffset: {x: 0, y: -7.5, z: 8}
+  _v3PlayerPanning: {x: 0, y: 0.25, z: 0}
 --- !u!114 &114051461296551960
 MonoBehaviour:
   m_ObjectHideFlags: 1

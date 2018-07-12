@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.2.0
+   Version:			0.3.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -57,52 +57,14 @@ public class CharSpells : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Called when we're starting to type. Contains all activation code and executes any runtime requirements.
-	public void TypeStatus(bool shouldShow, bool wasCancelled = false) {
+	public void TypeStatus(bool toggleOn, bool wasCancelled = false) {
 
-		// Just quickly toggle each component of the typing field.
-		if (hasAuthority) {
-			_trTypingComponent.gameObject.SetActive(shouldShow);
-			_inputField.interactable = shouldShow;
-		}
+		ShowInputField(toggleOn);
+		CallCameraZoom(toggleOn);
+		CallAnimationCasting(toggleOn);
 
-		// Then either disable the field or force focus onto the field.
-		if (!wasCancelled) {
-
-			if (!shouldShow) {
-
-				_inputField.DeactivateInputField();
-				CastSpell();
-
-			} else {
-
-				_inputField.text = "";
-				_scVisual.CharacterZoom(true);
-				_scVisual.AnimCasting(true);
-
-				FocusCursor();
-
-			}
-
-		} else {
-
-			_scVisual.CharacterZoom(false);
-			_scVisual.AnimCasting(false);
-
-		}
-
-	}
-
-	/* ----------------------------------------------------------------------------- */
-	// Update Functions
-
-	// We're using the existing Events within the InputField object to force focus onto the object until it's not needed anymore.
-	public void FocusCursor() {
-
-		if (!hasAuthority)
-			return;
-
-		_inputField.ActivateInputField();
-		_inputField.MoveTextEnd(false);
+		if (!toggleOn && !wasCancelled)
+			CastSpell();
 
 	}
 
@@ -116,15 +78,12 @@ public class CharSpells : NetworkBehaviour {
 
 	}
 
-	/* ----------------------------------------------------------------------------- */
-	// Finalising Functions
-
 	// Choosing, and then casting the currently selected spell.
 	private void CastSpell() {
 
-		// #TODO: Cast the closest matching spell.
-		_scVisual.CharacterZoom(false);
-		_scVisual.AnimCasting(false);
+		ShowInputField(false);
+		CallCameraZoom(false);
+		CallAnimationCasting(false);
 
 	}
 
@@ -132,6 +91,63 @@ public class CharSpells : NetworkBehaviour {
 	private void CastEvaluation() {
 
 		// #TODO: Evaluate the validity of the player's input, and then grade the spell based on it.
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Visual Script Calls
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	private void CallCameraZoom(bool toggleOn) {
+
+		if (!hasAuthority)
+			return;
+
+		_scVisual.CharacterZoom(toggleOn);
+
+	}
+
+	private void CallAnimationCasting(bool toggleOn) {
+
+		_scVisual.AnimCasting(toggleOn);
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		InputField Calls
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// We're using this to toggle the User Interface that allows the player to begin typing. Calling ShowInputField is also implicetly calling FocusInputField.
+	public void ShowInputField(bool toggleOn = true) {
+
+		// We're doing this when true to wipe any old text that may still be stored from the last spellcast.
+		if (toggleOn)
+			_inputField.text = "";
+
+		if (!hasAuthority)
+			return;
+
+		_trTypingComponent.gameObject.SetActive(toggleOn);
+		_inputField.interactable = toggleOn;
+
+		FocusInputField(toggleOn);
+
+	}
+
+	// We're using the existing Events within the InputField object to force focus onto the object until it's not needed anymore.
+	public void FocusInputField(bool toggleOn = true) {
+
+		if (!hasAuthority)
+			return;
+
+		if (toggleOn) {
+			_inputField.ActivateInputField();
+			_inputField.MoveTextEnd(false);
+
+		} else {
+			_inputField.DeactivateInputField();
+
+		}
 
 	}
 

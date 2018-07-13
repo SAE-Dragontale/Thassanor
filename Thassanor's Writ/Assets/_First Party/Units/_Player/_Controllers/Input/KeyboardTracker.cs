@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			KeyboardTracker.cs
-   Version:			0.3.2
+   Version:			0.4.0
    Description: 	Inheriting from DeviceTracker.cs, this script extends functionality to track the player's Keyboard specifically.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -19,6 +19,9 @@ public class KeyboardTracker : DeviceTracker {
 	[Tooltip("The buttons our Player currently has bound for axis-based movement.")]
 	public AxisButtons[] _aabAxisButtons;
 
+	[Tooltip("The keybindings that we want to load into the game.")]
+	public KeyboardBindings _keyboardBindings;
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		System Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -26,20 +29,19 @@ public class KeyboardTracker : DeviceTracker {
 	// Called before Awake() in Inspector
 	private void Reset() {
 
-		_inputTranslator = GetComponent<InputTranslator>();
-
         _akcBoolButtons = new KeyCode[_itButtonCount];
         _aabAxisButtons = new AxisButtons[_itAxesCount];
 
-        // Development Functionality: Assign 'baseline' keycodes for development purposes.
-        DefaultKeybindings();
+		DefaultKeybindings();
 
     }
 
-    // Alternative to Reset() that doesn't clear away our keybindings.
-    public void Refresh() {
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Function Calls.
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-        _inputTranslator = GetComponent<InputTranslator>();
+	// Alternative to Reset() that doesn't clear away our keybindings.
+	public void Refresh() {
 
         // Assign temporary Arrays to store data according to new length governance.
         KeyCode[] akcBoolButtonNew = new KeyCode[_itButtonCount];
@@ -65,9 +67,10 @@ public class KeyboardTracker : DeviceTracker {
     }
 
 	// A quick hardcoded function to set the default keybindings for development purposes.
-	public void DefaultKeybindings() {
+	public override void DefaultKeybindings() {
 
 		try {
+
 			_aabAxisButtons[0]._kcPositive = KeyCode.W;
 			_aabAxisButtons[0]._kcNegative = KeyCode.S;
 
@@ -76,22 +79,30 @@ public class KeyboardTracker : DeviceTracker {
 
 			_akcBoolButtons[0] = KeyCode.Escape;
 			_akcBoolButtons[1] = KeyCode.Return;
+			_akcBoolButtons[2] = KeyCode.Space;
+
 		} catch {
+
 			Debug.LogError("There aren't enough kebindings assigned in the InputTranslator to properly reset.");
+
 		}
 		
+	}
+
+	// How we load keybindings from the player's preferences.
+	public override void LoadKeybindings() {
+
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Main Program
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Called before Start().
-	private void Awake() {
-		_inputTranslator = GetComponent<InputTranslator>();
-		_inputData = new RawDataInput (_itAxesCount, _itAxesCount);
+	// Called before Update().
+	private void Start() {
+		_inputData = new RawDataInput(_itAxesCount, _itAxesCount);
 	}
-	
+
 	// Called once per frame.
 	private void Update () {
 

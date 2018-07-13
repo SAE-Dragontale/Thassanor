@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			DeviceTracker.cs
-   Version:			0.1.3
+   Version:			0.1.4
    Description: 	An alternative to Unity's inbuilt keybindings system and provides monitoring for custom keybindings.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -44,6 +44,12 @@ public abstract class DeviceTracker : NetworkBehaviour {
 		}
 
 	}
+
+	// A function shared by all DeviceTrackers to set the default keybindings.
+	public abstract void DefaultKeybindings();
+
+	// A function shared by all DeviceTrackers to load the player's keybindings.
+	public abstract void LoadKeybindings();
 
 }
 

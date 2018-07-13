@@ -1,12 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Stylize.cs
-   Version:			0.0.0
+   Version:			0.0.1
    Description: 	The Style-Container parent that holds the most basic information about a sprite-switch.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Stylize : ScriptableObject {

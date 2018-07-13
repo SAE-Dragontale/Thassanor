@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d973c62bc8e7145bf5f3ce8866ae96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kb: {fileID: 11400000, guid: b8ae8d59ac7aeb74fa807f52298ccd69, type: 2}
 --- !u!114 &114041299481461328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,13 +627,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itAxesCount: 2
-  _itButtonCount: 2
-  _akcBoolButtons: 1b0000000d000000
+  _itButtonCount: 3
+  _akcBoolButtons: 1b0000000d00000020000000
   _aabAxisButtons:
   - _kcPositive: 119
     _kcNegative: 115
-  - _kcPositive: 100
-    _kcNegative: 97
+  - _kcPositive: 97
+    _kcNegative: 100
+  _keyboardBindings: {fileID: 0}
 --- !u!114 &114790070207705898
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -54,12 +54,10 @@ public class KeyboardTracker : DeviceTracker {
 
 			if (Input.GetKey(_keybindings._arrayKeyAxis[it].positive)) {
 				flAxisReturn += 1f;
-				Debug.Log($"Positive detected at {it}.");
 			}
 
 			if (Input.GetKey(_keybindings._arrayKeyAxis[it].negative)) {
 				flAxisReturn -= 1f;
-				Debug.Log($"Negative detected at {it}.");
 			}
 
 			if (flAxisReturn != _inputData._aflAxis[it]) {

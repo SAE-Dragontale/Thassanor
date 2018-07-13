@@ -2629,6 +2629,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114187193954205334, guid: fc8a43c235a91034aa11bf97e5e2a53a,
+        type: 2}
+      propertyPath: _ltrCameraFocus.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			KeyboardTracker.cs
-   Version:			0.4.0
+   Version:			0.5.0
    Description: 	Inheriting from DeviceTracker.cs, this script extends functionality to track the player's Keyboard specifically.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -10,145 +10,83 @@ using UnityEngine;
 public class KeyboardTracker : DeviceTracker {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Button Storage
+		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The buttons our Player currently has bound for toggle-able commands.")]
-	public KeyCode[] _akcBoolButtons;
-
-	[Tooltip("The buttons our Player currently has bound for axis-based movement.")]
-	public AxisButtons[] _aabAxisButtons;
-
-	[Tooltip("The keybindings that we want to load into the game.")]
-	public KeyboardBindings _keyboardBindings;
+	[SerializeField] private KeyboardHotkeys _keybindings;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		System Functions
+		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Called before Awake() in Inspector
-	private void Reset() {
+	// Called before Update().
+	private void Start() {
 
-        _akcBoolButtons = new KeyCode[_itButtonCount];
-        _aabAxisButtons = new AxisButtons[_itAxesCount];
+		LoadKeybindings(_keybindings);
+		_inputData = new RawDataInput( _keybindings._arrayKeyAxis.Length, _keybindings._arrayKeyCode.Length );
 
-		DefaultKeybindings();
-
-    }
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Function Calls.
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Alternative to Reset() that doesn't clear away our keybindings.
-	public void Refresh() {
-
-        // Assign temporary Arrays to store data according to new length governance.
-        KeyCode[] akcBoolButtonNew = new KeyCode[_itButtonCount];
-        AxisButtons[] aabAxisButtonsNew = new AxisButtons[_itAxesCount];
-
-        // Load our old data into the new array, either culling elements or expanding the maximum number of elements.
-        if (_akcBoolButtons != null) {
-            for (int it = 0; it < Mathf.Min(akcBoolButtonNew.Length, _akcBoolButtons.Length); it++) {
-                akcBoolButtonNew[it] = _akcBoolButtons[it];
-            }
-        }
-
-        if (_aabAxisButtons != null) {
-            for (int it = 0; it < Mathf.Min(aabAxisButtonsNew.Length, _aabAxisButtons.Length); it++) {
-                aabAxisButtonsNew[it] = _aabAxisButtons[it];
-            }
-        }
-
-        // Finally, assign our original variables with the new array lengths, containing our old array data.
-        _akcBoolButtons = akcBoolButtonNew;
-        _aabAxisButtons = aabAxisButtonsNew;
-
-    }
-
-	// A quick hardcoded function to set the default keybindings for development purposes.
-	public override void DefaultKeybindings() {
-
-		try {
-
-			_aabAxisButtons[0]._kcPositive = KeyCode.W;
-			_aabAxisButtons[0]._kcNegative = KeyCode.S;
-
-			_aabAxisButtons[1]._kcPositive = KeyCode.A;
-			_aabAxisButtons[1]._kcNegative = KeyCode.D;
-
-			_akcBoolButtons[0] = KeyCode.Escape;
-			_akcBoolButtons[1] = KeyCode.Return;
-			_akcBoolButtons[2] = KeyCode.Space;
-
-		} catch {
-
-			Debug.LogError("There aren't enough kebindings assigned in the InputTranslator to properly reset.");
-
-		}
-		
 	}
 
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Function Calls
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 	// How we load keybindings from the player's preferences.
-	public override void LoadKeybindings() {
+	public void LoadKeybindings(KeyboardHotkeys newHotkeys) {
+
+		_keybindings = newHotkeys ?? new KeyboardHotkeys();
 
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Main Program
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Called before Update().
-	private void Start() {
-		_inputData = new RawDataInput(_itAxesCount, _itAxesCount);
-	}
-
+	
 	// Called once per frame.
-	private void Update () {
+	private void Update() {
 
-		// Check each Boolean-Button to see if they have been pressed or not.
-		for (int it = 0; it < _akcBoolButtons.Length; it++) {
-			
-			if (_inputData._ablButtons[it] != Input.GetKey(_akcBoolButtons[it])) {
-				_inputData._ablButtons[it] = Input.GetKey(_akcBoolButtons[it]);
-			 	_hasNewData = true;
-			}
-
-		}
-
+		/* ----------------------------------------------------------------------------- */
 		// Check each Axis-Button combination to see if either key in the axis has been pressed and return a float.
-		for (int it = 0; it < _aabAxisButtons.Length; it++) {
-			
+
+		for (int it = 0; it < _keybindings._arrayKeyAxis.Length; it++) {
+
 			float flAxisReturn = 0f;
 
-			if (Input.GetKey (_aabAxisButtons[it]._kcPositive)) {
+			if (Input.GetKey(_keybindings._arrayKeyAxis[it].positive)) {
 				flAxisReturn += 1f;
+				Debug.Log($"Positive detected at {it}.");
 			}
 
-			if (Input.GetKey (_aabAxisButtons[it]._kcNegative)) {
+			if (Input.GetKey(_keybindings._arrayKeyAxis[it].negative)) {
 				flAxisReturn -= 1f;
+				Debug.Log($"Negative detected at {it}.");
 			}
 
-			if (flAxisReturn != _inputData._aflAxes[it]) {
-				_inputData._aflAxes[it] = flAxisReturn;
+			if (flAxisReturn != _inputData._aflAxis[it]) {
+				_inputData._aflAxis[it] = flAxisReturn;
 				_hasNewData = true;
 			}
 
 		}
 
+		/* ----------------------------------------------------------------------------- */
+		// Check each Boolean-Button to see if they have been pressed or not and return a bool.
+
+		for (int it = 0; it < _keybindings._arrayKeyCode.Length; it++) {
+
+			if (_inputData._ablKeys[it] != Input.GetKey(_keybindings._arrayKeyCode[it])) {
+				_inputData._ablKeys[it] = Input.GetKey(_keybindings._arrayKeyCode[it]);
+				_hasNewData = true;
+			}
+
+		}
+
+		/* ----------------------------------------------------------------------------- */
 		// If we have new Data, we need to act upon it, so we send it to the Input Translator to be processed.
-		CheckForNewData();
+
+		if (_hasNewData)
+			SendNewInput();
 
 	}
 
-}
-
-/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-	Our custom Data Structs.
-// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-[System.Serializable]
-public struct AxisButtons {
-	public KeyCode _kcPositive;
-	public KeyCode _kcNegative;	
 }

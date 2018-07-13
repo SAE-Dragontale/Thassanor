@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.4
+   Version:			0.7.5
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -10,8 +10,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 // We send information to:
-[RequireComponent(typeof(CharSpells))]
-[RequireComponent(typeof(CharControls))]
+[RequireComponent(typeof(CharSpells),typeof(CharControls))]
 
 public class InputTranslator : NetworkBehaviour {
 
@@ -80,7 +79,7 @@ public class InputTranslator : NetworkBehaviour {
 			case (PlayerState.Idle):
 
 				// Pressing Escape
-				if (rdi._ablButtons[0]) {
+				if (rdi._ablKeys[0]) {
 
 					// #TODO: Implement pause menu here.
 					// This should be done through additive loading, and called as a function in another script from this class.
@@ -96,7 +95,7 @@ public class InputTranslator : NetworkBehaviour {
 				}
 
 				// Pressing Enter
-				else if (rdi._ablButtons[1]) {
+				else if (rdi._ablKeys[1]) {
 
 					// #TODO: Implement spellcasting trigger.
 					// Communicate with CharSpells.cs and begin the 'Spellcasting Phase' from this point.
@@ -110,7 +109,7 @@ public class InputTranslator : NetworkBehaviour {
 
 				// If no commands are being pressed, process movement commands
 				else {
-					_scControl.TrajectoryChange(rdi._aflAxes);
+					_scControl.TrajectoryChange(rdi._aflAxis);
 				}
 				
 				break;
@@ -119,7 +118,7 @@ public class InputTranslator : NetworkBehaviour {
 			case (PlayerState.Spellcasting):
 
 				// Pressing Escape
-				if (rdi._ablButtons[0]) {
+				if (rdi._ablKeys[0]) {
 
 					// #TODO: Implement spellcasting 'Abort'.
 					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
@@ -131,7 +130,7 @@ public class InputTranslator : NetworkBehaviour {
 				}
 
 				// Pressing Enter
-				else if (rdi._ablButtons[1]) {
+				else if (rdi._ablKeys[1]) {
 
 					// #TODO: Implement spellcasting 'Cast'.
 					// We don't want to instantly transition here. Include an Animation Lock.
@@ -148,7 +147,7 @@ public class InputTranslator : NetworkBehaviour {
 			case (PlayerState.Paused):
 
 				// Pressing Escape
-				if (rdi._ablButtons[0]) {
+				if (rdi._ablKeys[0]) {
 
 					// #TODO: Implement ability to dismiss pause menu here.
 					// Same as the sister function above, except we also want to be able to deload the pause menu. Function should be called from here.
@@ -185,7 +184,7 @@ public class InputTranslator : NetworkBehaviour {
 		
 		// Change to the newly issued state and correct movement to the last pressed Axis-Keys.
 		_enPlayerState = _enNewState;
-		_scControl.TrajectoryChange(rdi._aflAxes);
+		_scControl.TrajectoryChange(rdi._aflAxis);
 
 	}
 

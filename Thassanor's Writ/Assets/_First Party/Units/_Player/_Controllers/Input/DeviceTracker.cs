@@ -1,55 +1,44 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			DeviceTracker.cs
-   Version:			0.1.4
+   Version:			0.2.0
    Description: 	An alternative to Unity's inbuilt keybindings system and provides monitoring for custom keybindings.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
-using UnityEngine.Networking;
 
 // We send information to:
 [RequireComponent(typeof(InputTranslator))]
 
-public abstract class DeviceTracker : NetworkBehaviour {
+public abstract class DeviceTracker : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Player Input
+		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Tooltip("The number of Player-Axes we need to monitor. Each Axis is two buttons, or a joystick between two values.")]
-	public int _itAxesCount;
+	protected InputTranslator _inputTranslator;	// Where we are passing all of our input information once it's collected.
 
-	[Tooltip("The number of Player-Buttons we need to monitor. These are checked if they are pressed.")]
-	public int _itButtonCount;
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Tracker Specific Variables
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	protected InputTranslator _inputTranslator;
-	protected RawDataInput _inputData;
-	protected bool _hasNewData;
+	protected RawDataInput _inputData; // The data that we are passing through.
+	protected bool _hasNewData; // Whether that data has changed since the last Sync.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Main program
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// New data should be collected, packaged, and then sent over the network so that our inputs are processed on a network-wide scale.
-	protected void CheckForNewData() {
+	// Run before Start()
+	private void Awake() {
 
-		if (_hasNewData) {
-			_inputTranslator.CmdSyncStruct(_inputData);
-			_hasNewData = false;
-		}
+		_inputTranslator = GetComponent<InputTranslator>();
 
 	}
 
-	// A function shared by all DeviceTrackers to set the default keybindings.
-	public abstract void DefaultKeybindings();
+	// New data should be collected, packaged, and then sent over the network so that our inputs are processed on a network-wide scale.
+	protected void SendNewInput() {
 
-	// A function shared by all DeviceTrackers to load the player's keybindings.
-	public abstract void LoadKeybindings();
+		_inputTranslator.CmdSyncStruct(_inputData);
+		_hasNewData = false;
+
+	}
 
 }
 
@@ -59,21 +48,26 @@ public abstract class DeviceTracker : NetworkBehaviour {
 
 public struct RawDataInput {
 
-	public float[] _aflAxes;
-	public bool[] _ablButtons;
+	public float[] _aflAxis;
+	public bool[] _ablKeys;
 
-	public RawDataInput(int itNumAxes, int itNumButtons) {
-		_aflAxes = new float[itNumAxes];
-		_ablButtons = new bool[itNumButtons];
+	public RawDataInput(int itAxesNum, int itButtonNum) {
+
+		_aflAxis = new float[itAxesNum];
+		_ablKeys = new bool[itButtonNum];
+
 	}
 
 	public void Reset() {
-		for (int it = 0; it < _aflAxes.Length; it++) {
-			_aflAxes[it] = 0f;
+
+		for (int it = 0; it < _aflAxis.Length; it++) {
+			_aflAxis[it] = 0f;
 		}
-		for (int it = 0; it < _ablButtons.Length; it++) {
-			_ablButtons[it] = false;
+
+		for (int it = 0; it < _ablKeys.Length; it++) {
+			_ablKeys[it] = false;
 		}
+
 	}
 
 }

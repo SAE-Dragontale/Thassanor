@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4257883264827294}
-  - component: {fileID: 114206768219623590}
   - component: {fileID: 114333877672462342}
+  - component: {fileID: 114137187715621740}
   m_Layer: 0
   m_Name: BoardGenerator
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114206768219623590
+--- !u!114 &114137187715621740
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,13 +53,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
-  _itSeed: 48375
-  _columns: 30
-  _rows: 30
-  _waterDensity: -0.5
-  _waterSize: 1
+  _itSeed: 34
+  _columns: 12
+  _rows: 12
+  _waterDensity: -0.366
+  _waterSize: 2
   _townSpread: 2
-  _MaxTownCount: 40
+  _MaxTownCount: 10
   _curTownCount: 0
   _floorTiles:
   - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
@@ -69,14 +69,18 @@ MonoBehaviour:
   _waterTiles:
   - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
   _boardHolder: {fileID: 0}
-  _tileList: []
-  _propList: []
-  _waterList: []
+  _tileList:
+  - {fileID: 0}
+  - {fileID: 0}
+  _propList:
+  - {fileID: 0}
+  _waterList:
+  - {fileID: 0}
   _txtBoardSize: {fileID: 0}
   _txtWaterCount: {fileID: 0}
   _txtTownCount: {fileID: 0}
   _borderGenRef: {fileID: 0}
-  tileInstance: {fileID: 0}
+  _tileInstance: {fileID: 0}
 --- !u!114 &114333877672462342
 MonoBehaviour:
   m_ObjectHideFlags: 1

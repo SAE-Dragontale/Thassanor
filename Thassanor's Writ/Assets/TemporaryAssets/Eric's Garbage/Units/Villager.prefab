@@ -9,71 +9,70 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1465338795882398}
+  m_RootGameObject: {fileID: 1503196646880998}
   m_IsPrefabAsset: 1
---- !u!1 &1465338795882398
+--- !u!1 &1503196646880998
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4179395264937444}
-  - component: {fileID: 212317931291996200}
-  - component: {fileID: 114825430850976804}
-  - component: {fileID: 114470524102189172}
+  - component: {fileID: 4257713436338226}
+  - component: {fileID: 212861955328500736}
+  - component: {fileID: 114318050902579812}
+  - component: {fileID: 114590621470707634}
   m_Layer: 0
-  m_Name: Town
+  m_Name: Villager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4179395264937444
+--- !u!4 &4257713436338226
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465338795882398}
+  m_GameObject: {fileID: 1503196646880998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9458685, y: 1.7552652, z: -8.153734}
+  m_LocalPosition: {x: 2.3097708, y: 6.5401926, z: -14.6269655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114470524102189172
+--- !u!114 &114318050902579812
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465338795882398}
+  m_GameObject: {fileID: 1503196646880998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428e1a9e46c4d39418e88b14acfc54e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2204bd6a1b0d1d246abe7aa7d731a438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _villagers:
-  - {fileID: 1503196646880998, guid: e3fb3c4b71297e74babcfc863196a966, type: 2}
-  _villagerCount: []
---- !u!114 &114825430850976804
+  _currentState: 0
+  _health: 3
+--- !u!114 &114590621470707634
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465338795882398}
+  m_GameObject: {fileID: 1503196646880998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _trCamera: {fileID: 0}
---- !u!212 &212317931291996200
+--- !u!212 &212861955328500736
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465338795882398}
+  m_GameObject: {fileID: 1503196646880998}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -103,12 +102,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e209835075b3ce94fa45dc1157203303, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49dfbcb5f8feb384385999317285305c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.63, y: 2.28}
+  m_Size: {x: 0.47, y: 0.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

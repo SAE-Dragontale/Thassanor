@@ -78,13 +78,19 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject _tileInstance;
 		
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+	void Awake()
+	{
+		_playerRef = GameObject.FindGameObjectWithTag ("Player");
+		_playerRef.SetActive(true);
+
+	}
+
 
 	private void Start ()
 	{
 		_borderGenRef = gameObject.GetComponent<BorderGeneration>();
 
         _simplexNoise = new OpenSimplexNoise(_itSeed);
-		_playerRef = GameObject.FindGameObjectWithTag ("Player");
 		// Create the board holder.
 		_boardHolder = new GameObject("BoardHolder");
 
@@ -96,9 +102,16 @@ public class BoardGeneration : MonoBehaviour {
 		_txtBoardSize.text = "Columns: " + _columns + " | Rows: " + _rows + " | Ground Tiles: " + _tileList.Count;		
 		_txtTownCount.text = "Towns: " + _curTownCount;	
 		_txtWaterCount.text = "Water Tiles: " + _waterList.Count;
-		
+				
+		StartCoroutine(DelayedStart());
+
 	}
 
+	public IEnumerator DelayedStart()
+	{
+		yield return new WaitForSeconds(.7f);
+		_playerRef.SetActive(true);
+	}
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
 	void SetupTilesArray ()

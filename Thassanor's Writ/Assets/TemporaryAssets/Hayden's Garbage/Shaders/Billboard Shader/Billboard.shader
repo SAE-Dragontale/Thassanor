@@ -1,4 +1,4 @@
-﻿Shader "2D Billboard Shader" {
+﻿Shader "Sprites (Custom)/Unit's Default Billboarder" {
    Properties {
       _MainTex ("Texture Image", 2D) = "white" {}
       _ScaleX ("Scale X", Float) = 1.0

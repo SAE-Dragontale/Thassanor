@@ -12,14 +12,55 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114409507885176388}
-  - {fileID: 114321212865488968}
+  - {fileID: 114121283034067988}
+  - {fileID: 114497165932303090}
   EditorEvents:
-  - {fileID: 114641826960594762}
-  MasterBankRef: {fileID: 114321212865488968}
-  StringsBankRef: {fileID: 114409507885176388}
-  stringsBankWriteTime: 636669279362590769
+  - {fileID: 114172504432264438}
+  - {fileID: 114763509176166406}
+  MasterBankRef: {fileID: 114497165932303090}
+  StringsBankRef: {fileID: 114121283034067988}
+  stringsBankWriteTime: 636673561701048339
   cacheVersion: 2
+--- !u!114 &114121283034067988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\_First Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636673561701048339
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 734
+  Exists: 1
+--- !u!114 &114172504432264438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  guid: 37be3c6f4f68bf47a84f1aa40a2ab248
+  Banks:
+  - {fileID: 114497165932303090}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 57600
 --- !u!114 &114321212865488968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,6 +98,25 @@ MonoBehaviour:
   - Name: Desktop
     Value: 682
   Exists: 1
+--- !u!114 &114497165932303090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: T:\Personal\Work\!University\SAE\Trimester 5 and 6\Thassanor\Thassanor's Writ\Assets\_First
+    Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.bank
+  lastModified: 636673561701008227
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 886400
+  Exists: 1
 --- !u!114 &114641826960594762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,3 +139,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 57600
+--- !u!114 &114763509176166406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps
+  guid: bca8db019ff7944d94853a8d96d58d79
+  Banks:
+  - {fileID: 114497165932303090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3400

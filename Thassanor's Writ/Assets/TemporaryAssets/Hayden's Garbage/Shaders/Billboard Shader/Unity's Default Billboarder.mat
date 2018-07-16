@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BillboardShader
-  m_Shader: {fileID: 4800000, guid: 1d1b99b0c6eaf564fb4936eb75b89f3f, type: 3}
+  m_Name: Unity's Default Billboarder
+  m_Shader: {fileID: 4800000, guid: 7c38a99235af71e4d9658b07175a9b81, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -103,6 +103,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1

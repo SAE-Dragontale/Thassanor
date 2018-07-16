@@ -34,11 +34,7 @@ public class Billboarder : MonoBehaviour {
 	private void FixedUpdate () {
 
 		// We're simply asking the sprite to look towards the camera.
-		// NOTE: I do not know why you need the (Vector3.forward * 180f). It does not work without it. ~Vector3(0,0,15) at least is needed, as Vector3.forward/back/up/down do literally nothing.
-
-        Camera cam = Camera.main;
-         transform.LookAt(transform.position + _trCamera.transform.rotation * Vector3.forward, _trCamera.transform.rotation * Vector3.up); // Eric - Added this to make the billboard objects all faace the same direction instead of facing the camera. Had clipping issues with the town sprites and the ground
-    	//transform.LookAt(_trCamera.position + _trCamera.transform.rotation * (Vector3.forward * 180f), _trCamera.transform.rotation * Vector3.up);	
+        transform.LookAt(transform.position + _trCamera.transform.rotation * Vector3.forward, _trCamera.transform.rotation * Vector3.up);	
 		
 	}
 

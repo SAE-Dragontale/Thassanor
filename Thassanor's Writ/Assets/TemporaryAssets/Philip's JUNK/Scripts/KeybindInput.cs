@@ -13,7 +13,13 @@ using UnityEngine.EventSystems;
 
 public class KeybindInput : MonoBehaviour {
 
+    [SerializeField]
+    private KeyboardHotkeys _keyboardHotkeys;
+
     private Dictionary<string, KeyCode> key = new Dictionary<string, KeyCode>();
+
+    private KeyAxis[] keyAxis = new KeyAxis[2];
+    private KeyCode[] keyCode = new KeyCode[3];
 
     public TextMeshProUGUI up, down, left, right, unitCommand;
 
@@ -24,34 +30,36 @@ public class KeybindInput : MonoBehaviour {
     //public KeyData[] keyData;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        Debug.Log(keyAxis[0]);
+        keyAxis[0].positive = _keyboardHotkeys._arrayKeyAxis[0].positive;
+        keyAxis[0].negative = _keyboardHotkeys._arrayKeyAxis[0].negative;
+        keyAxis[1].positive = _keyboardHotkeys._arrayKeyAxis[1].positive;
+        keyAxis[1].negative = _keyboardHotkeys._arrayKeyAxis[1].negative;
 
-        //int keybindStringIndex = 0;
-        //if(key.Count > keybindStringIndex + 1)
-        //{
-        //    key.Add(keyData[keybindStringIndex].Action, KeyCode.W);
-        //}
+        keyCode[0] = _keyboardHotkeys._arrayKeyCode[0];
+        keyCode[1] = _keyboardHotkeys._arrayKeyCode[1];
+        keyCode[2] = _keyboardHotkeys._arrayKeyCode[2];
 
-        key.Add("Move Up", KeyCode.W);
-        key.Add("Move Down", KeyCode.S);
-        key.Add("Move Left", KeyCode.A);
-        key.Add("Move Right", KeyCode.D);
-        key.Add("Follow / Stay", KeyCode.Space);
+        up.text = keyAxis[0].positive.ToString();
+        down.text = keyAxis[0].negative.ToString();
+        left.text = keyAxis[1].positive.ToString();
+        right.text = keyAxis[1].negative.ToString();
 
-        up.text = key["Move Up"].ToString();
-        down.text = key["Move Down"].ToString();
-        left.text = key["Move Left"].ToString();
-        right.text = key["Move Right"].ToString();
-        unitCommand.text = key["Follow / Stay"].ToString();
+        unitCommand.text = keyCode[2].ToString();
 
-        //buttonText[0].text = key["Move Up"].ToString();
-        //buttonText[1].text = key["Move Down"].ToString();
-        //buttonText[2].text = key["Move Left"].ToString();
-        //buttonText[3].text = key["Move Right"].ToString();
-        //buttonText[4].text = key["Cast Spell"].ToString();
-        //buttonText[5].text = key["Quick Spell 1"].ToString();
-        //buttonText[6].text = key["Quick Spell 2"].ToString();
-        //buttonText[7].text = key["Quick Spell 3"].ToString();
+        //key.Add("Move Up", _keyboardHotkeys._arrayKeyAxis[0]);
+        //key.Add("Move Down", KeyCode.S);
+        //key.Add("Move Left", KeyCode.A);
+        //key.Add("Move Right", KeyCode.D);
+        //key.Add("Follow / Stay", KeyCode.Space);
+
+        //up.text = key["Move Up"].ToString();
+        //down.text = key["Move Down"].ToString();
+        //left.text = key["Move Left"].ToString();
+        //right.text = key["Move Right"].ToString();
+        //unitCommand.text = key["Follow / Stay"].ToString();
     }
 
     private void OnGUI()
@@ -62,6 +70,7 @@ public class KeybindInput : MonoBehaviour {
             if (e.isKey)
             {
                 if(e.keyCode != KeyCode.Return) {
+                    _keyboardHotkeys = new KeyboardHotkeys();
                     key[currentKey.name] = e.keyCode;
                     currentKey.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
                     currentKey = null;

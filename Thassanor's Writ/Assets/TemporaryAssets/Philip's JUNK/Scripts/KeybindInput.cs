@@ -11,12 +11,13 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class KeybindInput : MonoBehaviour {
+public class KeybindInput : MonoBehaviour
+{
 
     [SerializeField]
     private KeyboardHotkeys _keyboardHotkeys;
 
-    private Dictionary<string, KeyCode> key = new Dictionary<string, KeyCode>();
+    private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
 
     private KeyAxis[] keyAxis = new KeyAxis[2];
     private KeyCode[] keyCode = new KeyCode[3];
@@ -25,12 +26,14 @@ public class KeybindInput : MonoBehaviour {
 
     private GameObject currentKey;
 
+
+
     //[Header("Keybind Setup")]
     //[Tooltip("How many keybinds do you have?")]
     //public KeyData[] keyData;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         Debug.Log(keyAxis[0]);
         keyAxis[0].positive = _keyboardHotkeys._arrayKeyAxis[0].positive;
@@ -49,11 +52,11 @@ public class KeybindInput : MonoBehaviour {
 
         unitCommand.text = keyCode[2].ToString();
 
-        //key.Add("Move Up", _keyboardHotkeys._arrayKeyAxis[0]);
-        //key.Add("Move Down", KeyCode.S);
-        //key.Add("Move Left", KeyCode.A);
-        //key.Add("Move Right", KeyCode.D);
-        //key.Add("Follow / Stay", KeyCode.Space);
+        keys.Add("Up", keyAxis[0].positive);
+        keys.Add("Down", keyAxis[0].negative);
+        keys.Add("Left", keyAxis[1].positive);
+        keys.Add("Right", keyAxis[1].negative);
+        keys.Add("UnitCommand", keyCode[2]);
 
         //up.text = key["Move Up"].ToString();
         //down.text = key["Move Down"].ToString();
@@ -69,9 +72,10 @@ public class KeybindInput : MonoBehaviour {
             Event e = Event.current;
             if (e.isKey)
             {
-                if(e.keyCode != KeyCode.Return) {
+                if (e.keyCode != KeyCode.Return)
+                {
                     _keyboardHotkeys = new KeyboardHotkeys();
-                    key[currentKey.name] = e.keyCode;
+                    keys[currentKey.name] = e.keyCode;
                     currentKey.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();
                     currentKey = null;
                 }
@@ -84,4 +88,15 @@ public class KeybindInput : MonoBehaviour {
         currentKey = clicked;
     }
 
+    public void SaveHotKeysToProfile()
+    {
+        KeyboardHotkeys newKeyboardHotkeys = ScriptableObject.CreateInstance<KeyboardHotkeys>();
+        newKeyboardHotkeys._arrayKeyAxis[0].positive = keys["Up"];
+        newKeyboardHotkeys._arrayKeyAxis[0].negative = keys["Down"];
+        newKeyboardHotkeys._arrayKeyAxis[1].positive = keys["Left"];
+        newKeyboardHotkeys._arrayKeyAxis[1].negative = keys["Right"];
+
+        newKeyboardHotkeys._arrayKeyCode[2] = keys["UnitCommand"];
+    }
 }
+

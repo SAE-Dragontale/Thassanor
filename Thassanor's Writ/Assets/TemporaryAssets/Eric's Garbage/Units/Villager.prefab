@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4257713436338226}
   - component: {fileID: 212861955328500736}
-  - component: {fileID: 114318050902579812}
   - component: {fileID: 114590621470707634}
+  - component: {fileID: 114522769098848530}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114318050902579812
+--- !u!114 &114522769098848530
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,11 +50,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1503196646880998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2204bd6a1b0d1d246abe7aa7d731a438, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b99a355a1f8e4240b7cf272a581321a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
   _health: 3
+  _townRef: {fileID: 0}
+  _outOfBoundsDistance: 3
+  _isIdling: 0
+  _isPatroling: 0
+  _patrolDir: {x: 0, y: 0, z: 0}
+  _isFleeing: 0
+  _fleeDir: {x: 0, y: 0, z: 0}
+  distance: 0
 --- !u!114 &114590621470707634
 MonoBehaviour:
   m_ObjectHideFlags: 1

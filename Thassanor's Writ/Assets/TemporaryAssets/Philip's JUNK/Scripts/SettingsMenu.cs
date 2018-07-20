@@ -11,6 +11,8 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionsDropdown;
     //public Text textDebug;
 
+
+
     Resolution[] resolutions;
 
     private void Start()
@@ -51,13 +53,33 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution (int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        Resolution resolution;
+
+        if (PlayerPrefs.HasKey("resolutionIndex"))
+        {
+            int storedResolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
+            resolution = resolutions[storedResolutionIndex];
+        }
+        else
+        {
+            resolution = resolutions[resolutionIndex];
+        }
+
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        PlayerPrefs.SetInt("resolutionIndex", resolution.width);
     }
 
     public void SetVolume(float volume)
     {
-        audiomixer.SetFloat("volume", volume);
+        if (PlayerPrefs.HasKey("storedVolume"))
+        {
+            int storedVolume = PlayerPrefs.GetInt("storedVolume");
+            audiomixer.SetFloat("volume", storedVolume);
+        }
+        else
+        {
+            audiomixer.SetFloat("volume", volume);
+        }
     }
 
     public void SetQuality(int qualityIndex)
@@ -69,12 +91,33 @@ public class SettingsMenu : MonoBehaviour
     //Initially Screen.fullScreen = !Screen.fullScreen was used but ran into problems even though this was noted in the unity API
     public void SetFullscreen(bool fullScreenBool)
     {
-        Screen.fullScreen = fullScreenBool;
-        if (!fullScreenBool)
+        bool storedIsFullScreen;
+        Resolution resolution = Screen.currentResolution;
+        if (PlayerPrefs.HasKey("isFullScreen"))
         {
-            Resolution resolution = Screen.currentResolution;
-            Screen.SetResolution(resolution.width, resolution.height, fullScreenBool);
+            int isFullScreenInt = PlayerPrefs.GetInt("isFullScreen");
+
+            if (isFullScreenInt == 1)
+            {
+                storedIsFullScreen = true;
+
+            }
+            else
+            {
+                storedIsFullScreen = false;
+            }
+            Screen.SetResolution(resolution.width, resolution.height, storedIsFullScreen);
         }
+        else
+        {
+            if (!fullScreenBool)
+            {
+                Screen.SetResolution(resolution.width, resolution.height, fullScreenBool);
+                PlayerPrefs.SetInt("isFullscreen", 1);
+            }
+        }
+
+        Screen.fullScreen = fullScreenBool;
 
         //Debug.Log(Screen.fullScreen);
         //if (Screen.fullScreen == false)

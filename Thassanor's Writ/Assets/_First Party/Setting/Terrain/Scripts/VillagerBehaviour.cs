@@ -46,8 +46,16 @@ public class VillagerBehaviour : MonoBehaviour {
 	
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	//idle
+	Vector3 directionOfTown;
 	bool outOfBounds = false;
+	//patrol
+	float patrolDirX;
+	float patrolDirY;
 	public float distance;
+	float randTimeValue;
+	//flee
+	
 	// Update is called once per frame
 	void Update () 
 	{
@@ -56,15 +64,23 @@ public class VillagerBehaviour : MonoBehaviour {
 	//	IDLE
 		if(_isIdling == true)
 		{
+			//sets appropriate bools
 			_canMove = false;
 			_isFleeing = false;
 			_isPatroling = false;
-
-			//get direction nd distance of the town 
-			Vector3 heading = _townRef.transform.position - this.gameObject.transform.position;
-			heading = heading.normalized;
+		
+			//distance held here because in oneshot, it on has tthe value entered at idle start
+			//causing the villager to walk endlessly in the direction of the town if out of bounds
 			distance = Vector3.Distance(transform.position,_townRef.transform.position);
-			Vector3 directionOfTown = heading / distance;	
+			if(_oneShotActionActive == true)
+			{
+				_oneShotActionActive = false;
+				
+				//get direction nd distance of the town 
+				Vector3 heading = _townRef.transform.position - this.gameObject.transform.position;
+				heading = heading.normalized;
+				directionOfTown = heading / distance;				
+			}
 
 			//checks if im too far from the town, then sets out of bounds to true
 			if(distance > _outOfBoundsDistance)
@@ -74,14 +90,15 @@ public class VillagerBehaviour : MonoBehaviour {
 
 			//time spent idling
 			_actionTimer = _actionTimer + Time.deltaTime;
-			if(_actionTimer >= Random.Range(.5f,2f))
+			if(_actionTimer >= .2f)
 			{
 				//if out of bounds is true, then move towards the town until im close enough.
 				if(outOfBounds == true)
 				{
 					transform.Translate(directionOfTown * 5f* Time.deltaTime, Space.World);
 
-					if(distance <= _outOfBoundsDistance / 4f)
+					//if you're half the out of bounds distance, let npc leave idle state
+					if(distance <= _outOfBoundsDistance / 2f)
 					{
 						outOfBounds = false;
 						_actionTimer = 0f;
@@ -115,22 +132,22 @@ public class VillagerBehaviour : MonoBehaviour {
 				
 				//chooses a random patrol direction out of 4 directions
 				_patrolDir = new Vector3(0f,0f,0f);
-				int dir = Random.Range(0,4);
+				patrolDirX = Random.Range(-1f,1f);
+				patrolDirY = Random.Range(-1f,1f);
 
-				if(dir == 0){_patrolDir = Vector3.forward;}
-				if(dir == 1){_patrolDir = -Vector3.forward;}
-				if(dir == 2){_patrolDir = Vector3.right;}
-				if(dir == 3){_patrolDir = -Vector3.right;}					
+				//rand value for timer here so it only sets once per patrol state
+				randTimeValue = Random.Range(1f,1.8f);				
 			}
 
 			//move in that patrol direction
-			transform.Translate(_patrolDir * 1f * Time.deltaTime, Space.World);
+			transform.Translate(new Vector3(patrolDirX, 0, patrolDirY) * 1f * Time.deltaTime, Space.World);
 			//add to timer to end patrol
 			_actionTimer = _actionTimer + Time.deltaTime;
-			if(_actionTimer >= Random.Range(1.5f,3f))
+			if(_actionTimer >= randTimeValue)
 			{
-				//reset action timer, and set back to idle 
+				//reset action timer, set one shot bool to true because idle has 'play once' elements, and set back to idle 
 				_actionTimer = 0f;
+				_oneShotActionActive = true;
 				_isIdling = true;	
 			}
 		}
@@ -138,30 +155,48 @@ public class VillagerBehaviour : MonoBehaviour {
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	// FLEE
 
+	//this doesnt work? (the whole thing)
+		
 		RaycastHit hit;
-		if (Physics.SphereCast(transform.position, 15, transform.forward, out hit))
+		if (Physics.SphereCast(transform.position, 3f, -transform.up, out hit))
 		{
-			if(hit.transform.tag == "Player")
+			if(hit.collider.tag == "Player")
 			{
+				Debug.Log(hit.collider.name);
+				_isIdling = false;
+				_isPatroling = false;
+
 				Vector3 heading = hit.transform.position - this.gameObject.transform.position;
 				heading = heading.normalized;
 				float distance = heading.magnitude;
+				//makes it the opposite direction of the player somehow
+				distance = -distance;
 				Vector3 direction = heading / distance;	
 				_fleeDir = direction;
+
 				_isFleeing = true;		
 			}
-		}
+		}	        
 
 		if(_isFleeing == true)
 		{
 			_canMove = true;
 			_isPatroling = false;
-			_isIdling = false;
-			
+			_isIdling = false;			
 			
 			transform.Translate(_fleeDir * 1f * Time.deltaTime, Space.World);
+
+			_actionTimer = _actionTimer + Time.deltaTime;
+			if(_actionTimer > 3f)
+			{
+				_actionTimer = 0f;
+				_isIdling = _isPatroling = true;
+				_oneShotActionActive = true;
+			}
 			
 		}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 		if(Input.GetKeyDown(KeyCode.E))
 		{
@@ -181,6 +216,10 @@ public class VillagerBehaviour : MonoBehaviour {
 	}
 	
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-	
+	void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 3f);
+    }
+
 
 }

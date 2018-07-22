@@ -53,29 +53,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
-  _itSeed: 34
-  _columns: 12
-  _rows: 12
-  _waterDensity: -0.366
-  _waterSize: 2
+  _itSeed: 4812
+  _columns: 30
+  _rows: 30
+  _waterDensity: -0.5
+  _waterSize: 1
   _townSpread: 2
-  _MaxTownCount: 10
+  _MaxTownCount: 4
   _curTownCount: 0
-  _floorTiles:
-  - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
-  - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
-  _townTiles:
-  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
-  _waterTiles:
-  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
+  _floorTiles: []
+  _townTiles: []
+  _waterTiles: []
   _boardHolder: {fileID: 0}
   _tileList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
+  - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
   _propList:
-  - {fileID: 0}
+  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
   _waterList:
-  - {fileID: 0}
+  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
   _txtBoardSize: {fileID: 0}
   _txtWaterCount: {fileID: 0}
   _txtTownCount: {fileID: 0}

@@ -333,6 +333,21 @@ Prefab:
       propertyPath: _waterList.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _townTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _floorTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_LocalPosition.x
       value: -2.869618
@@ -380,6 +395,80 @@ Prefab:
       propertyPath: _txtTownCount
       value: 
       objectReference: {fileID: 1298079728}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _tileList.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _tileList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _propList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _floorTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216,
+        type: 2}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _floorTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a,
+        type: 2}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _townTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323,
+        type: 2}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117,
+        type: 2}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _townSpread
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _MaxTownCount
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterDensity
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _itSeed
+      value: 119831
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _waterAmount
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_IsPrefabAsset: 0

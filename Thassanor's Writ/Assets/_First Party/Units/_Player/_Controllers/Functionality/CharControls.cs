@@ -74,7 +74,6 @@ public class CharControls : MonoBehaviour {
 
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, -Vector3.up, out hit) && hit.transform.tag == "Water") {
-			Debug.Log("Water");
 		}
 
 	}

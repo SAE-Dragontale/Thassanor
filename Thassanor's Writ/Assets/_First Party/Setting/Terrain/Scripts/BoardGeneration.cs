@@ -37,14 +37,14 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 
     [Range(-.5f,.5f)]
-    public float _waterDensity;
+    public float _waterAmount;
     [Range(1, 9)]
     public int _waterSize;
 
 	[Space]
 
     [Tooltip("This value is multiplied by the column size or row size, whichever is biggest. This keeps size & spread dynamic.")]
-    [Range(2, 9)]
+    [Range(2, 12)]
     public int _townSpread;
 	public int _MaxTownCount = 4;	
 	[SerializeField] private int _curTownCount = 0;	
@@ -56,6 +56,12 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject[] _waterTiles;       
 
 	[Space]
+	[Header("UI Components")]
+	public Text _txtBoardSize;
+	public Text _txtWaterCount;
+	public Text _txtTownCount;
+
+	[Space]
 	[Header("Board Components")]
 	public GameObject _boardHolder;                           // GameObject that acts as a container for all other tiles.
 	public List<GameObject> _tileList = new List<GameObject>();
@@ -64,11 +70,6 @@ public class BoardGeneration : MonoBehaviour {
 	public TileType[][] _tiles;                               // A jagged array of tile types representing the board, like a grid.
 
 
-	[Space]
-	[Header("UI Components")]
-	public Text _txtBoardSize;
-	public Text _txtWaterCount;
-	public Text _txtTownCount;
 
 
 	[Space]
@@ -136,8 +137,10 @@ public class BoardGeneration : MonoBehaviour {
 	{		
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
-		//keeps this a constant size compared to the grid/map size
-		_townSpread = Mathf.Max(_columns,_rows) * _townSpread;
+		//keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
+		_townSpread = ((Mathf.Max(_columns,_rows) / 3) * _townSpread);
+		if(_townSpread % 2 == 0)
+		{_townSpread -= 1;}
 				
 		for (int z = 0; z < _tiles[0].Length; z++)
 		{	
@@ -157,13 +160,13 @@ public class BoardGeneration : MonoBehaviour {
 					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
 					{
 						//perlin value for water
-						if (_fltPerlinValue < _waterDensity) 
+						if (_fltPerlinValue < _waterAmount) 
 						{
 							InstantiateWater (_waterTiles, x, z);									
 						}
 						
 						//perlin value for towns to spawn
-						if (_fltPerlinValue < .3f && _fltPerlinValue > -.2f && townSpreadCur == _townSpread) 
+						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f  && townSpreadCur == _townSpread) 
 						{
 							if (_curTownCount != _MaxTownCount)
 							{

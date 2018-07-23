@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114121283034067988}
-  - {fileID: 114497165932303090}
+  - {fileID: 114150194731054546}
+  - {fileID: 114144430748069208}
   EditorEvents:
-  - {fileID: 114172504432264438}
-  - {fileID: 114763509176166406}
-  MasterBankRef: {fileID: 114497165932303090}
-  StringsBankRef: {fileID: 114121283034067988}
-  stringsBankWriteTime: 636673561701048339
+  - {fileID: 114625235064045768}
+  - {fileID: 114149638274264468}
+  MasterBankRef: {fileID: 114144430748069208}
+  StringsBankRef: {fileID: 114150194731054546}
+  stringsBankWriteTime: 636679368387914589
   cacheVersion: 2
 --- !u!114 &114121283034067988
 MonoBehaviour:
@@ -33,7 +33,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\_First Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636673561701048339
+  lastModified: 636679368387914589
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 734
+  Exists: 1
+--- !u!114 &114144430748069208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
+    Party\Audio\Build\Desktop\Master Bank.bank
+  lastModified: 636679368387864786
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 886400
+  Exists: 1
+--- !u!114 &114149638274264468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps
+  guid: bca8db019ff7944d94853a8d96d58d79
+  Banks:
+  - {fileID: 114144430748069208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3400
+--- !u!114 &114150194731054546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\_First Party\Audio\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636679368387914589
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -53,7 +112,7 @@ MonoBehaviour:
   Path: event:/Music
   guid: 37be3c6f4f68bf47a84f1aa40a2ab248
   Banks:
-  - {fileID: 114497165932303090}
+  - {fileID: 114734894678634440}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -98,6 +157,28 @@ MonoBehaviour:
   - Name: Desktop
     Value: 682
   Exists: 1
+--- !u!114 &114426437118222358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps
+  guid: bca8db019ff7944d94853a8d96d58d79
+  Banks:
+  - {fileID: 114734894678634440}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3400
 --- !u!114 &114497165932303090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +198,28 @@ MonoBehaviour:
   - Name: Desktop
     Value: 886400
   Exists: 1
+--- !u!114 &114625235064045768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  guid: 37be3c6f4f68bf47a84f1aa40a2ab248
+  Banks:
+  - {fileID: 114144430748069208}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 57600
 --- !u!114 &114641826960594762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +242,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 57600
+--- !u!114 &114734894678634440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
+    Party\FMOD\ThassanorAudio\Build\Desktop\Master Bank.bank
+  lastModified: 636679368387864786
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 886400
+  Exists: 1
 --- !u!114 &114763509176166406
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,17 +12,12 @@ public class SettingsMenu : MonoBehaviour
     //public Text textDebug;
 
 
-
     Resolution[] resolutions;
 
     private void Start()
     {
-        if (Screen.fullScreen)
-        {
-           return;
-        }
-        else
-        {
+        if (!Screen.fullScreen)
+        { 
             windowedToggle.isOn = false;
         }
 

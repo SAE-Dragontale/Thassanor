@@ -87,7 +87,7 @@ public class BorderGeneration : MonoBehaviour {
 			//this checks the left wall, and says at the top and botttom wall piece, generate a corner tile
 			if (zCoord == _boardGeneratorRef._tiles[0].Length || zCoord == -1) 
 			{			
-				if (zCoord == _boardGeneratorRef._tiles.Length) 
+				if (zCoord == _boardGeneratorRef._tiles.Length - 1) 
 				{
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
 				}	
@@ -107,7 +107,7 @@ public class BorderGeneration : MonoBehaviour {
 			//this checks the right wall, and says at the top and botttom wall piece, generate a corner tile
 			if (zCoord == _boardGeneratorRef._tiles[0].Length || zCoord == -1) 
 			{			
-				if (zCoord == _boardGeneratorRef._tiles.Length) 
+				if (zCoord == _boardGeneratorRef._tiles.Length -1) 
 				{
 					//create corner tile at length
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;

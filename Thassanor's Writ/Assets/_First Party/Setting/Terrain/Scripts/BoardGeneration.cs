@@ -20,7 +20,7 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 
 	//player reference
-	public GameObject _playerRef;
+	public GameObject[] _playerRef;
 
     [Header("Grid Components")]	
     public int _itSeed;                                         //grid seed for generation
@@ -64,6 +64,10 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 	[Header("Board Components")]
 	public GameObject _boardHolder;                           // GameObject that acts as a container for all other tiles.
+	public GameObject _p1Spawn;       
+	public GameObject _p2Spawn;       
+	[Space]
+
 	public List<GameObject> _tileList = new List<GameObject>();
 	public List<GameObject> _propList = new List<GameObject>();
     public List<GameObject> _waterList = new List<GameObject>();
@@ -81,9 +85,9 @@ public class BoardGeneration : MonoBehaviour {
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	void Awake()
 	{
-		_playerRef = GameObject.FindGameObjectWithTag ("Player");
-		_playerRef.SetActive(true);
-
+		_playerRef = GameObject.FindGameObjectsWithTag ("Player");	
+		Debug.Log(_playerRef[0]);
+		Debug.Log(_playerRef[1]);
 	}
 
 
@@ -94,6 +98,8 @@ public class BoardGeneration : MonoBehaviour {
         _simplexNoise = new OpenSimplexNoise(_itSeed);
 		// Create the board holder.
 		_boardHolder = new GameObject("BoardHolder");
+		_p1Spawn = new GameObject("P1 Spawner");
+		_p2Spawn = new GameObject("P2 Spawner");
 
 		SetupTilesArray ();
 	
@@ -111,7 +117,6 @@ public class BoardGeneration : MonoBehaviour {
 	public IEnumerator DelayedStart()
 	{
 		yield return new WaitForSeconds(.7f);
-		_playerRef.SetActive(true);
 	}
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
@@ -135,6 +140,9 @@ public class BoardGeneration : MonoBehaviour {
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
+		_playerRef[0].SetActive(true);		
+		_playerRef[1].SetActive(true);	
+
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
 		//keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
@@ -195,7 +203,7 @@ public class BoardGeneration : MonoBehaviour {
 					floorTileInstance.transform.parent = _boardHolder.transform;
 
 					mirrorListCount--;					
-					
+									
 					
 					//this is the check(s) for 'steps' between components
 					if(townSpreadCur < _townSpread)
@@ -214,11 +222,22 @@ public class BoardGeneration : MonoBehaviour {
 	GameObject floorTileInstance;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{		
-		//sets the player position to the first tile
+		//sets the player positions appropriately to their gbo's
 		if (xCoord == (_columns/2) && zCoord == 0) 
 		{
-			_playerRef.transform.position = new Vector3(_columns/2,.6f,0f);
-		}
+			Debug.Log("Move " + _p1Spawn.name + " To position");
+			_p1Spawn.transform.position = new Vector3(xCoord,.6f,zCoord);
+			_playerRef[0].transform.position = _p1Spawn.transform.position;
+
+			if(_playerRef[1] != null)
+			{
+				Debug.Log("Move " + _p2Spawn.name + " To position");
+				_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
+				_playerRef[1].transform.position = _p2Spawn.transform.position;
+			}
+
+
+		}		
 
 		// Create a random index for the instantiated tile.
 		int randomIndex = Random.Range(0, prefabs.Length);
@@ -246,7 +265,7 @@ public class BoardGeneration : MonoBehaviour {
 		GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
 
 		Vector3 newPos = tileInstance.transform.position;
-		newPos = newPos + new Vector3(0,.95f,0);
+		newPos = newPos + new Vector3(0,0.05f,0);
 		tileInstance.transform.position = newPos;
 		tileInstance.name = "Town_#" + _curTownCount;
 		_curTownCount++;

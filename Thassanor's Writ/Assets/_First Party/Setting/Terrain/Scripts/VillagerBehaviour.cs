@@ -31,7 +31,7 @@ public class VillagerBehaviour : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	void Awake()
+	void Start()
 	{
 		_canMove = true;
 		_isAlive = true;
@@ -51,7 +51,7 @@ public class VillagerBehaviour : MonoBehaviour {
 	bool outOfBounds = false;
 	//patrol
 	float patrolDirX;
-	float patrolDirY;
+	float patrolDirZ;
 	public float distance;
 	float randTimeValue;
 	//flee
@@ -64,6 +64,8 @@ public class VillagerBehaviour : MonoBehaviour {
 	//	IDLE
 		if(_isIdling == true)
 		{
+			//sets rotation to 0's
+			transform.rotation = Quaternion.identity;
 			//sets appropriate bools
 			_canMove = false;
 			_isFleeing = false;
@@ -133,14 +135,14 @@ public class VillagerBehaviour : MonoBehaviour {
 				//chooses a random patrol direction out of 4 directions
 				_patrolDir = new Vector3(0f,0f,0f);
 				patrolDirX = Random.Range(-1f,1f);
-				patrolDirY = Random.Range(-1f,1f);
+				patrolDirZ = Random.Range(-1f,1f);
 
 				//rand value for timer here so it only sets once per patrol state
 				randTimeValue = Random.Range(1f,1.8f);				
 			}
 
 			//move in that patrol direction
-			transform.Translate(new Vector3(patrolDirX, 0, patrolDirY) * 1f * Time.deltaTime, Space.World);
+			transform.Translate(new Vector3(patrolDirX, 0, patrolDirZ) * 1f * Time.deltaTime, Space.World);
 			//add to timer to end patrol
 			_actionTimer = _actionTimer + Time.deltaTime;
 			if(_actionTimer >= randTimeValue)

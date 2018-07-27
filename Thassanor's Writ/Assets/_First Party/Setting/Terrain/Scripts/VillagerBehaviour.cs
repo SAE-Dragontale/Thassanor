@@ -22,11 +22,12 @@ public class VillagerBehaviour : MonoBehaviour {
 
 	[SerializeField] bool _isFleeing = false;
 	[SerializeField] Vector3 _fleeDir;
+	public GameObject _playerRef;
 	[Space]
 
 
 	float _actionTimer;
-	bool _oneShotActionActive = false;
+	bool _oneShotActionActive = false;																						// state machine goodness please
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -40,6 +41,7 @@ public class VillagerBehaviour : MonoBehaviour {
 		_isFleeing = false;
 		
 		_townRef = transform.parent.gameObject;
+
 
 	}
 	
@@ -201,6 +203,9 @@ public class VillagerBehaviour : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.E))
 		{
 			_health--;
+			_playerRef = GameObject.FindGameObjectWithTag ("Player");
+
+			
 		}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */

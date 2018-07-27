@@ -1,5 +1,5 @@
 ﻿// Script: BoardGeneration.cs
-// Date Updated: 26/06/2018
+// Date Updated: 27/07/2018
 // Author & Contributors: Eric Cox
 // Purpose: The creation and design details of the maps for the game. Water/Towns/Props/Size. etc.  
 
@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 
 public class BoardGeneration : MonoBehaviour {
@@ -36,9 +37,9 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 
-    [Range(-.5f,.5f)]
+    [Range(-.6f,.3f)]
     public float _waterAmount;
-    [Range(1, 9)]
+    [Range(4, 12)]
     public int _waterSize;
 
 	[Space]
@@ -73,9 +74,6 @@ public class BoardGeneration : MonoBehaviour {
     public List<GameObject> _waterList = new List<GameObject>();
 	public TileType[][] _tiles;                               // A jagged array of tile types representing the board, like a grid.
 
-
-
-
 	[Space]
 	[Header("GameObject References")]
 	public BorderGeneration _borderGenRef;
@@ -84,10 +82,8 @@ public class BoardGeneration : MonoBehaviour {
 		
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	void Awake()
-	{
-		_playerRef = GameObject.FindGameObjectsWithTag ("Player");	
-		Debug.Log(_playerRef[0]);
-		Debug.Log(_playerRef[1]);
+	{                   
+        
 	}
 
 
@@ -98,8 +94,8 @@ public class BoardGeneration : MonoBehaviour {
         _simplexNoise = new OpenSimplexNoise(_itSeed);
 		// Create the board holder.
 		_boardHolder = new GameObject("BoardHolder");
-		_p1Spawn = new GameObject("P1 Spawner");
-		_p2Spawn = new GameObject("P2 Spawner");
+		_p1Spawn = GameObject.Find("P1 Spawner");
+		_p2Spawn = GameObject.Find("P2 Spawner");
 
 		SetupTilesArray ();
 	
@@ -140,8 +136,6 @@ public class BoardGeneration : MonoBehaviour {
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
-		_playerRef[0].SetActive(true);		
-		_playerRef[1].SetActive(true);	
 
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
@@ -222,20 +216,11 @@ public class BoardGeneration : MonoBehaviour {
 	GameObject floorTileInstance;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{		
-		//sets the player positions appropriately to their gbo's
+		//sets the player positions appropriately to their gbo's, when the center bottom tile is creating. 
 		if (xCoord == (_columns/2) && zCoord == 0) 
 		{
-			Debug.Log("Move " + _p1Spawn.name + " To position");
 			_p1Spawn.transform.position = new Vector3(xCoord,.6f,zCoord);
-			_playerRef[0].transform.position = _p1Spawn.transform.position;
-
-			if(_playerRef[1] != null)
-			{
-				Debug.Log("Move " + _p2Spawn.name + " To position");
-				_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
-				_playerRef[1].transform.position = _p2Spawn.transform.position;
-			}
-
+			_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
 
 		}		
 

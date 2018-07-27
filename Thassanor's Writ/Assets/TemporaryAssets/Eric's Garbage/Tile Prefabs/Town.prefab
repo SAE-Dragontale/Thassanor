@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _villagers:
   - {fileID: 1503196646880998, guid: e3fb3c4b71297e74babcfc863196a966, type: 2}
-  _villagersToSpawn: 1
+  _villagersToSpawn: 2
   _randomNumOfVillagers: 0
   _villagerCount: []
   _power: 0

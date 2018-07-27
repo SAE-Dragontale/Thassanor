@@ -18,7 +18,6 @@ public class VillagerBehaviour : MonoBehaviour {
 	[Space]
 
 	[SerializeField] bool _isPatroling = false;
-	[SerializeField] Vector3 _patrolDir;
 	[Space]
 
 	[SerializeField] bool _isFleeing = false;
@@ -133,7 +132,6 @@ public class VillagerBehaviour : MonoBehaviour {
 				_oneShotActionActive = false;
 				
 				//chooses a random patrol direction out of 4 directions
-				_patrolDir = new Vector3(0f,0f,0f);
 				patrolDirX = Random.Range(-1f,1f);
 				patrolDirZ = Random.Range(-1f,1f);
 

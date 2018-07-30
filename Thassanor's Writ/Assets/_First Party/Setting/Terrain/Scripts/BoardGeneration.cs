@@ -32,7 +32,7 @@ public class BoardGeneration : MonoBehaviour {
 
     [Tooltip("Width.")]
     public int _columns = 12;                                   // The number of columns on the board (how wide it will be).
-    [Tooltip("Height.")]
+    [Tooltip("Height. This number also cannot be odd.")]
 	public int _rows = 12;                                      // The number of rows on the board (how tall it will be).
 
 	[Space]
@@ -186,8 +186,8 @@ public class BoardGeneration : MonoBehaviour {
 			}
 			else 		//non random half
 			{				
-				//for (int x = 0; x < _tiles.Length; x++)  this results in a vertical and horizontal flip, so x town will be to the right of both players
-				for (int x = _tiles.Length - 1; x >= 0; x--) //this results in a vertical flip, so x town will be to the right of one player, and to the left for the other
+				//for (int x = _tiles.Length - 1; x >= 0; x--) //this results in a vertical flip, so x town will be to the right of one player, and to the left for the other
+				for (int x = 0; x < _tiles.Length; x++)//  this results in a vertical and horizontal flip, so x town will be to the right of both players
 				{ 						
 					Vector3 position = new Vector3(x, 0f, z);    
 

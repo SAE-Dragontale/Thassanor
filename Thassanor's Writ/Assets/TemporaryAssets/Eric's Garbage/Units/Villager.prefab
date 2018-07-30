@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4257713436338226}
-  - component: {fileID: 114522769098848530}
+  - component: {fileID: 114026413701085612}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -71,19 +71,7 @@ Transform:
   m_Father: {fileID: 4257713436338226}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114328970459679058
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878034461744330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _trCamera: {fileID: 0}
---- !u!114 &114522769098848530
+--- !u!114 &114026413701085612
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,10 +87,22 @@ MonoBehaviour:
   _outOfBoundsDistance: 3
   _isIdling: 0
   _isPatroling: 0
-  _patrolDir: {x: 0, y: 0, z: 0}
   _isFleeing: 0
   _fleeDir: {x: 0, y: 0, z: 0}
+  _playerRef: {fileID: 0}
   distance: 0
+--- !u!114 &114328970459679058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878034461744330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trCamera: {fileID: 0}
 --- !u!212 &212816410104114992
 SpriteRenderer:
   m_ObjectHideFlags: 1

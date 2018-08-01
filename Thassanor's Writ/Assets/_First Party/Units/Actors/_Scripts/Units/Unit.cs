@@ -5,8 +5,6 @@
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -21,6 +19,8 @@ public abstract class Unit : MonoBehaviour {
 
 	protected Animator _an;
 	protected SpriteRenderer _sr;
+
+	protected Transform _trDirection;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables

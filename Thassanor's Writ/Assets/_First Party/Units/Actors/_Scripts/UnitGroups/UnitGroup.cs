@@ -17,10 +17,10 @@ public abstract class UnitGroup : MonoBehaviour {
 	[Space] [Header("References")]
 
 	[Tooltip("The host is the transform that the UnitGroup is associated with. This can be a player, actor, or even a terrain set.")]
-	[SerializeField] protected Transform _trHost;						// The target the group is following.
+	[SerializeField] protected Transform _trHost;		// The target the group is following.
 
-	[SerializeField] protected List<Transform> _ltrUnits;				// The units within the group.
-	[SerializeField] protected List<Transform> _ltrUnitDestinations;	// The desired location of any units that might be in the group. 1:1 with _ltrUnits.
+	[Tooltip("The units currently associated with this group.")]
+	[SerializeField] protected List<Unit> _lscUnits;	// The units within the group.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -33,7 +33,7 @@ public abstract class UnitGroup : MonoBehaviour {
 	};
 
 	[Space] [Header("State")]
-	[SerializeField] protected GroupState _groupState = GroupState.Standing;	// The current state of the group.
+	[SerializeField] protected GroupState _groupState;	// The current state of the group.
 
 	[Space] [Header("Variables")]
 	[SerializeField] protected float _flHealth;		// The health of the group.
@@ -45,12 +45,14 @@ public abstract class UnitGroup : MonoBehaviour {
 
 	// Called before Start().
 	protected virtual void Awake() {
-		
+
 		_trHost = _trHost.GetComponent<Transform>();
 
 	}
 
+	// Called before Update().
 	protected virtual void Start() {
+
 
 
 	}
@@ -121,7 +123,18 @@ public abstract class UnitGroup : MonoBehaviour {
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	/* ----------------------------------------------------------------------------- */
+	// Where each unit within the group will be directed to move.
 
+	protected virtual void PositionUnits() {
+
+
+
+	}
+
+	protected virtual void PositionVariance() {
+
+	}
 
 	/* ----------------------------------------------------------------------------- */
 

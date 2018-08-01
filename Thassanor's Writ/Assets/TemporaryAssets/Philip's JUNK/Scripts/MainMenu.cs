@@ -63,7 +63,7 @@ public class MainMenu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(hotkeysButton);
     }
 
-    public void ButtonHoykeys()
+    public void ButtonHotkeys()
     {
         optionsMenu.SetActive(false);
         hotkeyMenu.SetActive(true);
@@ -110,6 +110,13 @@ public class MainMenu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(newgameButton);
     }
 
+    public void ButtonBackHotKeys()
+    {
+        hotkeyMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(hotkeysButton);
+    }
+
     public void ButtonAudio()
     {
         optionsMenu.SetActive(false);
@@ -129,6 +136,11 @@ public class MainMenu : MonoBehaviour {
         playMenu.SetActive(false);
         multiplayerMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(createButton);
+    }
+
+    public void ButtonPlayerPrefsReset()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     void MakeMainMenuActive()

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{835cbc60-c148-442c-91e9-a6f0a7c5a3b7}">
+        <property name="assetPath">
+            <value>Reverse mixtape.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>6.2432653061224492</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1678f974-dcac-4f1a-90c3-4a09c7722ec8}</destination>
+        </relationship>
+    </object>
+</objects>

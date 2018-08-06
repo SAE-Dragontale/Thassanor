@@ -1,15 +1,14 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
-   File:			UndeadGroup.cs
+   File:			UndeadStyle.cs
    Version:			0.0.0
-   Description: 	Parent class for all player-controlled actors.
+   Description: 	A Style-Container that simple holds different variations of the assets used by the Undead.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UndeadGroup : UnitGroup {
+[CreateAssetMenu(fileName = "New Unit Style", menuName = "Style/Unit")]
+public class UnitStyle : Stylize {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables

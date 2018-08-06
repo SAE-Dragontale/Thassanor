@@ -7,10 +7,6 @@
 
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
-
 public class Unit : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -18,16 +14,18 @@ public class Unit : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
 	protected Transform _trThisUnit; // Our unit as represented in the game world. This is decoupled from this script.
-	public Transform _trDestination; // Accessed by the UnitGroup in order to direct our unit to a formation.
+	[HideInInspector] public Transform _trDestination; // Accessed by the UnitGroup in order to direct our unit to a formation.
 
 	protected Animator _an;
 	protected SpriteRenderer _sr;
+
+	protected UnitStyle _unitStyle;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public enum UnitState {
+	protected enum UnitState {
 		Idling,		// When the unit has remained at its destination for long enough to 'idle'.
 		Following,	// When the unit is simply moving towards its destination.
 		Attacking,	// When the unit is engaged in combat.

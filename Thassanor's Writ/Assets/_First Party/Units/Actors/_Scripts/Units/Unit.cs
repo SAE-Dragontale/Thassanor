@@ -1,11 +1,12 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.0.0
+   Version:			0.2.0
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Unit : MonoBehaviour {
 
@@ -13,11 +14,14 @@ public class Unit : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
-	protected Transform _trThisUnit; // Our unit as represented in the game world. This is decoupled from this script.
-	[HideInInspector] public Transform _trDestination; // Accessed by the UnitGroup in order to direct our unit to a formation.
+	[HideInInspector] public Transform _trDestination;	// Accessed by the UnitGroup in order to direct our unit to a formation.
+	protected Vector3 _v3PosToMove;						// The last _trDestination.position that we were instructed to move towards.
 
+	// These references are decoupled as a child from this script, however for all intents and purposes they are this script's components.
+	protected Transform _tr;
 	protected Animator _an;
 	protected SpriteRenderer _sr;
+	protected NavMeshAgent _ai;
 
 	protected UnitStyle _unitStyle;
 
@@ -26,10 +30,9 @@ public class Unit : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	protected enum UnitState {
-		Idling,		// When the unit has remained at its destination for long enough to 'idle'.
 		Following,	// When the unit is simply moving towards its destination.
 		Attacking,	// When the unit is engaged in combat.
-		Killed		// If the unit has been killed and is awaiting resurrection.
+		Dead		// If the unit has been killed and is awaiting resurrection.
 	}
 
 	[SerializeField] protected UnitState _unitState;
@@ -45,9 +48,10 @@ public class Unit : MonoBehaviour {
 		_trDestination = transform.Find("Destination").GetComponent<Transform>();
 
 		// Access and save the transform of our Unit as visualised.
-		_trThisUnit = transform.Find("Sprite").GetComponent<Transform>();
-		_an = _trThisUnit.GetComponent<Animator>();
-		_sr = _trThisUnit.GetComponent<SpriteRenderer>();
+		_tr = transform.Find("Sprite").GetComponent<Transform>();
+		_an = _tr.GetComponent<Animator>();
+		_sr = _tr.GetComponent<SpriteRenderer>();
+		_ai = _tr.GetComponent<NavMeshAgent>();
 
 	}
 
@@ -71,10 +75,6 @@ public class Unit : MonoBehaviour {
 		
 		switch (_unitState) {
 
-			case (UnitState.Idling):
-				BehaviourLoopIdling();
-				return;
-
 			case (UnitState.Following):
 				BehaviourLoopFollowing();
 				return;
@@ -83,8 +83,8 @@ public class Unit : MonoBehaviour {
 				BehaviourLoopAttacking();
 				return;
 
-			case (UnitState.Killed):
-				BehaviourLoopKilled();
+			case (UnitState.Dead):
+				BehaviourLoopDead();
 				return;
 
 		}
@@ -92,16 +92,17 @@ public class Unit : MonoBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
-	// Idling
-
-	protected void BehaviourLoopIdling() {
-
-	}
-
-	/* ----------------------------------------------------------------------------- */
 	// Following
 
 	protected void BehaviourLoopFollowing() {
+
+		// If our new location is the same as our old location, don't run.
+		if (_v3PosToMove == _trDestination.position)
+			return;
+
+		// Instruct the Nav Agent to move towards our new location.
+		if (_unitState == UnitState.Following)
+			_ai?.SetDestination(_trDestination.position);
 
 	}
 
@@ -113,9 +114,9 @@ public class Unit : MonoBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
-	// Killed
+	// Dead
 
-	protected void BehaviourLoopKilled() {
+	protected void BehaviourLoopDead() {
 
 	}
 

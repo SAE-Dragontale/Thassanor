@@ -173,33 +173,27 @@ public class UnitGroup : MonoBehaviour {
 		if (_lscUnits.Count == 0)
 			return;
 
-		// FIRST, we need to iterate through a row's worth of units.
-		// THEN, we need to evenly spread each unit with UnitSpacing.
-		// FINALLY, if we have a remainder, we need to modify that final position by different vector maths.
+		// Now that we've determined we need to update our position, we can begin to initialise any variables we need.
 
 		int itRemainingUnits = _lscUnits.Count; // The units that are currently unpositioned in our iteration.
 		int itCurrentUnitIndex = 0;             // How many units we've positioned so far by array index.
-		Vector3 v3ExpandThisWay;                // The direction that the squad is facing towards. We expand backwards into rows opposite this direction.
-
-		// Determine the direction that we 'expand' our formation by our rallypoint's location. If we have no rallypoint, simply make it expand away from the camera.
-		if (_trHost.name == "RallyPoint")
-			v3ExpandThisWay = new Vector3(0, 0, 0); // TODO: These aren't actually supposed to be 0,0,0. This is temporary.
-		else
-			v3ExpandThisWay = new Vector3(0, 0, 0);
 
 		// As long as we've still got unpositioned units, we should continue iterating based on the number of units we have left.
 		while (itRemainingUnits > 0) {
 
+			// We only want to iterate on units row by row. For each row, we add units to a currently selected pile, then place those and go back one row.
 			int itSelectedUnits = Mathf.Min(itRemainingUnits, _itRoFColumns);
 
 			for (int it = 0; it < itSelectedUnits; it++) {
 
-				// TODO: Use proper vectormaths here.
-				// This properly spaces the units on the x and y planes, however doesn't account for direction facing as noted above in the variables for this function.
-				float flColumn = ((itSelectedUnits * _flRoFSpread) / 2 * -1) + (_flRoFSpread * it);
-				float flRow = (itCurrentUnitIndex / _itRoFColumns) * _flRoFSpread;
+				// First, we need to space each unit out evenly, so we take the total units, divide it in half, and add our array position as an offset between Spread.
+				// Then, we do basically the same thing backwards by dividing the amount of rows we already have and offsetting us by Spread.
+				// Finally, we need to add our calculated vector position to the local vector of the Rally Point to add rotational values easily.
 
-				_lscUnits[it + itCurrentUnitIndex]._trDestination.position = _trHost.TransformPoint(flColumn, 0, flRow);
+				float flPlaceAcross = (((itSelectedUnits - 1) * _flRoFSpread) / 2 * -1) + (_flRoFSpread * it);
+				float flPlaceBehind = (itCurrentUnitIndex / _itRoFColumns) * _flRoFSpread;
+				
+				_lscUnits[it + itCurrentUnitIndex]._trDestination.position = _trHost.TransformPoint(flPlaceAcross, 0, flPlaceBehind);
 
 			}
 

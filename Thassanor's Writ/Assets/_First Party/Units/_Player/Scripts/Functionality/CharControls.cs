@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharControls.cs
-   Version:			0.3.0
+   Version:			0.4.0
    Description: 	Recieves movement input and controls the player's position.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -15,6 +15,7 @@ public class CharControls : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private Rigidbody _rb;
+	private Transform _rallyPoint;
 	private CharVisuals _charVisuals;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -25,6 +26,8 @@ public class CharControls : MonoBehaviour {
 	[SerializeField] private float _flMovementSpeed;
 	private Vector3 _v3Trajectory = new Vector3 (0f,0f,0f);
 
+	[SerializeField] private Vector3 _v3RallyDistance = new Vector3(0f, 0f, 0f);
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -34,6 +37,7 @@ public class CharControls : MonoBehaviour {
 		// References
 		_rb = GetComponent<Rigidbody>();
 		_charVisuals = GetComponent<CharVisuals>();
+		_rallyPoint = transform.Find("RallyPoint");
 
 	}
 
@@ -47,9 +51,19 @@ public class CharControls : MonoBehaviour {
 		if (flDirection == null)
 			_v3Trajectory = new Vector3(0f, _v3Trajectory.y, 0f);
 
-		// Otherwise, consider the input as normal and add the values to each direction as needed.
-		else
-			_v3Trajectory = new Vector3 (flDirection[1] * _flMovementSpeed, _v3Trajectory.y, flDirection[0] * _flMovementSpeed);
+		else {
+
+			// Otherwise, consider the input as normal and add the values to each direction as needed.
+			_v3Trajectory = new Vector3(flDirection[1] * _flMovementSpeed, _v3Trajectory.y, flDirection[0] * _flMovementSpeed);
+
+			// And update the RallyPoint to reside on the opposite facing side of the player. Minions need to know their place!
+			if (_v3Trajectory != Vector3.zero) {
+				_rallyPoint.position = transform.position - _v3Trajectory.normalized;
+				_rallyPoint.LookAt(2 * _rallyPoint.position - transform.position);
+			}
+
+		}
+			
 
 		// Then, since we have a new command, we send that variable to the Animator to adjust the visuals.
 		_charVisuals.AnimMovement(flDirection);

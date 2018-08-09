@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trHost: {fileID: 0}
+  _goUnitType: {fileID: 0}
   _lscUnits: []
-  _groupState: 0
+  _groupState: 1
   _isKillable: 0
   _usesRoF: 1
   _itRoFColumns: 4
-  _flRoFSpread: 1
+  _flRoFSpread: 0.75

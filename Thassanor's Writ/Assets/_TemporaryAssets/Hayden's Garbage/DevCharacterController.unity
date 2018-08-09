@@ -3347,7 +3347,12 @@ Prefab:
     - target: {fileID: 114866193673318034, guid: 71070946c78c1b24980a435c9b064ac0,
         type: 2}
       propertyPath: _itRoFColumns
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114866193673318034, guid: 71070946c78c1b24980a435c9b064ac0,
+        type: 2}
+      propertyPath: _flRoFSpread
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71070946c78c1b24980a435c9b064ac0, type: 2}
@@ -7644,6 +7649,11 @@ Prefab:
     - target: {fileID: 4028886724447644, guid: 0048ee6cd0666444caa4cac93955b020, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54666156386574484, guid: 0048ee6cd0666444caa4cac93955b020,
+        type: 2}
+      propertyPath: m_Drag
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0048ee6cd0666444caa4cac93955b020, type: 2}

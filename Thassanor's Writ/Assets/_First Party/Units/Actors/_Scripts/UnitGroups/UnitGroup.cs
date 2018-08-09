@@ -1,13 +1,12 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.5.0
+   Version:			0.5.1
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections.Generic;
 using System.Collections;
-using System;
 using UnityEngine;
 
 public class UnitGroup : MonoBehaviour {
@@ -37,11 +36,10 @@ public class UnitGroup : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	protected enum GroupState {
-		Idle,       // Idle movement when abandoned.
-		Active      // Stand at attention within an area.
+		Passive,	// Idle movement and will not engage in combat.
+		Idle,       // Idle movement but will defend themselves.
+		Active      // Stand at attention and engage all hostiles.
 	};
-
-	protected event Action _actNavigate;	// We're storing references to our units MoveUnit event.
 
 	protected IEnumerator _ieLastPos;   // Reclusive reference for UpdateLastPos().
 
@@ -84,6 +82,14 @@ public class UnitGroup : MonoBehaviour {
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	/* ----------------------------------------------------------------------------- */
+	// Creation
+
+	
+
+	/* ----------------------------------------------------------------------------- */
+	// Combat
+
 	public void ModifyHealth(float itHealthModifier) {
 
 
@@ -123,6 +129,10 @@ public class UnitGroup : MonoBehaviour {
 				BehaviourLoopIdle();
 				return;
 
+			case (GroupState.Passive):
+				BehaviourLoopPassive();
+				return;
+
 		}
 
 	}
@@ -140,6 +150,15 @@ public class UnitGroup : MonoBehaviour {
 	// Unit priority: All units gain 'freedom of movement' within the Host's Area of Influence.
 
 	protected virtual void BehaviourLoopIdle() {
+
+		// No functionality here.
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
+	// No priority: All units gain 'freedom of movement' and will not engage in combat.
+
+	protected virtual void BehaviourLoopPassive() {
 
 		// No functionality here.
 
@@ -168,8 +187,8 @@ public class UnitGroup : MonoBehaviour {
 			StartCoroutine(_ieLastPos = UpdateLastPos(_trHost.position));
 
 		// If we are at the same location as before, we don't need to update our unit's destinations.
-		//if (_trHost.position == _v3LastPos)
-		//	return;
+		if (_trHost.position == _v3LastPos)
+			return;
 
 		// If we have no units, we don't need to organise anyone.
 		if (_lscUnits.Count == 0)

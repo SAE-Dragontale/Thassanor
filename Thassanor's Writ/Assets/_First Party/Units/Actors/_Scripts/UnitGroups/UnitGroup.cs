@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.5.1
+   Version:			0.6.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -26,7 +26,7 @@ public class UnitGroup : MonoBehaviour {
 	}
 
 	[Tooltip("The type of unit that this group control.s")]
-	[SerializeField] protected GameObject _goUnitType;
+	[SerializeField] protected UnitStyle _unitStyle;
 
 	[Tooltip("All units currently associated with this group.")]
 	[SerializeField] protected List<Unit> _lscUnits;    // The units within the group.
@@ -47,10 +47,9 @@ public class UnitGroup : MonoBehaviour {
 		Data Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
-	[Space] [Header("State")]
-	[SerializeField] protected GroupState _groupState;  // The current state of the group.
-	
 	[Space] [Header("Variables")]
+	[SerializeField] protected GroupState _groupState;  // The current state of the group.
+
 	[SerializeField] protected bool _isKillable;    // Whether the group will Destroy() if it has no units.
 
 	protected float _flUnitHealth;      // How much health does each unit individually contribute?
@@ -67,19 +66,34 @@ public class UnitGroup : MonoBehaviour {
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	// Called before Start().
+	protected virtual void Awake() {
+
+	}
+
 	// Called before Update().
 	protected virtual void Start() {
+
+		ReloadUnits();
+
+	}
+
+	[InspectButton]
+	public virtual void ReloadUnits() {
+
+		_lscUnits.Clear();
 
 		foreach (Unit unit in GetComponentsInChildren<Unit>()) {
 
 			_lscUnits.Add(unit);
+			unit._UnitStyle = _unitStyle;
 
 		}
 
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Functions
+		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	/* ----------------------------------------------------------------------------- */

@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28914483f8cd0a642b6e98aaca44acfe, type: 3}
   m_Name: MeleeMinionStyle
   m_EditorClassIdentifier: 
-  _stUnitName: 
-  _animatorController: {fileID: 0}
+  _stUnitName: Melee Skeleton
+  _animatorController: {fileID: 9100000, guid: 549ca00699cd1aa4a8a05c93593ee326, type: 2}

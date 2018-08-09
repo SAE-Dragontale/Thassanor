@@ -70,6 +70,7 @@ public class CharVisuals : MonoBehaviour {
 		// If no value is passed to the function we should substitute {0,0} instead.
 		aflMovement = aflMovement ?? new float[2];
 
+		
 		// First we need to determine whether we're running or not and change our animator as needed.
 		_an.SetBool("isRunning", (aflMovement[0] != 0 || aflMovement[1] != 0) );
 

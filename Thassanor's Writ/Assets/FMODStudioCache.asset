@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 114253782834601638}
   MasterBankRef: {fileID: 114704375187596760}
   StringsBankRef: {fileID: 114150194731054546}
-  stringsBankWriteTime: 636693499453784366
+  stringsBankWriteTime: 636694411540433700
   cacheVersion: 2
 --- !u!114 &114121283034067988
 MonoBehaviour:
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\_First Party\Audio\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636693499453784366
+  lastModified: 636694411540433700
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -135,12 +135,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: T:\Personal\Work\!University\SAE\Trimester 6\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\Soundtrack.bank
-  lastModified: 636693499483262749
+  lastModified: 636694411570543759
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 4926944
   Exists: 1
+--- !u!114 &114196157411031316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Fight Incoming
+  Min: 0
+  Max: 10
+  Default: 0
 --- !u!114 &114253782834601638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,13 +175,28 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114963797928341594}
-  - {fileID: 114636395646152650}
-  - {fileID: 114652996334202552}
-  - {fileID: 114537073331558718}
+  - {fileID: 114857710305416118}
+  - {fileID: 114275629067831256}
+  - {fileID: 114851767565454892}
+  - {fileID: 114196157411031316}
   MinDistance: 720
   MaxDistance: 10000
   Length: 134400
+--- !u!114 &114275629067831256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Game Intensity
+  Min: 0
+  Max: 100
+  Default: 0
 --- !u!114 &114321212865488968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: T:\Personal\Work\!University\SAE\Trimester 6\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\Master Bank.bank
-  lastModified: 636693499453739246
+  lastModified: 636694411540388601
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -580,6 +610,36 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &114851767565454892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
+--- !u!114 &114857710305416118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Special Event or Town
+  Min: 0
+  Max: 100
+  Default: 0
 --- !u!114 &114963797928341594
 MonoBehaviour:
   m_ObjectHideFlags: 0

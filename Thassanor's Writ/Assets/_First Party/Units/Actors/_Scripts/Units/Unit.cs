@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.2.0
+   Version:			0.3.0
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -23,26 +23,34 @@ public class Unit : MonoBehaviour {
 	protected SpriteRenderer _sr;
 	protected NavMeshAgent _ai;
 
-	protected UnitStyle _unitStyle;
-
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	protected enum UnitState {
-		Following,	// When the unit is simply moving towards its destination.
+		Moving,	// When the unit is simply moving towards its destination.
 		Attacking,	// When the unit is engaged in combat.
 		Dead		// If the unit has been killed and is awaiting resurrection.
 	}
 
 	[SerializeField] protected UnitState _unitState;
 
+	protected UnitStyle _unitStyle;
+
+	public UnitStyle _UnitStyle {
+		get { return _unitStyle; }
+		set {
+			_unitStyle = value;
+			LoadUnitStyle();
+		}
+	}
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Called before Start().
-	private void Awake() {
+	protected void Awake() {
 
 		// Access and save the transform of our Destination.
 		_trDestination = transform.Find("Destination").GetComponent<Transform>();
@@ -56,12 +64,21 @@ public class Unit : MonoBehaviour {
 	}
 
 	// Called before Update().
-	private void Start () {
+	protected void Start () {
+
 		
+
+	}
+
+	// Assign our Visual UnitStyles to our character.
+	protected void LoadUnitStyle() {
+
+		_an.runtimeAnimatorController = _unitStyle._animatorController;
+
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Functions
+		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -72,10 +89,10 @@ public class Unit : MonoBehaviour {
 	
 	// Update is called once per frame.
 	protected void Update () {
-		
+
 		switch (_unitState) {
 
-			case (UnitState.Following):
+			case (UnitState.Moving):
 				BehaviourLoopFollowing();
 				return;
 
@@ -89,6 +106,8 @@ public class Unit : MonoBehaviour {
 
 		}
 
+
+
 	}
 
 	/* ----------------------------------------------------------------------------- */
@@ -96,13 +115,14 @@ public class Unit : MonoBehaviour {
 
 	protected void BehaviourLoopFollowing() {
 
+		AnimatorMovement();
+
 		// If our new location is the same as our old location, don't run.
 		if (_v3PosToMove == _trDestination.position)
 			return;
 
-		// Instruct the Nav Agent to move towards our new location.
-		if (_unitState == UnitState.Following)
-			_ai?.SetDestination(_trDestination.position);
+		_ai?.SetDestination(_trDestination.position);
+		_v3PosToMove = _trDestination.position;			
 
 	}
 
@@ -111,12 +131,48 @@ public class Unit : MonoBehaviour {
 
 	protected void BehaviourLoopAttacking() {
 
+		AnimatorMovement();
+
 	}
 
 	/* ----------------------------------------------------------------------------- */
 	// Dead
 
 	protected void BehaviourLoopDead() {
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Class Functions
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// Here we're making sure to update the current animator variables according to our movement.
+	protected void AnimatorMovement() {
+
+		// Change the facing of the sprite based on the x velocity.
+		if (_ai.velocity.x < -0.25f)
+			_sr.flipX = true;
+
+		else if (_ai.velocity.x > 0.25f)
+			_sr.flipX = false;
+
+		// Then we'll use the "overall speed" of the velocity and convert it roughly into a percentage.
+		_an.SetFloat("flVelocity01", Dragontale.Math.Remap( _ai.velocity.sqrMagnitude, 0f, 100f, 0f, 1.5f));
+
+		// In reality, we actually want to use a remap function, but it's not worth the processing power here. MAYBE IT IS.
+		// _an.SetFloat("flVelocity01", Mathf.Clamp(_ai.velocity.sqrMagnitude / 50f, 0f, 1.5f));
+
+	}
+
+	protected void AnimatorAttack() {
+
+
+
+	}
+
+	protected void AnimatorDeath() {
+
+
 
 	}
 

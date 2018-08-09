@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28914483f8cd0a642b6e98aaca44acfe, type: 3}
-  m_Name: RangedMinionStyle
+  m_Name: ExampleMinionStyle
   m_EditorClassIdentifier: 
-  _stUnitName: Ranged Skeleton
-  _animatorController: {fileID: 9100000, guid: b9116b04fcf5c4342b2a914be8542feb, type: 2}
+  _stUnitName: Example Skeleton
+  _animatorController: {fileID: 9100000, guid: ab11841a04e04634a95dc5cf1aca6e5d, type: 2}

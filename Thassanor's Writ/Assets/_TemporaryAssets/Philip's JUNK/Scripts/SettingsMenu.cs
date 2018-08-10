@@ -34,35 +34,35 @@ public class SettingsMenu : MonoBehaviour
 
         int currentResolutionIndex = 0;
 
+        for (int i = 0; i < allResolutions.Length; i++)
+        {
+            string option = $"{allResolutions[i].width} x {allResolutions[i].height} @ {allResolutions[i].refreshRate}";
+            options.Add(option);
+
+            if (allResolutions[i].width == Screen.currentResolution.width && allResolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
         //for (int i = 0; i < allResolutions.Length; i++)
         //{
-        //    string option = $"{allResolutions[i].width} x {allResolutions[i].height} @ {allResolutions[i].refreshRate}";
-        //    options.Add(option);
-
-        //    if (allResolutions[i].width == Screen.currentResolution.width && allResolutions[i].height == Screen.currentResolution.height)
+        //    if (allResolutions[i].refreshRate == Screen.currentResolution.refreshRate)
         //    {
-        //        currentResolutionIndex = i;
+        //        resolutionsWithRefreshRate.Add(allResolutions[i]);
         //    }
         //}
 
-        for (int i = 0; i < allResolutions.Length; i++)
-        {
-            if (allResolutions[i].refreshRate == Screen.currentResolution.refreshRate)
-            {
-                resolutionsWithRefreshRate.Add(allResolutions[i]);
-            }
-        }
+        //foreach (var res in resolutionsWithRefreshRate)
+        //{
+        //    string option = $"{res.width} x {res.height} @ {res.refreshRate}";
+        //    options.Add(option);
 
-        foreach (var res in resolutionsWithRefreshRate)
-        {
-            string option = $"{res.width} x {res.height} @ {res.refreshRate}";
-            options.Add(option);
-
-            if (res.width == Screen.currentResolution.width && res.height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = resolutionsWithRefreshRate.IndexOf(res);
-            }
-        }
+        //    if (res.width == Screen.currentResolution.width && res.height == Screen.currentResolution.height)
+        //    {
+        //        currentResolutionIndex = resolutionsWithRefreshRate.IndexOf(res);
+        //    }
+        //}
 
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;

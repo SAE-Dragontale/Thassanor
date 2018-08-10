@@ -1,5 +1,4 @@
 ﻿// Script: BoardGeneration.cs
-// Date Updated: 27/07/2018
 // Author & Contributors: Eric Cox
 // Purpose: The creation and design details of the maps for the game. Water/Towns/Props/Size. etc.  
 
@@ -38,8 +37,7 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 
-    [Range(-.6f,.3f)]
-    public float _waterAmount;
+    float _waterAmount = -0.6f;
     [Range(4, 12)]
     public int _waterSize;
 
@@ -238,17 +236,22 @@ public class BoardGeneration : MonoBehaviour {
 			_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
 
 		}		
+				
 
-		// Create a random index for the instantiated tile.
-		int randomIndex = Random.Range(0, prefabs.Length);
 		Vector3 position = new Vector3(xCoord, 0f, zCoord);    
-		int index = Mathf.RoundToInt(_fltPerlinValue);
-		if(index < 0)
-		{index = 0;}
-
+		
+		int index = 0; //if the number of possible grass tiles is 1, then set index to 0 so it wont try spawn soemthing that doesnt exist
+		if(prefabs.Length > 1)
+		{
+			//if there's more than 1 possible grass tile to spawn from, it chooses one tile at random and sets that as the index
+			index = Random.Range(0, prefabs.Length);
+			
+		}			
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity) as GameObject;
 		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
+		
+
 		_tileList.Add (floorTileInstance);	
 		floorTileInstance.transform.parent = _boardHolder.transform;
 
@@ -301,11 +304,11 @@ public class BoardGeneration : MonoBehaviour {
 			{			
 				tileInstance.transform.parent = hit.transform;
 			}
-			else
+	/*		else
 			{
 				Destroy(tileInstance);
 			}
-
+	*/
             //check to make sure water doesnt overlap itself or other objects
             foreach (GameObject tile in _waterList) 
 			{				

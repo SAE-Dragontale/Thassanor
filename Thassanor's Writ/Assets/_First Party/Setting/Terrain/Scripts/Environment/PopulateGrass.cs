@@ -1,11 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			PopulateGrass.cs
-   Version:			0.0.0
+   Version:			0.1.0
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PopulateGrass : MonoBehaviour {
@@ -20,8 +19,8 @@ public class PopulateGrass : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] private GameObject[] _agoGrass;	// The various grass prefabs that we can choose to spawn.
-	[SerializeField] private int _itAmountOfGrass;		// How many of said prefabs do we want to spawn?
+	[SerializeField] private Sprite[] _sprites;		// The various grass sprites that we can choose between!
+	[SerializeField] private int _itAmountOfGrass;	// How many of said prefabs do we want to spawn?
 
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -31,20 +30,27 @@ public class PopulateGrass : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		_mr = GetComponent<MeshRenderer>();
+		_mr = GetComponentInParent<MeshRenderer>();
 
 	}
 
 	// Called before class calls or functions.
 	private void Start() {
 
-		Vector3 v3Size = _mr.bounds.extents;
+		Vector3 v3Size = _mr.bounds.size;
 
 		for (int it = _itAmountOfGrass; _itAmountOfGrass > 0; _itAmountOfGrass--) {
 
 			// Find our our position within the bounds of our Mesh Renderer (surface) and instantiate some grass!
-			Vector3 v3Place = _mr.bounds.center + new Vector3(Random.Range(-v3Size.x/2,v3Size.x/2), Random.Range(-v3Size.y / 2, v3Size.y / 2), 0f);
-			Instantiate(_agoGrass[Random.Range(0, _agoGrass.Length - 1)], v3Place, Quaternion.identity);
+			Vector3 v3Place = _mr.bounds.center + new Vector3(Random.Range(-v3Size.x/2,v3Size.x/2), 0f, Random.Range(-v3Size.z / 2, v3Size.z / 2));
+
+			// Instantiate and set the parent of the GameObject.
+			GameObject grass = new GameObject("Grass");
+			grass.transform.parent = transform;
+			grass.transform.position = v3Place;
+
+			// Randomise the sprite that we're giving the blade of grass!
+			grass.AddComponent<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Length - 1)];
 
 		}
 

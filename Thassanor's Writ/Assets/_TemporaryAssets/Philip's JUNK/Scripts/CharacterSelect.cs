@@ -22,8 +22,6 @@ public class CharacterSelect : MonoBehaviour{
     public CharVisuals playerSprite;
     private bool setCharacterSprite = true;
 
-
-
     NecromancerStyle characterSelection;
 
     public void Start()

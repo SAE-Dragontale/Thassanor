@@ -26,7 +26,7 @@ public class VillagerSpawn : MonoBehaviour {
 				GameObject newVillager;
 				newVillager = Instantiate(_villagers[Random.Range(0,_villagers.Length)], transform.position, Quaternion.identity, transform) as GameObject;
 
-				Vector3 newpos = new Vector3(transform.position.x,0,transform.position.z - .5f);
+				Vector3 newpos = new Vector3(transform.position.x,0.07f,transform.position.z - .5f);
 				//newpos.transform.position = transform.position;
 				newVillager.transform.position = newpos;
 				_villagerCount.Add(newVillager);

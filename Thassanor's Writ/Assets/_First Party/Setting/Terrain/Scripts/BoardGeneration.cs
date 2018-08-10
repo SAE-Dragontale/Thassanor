@@ -238,14 +238,18 @@ public class BoardGeneration : MonoBehaviour {
 			_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
 
 		}		
-
-		// Create a random index for the instantiated tile.
-		int randomIndex = Random.Range(0, prefabs.Length);
+		
 		Vector3 position = new Vector3(xCoord, 0f, zCoord);    
-		int index = Mathf.RoundToInt(_fltPerlinValue);
-		if(index < 0)
-		{index = 0;}
-
+		
+		int index = 0; //if the number of possible grass tiles is 1, then set index to 0 so it wont try spawn soemthing that doesnt exist
+		if(prefabs.Length > 1)
+		{
+			// Create a random index for the instantiated tile. Creates index for the variation in grass tiles
+			int randomIndex = Random.Range(0, prefabs.Length);
+			index = Mathf.RoundToInt(_fltPerlinValue);
+			if(index < 0)
+			{index = 0;}
+		}			
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity) as GameObject;
 		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;

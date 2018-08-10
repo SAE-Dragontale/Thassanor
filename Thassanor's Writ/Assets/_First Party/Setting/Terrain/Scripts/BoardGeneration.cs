@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 
 
@@ -56,11 +57,13 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject[] _townTiles;        
 	public GameObject[] _waterTiles;       
 
+/*
 	[Space]
 	[Header("UI Components")]
 	public Text _txtBoardSize;
 	public Text _txtWaterCount;
 	public Text _txtTownCount;
+*/
 
 	[Space]
 	[Header("Board Components")]
@@ -68,6 +71,10 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject _p1Spawn;       
 	public GameObject _p2Spawn;       
 	[Space]
+
+    public GameObject _navMeshTile;
+	public NavMeshSurface _surface;
+	public Renderer _navTileRend;
 
 	public List<GameObject> _tileList = new List<GameObject>();
 	public List<GameObject> _propList = new List<GameObject>();
@@ -81,11 +88,7 @@ public class BoardGeneration : MonoBehaviour {
 	public GameObject _tileInstance;
 		
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-	void Awake()
-	{                   
-        
-	}
-
+ 
 
 	private void Start ()
 	{
@@ -97,15 +100,27 @@ public class BoardGeneration : MonoBehaviour {
 		_p1Spawn = GameObject.Find("P1 Spawner");
 		_p2Spawn = GameObject.Find("P2 Spawner");
 
+		//sets the surface object as a child of the grid, sets the transform to the center of the board, sets the scale to match the length and height of the grid, and builds a navmesh on the surface.
+		//disables rendered just in case
+		_navTileRend = _navMeshTile.GetComponent<Renderer>();
+		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
+		_navMeshTile.transform.parent = _boardHolder.transform;
+		_navMeshTile.transform.position = new Vector3(_columns/2f -.5f, -0.01f, _rows/2f -.5f);
+		_navMeshTile.transform.localScale = new Vector3(_columns / 9.75f,.1f,_rows / 9.75f);
+		_surface.BuildNavMesh();
+		_navTileRend.enabled = false;
+
+
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
 		_borderGenRef.InstantiateOuterWalls (); 			
 
+/*
 		_txtBoardSize.text = "Columns: " + _columns + " | Rows: " + _rows + " | Ground Tiles: " + _tileList.Count;		
 		_txtTownCount.text = "Towns: " + _curTownCount;	
 		_txtWaterCount.text = "Water Tiles: " + _waterList.Count;
-				
+*/			
 		StartCoroutine(DelayedStart());
 
 	}

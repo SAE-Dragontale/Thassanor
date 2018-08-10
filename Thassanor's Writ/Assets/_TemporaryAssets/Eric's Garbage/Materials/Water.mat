@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
+  m_Shader: {fileID: 4800000, guid: 1ecefedcdb0b17343bf49a5d2cf8d5a2, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_1D2B7D3C:
+        m_Texture: {fileID: 2800000, guid: 1c8e049cfa5da3b42a40fc2ddabe969b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -148,6 +152,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_215E87E4: 0.034
+    - Vector1_2236FCA0: 2
+    - Vector1_3F555C9A: 0
+    - Vector1_62FEFD91: 1
+    - Vector1_7DCE190B: 0.02
+    - Vector1_97899FBD: 0.01
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -275,6 +285,8 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_CF4CD828: {r: 0, g: 1, b: 0.6616406, a: 0}
+    - Color_E6AF4525: {r: 0.29792625, g: 0.8649267, b: 0.9716981, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

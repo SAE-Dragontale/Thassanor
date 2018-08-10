@@ -36,16 +36,18 @@ public class KeybindInput : MonoBehaviour
         GameObject Buttons names, this is required to easily store changed keys in OnGui()*/
         keys.Add("ButtonMoveUp", keyAxis[0].positive);
         keys.Add("ButtonMoveDown", keyAxis[0].negative);
-        keys.Add("ButtonMoveLeft", keyAxis[1].positive);
-        keys.Add("ButtonMoveRight", keyAxis[1].negative);
+        keys.Add("ButtonMoveLeft", keyAxis[1].negative);
+        keys.Add("ButtonMoveRight", keyAxis[1].positive);
         keys.Add("ButtonUnitCommand", keyCode[2]);
+
+
         //Debug.Log(keys["ButtonMoveUp"]);
 
         //keybindings text is displayed in the keybindings menu on the buttons
         up.text             =   keyAxis[0].positive.ToString();
         down.text           =   keyAxis[0].negative.ToString();
-        left.text           =   keyAxis[1].positive.ToString();
-        right.text          =   keyAxis[1].negative.ToString();
+        left.text           =   keyAxis[1].negative.ToString();
+        right.text          =   keyAxis[1].positive.ToString();
         unitCommand.text    =   keyCode[2].ToString();
     }
 
@@ -67,6 +69,7 @@ public class KeybindInput : MonoBehaviour
                     currentKey.GetComponentInChildren<TextMeshProUGUI>().text = e.keyCode.ToString();/*change the text on the button 
                     to that of the key pressed*/
                     currentKey = null;//resets currentKey back to null to avoid running through loop again
+                    SaveKeyLayoutToScriptableObject();
                 }
             }
         }
@@ -113,8 +116,18 @@ public class KeybindInput : MonoBehaviour
         }
     }
 
+    private void SaveKeyLayoutToScriptableObject()
+    {
+        _keyboardHotkeys._arrayKeyAxis[0].positive = keys["ButtonMoveUp"];
+        _keyboardHotkeys._arrayKeyAxis[0].negative = keys["ButtonMoveDown"];
+        _keyboardHotkeys._arrayKeyAxis[1].positive = keys["ButtonMoveRight"];
+        _keyboardHotkeys._arrayKeyAxis[1].negative = keys["ButtonMoveLeft"];
+        _keyboardHotkeys._arrayKeyCode[2] = keys["ButtonUnitCommand"];
+    }
+
     public void SaveKeyLayout()
     {
+        SaveKeyLayoutToScriptableObject();
         /*stores the file path to the json file located
         in the streaming assets folder for use in JSON loading and saving*/
         //when this method is called (Save button is pressed) store all current stored keybindings into the json file.

@@ -146,6 +146,7 @@ public class BoardGeneration : MonoBehaviour {
 
 	List<GameObject> mirrorTileList = new List<GameObject>();
 	int mirrorListCount;
+	bool SpawnBaseTile = false;
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
@@ -167,13 +168,18 @@ public class BoardGeneration : MonoBehaviour {
 					//THIS WILL RETURN -1 TO 1
 					_fltPerlinValue = (float)_simplexNoise.Evaluate((double)(x * .5f), (double)(z * 0.5f));
 				
-					InstantiateFromArray(_floorTiles,x,z);	
-					mirrorTileList.Add(floorTileInstance);
-					mirrorListCount++;	
 
 					//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
 					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
 					{
+
+						//the actual spawning of the grass tiles
+						InstantiateFromArray(_floorTiles,x,z);	
+						SpawnBaseTile = true;
+						mirrorTileList.Add(floorTileInstance);
+						mirrorListCount++;
+
+
 						//perlin value for water
 						if (_fltPerlinValue < _waterAmount) 
 						{
@@ -189,12 +195,23 @@ public class BoardGeneration : MonoBehaviour {
 								townSpreadCur = 0;
 							}
 						} 						
-					} 					
+					}
+					else
+					{
+						//the actual spawning of the grass tiles
+						InstantiateFromArray(_floorTiles,x,z);	
+						mirrorTileList.Add(floorTileInstance);
+						mirrorListCount++;	
+					} 		
+
+
 					//this is the check(s) for 'steps' between components
 					if(townSpreadCur < _townSpread)
 					{
 						townSpreadCur++;
 					}
+					
+						SpawnBaseTile = false;
 				}
 			}
 			else 		//non random half
@@ -243,8 +260,19 @@ public class BoardGeneration : MonoBehaviour {
 		int index = 0; //if the number of possible grass tiles is 1, then set index to 0 so it wont try spawn soemthing that doesnt exist
 		if(prefabs.Length > 1)
 		{
-			//if there's more than 1 possible grass tile to spawn from, it chooses one tile at random and sets that as the index
-			index = Random.Range(0, prefabs.Length);
+			//if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
+			//... it chooses one tile at random from the others and sets that as the index
+			if(Random.value > .85f)
+			{
+				if(SpawnBaseTile == true)
+				{index = 0;}
+				else
+				{index = Random.Range(0, prefabs.Length);}
+			}
+			else
+			{
+				index = 0;
+			}
 			
 		}			
 

@@ -267,7 +267,7 @@ Prefab:
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _floorTiles.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
@@ -345,13 +345,13 @@ Prefab:
         type: 2}
       propertyPath: _floorTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216,
+      objectReference: {fileID: 1950816847883232, guid: dbcecec8661dd634a8d81a9c003b0526,
         type: 2}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _floorTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a,
+      objectReference: {fileID: 1653829826068180, guid: a60f4b671e77ce04b92df0613a4bb6cc,
         type: 2}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
@@ -420,6 +420,12 @@ Prefab:
       propertyPath: _navMeshTile
       value: 
       objectReference: {fileID: 1834870455}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _floorTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 1725566508523174, guid: a483301d65a52624c93d943debbec749,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_IsPrefabAsset: 0

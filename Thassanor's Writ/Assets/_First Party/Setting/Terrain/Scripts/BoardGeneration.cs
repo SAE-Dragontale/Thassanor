@@ -304,11 +304,11 @@ public class BoardGeneration : MonoBehaviour {
 			{			
 				tileInstance.transform.parent = hit.transform;
 			}
-	/*		else
+			else
 			{
 				Destroy(tileInstance);
 			}
-	*/
+	
             //check to make sure water doesnt overlap itself or other objects
             foreach (GameObject tile in _waterList) 
 			{				

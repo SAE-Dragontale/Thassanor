@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: OpenSans-Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1025855939
   material: {fileID: 21008114330897046}
-  materialHashCode: 0
+  materialHashCode: -1568813290
   fontAssetType: 1
   m_fontInfo:
     Name: Open Sans
     PointSize: 170
-    Scale: 0
+    Scale: 1
     CharacterCount: 98
     LineHeight: 231.5
     Baseline: 0
     Ascender: 181.71875
-    CapHeight: 0
+    CapHeight: 121.375
     Descender: -49.8125
     CenterLine: 0
     SuperscriptOffset: 181.71875
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 8.466797
     strikethrough: 47.965908
     strikethroughThickness: 8.466797
-    TabWidth: 0
+    TabWidth: 441.5625
     Padding: 5
     AtlasWidth: 1024
     AtlasHeight: 1024
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 1029
-    width: 0
-    height: 0
+    width: 44.15625
+    height: 231.53125
     xOffset: 0
-    yOffset: 0
+    yOffset: 181.71875
     xAdvance: 44.15625
     scale: 1
   - id: 33
@@ -938,19 +938,23 @@ MonoBehaviour:
       yAdvance: 0
     xOffset: 0
   fallbackFontAssets: []
-  fontCreationSettings:
-    fontSourcePath: 
-    fontSizingMode: 0
-    fontSize: 0
-    fontPadding: 0
-    fontPackingMode: 0
-    fontAtlasWidth: 0
-    fontAtlasHeight: 0
-    fontCharacterSet: 0
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: 
+    pointSizeSamplingMode: 0
+    pointSize: 0
+    padding: 0
+    packingMode: 0
+    atlasWidth: 0
+    atlasHeight: 0
+    characterSetSelectionMode: 0
+    characterSequence: 
+    referencedFontAssetGUID: 
+    referencedTextAssetGUID: 
     fontStyle: 0
-    fontStlyeModifier: 0
-    fontRenderMode: 0
-    fontKerning: 0
+    fontStyleModifier: 0
+    renderMode: 0
+    includeFontFeatures: 0
   fontWeights:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
@@ -1044,9 +1048,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stUnitName: Ranged Skeleton
   _animatorController: {fileID: 9100000, guid: b9116b04fcf5c4342b2a914be8542feb, type: 2}
+  _flHealth: 10

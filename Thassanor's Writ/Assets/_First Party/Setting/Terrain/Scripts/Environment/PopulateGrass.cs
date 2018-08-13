@@ -42,7 +42,7 @@ public class PopulateGrass : MonoBehaviour {
 		Vector3 v3Size = _mr.bounds.size;
 
 		// We want to position our grass across the Mesh Renderer.
-		for (int it = _itAmountOfGrass; _itAmountOfGrass > 0; _itAmountOfGrass--) {
+		for (int it = _itAmountOfGrass; it > 0; it--) {
 
 			// Find our our position within the bounds of our Mesh Renderer (surface) and instantiate some grass!
 			Vector3 v3Place = _mr.bounds.center + new Vector3(Random.Range(-v3Size.x/2,v3Size.x/2), 0f, Random.Range(-v3Size.z / 2, v3Size.z / 2));

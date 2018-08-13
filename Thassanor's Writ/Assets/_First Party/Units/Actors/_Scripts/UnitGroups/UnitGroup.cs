@@ -1,15 +1,15 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.6.0
+   Version:			0.1.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class UnitGroup : MonoBehaviour {
+public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
@@ -25,11 +25,9 @@ public class UnitGroup : MonoBehaviour {
 		set { _trHost = value?.Find("RallyPoint") ?? value; }
 	}
 
-	[Tooltip("The type of unit that this group control.s")]
-	[SerializeField] protected UnitStyle _unitStyle;
-
-	[Tooltip("All units currently associated with this group.")]
-	[SerializeField] protected List<Unit> _lscUnits;    // The units within the group.
+	[SerializeField] protected UnitStyle _unitStyle;	// The type of unit that we contain.
+	[SerializeField] protected GameObject _goUnit;		// The basic unit template.
+	[SerializeField] protected Unit[] _ascUnits;		// The units within the group.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Method Variables
@@ -52,8 +50,14 @@ public class UnitGroup : MonoBehaviour {
 
 	[SerializeField] protected bool _isKillable;    // Whether the group will Destroy() if it has no units.
 
-	protected float _flUnitHealth;      // How much health does each unit individually contribute?
-	protected float _flCurrentHealth;   // The current total pool of health the UnitGroup currently has.
+	// Health functionality for UnitGroups.
+	/* [SyncVar] */ [SerializeField] protected float _flHealth;
+	public float SetHealth {
+		set {
+			_flHealth = value;
+			UnitsFromHealth();
+		}
+	}
 
 	[Space] [Header("Rules of Formations")]
 	[SerializeField] protected bool _usesRoF;       // If false, we're looking at mass chaos as every unit vies for host senpai's rally point.
@@ -74,23 +78,8 @@ public class UnitGroup : MonoBehaviour {
 	// Called before Update().
 	protected virtual void Start() {
 
-		ReloadUnits();
-
-	}
-
-	[InspectButton]
-	public virtual void ReloadUnits() {
-
-		_lscUnits.Clear();
-
-		foreach (Unit unit in GetComponentsInChildren<Unit>()) {
-
-			_lscUnits.Add(unit);
-			unit._UnitStyle = _unitStyle;
-
-		}
-
-		
+		// If a UnitGroup starts pre-initialised, we have to recognise this.
+		UnitsFromChildren();
 
 	}
 
@@ -98,23 +87,81 @@ public class UnitGroup : MonoBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	/* ----------------------------------------------------------------------------- */
-	// Creation
+	[InspectButton]
+	public virtual void AddUnit() {
+		ChangeHealth(_unitStyle._flHealth);
+	}
 
-	
+	[InspectButton]
+	public virtual void MinusUnit() {
+		ChangeHealth(-_unitStyle._flHealth);
+	}
 
-	/* ----------------------------------------------------------------------------- */
-	// Combat
+	[InspectButton]
+	public virtual void ChangeHealth(float _flHealthMod) {
 
-	public void ModifyHealth(float itHealthModifier) {
-
-
+		SetHealth = _flHealth + _flHealthMod;
 
 	}
 
-	public void ModifyUnitCount(int it) {
+	/* ----------------------------------------------------------------------------- */
 
-		// Instantiate(goNewUnit);
+	// This function is used to update incremental changes to a Unit's health.
+	public virtual void UnitsFromHealth() {
+
+		// Health should not drop below zero.
+		_flHealth = Mathf.Max(_flHealth, 0);
+		
+		// How many units does our health indicate that we should have?
+		int itNewHealth = Mathf.CeilToInt(_flHealth / _unitStyle._flHealth);
+
+		// If our total health pool exceeds the maximum health pool of our units...
+		if (itNewHealth  > _ascUnits.Length)
+			AddUnits(itNewHealth);
+
+		// If our total health pool leaves a unit without any remaining health...
+		else if (itNewHealth < _ascUnits.Length)
+			MinusUnits(itNewHealth);
+
+		// Update our UnitList with the hierarchy components.
+		_ascUnits = GetComponentsInChildren<Unit>();
+
+	}
+
+	// We need to spawn units here then. This doesn't need networking commands because it is implicitly networked with a SyncVar.
+	protected virtual void AddUnits(int itNewHealth) {
+
+		for (int it = itNewHealth - _ascUnits.Length; it > 0; it--) {
+			Instantiate(_goUnit, transform);
+			_goUnit.GetComponent<Unit>()._UnitStyle = _unitStyle;
+		}
+
+	}
+
+	// We need to despawn units instead, which once again is implicitly networked.
+	protected virtual void MinusUnits(int itNewHealth) {
+
+		for (int it = _ascUnits.Length - itNewHealth; it > 0; it--) {
+			DestroyImmediate(_ascUnits[it].gameObject);
+		}
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
+
+	// This function is used to update a collection of units, generally from the editor.
+	[InspectButton]
+	public virtual void UnitsFromChildren() {
+
+		// Update our UnitList with the hierarchy components.
+		_ascUnits = GetComponentsInChildren<Unit>();
+
+		// Load in our initial health value.
+		_flHealth = _unitStyle._flHealth * _ascUnits.Length;
+
+		// Then iterate through our units and apply our current style to each unit.
+		foreach (Unit unit in _ascUnits)
+			unit._UnitStyle = _unitStyle;
 
 	}
 
@@ -125,7 +172,7 @@ public class UnitGroup : MonoBehaviour {
 	// Standard GroupCycle behaviour. Override functions that extend this cycle to change functionality.
 	protected void Update() {
 
-		if (_flCurrentHealth <= 0) {
+		if (_flHealth <= 0) {
 			if (_isKillable) {
 
 				RemoveGroup();
@@ -207,7 +254,7 @@ public class UnitGroup : MonoBehaviour {
 			return;
 
 		// If we have no units, we don't need to organise anyone.
-		if (_lscUnits.Count == 0)
+		if (_ascUnits.Length == 0)
 			return;
 
 		// And finally, now we're sure we need to update our position, we choose our destination style.
@@ -221,7 +268,7 @@ public class UnitGroup : MonoBehaviour {
 	// The "Rules of Formation" provide a framework position for the units to move to as an army. They'll be arrayed in columns and rows.
 	protected virtual void RulesOfFormation() {
 
-		int itRemainingUnits = _lscUnits.Count; // The units that are currently unpositioned in our iteration.
+		int itRemainingUnits = _ascUnits.Length; // The units that are currently unpositioned in our iteration.
 		int itCurrentUnitIndex = 0;             // How many units we've positioned so far by array index.
 
 		// As long as we've still got unpositioned units, we should continue iterating based on the number of units we have left.
@@ -239,7 +286,7 @@ public class UnitGroup : MonoBehaviour {
 				float flPlaceAcross = (((itSelectedUnits - 1) * _flRoFSpread) / 2 * -1) + (_flRoFSpread * it);
 				float flPlaceBehind = (itCurrentUnitIndex / _itRoFColumns) * _flRoFSpread;
 
-				_lscUnits[it + itCurrentUnitIndex]._trDestination.position = PositionVariance(_trHost.TransformPoint(flPlaceAcross, 0, flPlaceBehind));
+				_ascUnits[it + itCurrentUnitIndex]._trDestination.position = PositionVariance(_trHost.TransformPoint(flPlaceAcross, 0, flPlaceBehind));
 
 			}
 
@@ -254,7 +301,7 @@ public class UnitGroup : MonoBehaviour {
 	// For some reason this unit does not care for formation and will jam themselves as close as possible to the destination as they can.
 	protected virtual void RulesOfChaos() {
 
-		foreach (Unit unit in _lscUnits) {
+		foreach (Unit unit in _ascUnits) {
 
 			unit._trDestination.position = PositionVariance(_trHost.TransformPoint(0,0,0));
 

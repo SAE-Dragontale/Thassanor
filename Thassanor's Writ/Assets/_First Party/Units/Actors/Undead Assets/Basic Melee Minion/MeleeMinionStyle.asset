@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stUnitName: Melee Skeleton
   _animatorController: {fileID: 9100000, guid: 549ca00699cd1aa4a8a05c93593ee326, type: 2}
+  _flHealth: 20

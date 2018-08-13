@@ -21,6 +21,7 @@ public class PopulateGrass : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	[Range(0,1000)]
 	[SerializeField] private int _itAmountOfGrass;	// How many of said prefabs do we want to spawn?
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -30,7 +31,7 @@ public class PopulateGrass : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		_mr = GetComponentInParent<MeshRenderer>();
+		_mr = GetComponent<MeshRenderer>();
 
 	}
 

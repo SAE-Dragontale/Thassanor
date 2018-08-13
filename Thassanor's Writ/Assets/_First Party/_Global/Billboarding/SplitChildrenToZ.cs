@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class SplitChildrenToZ : MonoBehaviour {
 
-	[SerializeField] private float __flSplitY = 0.05f;
+	[SerializeField] private float _flSplitY = 0.05f;
 	[SerializeField] private float _flSplitZ = 0.1f;
 
 	// Called before class calls or functions.
@@ -25,7 +25,7 @@ public class SplitChildrenToZ : MonoBehaviour {
 		var children = GetComponentsInChildren<Transform>();
 
 		for (int it = 0; it < children.Length; it++) {
-			children[it].position = transform.TransformPoint(0f, it * __flSplitY, it * _flSplitZ *-1);
+			children[it].position = transform.TransformPoint(0f, it * _flSplitY, it * _flSplitZ *-1);
 		}
 
 	}

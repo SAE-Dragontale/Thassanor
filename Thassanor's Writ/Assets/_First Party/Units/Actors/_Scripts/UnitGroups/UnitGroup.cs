@@ -18,8 +18,8 @@ public class UnitGroup : MonoBehaviour {
 	[Space] [Header("References")]
 
 	[Tooltip("The host is the transform that the UnitGroup is associated with. This can be a player, actor, or even a terrain set.")]
-	[SerializeField] protected Transform _trHost;           // The target the group is following.
-	protected Vector3 _v3LastPos = new Vector3(0, 0, 0);        // The last position of the target host. Check against to summise whether we've moved.
+	[SerializeField] protected Transform _trHost;			// The target the group is following.
+	protected Vector3 _v3LastPos = new Vector3(0, 0, 0);	// The last position of the target host. Check against to summise whether we've moved.
 
 	public Transform _TrHost {
 		set { _trHost = value?.Find("RallyPoint") ?? value; }
@@ -89,6 +89,8 @@ public class UnitGroup : MonoBehaviour {
 			unit._UnitStyle = _unitStyle;
 
 		}
+
+		
 
 	}
 

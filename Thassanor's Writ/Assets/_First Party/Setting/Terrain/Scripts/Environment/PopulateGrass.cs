@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			PopulateGrass.cs
-   Version:			0.1.0
+   Version:			0.1.1
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -13,15 +13,15 @@ public class PopulateGrass : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private MeshRenderer _mr;	// We need our Mesh Renderer to determine the area of the space we have to work with when spawning grass.
+	private MeshRenderer _mr;   // We need our Mesh Renderer to determine the area of the space we have to work with when spawning grass.
+
+	[SerializeField] private Sprite[] _sprites;     // The various grass sprites that we can choose between!
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] private Sprite[] _sprites;		// The various grass sprites that we can choose between!
 	[SerializeField] private int _itAmountOfGrass;	// How many of said prefabs do we want to spawn?
-
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -37,8 +37,10 @@ public class PopulateGrass : MonoBehaviour {
 	// Called before class calls or functions.
 	private void Start() {
 
+		// We're taking the Mesh Renderer's "dimensions" in a Vector 3 so we can position our stuff evenly across it.
 		Vector3 v3Size = _mr.bounds.size;
 
+		// We want to position our grass across the Mesh Renderer.
 		for (int it = _itAmountOfGrass; _itAmountOfGrass > 0; _itAmountOfGrass--) {
 
 			// Find our our position within the bounds of our Mesh Renderer (surface) and instantiate some grass!

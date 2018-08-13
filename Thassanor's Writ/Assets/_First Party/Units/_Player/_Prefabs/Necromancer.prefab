@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8402f2f09e2d0c049802975d94790bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _necromancerStyle: {fileID: 11400000, guid: b78c8dc28cedce347b9f11319d2f6c7b, type: 2}
+  _necromancerStyle: {fileID: 11400000, guid: d6d11ad0c0bd0bf44b7b3a8ebf372e4d, type: 2}
   _v3PlayerOffset: {x: 0, y: -7.5, z: 8}
   _v3PlayerPanning: {x: 0, y: 0.25, z: 0}
 --- !u!114 &114051461296551960
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flMovementSpeed: 1.2
+  _v3RallyDistance: {x: 0, y: 0, z: 0}
 --- !u!114 &114199404678548330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -667,7 +668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trCamera: {fileID: 0}
 --- !u!114 &114836519438897312
 MonoBehaviour:
   m_ObjectHideFlags: 1

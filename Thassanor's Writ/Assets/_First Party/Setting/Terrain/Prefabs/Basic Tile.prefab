@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114528898668236178}
   m_Layer: 0
   m_Name: Basic Tile
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b1cc4da753727741a8d6df5a4c862d6, type: 3}
   - {fileID: 21300000, guid: 8563e983576fdd640a27ad7345c902c8, type: 3}
   - {fileID: 21300000, guid: e1e79b733d8128247b7ffb9096ffa9f3, type: 3}
-  - {fileID: 21300000, guid: 4fcff723c1ccb0a4fbfa78ace927e91e, type: 3}
+  - {fileID: 0}
   - {fileID: 21300000, guid: e568d6585070ac94384e1301b295642b, type: 3}
   - {fileID: 21300000, guid: c0d354f4d28247c45a25ceb97d6792e5, type: 3}
   - {fileID: 21300000, guid: 7cfe8fda6b85e8e459cbe519459149b7, type: 3}

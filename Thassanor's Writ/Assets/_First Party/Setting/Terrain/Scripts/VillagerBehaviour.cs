@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class VillagerBehaviour : MonoBehaviour {
 
+	SpriteRenderer _mySprite;
     bool _canMove;
 	float _directionChangeTimer;
 	public float _health = 3f;
@@ -33,6 +34,8 @@ public class VillagerBehaviour : MonoBehaviour {
 
 	void Start()
 	{
+		_mySprite = GetComponentInChildren<SpriteRenderer>();
+
 		_canMove = true;
 		_isAlive = true;
 
@@ -93,12 +96,21 @@ public class VillagerBehaviour : MonoBehaviour {
 
 			//time spent idling
 			_actionTimer = _actionTimer + Time.deltaTime;
-			if(_actionTimer >= .2f)
+			if(_actionTimer >= .1f)
 			{
 				//if out of bounds is true, then move towards the town until im close enough.
 				if(outOfBounds == true)
 				{
-					transform.Translate(directionOfTown * 5f* Time.deltaTime, Space.World);
+					transform.Translate(directionOfTown * 8f* Time.deltaTime, Space.World);
+
+					if(directionOfTown.x > 0)
+					{
+						_mySprite.flipX = false;
+					}
+					else
+					{
+						_mySprite.flipX = true;
+					}
 
 					//if you're half the out of bounds distance, let npc leave idle state
 					if(distance <= _outOfBoundsDistance / 2f)
@@ -138,7 +150,17 @@ public class VillagerBehaviour : MonoBehaviour {
 				patrolDirZ = Random.Range(-1f,1f);
 
 				//rand value for timer here so it only sets once per patrol state
-				randTimeValue = Random.Range(1f,1.8f);				
+				randTimeValue = Random.Range(1f,1.8f);		
+
+				if(patrolDirX > 0)
+				{
+					_mySprite.flipX = false;
+				}	
+				else
+				{
+					_mySprite.flipX = true;
+
+				}	
 			}
 
 			//move in that patrol direction

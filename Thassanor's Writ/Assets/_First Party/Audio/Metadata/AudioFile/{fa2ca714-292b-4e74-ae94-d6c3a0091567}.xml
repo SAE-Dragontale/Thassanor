@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{fa2ca714-292b-4e74-ae94-d6c3a0091567}">
+        <property name="assetPath">
+            <value>UI FORREST AMBIENCE.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>35.339319727891159</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1678f974-dcac-4f1a-90c3-4a09c7722ec8}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{bf6a9781-d39a-4688-9ae6-869eb56d58c8}">
+        <property name="assetPath">
+            <value>FOLEY AND FX/FOLEY/Grunt high_2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.44800000000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1678f974-dcac-4f1a-90c3-4a09c7722ec8}</destination>
+        </relationship>
+    </object>
+</objects>

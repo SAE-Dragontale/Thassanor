@@ -262,7 +262,7 @@ public class BoardGeneration : MonoBehaviour {
 		{
 			//if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
 			//... it chooses one tile at random from the others and sets that as the index
-			if(Random.value > .85f)
+			if(Random.value > .92f)
 			{
 				if(SpawnBaseTile == true)
 				{index = 0;}

@@ -87,6 +87,18 @@ public class BoardGeneration : MonoBehaviour {
 		
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
  
+	//public SingletonPass _singletonRef;
+	void Awake()
+	{
+		//read from singleton
+		//_singletonRef = GameObject.Find("MapSettings").GetComponent<SingletonPass>();
+		//_itSeed = _singletonRef._itSeed;
+		//_columns = _singletonRef._columns;
+		//_rows = _singletonRef._rows;
+		//_waterSize = _singletonRef._waterSize;
+		//_townSpread = _singletonRef._townSpread;
+		//_maxTownCount = _singletonRef._maxTownCount;
+	}
 
 	private void Start ()
 	{

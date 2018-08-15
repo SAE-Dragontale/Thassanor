@@ -125,13 +125,6 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
-	// String Comparison Functions
-
-	// https://blogs.msdn.microsoft.com/toub/2006/05/05/generic-levenshtein-edit-distance-with-c/
-	// https://stackoverflow.com/questions/5859561/getting-the-closest-string-match
-	// https://www.dotnetperls.com/levenshtein (Best)
-
-	/* ----------------------------------------------------------------------------- */
 	// Input Field Calls
 
 	// We're using this to toggle the User Interface that allows the player to begin typing. Calling ShowInputField is also implicetly calling FocusInputField.

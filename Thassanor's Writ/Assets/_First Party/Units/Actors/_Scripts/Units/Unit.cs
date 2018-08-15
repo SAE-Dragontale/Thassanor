@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour {
 			_sr.flipX = false;
 
 		// Then we'll use the "overall speed" of the velocity and convert it roughly into a percentage.
-		_an.SetFloat("flVelocity01", Dragontale.Math.Remap( _ai.velocity.sqrMagnitude, 0f, 100f, 0f, 1.5f));
+		_an.SetFloat("flVelocity01", Dragontale.FableMath.Remap( _ai.velocity.sqrMagnitude, 0f, 100f, 0f, 1.5f));
 
 		// In reality, we actually want to use a remap function, but it's not worth the processing power here. MAYBE IT IS.
 		// _an.SetFloat("flVelocity01", Mathf.Clamp(_ai.velocity.sqrMagnitude / 50f, 0f, 1.5f));

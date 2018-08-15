@@ -27,7 +27,7 @@ namespace Dragontale {
 			GameObject thassanor = new GameObject { name = "[Thassanor]" };
 
 			// Add our script dependencies here.
-			thassanor.AddComponent<Thassanor>();
+			thassanor.AddComponent<ByteSprite.Development.DeveloperConsole>();
 
 			DontDestroyOnLoad(thassanor);
 

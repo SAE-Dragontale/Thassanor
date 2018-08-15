@@ -1,13 +1,13 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.1.0
+   Version:			0.1.1
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
+// using UnityEngine.Networking;
 
 public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
@@ -62,7 +62,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	[Space] [Header("Rules of Formations")]
 	[SerializeField] protected bool _usesRoF;       // If false, we're looking at mass chaos as every unit vies for host senpai's rally point.
 
-	[Range(1, 20)]
+	[Range(1, 30)]
 	[SerializeField] protected int _itRoFColumns;   // This controls how many columns are present within the UnitGroup formation.
 	[SerializeField] protected float _flRoFSpread;  // The amount of space in Vector Math between each unit. Horizontal and Vertical.
 

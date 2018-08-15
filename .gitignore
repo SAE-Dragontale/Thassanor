@@ -36,6 +36,11 @@ fmod_editor.log
 */Assets/_First Party/Audio/*.restore
 */Assets/_First Party/Audio/**/*.meta
 
+*/Assets/StreamingAssets/**/*.bank
+*/Assets/StreamingAssets/**/*.bank.meta
+*/Assets/StreamingAssets/**/*.strings.bank
+*/Assets/StreamingAssets/**/*.strings.bank.meta
+
 #################################################################
 # VS/MD solution and project files
 

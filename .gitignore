@@ -20,8 +20,8 @@ sysinfo.txt
 #################################################################
 # FMOD
 
-/Assets/FMODStudioCache.asset
-/Assets/FMODStudioCache.asset.meta
+*/Assets/FMODStudioCache.asset
+*/Assets/FMODStudioCache.asset.meta
 fmod.log
 fmod_editor.log
 
@@ -30,11 +30,11 @@ fmod_editor.log
 *.user/
 *.restore/
 
-Assets/_First Party/Audio/*.user
-Assets/_First Party/Audio/*.unsaved
-Assets/_First Party/Audio/*.cache
-Assets/_First Party/Audio/*.restore
-Assets/_First Party/Audio/*.meta
+*/Assets/_First Party/Audio/*.user
+*/Assets/_First Party/Audio/*.unsaved
+*/Assets/_First Party/Audio/*.cache
+*/Assets/_First Party/Audio/*.restore
+*/Assets/_First Party/Audio/**/*.meta
 
 #################################################################
 # VS/MD solution and project files
@@ -51,13 +51,12 @@ Assets/_First Party/Audio/*.meta
 *.user
 *.userprefs
 *.pidb
-.DS_Store
 
 #################################################################
 # OS generated
 
-.DS_Store
-.DS_Store?
+*_DS_Store
+*.DS_Store
 ._*
 .Spotlight-V100
 .Trashes

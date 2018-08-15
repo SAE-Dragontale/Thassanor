@@ -16,10 +16,11 @@ public class CharSpells : NetworkBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private Transform _trTypingComponent; // This is the base root we'll be working with for the Input System.
-	private TMP_InputField _inputField; // This is the player's Input Field.
+	private Transform _trTypingComponent;	// This is the base root we'll be working with for the Input System.
+	private TMP_InputField _inputField;     // This is the player's Input Field.
+	private TMP_Text _backgroundText;       // Used to show what we think the player is trying to type, or show that another player is typing something.
 
-	private CharVisuals _scVisual; // The Visual Controller script for the character.
+	private CharVisuals _scVisual;			// The Visual Controller script for the character.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -27,6 +28,7 @@ public class CharSpells : NetworkBehaviour {
 
 	// The list of spells in our loadout. These should generally be assigned at runtime, however if they aren't, then the defaults are assigned in the inspector.
 	[SerializeField] private Spell[] _spellLoadout;
+	[SerializeField] private string[] _astSpellPhrases;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -45,7 +47,14 @@ public class CharSpells : NetworkBehaviour {
 	// Run at the start of an object's lifetime.
 	private void Start() {
 
-		// #TODO: Properly assign spells here from loadout.
+		// Aquire Spell Settings from Phil's Implementation.
+		int difficulty = 1;
+
+		// Take out the corresponding "casting string" from each spell in the player's loadout and store it in something easier to manage later on.
+		_astSpellPhrases = new string[_spellLoadout.Length];
+		
+		for (int it = 0; it < _spellLoadout.Length; it++)
+			_astSpellPhrases[it] = _spellLoadout[it]._astSpellPhrase[difficulty];
 
 		// Just as a failsafe, we want to make sure we're always starting with the input field disabled.
 		TypeStatus(false, true);
@@ -57,16 +66,24 @@ public class CharSpells : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Called when we're starting to type. Contains all activation code and executes any runtime requirements.
-	public void TypeStatus(bool toggleOn, bool wasCancelled = false) {
+	public void TypeStatus(bool toggleOn, bool cancelCast = false) {
 
 		ShowInputField(toggleOn);
 		CallCameraZoom(toggleOn);
 		CallAnimationCasting(toggleOn);
 
-		if (!toggleOn && !wasCancelled)
-			CastSpell();
+		if (!toggleOn)
+			return;
+
+		if (cancelCast)
+			return;
+
+		CastSpell();
 
 	}
+
+	/* ----------------------------------------------------------------------------- */
+	// Spellcasting Calls
 
 	// The Prediction Model that we're using to match the player's currently entered text to the closest matching spell in their loadout.
 	public void PredictSpell() {
@@ -74,48 +91,48 @@ public class CharSpells : NetworkBehaviour {
 		if (!hasAuthority)
 			return;
 
-		// #TODO: Predict the spell the player is typing and display it dynamically.
+		// Identify which spell we're trying to cast by comparing our current string to the string for each equipped spell.
+
+		// Display the closest matched string visually for the player to see.
 
 	}
 
 	// Choosing, and then casting the currently selected spell.
 	private void CastSpell() {
 
-		ShowInputField(false);
-		CallCameraZoom(false);
-		CallAnimationCasting(false);
+		// Identify which spell we cast.
+
+
+		// Determine and assign a value to how accurately we typed our spell.
+
+
+		// Assign spell targets.
+
+
+		// Call any functions related to the spell's specific function.
+
+
+		// Finalise casting interface and move back to normal controls.
+		TypeStatus(false, true);
 
 	}
 
 	// Here we evaluate the player's accuracy to what they intended to cast and modify casting time based on this.
-	private void CastEvaluation() {
+	private float CastEvaluation(float fl) {
 
-		// #TODO: Evaluate the validity of the player's input, and then grade the spell based on it.
-
-	}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Visual Script Calls
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	private void CallCameraZoom(bool toggleOn) {
-
-		if (!hasAuthority)
-			return;
-
-		_scVisual.CharacterZoom(toggleOn);
+		return fl;
 
 	}
 
-	private void CallAnimationCasting(bool toggleOn) {
+	/* ----------------------------------------------------------------------------- */
+	// String Comparison Functions
 
-		_scVisual.AnimCasting(toggleOn);
+	// https://blogs.msdn.microsoft.com/toub/2006/05/05/generic-levenshtein-edit-distance-with-c/
+	// https://stackoverflow.com/questions/5859561/getting-the-closest-string-match
+	// https://www.dotnetperls.com/levenshtein (Best)
 
-	}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		InputField Calls
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+	/* ----------------------------------------------------------------------------- */
+	// Input Field Calls
 
 	// We're using this to toggle the User Interface that allows the player to begin typing. Calling ShowInputField is also implicetly calling FocusInputField.
 	public void ShowInputField(bool toggleOn = true) {
@@ -148,6 +165,24 @@ public class CharSpells : NetworkBehaviour {
 			_inputField.DeactivateInputField();
 
 		}
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
+	// Visual Calls.
+
+	private void CallCameraZoom(bool toggleOn) {
+
+		if (!hasAuthority)
+			return;
+
+		_scVisual.CharacterZoom(toggleOn);
+
+	}
+
+	private void CallAnimationCasting(bool toggleOn) {
+
+		_scVisual.AnimCasting(toggleOn);
 
 	}
 

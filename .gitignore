@@ -34,6 +34,7 @@ Assets/_First Party/Audio/*.user
 Assets/_First Party/Audio/*.unsaved
 Assets/_First Party/Audio/*.cache
 Assets/_First Party/Audio/*.restore
+Assets/_First Party/Audio/*.meta
 
 #################################################################
 # VS/MD solution and project files

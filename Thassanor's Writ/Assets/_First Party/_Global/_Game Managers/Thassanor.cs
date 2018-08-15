@@ -1,11 +1,12 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Thassanor.cs
-   Version:			0.0.0
+   Version:			0.1.0
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
+using ByteSprite.Development;
 
 namespace Dragontale {
 
@@ -15,22 +16,30 @@ namespace Dragontale {
 			Instantation
 		// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+		// This script will run at the start of every scene. 
+
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 		static void RuntimeInit() {
 
-			// This script will run at the start of every scene. 
 			// If we have already run in a different scene, we don't want to run again.
 			if (FindObjectOfType<Thassanor>() != null)
 				return;
 
-			// Create an empty gameobject to hold this and any other dependencies.
+			/* ----------------------------------------------------------------------------- */
+			// Critical Dependency Object
 			GameObject thassanor = new GameObject { name = "[Thassanor]" };
-
-			// Add our script dependencies here.
-			thassanor.AddComponent<ByteSprite.Development.DeveloperConsole>();
-
 			DontDestroyOnLoad(thassanor);
 
+			thassanor.AddComponent<Thassanor>();
+			thassanor.AddComponent<DeveloperConsole>();
+
+			/* ----------------------------------------------------------------------------- */
+			// Audio Manager Object
+			GameObject audio = new GameObject { name = "[Audio]" };
+			DontDestroyOnLoad(audio);
+
+			audio.AddComponent<AudioManager>();
+			
 		}
 
 		/* ----------------------------------------------------------------------------- */

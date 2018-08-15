@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharControls.cs
-   Version:			0.4.0
+   Version:			0.5.0
    Description: 	Recieves movement input and controls the player's position.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -58,8 +58,14 @@ public class CharControls : MonoBehaviour {
 
 			// And update the RallyPoint to reside on the opposite facing side of the player. Minions need to know their place!
 			if (_v3Trajectory != Vector3.zero) {
+
+				// Place the initial position.
 				_rallyPoint.position = transform.position - _v3Trajectory.normalized;
 				_rallyPoint.LookAt(2 * _rallyPoint.position - transform.position);
+
+				// Add our adjustments.
+				_rallyPoint.position = _rallyPoint.TransformPoint(_v3RallyDistance);
+
 			}
 
 		}

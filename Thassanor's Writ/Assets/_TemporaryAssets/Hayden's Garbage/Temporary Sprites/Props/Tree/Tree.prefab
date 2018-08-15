@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ebbb41043cc5e4099a95a5d490fe29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __flSplitY: 0.05
+  _flSplitY: 0.05
   _flSplitZ: 0.075
 --- !u!114 &114376713169873594
 MonoBehaviour:

@@ -20,10 +20,10 @@ sysinfo.txt
 #################################################################
 # FMOD
 
-*/FMODStudioCache.asset
-*/FMODStudioCache.asset.meta
-fmod.log
-fmod_editor.log
+/**/FMODStudioCache.asset
+/**/FMODStudioCache.asset.meta
+/**/fmod.log
+/**/fmod_editor.log
 
 *.cache/
 *.unsaved/

@@ -296,12 +296,9 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	}
 
 	// We can choose to diffuse our formation's position's by overwriting this function.
-	protected virtual Vector3 PositionVariance(Vector3 position) {
+	protected virtual Vector3 PositionVariance(Vector3 position) => position;
 
-		return position;
-
-	}
-
+	// And finally, a quick shorthand function to actually move the unit. This is just for clean reading.
 	protected virtual void MoveUnit(int unit, Vector3 moveTo) {
 
 		_everyUnit[unit]._destination.position = PositionVariance(moveTo);

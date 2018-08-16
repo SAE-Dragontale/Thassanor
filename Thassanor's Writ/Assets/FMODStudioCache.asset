@@ -19,33 +19,83 @@ MonoBehaviour:
   - {fileID: 114160146026524728}
   - {fileID: 114877122510863204}
   EditorEvents:
-  - {fileID: 114018046743314810}
-  - {fileID: 114594799254937266}
-  - {fileID: 114031229980687252}
-  - {fileID: 114284467199910712}
-  - {fileID: 114775724672179472}
-  - {fileID: 114988339547453262}
-  - {fileID: 114608207905132890}
-  - {fileID: 114123602371187578}
-  - {fileID: 114982953335217318}
-  - {fileID: 114635357833486236}
-  - {fileID: 114252845691340588}
-  - {fileID: 114883197772227838}
-  - {fileID: 114476295481054532}
-  - {fileID: 114273351751706908}
-  - {fileID: 114485386420633602}
-  - {fileID: 114658002004261834}
-  - {fileID: 114866638845278264}
-  - {fileID: 114020378289447396}
-  - {fileID: 114100205754097122}
-  - {fileID: 114562778172839588}
-  - {fileID: 114106010099619386}
-  - {fileID: 114244837951368408}
-  - {fileID: 114554454648753616}
+  - {fileID: 114292515499709702}
+  - {fileID: 114466002208856484}
+  - {fileID: 114415018689855940}
+  - {fileID: 114575630114362010}
+  - {fileID: 114361926911673960}
+  - {fileID: 114571936795162944}
+  - {fileID: 114006680824236604}
+  - {fileID: 114799293390055172}
+  - {fileID: 114517515961692520}
+  - {fileID: 114100423286756860}
+  - {fileID: 114060448423345324}
+  - {fileID: 114640066908410286}
+  - {fileID: 114771566804509440}
+  - {fileID: 114559012896436860}
+  - {fileID: 114543137494126690}
+  - {fileID: 114503719826484310}
+  - {fileID: 114916362174043252}
+  - {fileID: 114804468383639196}
+  - {fileID: 114107969106280584}
+  - {fileID: 114042647163718920}
+  - {fileID: 114270837826439584}
   MasterBankRef: {fileID: 114680746127412288}
   StringsBankRef: {fileID: 114587489466830354}
-  stringsBankWriteTime: 636700260177273940
+  stringsBankWriteTime: 636700430219666752
   cacheVersion: 2
+--- !u!114 &114006680824236604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Button Click
+  guid: dcbcb0949186644483066ee3c983cd5e
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 930
+--- !u!114 &114011396817968120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO CREDITS
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114015667651708142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO MENU
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114016330485420136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,8 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Credits Soundtrack
   guid: 9891a1cd558444488343d20921abe461
-  Banks:
-  - {fileID: 114680746127412288}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -96,8 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Cast Spell- Resurection
   guid: f951191d295e3f49b27e8c25e16843ac
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -118,8 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Scroll Open
   guid: 4a47d2225978fd469a535c56ef49df32
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -127,6 +174,65 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 200
+--- !u!114 &114037610089216596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Game Intensity
+  Min: 0
+  Max: 4
+  Default: 0
+--- !u!114 &114042647163718920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Girl Grunts
+  guid: c08d505ec8a8df4898da188d09265c84
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 569
+--- !u!114 &114060448423345324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Damage From Soft Spell
+  guid: 3e276c94d223e34187b1c8726ee3801a
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 664
 --- !u!114 &114100205754097122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,8 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game SOundtrack/SOUNDTRACK
   guid: ca22178002d43e4bb4bb2d7fdb566c4c
-  Banks:
-  - {fileID: 114518569786923806}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -152,6 +257,28 @@ MonoBehaviour:
   MinDistance: 720
   MaxDistance: 10000
   Length: 134400
+--- !u!114 &114100423286756860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Female Villager Death
+  guid: 36e557eedc8b1b44943d13257e8b3f52
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 760
 --- !u!114 &114106010099619386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,8 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Scroll Open + Close
   guid: b1f5acffd9ae5e458974164a70d29506
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -174,6 +300,43 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 727
+--- !u!114 &114107969106280584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Footsteps
+  guid: bca8db019ff7944d94853a8d96d58d79
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 437
+--- !u!114 &114117917404142612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Fire Crackle Level
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114120430059601944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,11 +350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\In Menu Soundtrack.bank
-  lastModified: 636700260234785591
+  lastModified: 636700430223371833
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1052224
+    Value: 416
   Exists: 1
 --- !u!114 &114121283034067988
 MonoBehaviour:
@@ -224,8 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Walk Near Battle
   guid: 18592f443a9eb141b2208e5ff25fb4ca
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -292,6 +454,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 828
   Exists: 1
+--- !u!114 &114154856041484026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO GAMEPLAY (From Menu)
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114160146026524728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\In Menu UI.bank
-  lastModified: 636700260252469935
+  lastModified: 636700430224349218
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -333,6 +510,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 57600
+--- !u!114 &114179268132950538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO CREDITS
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114184183379776468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,8 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Female Villager Death
   guid: 36e557eedc8b1b44943d13257e8b3f52
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -417,8 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Player Death
   guid: 70ac28b5faf87740a54eb8dacf1f7d10
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -452,6 +642,43 @@ MonoBehaviour:
   MinDistance: 720
   MaxDistance: 10000
   Length: 134400
+--- !u!114 &114261685827585868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO GAMEPLAY
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114270837826439584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Cast Spell- Resurection
+  guid: f951191d295e3f49b27e8c25e16843ac
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3980
 --- !u!114 &114273351751706908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,8 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Cast Spell- Archers
   guid: ac29eda3be22dd4999d4d38f3984e61b
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -502,8 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Forest Ambience Fire Crackling
   guid: a952274c1ff2bd4e9034d698c4fcb182
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -511,6 +736,35 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 61699
+--- !u!114 &114292515499709702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Soundtrack/SOUNDTRACK
+  guid: ca22178002d43e4bb4bb2d7fdb566c4c
+  Banks:
+  - {fileID: 114518569786923806}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114494256092315284}
+  - {fileID: 114015667651708142}
+  - {fileID: 114365874246110304}
+  - {fileID: 114011396817968120}
+  - {fileID: 114355093158876992}
+  - {fileID: 114333001381920256}
+  - {fileID: 114154856041484026}
+  MinDistance: 720
+  MaxDistance: 10000
+  Length: 336000
 --- !u!114 &114308718616457788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +814,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 862112
   Exists: 1
+--- !u!114 &114333001381920256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114335783117083492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +851,36 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3400
+--- !u!114 &114342181873677616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO MENU
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114355093158876992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: PAUSE GAME
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114355214658163544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +900,43 @@ MonoBehaviour:
   - Name: Desktop
     Value: 4926944
   Exists: 1
+--- !u!114 &114361926911673960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Scroll Open + Close
+  guid: b1f5acffd9ae5e458974164a70d29506
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 727
+--- !u!114 &114365874246110304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Game Intensity
+  Min: 0
+  Max: 4
+  Default: 0
 --- !u!114 &114400731804616990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +985,28 @@ MonoBehaviour:
   - Name: Desktop
     Value: 682
   Exists: 1
+--- !u!114 &114415018689855940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Scroll Open
+  guid: 4a47d2225978fd469a535c56ef49df32
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 200
 --- !u!114 &114426437118222358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +1078,28 @@ MonoBehaviour:
   Min: 0
   Max: 4
   Default: 0
+--- !u!114 &114466002208856484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Scroll Close
+  guid: 2755b77bca444249aeabdde1fe4426a0
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 214
 --- !u!114 &114467909287449468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,8 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Damage From Hard spell
   guid: a9fcc96ad96b9941b2651f04e378e75c
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -781,8 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Cast Spell- Warriors
   guid: b879227cf06f5445a56820ca95fe1081
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -790,6 +1168,51 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2875
+--- !u!114 &114490930029944998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Fire Crackle Level
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114491961928018892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Easter Egg
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114494256092315284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Easter Egg
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114497165932303090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,6 +1232,65 @@ MonoBehaviour:
   - Name: Desktop
     Value: 886400
   Exists: 1
+--- !u!114 &114499193454495190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Fire Crackle Level
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114503719826484310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Damage From Hard spell
+  guid: a9fcc96ad96b9941b2651f04e378e75c
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1460
+--- !u!114 &114517515961692520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Walk Near Battle
+  guid: 18592f443a9eb141b2208e5ff25fb4ca
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1460
 --- !u!114 &114518569786923806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,11 +1304,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\In game Soundtrack.bank
-  lastModified: 636700260217775820
+  lastModified: 636700430223342197
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 6083488
+    Value: 7141600
   Exists: 1
 --- !u!114 &114531310629739166
 MonoBehaviour:
@@ -858,6 +1340,28 @@ MonoBehaviour:
   Min: 0
   Max: 10
   Default: 0
+--- !u!114 &114543137494126690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Zombie Skeleton Grunts
+  guid: 96a6e2a17b04a446a6122b553039b016
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1922
 --- !u!114 &114547508695539390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,8 +1390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Male Villager Death
   guid: 7d1d0bd32be3dd4ca504684413d19971
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -910,6 +1413,28 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114559012896436860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Male Villager Death
+  guid: 7d1d0bd32be3dd4ca504684413d19971
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1171
 --- !u!114 &114560181653498080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,8 +1463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Soundtrack/In Menu Soundtrack
   guid: 37be3c6f4f68bf47a84f1aa40a2ab248
-  Banks:
-  - {fileID: 114120430059601944}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -947,6 +1471,50 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 84920
+--- !u!114 &114571936795162944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Type Writer
+  guid: d2fb31a6b61f2b4b8803028bc47e72be
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 215
+--- !u!114 &114575630114362010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UserInterface/Forest Ambience Fire Crackling
+  guid: a952274c1ff2bd4e9034d698c4fcb182
+  Banks:
+  - {fileID: 114160146026524728}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 61699
 --- !u!114 &114587489466830354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,11 +1527,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\_First Party\Audio\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636700260177273940
+  lastModified: 636700430219666752
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2092
+    Value: 1944
   Exists: 1
 --- !u!114 &114594799254937266
 MonoBehaviour:
@@ -978,8 +1546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Scroll Close
   guid: 2755b77bca444249aeabdde1fe4426a0
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1000,8 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Skeleton Zombie Dying
   guid: 0b5d92b5df8a284db647c6b82137e035
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1044,8 +1610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Fire Crackle For In Game
   guid: 51fa965bdc50e645827e96b2a0664884
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1069,6 +1634,29 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114640066908410286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Fire Crackle For In Game
+  guid: 51fa965bdc50e645827e96b2a0664884
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 114499193454495190}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 50000
 --- !u!114 &114641826960594762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,8 +1763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Footsteps
   guid: bca8db019ff7944d94853a8d96d58d79
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1197,11 +1784,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\Master Bank.bank
-  lastModified: 636700260177176446
+  lastModified: 636700430219636834
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2227424
+    Value: 12192
   Exists: 1
 --- !u!114 &114683540607707874
 MonoBehaviour:
@@ -1318,6 +1905,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3400
+--- !u!114 &114771566804509440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Player Death
+  guid: 70ac28b5faf87740a54eb8dacf1f7d10
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2718
 --- !u!114 &114773183524482128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,8 +1964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Type Writer
   guid: d2fb31a6b61f2b4b8803028bc47e72be
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1386,6 +1994,65 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &114799293390055172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Skeleton Zombie Dying
+  guid: 0b5d92b5df8a284db647c6b82137e035
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 687
+--- !u!114 &114804468383639196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Cast Spell- Warriors
+  guid: b879227cf06f5445a56820ca95fe1081
+  Banks:
+  - {fileID: 114877122510863204}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2875
+--- !u!114 &114833419864813500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114834219039810186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,8 +2132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Girl Grunts
   guid: c08d505ec8a8df4898da188d09265c84
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1502,7 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\hreeve\Documents\GitHub\Thassanor\Thassanor's Writ\Assets\_First
     Party\Audio\Build\Desktop\In Game Sounds.bank
-  lastModified: 636700260187440409
+  lastModified: 636700430221562307
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1521,6 +2187,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Zombie Skeleton Grunts
   guid: 96a6e2a17b04a446a6122b553039b016
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1922
+--- !u!114 &114916362174043252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Cast Spell- Archers
+  guid: ac29eda3be22dd4999d4d38f3984e61b
   Banks:
   - {fileID: 114877122510863204}
   IsStream: 0
@@ -1529,7 +2216,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 1922
+  Length: 3375
 --- !u!114 &114961789469709142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,8 +2271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Game Events/Damage From Soft Spell
   guid: 3e276c94d223e34187b1c8726ee3801a
-  Banks:
-  - {fileID: 114877122510863204}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1606,8 +2292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/In Menu Events/Button Click
   guid: dcbcb0949186644483066ee3c983cd5e
-  Banks:
-  - {fileID: 114160146026524728}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1

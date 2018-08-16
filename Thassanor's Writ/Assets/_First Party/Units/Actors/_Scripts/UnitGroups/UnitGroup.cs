@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.2.0
+   Version:			0.2.1
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -60,7 +60,6 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	}
 
 	[Space] [Header("Rules of Formations")]
-	[SerializeField] protected bool _hasFormation;       // If false, we're looking at mass chaos as every unit vies for host senpai's rally point.
 
 	[Range(1, 30)]
 	[SerializeField] protected int _formationColumns;   // This controls how many columns are present within the UnitGroup formation.
@@ -83,21 +82,13 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[InspectButton]
-	public virtual void AddUnit() {
-		ChangeHealth(_unitStyle._health);
-	}
+	public virtual void AddUnit() => ChangeHealth(_unitStyle._health);
 
 	[InspectButton]
-	public virtual void MinusUnit() {
-		ChangeHealth(-_unitStyle._health);
-	}
+	public virtual void MinusUnit() => ChangeHealth(-_unitStyle._health);
 
 	[InspectButton]
-	public virtual void ChangeHealth(float _flHealthMod) {
-
-		SetHealth = _health + _flHealthMod;
-
-	}
+	public virtual void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
 
@@ -272,7 +263,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 		while (remainingUnits > 0) {
 
 			// We only want to iterate on units row by row. For each row, we add units to a currently selected pile, then place those and go back one row.
-			int selectedUnits = Mathf.Min(remainingUnits, _formationColumns);
+			int selectedUnits = Dragontale.MathFable.Min3(remainingUnits, _formationColumns,1);
 
 			for (int i = 0; i < selectedUnits; i++) {
 
@@ -283,7 +274,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 				float positionAcross = (((selectedUnits - 1) * _formationSpread) / 2 * -1) + (_formationSpread * i);
 				float positionBehind = (currentUnitIndex / _formationColumns) * _formationSpread;
 
-				_everyUnit[i + currentUnitIndex]._destination.position = PositionVariance(_anchor.TransformPoint(positionAcross, 0, positionBehind));
+				MoveUnit(currentUnitIndex + i, PositionVariance(_anchor.TransformPoint(positionAcross, 0, positionBehind)));
 
 			}
 

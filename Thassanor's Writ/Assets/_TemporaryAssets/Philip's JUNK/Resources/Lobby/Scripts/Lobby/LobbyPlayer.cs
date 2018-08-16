@@ -21,6 +21,12 @@ namespace Prototype.NetworkLobby
         public Button waitingPlayerButton;
         public Button removePlayerButton;
 
+        //public GameObject characterDropDown;
+        public Dropdown dropDown;
+        private int dropDownValue;
+        public Text characterSelectText;
+        private string dropDownstring;
+
         public GameObject localIcone;
         public GameObject remoteIcone;
 
@@ -29,6 +35,8 @@ namespace Prototype.NetworkLobby
         public string playerName = "";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
+        [SyncVar(hook = "OnCharacterSelect")]
+        public int playerCharacterIndex = 0;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -64,6 +72,7 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
+            OnCharacterChanged(playerCharacterIndex);
         }
 
         public override void OnStartAuthority()
@@ -73,7 +82,7 @@ namespace Prototype.NetworkLobby
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
-           SetupLocalPlayer();
+            SetupLocalPlayer();
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -90,6 +99,7 @@ namespace Prototype.NetworkLobby
         {
             nameInput.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
+            dropDown.interactable = false;
 
             ChangeReadyButtonColor(NotReadyColor);
 
@@ -122,12 +132,16 @@ namespace Prototype.NetworkLobby
             //we switch from simple name display to name input
             colorButton.interactable = true;
             nameInput.interactable = true;
+            dropDown.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
 
             colorButton.onClick.RemoveAllListeners();
             colorButton.onClick.AddListener(OnColorClicked);
+
+            dropDown.onValueChanged.RemoveAllListeners();
+            dropDown.onValueChanged.AddListener(OnCharacterChanged);
 
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
@@ -195,6 +209,14 @@ namespace Prototype.NetworkLobby
             colorButton.GetComponent<Image>().color = newColor;
         }
 
+        public void OnCharacterSelect(int newIndex)
+        {
+            playerCharacterIndex = newIndex;
+            dropDownValue = dropDown.value;
+            dropDownstring = dropDown.options[dropDownValue].text;
+            characterSelectText.text = dropDownstring;
+        }
+
         //===== UI Handler
 
         //Note that those handler use Command function, as we need to change the value on the server not locally
@@ -212,6 +234,11 @@ namespace Prototype.NetworkLobby
         public void OnNameChanged(string str)
         {
             CmdNameChanged(str);
+        }
+
+        public void OnCharacterChanged(int index)
+        {
+            CmdCharacterChanged(index);
         }
 
         public void OnRemovePlayerClick()
@@ -289,6 +316,12 @@ namespace Prototype.NetworkLobby
         public void CmdNameChanged(string name)
         {
             playerName = name;
+        }
+
+        [Command]
+        public void CmdCharacterChanged(int Index)
+        {
+            playerCharacterIndex = Index;
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

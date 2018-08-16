@@ -32,11 +32,11 @@ namespace Dragontale {
 
 			thassanor.AddComponent<Thassanor>();
 			thassanor.AddComponent<DeveloperConsole>();
-            //thassanor.AddComponent<PlayerData>();
+            thassanor.AddComponent<PlayerData>();
 
-			/* ----------------------------------------------------------------------------- */
-			// Audio Manager Object
-			GameObject audio = new GameObject { name = "[Audio]" };
+            /* ----------------------------------------------------------------------------- */
+            // Audio Manager Object
+            GameObject audio = new GameObject { name = "[Audio]" };
 			DontDestroyOnLoad(audio);
 
 			audio.AddComponent<AudioManager>();

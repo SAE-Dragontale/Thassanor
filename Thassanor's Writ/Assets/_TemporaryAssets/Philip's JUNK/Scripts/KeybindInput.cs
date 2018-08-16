@@ -30,14 +30,13 @@ public class KeybindInput : MonoBehaviour
     {
         filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);/*stores the file path to the json file located
         in the streaming assets folder for use in JSON loading and saving*/
+        thassanor = GameObject.Find("[Thassanor]");
     }
 
     void Start()
     {
         LoadKeyLayout();
         _playerKeyboardHotkeys = ScriptableObject.CreateInstance<KeyboardHotkeys>();
-        thassanor = GameObject.Find("[Thassanor]");
-        playerData = thassanor.GetComponent<PlayerData>();
         /*keys dictionary stores necessary keycodes along with string name which reflects the 
         GameObject Buttons names, this is required to easily store changed keys in OnGui()*/
         keys.Add("ButtonMoveUp", keyAxis[0].positive);
@@ -114,7 +113,15 @@ public class KeybindInput : MonoBehaviour
                 keyAxis[1].negative = loadedData._arrayKeyAxis[1].negative;
 
                 keyCode[2] = loadedData._arrayKeyCode[0];
+
+                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[0].positive = keyAxis[0].positive;
+                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[0].negative = keyAxis[0].negative;
+                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[1].positive = keyAxis[1].positive;
+                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[1].negative = keyAxis[1].negative;
             }
+
+
+            //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyCode[2] = keyCode[2];
         }
         else//if the json file doesn't exist
         {
@@ -130,7 +137,7 @@ public class KeybindInput : MonoBehaviour
         _keyboardHotkeys._arrayKeyAxis[1].negative = keys["ButtonMoveLeft"];
         _keyboardHotkeys._arrayKeyCode[2] = keys["ButtonUnitCommand"];
         _playerKeyboardHotkeys = _keyboardHotkeys;
-        playerData.playerHotkeys = _playerKeyboardHotkeys; 
+        thassanor.GetComponent<PlayerData>().playerHotkeys = _playerKeyboardHotkeys; 
     }
 
     public void SaveKeyLayout()

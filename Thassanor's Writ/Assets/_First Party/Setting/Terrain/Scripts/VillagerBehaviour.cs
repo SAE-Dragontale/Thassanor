@@ -13,8 +13,9 @@ public class VillagerBehaviour : MonoBehaviour {
 
 	public GameObject _townRef;
 	public float _outOfBoundsDistance;
-	[Space]
+    [Space]
 
+    public float _idleTime= 1f;
 	[SerializeField] bool _isIdling = false;
 	[Space]
 
@@ -96,7 +97,7 @@ public class VillagerBehaviour : MonoBehaviour {
 
 			//time spent idling
 			_actionTimer = _actionTimer + Time.deltaTime;
-			if(_actionTimer >= .1f)
+			if(_actionTimer >= _idleTime)
 			{
 				//if out of bounds is true, then move towards the town until im close enough.
 				if(outOfBounds == true)
@@ -218,26 +219,6 @@ public class VillagerBehaviour : MonoBehaviour {
 				_oneShotActionActive = true;
 			}
 			
-		}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-		if(Input.GetKeyDown(KeyCode.E))
-		{
-			_health--;
-			_playerRef = GameObject.FindGameObjectWithTag ("Player");
-
-			
-		}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-	// DEATH
-
-		if(_health <= 0f)
-		{
-			Debug.Log("time to die!");
-			_townRef.GetComponent<VillagerSpawn>().AddPower(1f);
-			Destroy(gameObject);
 		}
 		
 	}

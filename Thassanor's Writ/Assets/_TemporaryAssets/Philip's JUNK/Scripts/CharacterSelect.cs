@@ -14,7 +14,9 @@ public class CharacterSelect : MonoBehaviour{
     public NecromancerStyle Cute;
     public NecromancerStyle Soultry;
 
+    public GameObject thassanor;
     private int sceneIndex;
+    private PlayerData playerData;
 
     //[SerializeField]
     //private GameObject characterControllerObject;
@@ -22,33 +24,34 @@ public class CharacterSelect : MonoBehaviour{
     public CharVisuals playerSprite;
     private bool setCharacterSprite = true;
 
-    NecromancerStyle characterSelection;
-
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        thassanor = GameObject.Find("[Thassanor]");
+        thassanor.GetComponent<PlayerData>().playerCharacter = Soultry;
     }
 
     public void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1 && setCharacterSprite == true)
-        {
-            playerCharacter = GameObject.FindGameObjectWithTag("Player");
-            playerSprite = playerCharacter.GetComponent<CharVisuals>();
-            playerSprite._necromancerStyle = characterSelection;
-            setCharacterSprite = false;
-        }
+        //if(SceneManager.GetActiveScene().buildIndex == 1 && setCharacterSprite == true)
+        //{
+        //    playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        //    playerSprite = playerCharacter.GetComponent<CharVisuals>();
+        //    playerSprite._necromancerStyle = characterSelection;
+        //    setCharacterSprite = false;
+        //}
     }
 
     public void CharacterSelection(int characterIndex)
     {
         if(characterIndex == 0)
         {
-            characterSelection = Soultry;
+            thassanor.GetComponent<PlayerData>().playerCharacter = Soultry;
+            //characterSelection = Soultry;
         }
         else if(characterIndex == 1)
         {
-            characterSelection = Cute;
+            thassanor.GetComponent<PlayerData>().playerCharacter = Cute;
+            //characterSelection = Cute;
         }
     }
 }

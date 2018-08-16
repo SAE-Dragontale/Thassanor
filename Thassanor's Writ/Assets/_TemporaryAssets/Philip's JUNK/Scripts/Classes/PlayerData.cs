@@ -6,21 +6,16 @@
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 using UnityEngine;
 public class PlayerData : MonoBehaviour
-    {
-        public KeyboardHotkeys playerHotkeys;
-        public NecromancerStyle playerCharacter = new NecromancerStyle();
+{
+    public KeyboardHotkeys playerHotkeys;
+    public NecromancerStyle playerCharacter;
 
-        public int typingDifficulty;
+    public int typingDifficulty;
 
-        public int _itSeed;
-        public int _columns;
-        public int _rows;
-        public int _waterSize;
-        public int _townSpread;
-        public int _maxTownCount;
-
-    private void Start()
-    {
-        playerHotkeys = ScriptableObject.CreateInstance<KeyboardHotkeys>();
-    }
+    public int _itSeed;
+    public int _columns;
+    public int _rows;
+    public int _waterSize;
+    public int _townSpread;
+    public int _maxTownCount;
 }

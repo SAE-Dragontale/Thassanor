@@ -13,7 +13,6 @@ public class KeybindInput : MonoBehaviour
 {
     [SerializeField]
     private KeyboardHotkeys _keyboardHotkeys; //base class create by Hayden Reeve which stores necesarry keycodes and provides default keycodes
-    public KeyboardHotkeys _playerKeyboardHotkeys;
     private string gameDataFileName = "data.json"; //name of json file to store keybindings
     private GameData loadedData = new GameData(); //base class created to store info from json file
     private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
@@ -30,13 +29,14 @@ public class KeybindInput : MonoBehaviour
     {
         filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);/*stores the file path to the json file located
         in the streaming assets folder for use in JSON loading and saving*/
-        thassanor = GameObject.Find("[Thassanor]");
     }
 
     void Start()
     {
+        _keyboardHotkeys = new KeyboardHotkeys();
+        thassanor = GameObject.Find("[Thassanor]");
         LoadKeyLayout();
-        _playerKeyboardHotkeys = ScriptableObject.CreateInstance<KeyboardHotkeys>();
+        thassanor.GetComponent<PlayerData>().playerHotkeys = _keyboardHotkeys;
         /*keys dictionary stores necessary keycodes along with string name which reflects the 
         GameObject Buttons names, this is required to easily store changed keys in OnGui()*/
         keys.Add("ButtonMoveUp", keyAxis[0].positive);
@@ -114,10 +114,14 @@ public class KeybindInput : MonoBehaviour
 
                 keyCode[2] = loadedData._arrayKeyCode[0];
 
-                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[0].positive = keyAxis[0].positive;
-                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[0].negative = keyAxis[0].negative;
-                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[1].positive = keyAxis[1].positive;
-                //thassanor.GetComponent<PlayerData>().playerHotkeys._arrayKeyAxis[1].negative = keyAxis[1].negative;
+                _keyboardHotkeys._arrayKeyAxis[0].positive = keyAxis[0].positive;
+                _keyboardHotkeys._arrayKeyAxis[0].negative = keyAxis[0].negative;
+                _keyboardHotkeys._arrayKeyAxis[1].positive = keyAxis[1].positive;
+                _keyboardHotkeys._arrayKeyAxis[1].negative = keyAxis[1].negative;
+
+                _keyboardHotkeys._arrayKeyCode[2] = keyCode[2];
+
+
             }
 
 
@@ -136,8 +140,7 @@ public class KeybindInput : MonoBehaviour
         _keyboardHotkeys._arrayKeyAxis[1].positive = keys["ButtonMoveRight"];
         _keyboardHotkeys._arrayKeyAxis[1].negative = keys["ButtonMoveLeft"];
         _keyboardHotkeys._arrayKeyCode[2] = keys["ButtonUnitCommand"];
-        _playerKeyboardHotkeys = _keyboardHotkeys;
-        thassanor.GetComponent<PlayerData>().playerHotkeys = _playerKeyboardHotkeys; 
+        thassanor.GetComponent<PlayerData>().playerHotkeys = _keyboardHotkeys; 
     }
 
     public void SaveKeyLayout()

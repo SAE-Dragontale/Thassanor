@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2d1d1bceba58a4cac7e33480e372ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprites:
+  _grassSprites:
   - {fileID: 21300000, guid: c8d3797f570a51348a8ef658294afc52, type: 3}
   - {fileID: 21300000, guid: 89bba0f84a0cb9c4abe8423f5709a21b, type: 3}
   - {fileID: 21300000, guid: d59774f5dbb7a0c4cb467eb13259d983, type: 3}
@@ -103,7 +103,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b1cc4da753727741a8d6df5a4c862d6, type: 3}
   - {fileID: 21300000, guid: 8563e983576fdd640a27ad7345c902c8, type: 3}
   - {fileID: 21300000, guid: e1e79b733d8128247b7ffb9096ffa9f3, type: 3}
-  - {fileID: 0}
   - {fileID: 21300000, guid: e568d6585070ac94384e1301b295642b, type: 3}
   - {fileID: 21300000, guid: c0d354f4d28247c45a25ceb97d6792e5, type: 3}
   - {fileID: 21300000, guid: 7cfe8fda6b85e8e459cbe519459149b7, type: 3}
@@ -111,4 +110,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fb479109bad0c5b4fa4c22248d5c6d6e, type: 3}
   - {fileID: 21300000, guid: 218dd7b6dafec244eb497f2450c7368f, type: 3}
   - {fileID: 21300000, guid: 8fad2c703a936634b9c09c8b82c5fe40, type: 3}
-  _itAmountOfGrass: 100
+  amountOfGrass: 50

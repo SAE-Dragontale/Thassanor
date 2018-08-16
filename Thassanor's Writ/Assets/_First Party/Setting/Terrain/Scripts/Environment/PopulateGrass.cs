@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			PopulateGrass.cs
-   Version:			0.1.1
+   Version:			0.2.0
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -13,16 +13,18 @@ public class PopulateGrass : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private MeshRenderer _mr;   // We need our Mesh Renderer to determine the area of the space we have to work with when spawning grass.
+	private MeshRenderer _mr;	// We need our Mesh Renderer to determine the area of the space we have to work with when spawning grass.
 
-	[SerializeField] private Sprite[] _sprites;     // The various grass sprites that we can choose between!
+	[SerializeField] private Sprite[] _grassSprites;    // The various grass sprites that we can choose between!
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[Range(0,1000)]
-	[SerializeField] private int _itAmountOfGrass;	// How many of said prefabs do we want to spawn?
+	[SerializeField] private int amountOfGrass; // How many of said prefabs do we want to spawn?
+
+	private Vector3 _boundary;	// The boundary of our MeshRenderer. This is where we are allowed to spawn.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -39,26 +41,32 @@ public class PopulateGrass : MonoBehaviour {
 	private void Start() {
 
 		// We're taking the Mesh Renderer's "dimensions" in a Vector 3 so we can position our stuff evenly across it.
-		Vector3 v3Size = _mr.bounds.size;
+		_boundary = _mr.bounds.extents;
+		
+		// Spawn random visual-only elements that belong to this object.
+		SpawnGrass();
 
-		// We want to position our grass across the Mesh Renderer.
-		for (int it = _itAmountOfGrass; it > 0; it--) {
+		// We no longer require this script. Delete the evidence, Mr Burns.
+		Destroy(this);
 
-			// Find our our position within the bounds of our Mesh Renderer (surface) and instantiate some grass!
-			Vector3 v3Place = _mr.bounds.center + new Vector3(Random.Range(-v3Size.x/2,v3Size.x/2), 0f, Random.Range(-v3Size.z / 2, v3Size.z / 2));
+	}
+
+	// Find our our position within the bounds of our Mesh Renderer.
+	private Vector3 PlaceWithinBoundary() => _mr.bounds.center + new Vector3(Random.Range(-_boundary.x, _boundary.x), 0f, Random.Range(-_boundary.z, _boundary.z));
+
+	private void SpawnGrass() {
+
+		for (int i = amountOfGrass; i > 0; i--) {
 
 			// Instantiate and set the parent of the GameObject.
 			GameObject grass = new GameObject("Grass");
 			grass.transform.parent = transform;
-			grass.transform.position = v3Place;
+			grass.transform.position = PlaceWithinBoundary();
 
 			// Randomise the sprite that we're giving the blade of grass!
-			grass.AddComponent<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Length - 1)];
+			grass.AddComponent<SpriteRenderer>().sprite = _grassSprites[Random.Range(0, _grassSprites.Length - 1)];
 
 		}
-
-		// We no longer require this script. Delete the evidence, Mr Burns.
-		Destroy(this);
 
 	}
 

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{c09e624c-2dde-412d-9e5a-82b59e4bb0ab}">
         <property name="assetPath">
-            <value>Bass Track (Thassanors lit).wav</value>
+            <value>SoundTracks/Bass Track (Thassanors lit).wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

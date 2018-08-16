@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{f317c32e-1ee9-4254-b8a0-2c8ee740458f}">
         <property name="assetPath">
-            <value>Special Event Soundtrack Thassanors Writ .wav</value>
+            <value>SoundTracks/Special Event Soundtrack Thassanors Writ .wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

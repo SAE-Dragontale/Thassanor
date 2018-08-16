@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{f48b3727-33cd-4683-b090-4ca026138586}">
         <property name="assetPath">
-            <value>UI FIRE CRACKLING.wav</value>
+            <value>FOLEY AND FX/FX/UI FIRE CRACKLING.wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

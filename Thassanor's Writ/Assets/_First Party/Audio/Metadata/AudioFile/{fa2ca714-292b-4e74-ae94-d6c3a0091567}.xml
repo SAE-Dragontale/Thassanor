@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{fa2ca714-292b-4e74-ae94-d6c3a0091567}">
         <property name="assetPath">
-            <value>UI FORREST AMBIENCE.wav</value>
+            <value>FOLEY AND FX/FX/UI FORREST AMBIENCE.wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

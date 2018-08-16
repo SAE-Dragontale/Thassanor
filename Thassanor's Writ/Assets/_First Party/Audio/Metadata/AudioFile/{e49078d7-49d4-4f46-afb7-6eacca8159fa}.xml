@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{e49078d7-49d4-4f46-afb7-6eacca8159fa}">
         <property name="assetPath">
-            <value>Scroll Unwind (1).wav</value>
+            <value>FOLEY AND FX/FX/Scroll Unwind (1).wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

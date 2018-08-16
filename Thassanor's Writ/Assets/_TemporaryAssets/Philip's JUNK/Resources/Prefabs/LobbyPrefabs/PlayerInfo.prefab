@@ -981,6 +981,7 @@ MonoBehaviour:
   waitingPlayerButton: {fileID: 11405868}
   removePlayerButton: {fileID: 11443358}
   dropDown: {fileID: 114459414250694086}
+  characterSelectText: {fileID: 0}
   localIcone: {fileID: 153088}
   remoteIcone: {fileID: 189178}
   playerName: 

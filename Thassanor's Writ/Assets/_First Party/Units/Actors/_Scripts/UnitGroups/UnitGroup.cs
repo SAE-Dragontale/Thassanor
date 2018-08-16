@@ -101,10 +101,10 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[InspectButton]
-	public virtual void AddUnit() => ChangeHealth(_unitStyle._health);
+	public virtual void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
 
 	[InspectButton]
-	public virtual void MinusUnit() => ChangeHealth(-_unitStyle._health);
+	public virtual void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
 
 	[InspectButton]
 	public virtual void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
@@ -137,8 +137,10 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	protected virtual void UnitAddFromHealth(int updatedHealth) {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
-			GameObject unit = Instantiate(_unitTemplate, _anchor);
+
+			GameObject unit = Instantiate(_unitTemplate, transform);
 			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
+
 		}
 
 	}
@@ -148,8 +150,10 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 		// Because Destroy doesn't immediately destroy the object on the current frame, we need to remove it as a parent for the remainder of our code to funciton.
 		for (int i = _everyUnit.Length - updatedHealth; i > 0; i--) {
+
 			_everyUnit[i].transform.parent = null;
 			Destroy(_everyUnit[i].gameObject);
+
 		}
 
 	}

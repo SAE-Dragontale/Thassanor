@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257713436338226}
   - component: {fileID: 114026413701085612}
+  - component: {fileID: 114997189625876996}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503196646880998}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b99a355a1f8e4240b7cf272a581321a, type: 3}
   m_Name: 
@@ -104,6 +105,7 @@ MonoBehaviour:
   _health: 3
   _townRef: {fileID: 0}
   _outOfBoundsDistance: 3
+  _idleTime: 1
   _isIdling: 0
   _isPatroling: 0
   _isFleeing: 0
@@ -121,6 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2eac911622dd943b687cd22a7c9fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114997189625876996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503196646880998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b125870f6aadadd4696f9f5815bd30f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destination: {fileID: 0}
+  _unitState: 0
 --- !u!212 &212816410104114992
 SpriteRenderer:
   m_ObjectHideFlags: 1

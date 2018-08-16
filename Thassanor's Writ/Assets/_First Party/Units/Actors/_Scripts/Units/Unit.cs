@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.3.0
+   Version:			0.3.1
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -14,8 +14,8 @@ public class Unit : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
-	[HideInInspector] public Transform _trDestination;	// Accessed by the UnitGroup in order to direct our unit to a formation.
-	protected Vector3 _v3PosToMove;						// The last _trDestination.position that we were instructed to move towards.
+	[HideInInspector] public Transform _destination;	// Accessed by the UnitGroup in order to direct our unit to a formation.
+	protected Vector3 _lastDestination;					// The last _trDestination.position that we were instructed to move towards.
 
 	// These references are decoupled as a child from this script, however for all intents and purposes they are this script's components.
 	protected Transform _tr;
@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour {
 	protected void Awake() {
 
 		// Access and save the transform of our Destination.
-		_trDestination = transform.Find("Destination").GetComponent<Transform>();
+		_destination = transform.Find("Destination").GetComponent<Transform>();
 
 		// Access and save the transform of our Unit as visualised.
 		_tr = transform.Find("Sprite").GetComponent<Transform>();
@@ -116,11 +116,11 @@ public class Unit : MonoBehaviour {
 		AnimatorMovement();
 
 		// If our new location is the same as our old location, don't run.
-		if (_v3PosToMove == _trDestination.position)
+		if (_lastDestination == _destination.position)
 			return;
 
-		_ai?.SetDestination(_trDestination.position);
-		_v3PosToMove = _trDestination.position;			
+		_ai?.SetDestination(_destination.position);
+		_lastDestination = _destination.position;			
 
 	}
 

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.1.1
+   Version:			0.2.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -18,16 +18,16 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	[Space] [Header("References")]
 
 	[Tooltip("The host is the transform that the UnitGroup is associated with. This can be a player, actor, or even a terrain set.")]
-	[SerializeField] protected Transform _trHost;			// The target the group is following.
-	protected Vector3 _v3LastPos = new Vector3(0, 0, 0);	// The last position of the target host. Check against to summise whether we've moved.
-
-	public Transform _TrHost {
-		set { _trHost = value?.Find("RallyPoint") ?? value; }
+	[SerializeField] protected Transform _anchor;		// The target the group is following.
+	public Transform _Anchor {
+		set { _anchor = value?.Find("RallyPoint") ?? value; }
 	}
 
+	protected Vector3 _lastPosition = new Vector3();		// The last position of the target host. Check against to summise whether we've moved.
+
 	[SerializeField] protected UnitStyle _unitStyle;	// The type of unit that we contain.
-	[SerializeField] protected GameObject _goUnit;		// The basic unit template.
-	[SerializeField] protected Unit[] _ascUnits;		// The units within the group.
+	[SerializeField] protected GameObject _unitTemplate;		// The basic unit template.
+	[SerializeField] protected Unit[] _everyUnit;		// The units within the group.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Method Variables
@@ -39,7 +39,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 		Active      // Stand at attention and engage all hostiles.
 	};
 
-	protected IEnumerator _ieLastPos;   // Reclusive reference for UpdateLastPos().
+	protected IEnumerator setMyLastPosition;   // Reclusive reference for UpdateLastPos().
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Data Variables
@@ -48,32 +48,27 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	[Space] [Header("Variables")]
 	[SerializeField] protected GroupState _groupState;  // The current state of the group.
 
-	[SerializeField] protected bool _isKillable;    // Whether the group will Destroy() if it has no units.
+	[SerializeField] protected bool _permanent;    // Whether the group will Destroy() if it has no units.
 
 	// Health functionality for UnitGroups.
-	/* [SyncVar] */ [SerializeField] protected float _flHealth;
+	/* [SyncVar] */ [SerializeField] protected float _health;
 	public float SetHealth {
 		set {
-			_flHealth = value;
+			_health = value;
 			UnitsFromHealth();
 		}
 	}
 
 	[Space] [Header("Rules of Formations")]
-	[SerializeField] protected bool _usesRoF;       // If false, we're looking at mass chaos as every unit vies for host senpai's rally point.
+	[SerializeField] protected bool _hasFormation;       // If false, we're looking at mass chaos as every unit vies for host senpai's rally point.
 
 	[Range(1, 30)]
-	[SerializeField] protected int _itRoFColumns;   // This controls how many columns are present within the UnitGroup formation.
-	[SerializeField] protected float _flRoFSpread;  // The amount of space in Vector Math between each unit. Horizontal and Vertical.
+	[SerializeField] protected int _formationColumns;   // This controls how many columns are present within the UnitGroup formation.
+	[SerializeField] protected float _formationSpread;  // The amount of space in Vector Math between each unit. Horizontal and Vertical.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Called before Start().
-	protected virtual void Awake() {
-
-	}
 
 	// Called before Update().
 	protected virtual void Start() {
@@ -89,18 +84,18 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 	[InspectButton]
 	public virtual void AddUnit() {
-		ChangeHealth(_unitStyle._flHealth);
+		ChangeHealth(_unitStyle._health);
 	}
 
 	[InspectButton]
 	public virtual void MinusUnit() {
-		ChangeHealth(-_unitStyle._flHealth);
+		ChangeHealth(-_unitStyle._health);
 	}
 
 	[InspectButton]
 	public virtual void ChangeHealth(float _flHealthMod) {
 
-		SetHealth = _flHealth + _flHealthMod;
+		SetHealth = _health + _flHealthMod;
 
 	}
 
@@ -110,30 +105,30 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	public virtual void UnitsFromHealth() {
 
 		// Health should not drop below zero.
-		_flHealth = Mathf.Max(_flHealth, 0);
+		_health = Mathf.Max(_health, 0);
 		
 		// How many units does our health indicate that we should have?
-		int itNewHealth = Mathf.CeilToInt(_flHealth / _unitStyle._flHealth);
+		int updatedHealth = Mathf.CeilToInt(_health / _unitStyle._health);
 
 		// If our total health pool exceeds the maximum health pool of our units...
-		if (itNewHealth  > _ascUnits.Length)
-			AddUnits(itNewHealth);
+		if (updatedHealth  > _everyUnit.Length)
+			AddUnits(updatedHealth);
 
 		// If our total health pool leaves a unit without any remaining health...
-		else if (itNewHealth < _ascUnits.Length)
-			MinusUnits(itNewHealth);
+		else if (updatedHealth < _everyUnit.Length)
+			MinusUnits(updatedHealth);
 
 		// Update our UnitList with the hierarchy components.
-		_ascUnits = GetComponentsInChildren<Unit>();
+		_everyUnit = GetComponentsInChildren<Unit>();
 
 	}
 
 	// We need to spawn units here then. This doesn't need networking commands because it is implicitly networked with a SyncVar.
-	protected virtual void AddUnits(int itNewHealth) {
+	protected virtual void AddUnits(int updatedHealth) {
 
-		for (int it = itNewHealth - _ascUnits.Length; it > 0; it--) {
-			Instantiate(_goUnit, transform);
-			_goUnit.GetComponent<Unit>()._UnitStyle = _unitStyle;
+		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
+			Instantiate(_unitTemplate, transform);
+			_unitTemplate.GetComponent<Unit>()._UnitStyle = _unitStyle;
 		}
 
 	}
@@ -141,8 +136,10 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// We need to despawn units instead, which once again is implicitly networked.
 	protected virtual void MinusUnits(int itNewHealth) {
 
-		for (int it = _ascUnits.Length - itNewHealth; it > 0; it--) {
-			DestroyImmediate(_ascUnits[it].gameObject);
+		// Because Destroy doesn't immediately destroy the object on the current frame, we need to remove it as a parent for the remainder of our code to funciton.
+		for (int i = _everyUnit.Length - itNewHealth; i > 0; i--) {
+			_everyUnit[i].transform.parent = null;
+			Destroy(_everyUnit[i].gameObject);
 		}
 
 	}
@@ -154,13 +151,13 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	public virtual void UnitsFromChildren() {
 
 		// Update our UnitList with the hierarchy components.
-		_ascUnits = GetComponentsInChildren<Unit>();
+		_everyUnit = GetComponentsInChildren<Unit>();
 
 		// Load in our initial health value.
-		_flHealth = _unitStyle._flHealth * _ascUnits.Length;
+		_health = _unitStyle._health * _everyUnit.Length;
 
 		// Then iterate through our units and apply our current style to each unit.
-		foreach (Unit unit in _ascUnits)
+		foreach (Unit unit in _everyUnit)
 			unit._UnitStyle = _unitStyle;
 
 	}
@@ -172,15 +169,13 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// Standard GroupCycle behaviour. Override functions that extend this cycle to change functionality.
 	protected void Update() {
 
-		if (_flHealth <= 0) {
-			if (_isKillable) {
+		// If we have no health remaining, then stop running functionality and 
+		if (_health <= 0) {
 
-				RemoveGroup();
-				return;
-			}
+			if (_permanent) { return; } 
+			else { RemoveGroup(); }
+			
 		}
-
-		NewPosition();
 
 		switch (_groupState) {
 
@@ -205,27 +200,20 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 	protected virtual void BehaviourLoopActive() {
 
-		NewPosition();
+		if (NeedToUpdatePosition(_anchor.position))
+			RulesOfFormation();
 
 	}
 
 	/* ----------------------------------------------------------------------------- */
 	// Unit priority: All units gain 'freedom of movement' within the Host's Area of Influence.
 
-	protected virtual void BehaviourLoopIdle() {
-
-		// No functionality here.
-
-	}
+	protected virtual void BehaviourLoopIdle() { }
 
 	/* ----------------------------------------------------------------------------- */
 	// No priority: All units gain 'freedom of movement' and will not engage in combat.
 
-	protected virtual void BehaviourLoopPassive() {
-
-		// No functionality here.
-
-	}
+	protected virtual void BehaviourLoopPassive() { }
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Functions
@@ -241,88 +229,82 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
-	// Move our group towards the Host's Rally Point and adjust our formation as required.
+	// Before we do anything complicated, check whether we even need to update our position to start with.
 
-	protected void NewPosition() {
+	protected bool NeedToUpdatePosition(Vector3 positionToCheck) {
 
 		// Log our last position.
-		if (_ieLastPos == null)
-			StartCoroutine(_ieLastPos = UpdateLastPos(_trHost.position));
+		if (setMyLastPosition == null)
+			StartCoroutine(setMyLastPosition = UpdateLastPos(positionToCheck));
 
 		// If we are at the same location as before, we don't need to update our unit's destinations.
-		if (_trHost.position == _v3LastPos)
-			return;
+		if (positionToCheck == _lastPosition)
+			return false;
 
 		// If we have no units, we don't need to organise anyone.
-		if (_ascUnits.Length == 0)
-			return;
+		if (_everyUnit.Length == 0)
+			return false;
 
-		// And finally, now we're sure we need to update our position, we choose our destination style.
-		if (_usesRoF)
-			RulesOfFormation();
-		else
-			RulesOfChaos();
+		return true;
 
 	}
 
+	// We use this to determine whether we should update the UnitGroup Destinations, or instead return to be more efficient.
+	protected IEnumerator UpdateLastPos(Vector3 lastPosition) {
+
+		yield return new WaitForFixedUpdate();
+
+		_lastPosition = lastPosition;
+		setMyLastPosition = null;
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
+	// Move our group towards the Host's Rally Point and adjust our formation as required.
 	// The "Rules of Formation" provide a framework position for the units to move to as an army. They'll be arrayed in columns and rows.
+
 	protected virtual void RulesOfFormation() {
 
-		int itRemainingUnits = _ascUnits.Length; // The units that are currently unpositioned in our iteration.
-		int itCurrentUnitIndex = 0;             // How many units we've positioned so far by array index.
+		int remainingUnits = _everyUnit.Length; // The units that are currently unpositioned in our iteration.
+		int currentUnitIndex = 0;             // How many units we've positioned so far by array index.
 
 		// As long as we've still got unpositioned units, we should continue iterating based on the number of units we have left.
-		while (itRemainingUnits > 0) {
+		while (remainingUnits > 0) {
 
 			// We only want to iterate on units row by row. For each row, we add units to a currently selected pile, then place those and go back one row.
-			int itSelectedUnits = Mathf.Min(itRemainingUnits, _itRoFColumns);
+			int selectedUnits = Mathf.Min(remainingUnits, _formationColumns);
 
-			for (int it = 0; it < itSelectedUnits; it++) {
+			for (int i = 0; i < selectedUnits; i++) {
 
 				// First, we need to space each unit out evenly, so we take the total units, divide it in half, and add our array position as an offset.
 				// Then, we do basically the same thing backwards by dividing the amount of rows we already have and offsetting us by Spread.
 				// Finally, we need to add our calculated vector position to the local vector of the Rally Point to add rotational values easily.
 
-				float flPlaceAcross = (((itSelectedUnits - 1) * _flRoFSpread) / 2 * -1) + (_flRoFSpread * it);
-				float flPlaceBehind = (itCurrentUnitIndex / _itRoFColumns) * _flRoFSpread;
+				float positionAcross = (((selectedUnits - 1) * _formationSpread) / 2 * -1) + (_formationSpread * i);
+				float positionBehind = (currentUnitIndex / _formationColumns) * _formationSpread;
 
-				_ascUnits[it + itCurrentUnitIndex]._trDestination.position = PositionVariance(_trHost.TransformPoint(flPlaceAcross, 0, flPlaceBehind));
+				_everyUnit[i + currentUnitIndex]._destination.position = PositionVariance(_anchor.TransformPoint(positionAcross, 0, positionBehind));
 
 			}
 
 			// We've now placed these units, so shelve them for the meantime and increment how many loops we've performed.
-			itRemainingUnits -= itSelectedUnits;
-			itCurrentUnitIndex += itSelectedUnits;
+			remainingUnits -= selectedUnits;
+			currentUnitIndex += selectedUnits;
 
 		}
-
-	}
-
-	// For some reason this unit does not care for formation and will jam themselves as close as possible to the destination as they can.
-	protected virtual void RulesOfChaos() {
-
-		foreach (Unit unit in _ascUnits) {
-
-			unit._trDestination.position = PositionVariance(_trHost.TransformPoint(0,0,0));
-
-		}
-
-	}
-
-	// We use this to determine whether we should update the UnitGroup Destinations, or instead return to be more efficient.
-	protected IEnumerator UpdateLastPos(Vector3 v3) {
-
-		yield return new WaitForFixedUpdate();
-
-		_v3LastPos = v3;
-		_ieLastPos = null;
 
 	}
 
 	// We can choose to diffuse our formation's position's by overwriting this function.
-	protected virtual Vector3 PositionVariance(Vector3 v3) {
+	protected virtual Vector3 PositionVariance(Vector3 position) {
 
-		return v3;
+		return position;
+
+	}
+
+	protected virtual void MoveUnit(int unit, Vector3 moveTo) {
+
+		_everyUnit[unit]._destination.position = PositionVariance(moveTo);
 
 	}
 

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Toolkit.cs
-   Version:			0.1.2
+   Version:			0.1.3
    Description: 	Just some useful functions that I needed. Descriptions are labled within.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -57,7 +57,7 @@ namespace Dragontale {
 			// Declarations
 			int statementLength = statement.Length;
 			int comparisonLength = comparison.Length;
-			int[,] eachComparison = new int[statementLength + 1, comparisonLength + 1]; // Each possible combination of changes that we could make.
+			int[,] everyComparison = new int[statementLength + 1, comparisonLength + 1]; // Each possible combination of changes that we could make.
 
 			// Check for zero'd values. If a value is zero, the result must be the length of the compared string.
 			if (statementLength == 0)
@@ -67,8 +67,8 @@ namespace Dragontale {
 				return statementLength;
 
 			// Initialise the two dimensional array with default values.
-			for (int i = 0; i <= statementLength; eachComparison[i, 0] = i++) {}
-			for (int i = 0; i <= comparisonLength; eachComparison[0, i] = i++) {}
+			for (int i = 0; i <= statementLength; everyComparison[i, 0] = i++) {}
+			for (int i = 0; i <= comparisonLength; everyComparison[0, i] = i++) {}
 
 			// This produces the following effect:
 
@@ -87,13 +87,13 @@ namespace Dragontale {
 
 					int cost = (comparison[y - 1] == statement[x - 1]) ? 0 : 1;
 
-					eachComparison[x, y] = MathFable.Min3( eachComparison[x - 1, y] + 1, eachComparison[x, y - 1] + 1, eachComparison[x - 1, y - 1] + cost );
+					everyComparison[x, y] = MathFable.Min3( everyComparison[x - 1, y] + 1, everyComparison[x, y - 1] + 1, everyComparison[x - 1, y - 1] + cost );
 					
 				}
 			}
 
 			// After we've finished, we want to return our 'Conclusion' of [stringLength, stringLength] as it contains our Gypsy Russian Magic.
-			return eachComparison[statementLength, comparisonLength];
+			return everyComparison[statementLength, comparisonLength];
 
 		}
 

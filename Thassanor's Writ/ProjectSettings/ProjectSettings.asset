@@ -669,9 +669,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 3
-  cloudProjectId: 
-  projectName: Template_3D
-  organizationId: 
+  cloudProjectId: a215b74c-bb20-4e3d-9775-083115b35940
+  projectName: Thassanor's Writ (1)
+  organizationId: hajimi
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

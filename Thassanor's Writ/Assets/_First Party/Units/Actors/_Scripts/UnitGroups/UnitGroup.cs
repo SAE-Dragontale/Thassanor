@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.2.1
+   Version:			0.3.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -63,6 +63,8 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 	[Range(1, 30)]
 	[SerializeField] protected int _formationColumns;   // This controls how many columns are present within the UnitGroup formation.
+
+	[Range(0.5f,3)]
 	[SerializeField] protected float _formationSpread;  // The amount of space in Vector Math between each unit. Horizontal and Vertical.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -72,8 +74,25 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// Called before Update().
 	protected virtual void Start() {
 
+		// If shit is broken, fucking warn me please.
+		LogErrorsOnStart();
+
 		// If a UnitGroup starts pre-initialised, we have to recognise this.
 		UnitsFromChildren();
+
+	}
+
+	// Just make a few quick checks to safeguard us from err.
+	protected virtual void LogErrorsOnStart() {
+		
+		if (_unitStyle._health == 0)
+			Debug.LogError($"The health value for your UnitStyle cannot be {_unitStyle._health}.");
+
+		if (_formationColumns == 0)
+			Debug.LogError($"_formationsColumns cannot be {_formationColumns++}. Changed to {_formationColumns}.");
+
+		if (_formationSpread == 0)
+			Debug.LogError($"It is not wise to have a Rules of Formation spread value of {_formationSpread}.");
 
 	}
 
@@ -103,11 +122,11 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 		// If our total health pool exceeds the maximum health pool of our units...
 		if (updatedHealth  > _everyUnit.Length)
-			AddUnits(updatedHealth);
+			UnitAddFromHealth(updatedHealth);
 
 		// If our total health pool leaves a unit without any remaining health...
 		else if (updatedHealth < _everyUnit.Length)
-			MinusUnits(updatedHealth);
+			UnitSubtractFromHealth(updatedHealth);
 
 		// Update our UnitList with the hierarchy components.
 		_everyUnit = GetComponentsInChildren<Unit>();
@@ -115,20 +134,20 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	}
 
 	// We need to spawn units here then. This doesn't need networking commands because it is implicitly networked with a SyncVar.
-	protected virtual void AddUnits(int updatedHealth) {
+	protected virtual void UnitAddFromHealth(int updatedHealth) {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
-			Instantiate(_unitTemplate, transform);
-			_unitTemplate.GetComponent<Unit>()._UnitStyle = _unitStyle;
+			GameObject unit = Instantiate(_unitTemplate, _anchor);
+			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
 		}
 
 	}
 
 	// We need to despawn units instead, which once again is implicitly networked.
-	protected virtual void MinusUnits(int itNewHealth) {
+	protected virtual void UnitSubtractFromHealth(int updatedHealth) {
 
 		// Because Destroy doesn't immediately destroy the object on the current frame, we need to remove it as a parent for the remainder of our code to funciton.
-		for (int i = _everyUnit.Length - itNewHealth; i > 0; i--) {
+		for (int i = _everyUnit.Length - updatedHealth; i > 0; i--) {
 			_everyUnit[i].transform.parent = null;
 			Destroy(_everyUnit[i].gameObject);
 		}
@@ -263,7 +282,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 		while (remainingUnits > 0) {
 
 			// We only want to iterate on units row by row. For each row, we add units to a currently selected pile, then place those and go back one row.
-			int selectedUnits = Dragontale.MathFable.Min3(remainingUnits, _formationColumns,1);
+			int selectedUnits = Mathf.Min(remainingUnits, _formationColumns);
 
 			for (int i = 0; i < selectedUnits; i++) {
 

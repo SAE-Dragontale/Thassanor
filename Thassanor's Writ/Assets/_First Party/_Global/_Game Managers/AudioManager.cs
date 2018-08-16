@@ -1,12 +1,13 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			MusicManager.cs
-   Version:			0.1.0
+   Version:			0.1.1
    Description: 	For managing all audio components within the game. All audio should be called from this script.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
 using FMOD.Studio;
+using FMODUnity;
 
 public class AudioManager : MonoBehaviour {
 
@@ -17,6 +18,10 @@ public class AudioManager : MonoBehaviour {
 	EventInstance mainTheme;
 	ParameterInstance mainThemeHealth;
 	ParameterInstance mainThemeIntensity;
+	ParameterInstance mainThemeSpecialEvent;
+	ParameterInstance mainThemeMenu;
+	ParameterInstance mainThemeCredits;
+	ParameterInstance mainThemeGameplay;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -32,9 +37,14 @@ public class AudioManager : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		mainTheme = FMODUnity.RuntimeManager.CreateInstance("event:/In Game SOundtrack/SOUNDTRACK");
+		mainTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Soundtrack/SOUNDTRACK");
 		mainTheme.getParameterByIndex(0, out mainThemeHealth);
-		mainTheme.getParameterByIndex(2, out mainThemeIntensity);
+		mainTheme.getParameterByIndex(1, out mainThemeIntensity);
+		mainTheme.getParameterByIndex(2, out mainThemeSpecialEvent);
+		mainTheme.getParameterByIndex(3, out mainThemeMenu);
+		mainTheme.getParameterByIndex(4, out mainThemeCredits);
+		mainTheme.getParameterByIndex(5, out mainThemeGameplay);
+
 
 	}
 
@@ -42,6 +52,7 @@ public class AudioManager : MonoBehaviour {
 	private void Start () {
 
 		mainTheme.start();
+		mainThemeGameplay.setValue(1);
 
 	}
 

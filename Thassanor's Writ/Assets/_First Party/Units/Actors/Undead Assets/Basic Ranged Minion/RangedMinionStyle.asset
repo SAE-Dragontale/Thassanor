@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28914483f8cd0a642b6e98aaca44acfe, type: 3}
   m_Name: RangedMinionStyle
   m_EditorClassIdentifier: 
-  _stUnitName: Ranged Skeleton
+  _unitName: Skeletal Archer
   _animatorController: {fileID: 9100000, guid: b9116b04fcf5c4342b2a914be8542feb, type: 2}
-  _flHealth: 10
+  _health: 10

@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28914483f8cd0a642b6e98aaca44acfe, type: 3}
   m_Name: LargeMinionStyle
   m_EditorClassIdentifier: 
-  _stUnitName: 
+  _unitName: Zombie Behemoth
   _animatorController: {fileID: 0}
+  _health: 100

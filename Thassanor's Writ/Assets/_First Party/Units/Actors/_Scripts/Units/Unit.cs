@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.3.1
+   Version:			0.3.2
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -149,9 +149,6 @@ public class Unit : MonoBehaviour {
 
 		// Then we'll use the "overall speed" of the velocity and convert it roughly into a percentage.
 		_an.SetFloat("flVelocity01", Dragontale.MathFable.Remap( _ai.velocity.sqrMagnitude, 0f, 100f, 0f, 1.5f));
-
-		// In reality, we actually want to use a remap function, but it's not worth the processing power here. MAYBE IT IS.
-		// _an.SetFloat("flVelocity01", Mathf.Clamp(_ai.velocity.sqrMagnitude / 50f, 0f, 1.5f));
 
 	}
 

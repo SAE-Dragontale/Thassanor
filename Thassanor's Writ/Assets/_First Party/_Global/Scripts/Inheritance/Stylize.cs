@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Stylize.cs
-   Version:			0.0.1
+   Version:			0.0.2
    Description: 	The Style-Container parent that holds the most basic information about a sprite-switch.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -14,7 +14,7 @@ public abstract class Stylize : ScriptableObject {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[Tooltip("The flavour name of the unit.")]
-	public string _stUnitName;
+	public string _unitName;
 
 	[Tooltip("The animator that this character uses.")]
 	public RuntimeAnimatorController _animatorController;

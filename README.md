@@ -1,2 +1,2 @@
 # Thassanor
-A CIU230 Major Project Video Game at SAE Institute. A Necromancing Type-Hell, Type-Spell,  Real Time Strategy.
+A CIU330 Major Project Video Game at SAE Institute. Thassanor calls, mortal. Do you dare answer the call of a Necromancing Type-Hell, Type-Spell,  Real Time Strategy?

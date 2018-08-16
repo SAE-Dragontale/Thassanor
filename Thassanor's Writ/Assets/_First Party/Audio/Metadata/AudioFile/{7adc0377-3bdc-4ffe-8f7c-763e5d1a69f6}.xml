@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{7adc0377-3bdc-4ffe-8f7c-763e5d1a69f6}">
+        <property name="assetPath">
+            <value>FOLEY AND FX/FX/Man Death 2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.6100000000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1678f974-dcac-4f1a-90c3-4a09c7722ec8}</destination>
+        </relationship>
+    </object>
+</objects>

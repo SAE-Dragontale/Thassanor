@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{bd99e585-2686-4d83-b1ba-48a2d8f73690}">
         <property name="assetPath">
-            <value>Background music Bounce DEMO.aif</value>
+            <value>SoundTracks/Background music Bounce DEMO.aif</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

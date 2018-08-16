@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="AudioFile" id="{835cbc60-c148-442c-91e9-a6f0a7c5a3b7}">
         <property name="assetPath">
-            <value>Reverse mixtape.mp3</value>
+            <value>FOLEY AND FX/FX/Reverse mixtape.mp3</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

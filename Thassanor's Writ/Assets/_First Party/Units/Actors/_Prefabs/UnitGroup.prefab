@@ -51,13 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de2e92779ce0b74f828c91e8dbeaae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trHost: {fileID: 0}
-  _unitStyle: {fileID: 0}
-  _goUnit: {fileID: 1207368439219888, guid: 0048ee6cd0666444caa4cac93955b020, type: 2}
-  _ascUnits: []
+  _anchor: {fileID: 4075531041038800}
+  _unitStyle: {fileID: 11400000, guid: 8a5c2a7ef68c8c9459a4800a37e44baa, type: 2}
+  _unitTemplate: {fileID: 1207368439219888, guid: 0048ee6cd0666444caa4cac93955b020,
+    type: 2}
+  _everyUnit: []
   _groupState: 2
-  _isKillable: 0
-  _flHealth: 0
-  _usesRoF: 1
-  _itRoFColumns: 4
-  _flRoFSpread: 0.75
+  _permanent: 0
+  _health: 0
+  _formationColumns: 1
+  _formationSpread: 0

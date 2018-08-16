@@ -1,8 +1,8 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			MusicManager.cs
-   Version:			0.0.0
-   Description: 	
+   Version:			0.1.0
+   Description: 	For managing all audio components within the game. All audio should be called from this script.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
@@ -15,13 +15,15 @@ public class AudioManager : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	EventInstance mainTheme;
-
+	ParameterInstance mainThemeHealth;
+	ParameterInstance mainThemeIntensity;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-
+	[SerializeField] [Range(0, 4)] int gameIntensity;
+	[SerializeField] [Range(0, 100)] float playerHealth;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -29,12 +31,18 @@ public class AudioManager : MonoBehaviour {
 
 	// Called before Start().
 	private void Awake() {
-		
+
+		mainTheme = FMODUnity.RuntimeManager.CreateInstance("event:/In Game SOundtrack/SOUNDTRACK");
+		mainTheme.getParameterByIndex(0, out mainThemeHealth);
+		mainTheme.getParameterByIndex(2, out mainThemeIntensity);
+
 	}
 
 	// Called before class calls or functions.
 	private void Start () {
-		
+
+		mainTheme.start();
+
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //

@@ -63,13 +63,6 @@ public class Unit : MonoBehaviour {
 
 	}
 
-	// Called before Update().
-	protected void Start () {
-
-		
-
-	}
-
 	// Assign our Visual UnitStyles to our character.
 	protected void LoadUnitStyle() {
 

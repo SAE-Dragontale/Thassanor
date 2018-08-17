@@ -9,4 +9,5 @@ public class PlayerData : MonoBehaviour
 {
     public KeyboardHotkeys playerHotkeys;
     public NecromancerStyle playerCharacter;
+	public Spell[] playerSpells;
 }

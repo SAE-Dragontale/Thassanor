@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.3.3
+   Version:			0.4.0
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -19,7 +19,14 @@ public class CharVisuals : MonoBehaviour {
 	private CameraPlayer _cp;
 
 	[Space] [Header("References")]
-	[SerializeField] public NecromancerStyle _necromancerStyle;
+	[SerializeField] private NecromancerStyle _necromancerStyle;
+	public NecromancerStyle _NecromancerStyle {
+		set {
+			_necromancerStyle = value;
+			LoadStyle();
+		}
+	}
+
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -51,9 +58,12 @@ public class CharVisuals : MonoBehaviour {
 				
 	}
 
-	private void Start() {
+	// Called before Update().
+	private void Start() => LoadStyle();
 
-		// Assign Style to Character.
+	// Assign Style to Character.
+	private void LoadStyle() {
+
 		_an.runtimeAnimatorController = _necromancerStyle._animatorController;
 
 	}

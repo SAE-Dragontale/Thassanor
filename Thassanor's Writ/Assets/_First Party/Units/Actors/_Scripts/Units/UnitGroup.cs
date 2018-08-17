@@ -30,6 +30,13 @@ public class UnitGroup : NetworkBehaviour {
 	[SerializeField] protected GameObject _unitTemplate;	// The basic unit template.
 	[SerializeField] protected Unit[] _everyUnit;			// The units within the group.
 
+	public UnitStyle _UnitStyle {
+		set {
+			_unitStyle = value;
+			UnitsFromChildren();
+		}
+	}
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Method Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -137,7 +144,7 @@ public class UnitGroup : NetworkBehaviour {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
 
-			GameObject unit = Instantiate(_unitTemplate, _anchor);
+			GameObject unit = Instantiate(_unitTemplate, transform, _anchor);
 			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
 
 		}

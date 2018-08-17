@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			MusicManager.cs
-   Version:			0.2.0
+   Version:			0.3.0
    Description: 	For managing all audio components within the game. All audio should be called from this script.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -18,10 +18,8 @@ public class AudioManager : MonoBehaviour {
 	EventInstance mainTheme;
 	ParameterInstance mainThemeHealth;
 	ParameterInstance mainThemeIntensity;
-	ParameterInstance mainThemeSpecialEvent;
-	ParameterInstance mainThemeMenu;
-	ParameterInstance mainThemeCredits;
-	ParameterInstance mainThemeGameplay;
+	ParameterInstance mainThemePausing;
+	ParameterInstance mainThemeScene;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -37,24 +35,24 @@ public class AudioManager : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack/SOUNDTRACK");
-		mainTheme.getParameterByIndex(0, out mainThemeHealth);
-		mainTheme.getParameterByIndex(1, out mainThemeIntensity);
-		mainTheme.getParameterByIndex(2, out mainThemeSpecialEvent);
-		mainTheme.getParameterByIndex(3, out mainThemeMenu);
-		mainTheme.getParameterByIndex(4, out mainThemeCredits);
-		mainTheme.getParameterByIndex(5, out mainThemeGameplay);
-
-
-
+		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack/Main");
+		mainTheme.getParameter("intensity", out mainThemeIntensity);
+		mainTheme.getParameter("pause", out mainThemePausing);
+		mainTheme.getParameter("health", out mainThemeHealth);
+		mainTheme.getParameter("scene", out mainThemeScene);
+		
 	}
 
 	// Called before class calls or functions.
 	private void Start () {
 
-		// Initialise the music automatically.
-		BeginMusic();
+		// Initialise default music parameters.
 		MusicToGameplay();
+		_playerHealth = 100f;
+		_gameIntensity = 1;
+
+		// Finally, begin the music.
+		BeginMusic();		
 
 	}
 
@@ -62,25 +60,21 @@ public class AudioManager : MonoBehaviour {
 		Music Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	// Initialise the music.
 	public void BeginMusic() => mainTheme.start();
 	public void StopMusic() => mainTheme.stop(STOP_MODE.ALLOWFADEOUT);
 
+	// Parameteres controlling the music.
 	public void HealthParam(float health) => mainThemeHealth.setValue(health);
+	public void PausedParam(bool paused) => mainThemeScene.setValue(paused ? 0f : 1f);
 	public void IntensityParam(float intensity) => mainThemeIntensity.setValue(intensity);
 
-	public void MusicToMenu() => mainThemeMenu.setValue(1f);
-	public void MusicToGameplay() => mainThemeGameplay.setValue(1f);
-	public void MusicToCredits() => mainThemeCredits.setValue(1f);
-	public void MusicToSpecial() => mainThemeSpecialEvent.setValue(1f);
-
-	public void ResetMusicTo() {
-				
-		mainThemeMenu.setValue(0f);
-		mainThemeGameplay.setValue(0f);
-		mainThemeCredits.setValue(0f);
-		mainThemeSpecialEvent.setValue(0f);
-
-	}
+	// Versatile controlling for scenes. Some hardcoded functions for readability and a dynamic function as an emergency.
+	public void SceneParam(int scene) => mainThemeScene.setValue(scene);
+	public void MusicToMenu() => mainThemeScene.setValue(0f);
+	public void MusicToMenuSpecial() => mainThemeScene.setValue(1f);
+	public void MusicToGameplay() => mainThemeScene.setValue(2f);
+	public void MusicToCredits() => mainThemeScene.setValue(3f);
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		SFX Calls

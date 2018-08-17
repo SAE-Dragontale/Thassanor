@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{442f5918-9e3a-41b1-b220-8e5ff25fb4ca}">
         <property name="name">
-            <value>Walk Near Battle</value>
+            <value>battleAmbience</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{3626128a-fe9c-46b2-a899-b91167c8a804}</destination>
+            <destination>{3af5d53f-12e6-4166-884a-ce4abc7d716f}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{6ae46c85-0f41-4908-8cb9-e79439c54ba9}</destination>

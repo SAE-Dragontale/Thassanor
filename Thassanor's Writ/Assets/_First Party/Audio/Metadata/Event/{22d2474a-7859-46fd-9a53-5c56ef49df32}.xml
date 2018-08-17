@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{22d2474a-7859-46fd-9a53-5c56ef49df32}">
         <property name="name">
-            <value>Scroll Open</value>
+            <value>scrollOpen</value>
         </property>
         <property name="outputFormat">
             <value>1</value>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{1d1951f9-5e29-493f-b27e-8c25e16843ac}">
         <property name="name">
-            <value>Cast Spell- Resurection</value>
+            <value>castResurrection</value>
         </property>
         <property name="outputFormat">
             <value>1</value>

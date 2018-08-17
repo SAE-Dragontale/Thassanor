@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8cfdea744e71849b3f35eb3bfcc001, type: 3}
   m_Name: Shousei
   m_EditorClassIdentifier: 
-  _stUnitName: Shousei Kiina
+  _unitName: Shousei Kiina
   _animatorController: {fileID: 9100000, guid: 22aaf87980519f549a062425563b58f2, type: 2}

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.5
+   Version:			0.8.0
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -11,7 +11,6 @@ using UnityEngine.Networking;
 
 // We send information to:
 [RequireComponent(typeof(CharSpells),typeof(CharControls))]
-
 public class InputTranslator : NetworkBehaviour {
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -19,8 +18,8 @@ public class InputTranslator : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     // The scripts that control the player's movement, spellcasting, and visual functions. and basic control functionality.
-    private CharControls _scControl;
-    private CharSpells _scSpell;
+    private CharControls _charControls;
+    private CharSpells _charSpells;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -28,8 +27,10 @@ public class InputTranslator : NetworkBehaviour {
 
 	// PlayerState Containers.
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
-    [SyncVar] private PlayerState _enPlayerState;
-    [SyncVar] private PlayerState _enLastState;
+    [SyncVar] private PlayerState _playerState;
+    [SyncVar] private PlayerState _lastState;
+
+	[SerializeField] private bool isDebug = false;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -37,11 +38,11 @@ public class InputTranslator : NetworkBehaviour {
 
 	public void Awake() {
 
-        _scControl = GetComponent<CharControls>();
-        _scSpell = GetComponent<CharSpells>();
+        _charControls = GetComponent<CharControls>();
+        _charSpells = GetComponent<CharSpells>();
 
-        _enPlayerState = PlayerState.Idle;
-        _enLastState = _enPlayerState;
+        _playerState = PlayerState.Idle;
+        _lastState = _playerState;
 
     }
 
@@ -54,6 +55,25 @@ public class InputTranslator : NetworkBehaviour {
 
 		// Then, we also want to become the camera's primary transform tracker. We should be located on [0].
 		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
+
+		LoadPlayerSettings();
+
+	}
+
+	// Assign settings from lobby.
+	private void LoadPlayerSettings() {
+
+		if (isDebug)
+			return;
+
+		// Load Game Settings.
+		GetComponent<CharSpells>()._difficulty = FindObjectOfType<MapData>().typingDifficulty;
+
+		// Load Player Settings.
+		PlayerData settings = FindObjectOfType<PlayerData>();
+		GetComponent<CharVisuals>()._NecromancerStyle = settings.playerCharacter;
+		GetComponent<KeyboardTracker>()._Keybindings = settings.playerHotkeys;
+		GetComponent<CharSpells>()._SpellLoadout = settings.playerSpells;
 
 	}
 
@@ -73,43 +93,43 @@ public class InputTranslator : NetworkBehaviour {
 	public void TranslateInput(RawDataInput rdi) {
 
 		// Check the current player state and execute arguments based on it.
-		switch (_enPlayerState) {
+		switch (_playerState) {
 
 			/* ----------------------------------------------------------------------------- */
 			case (PlayerState.Idle):
 
-				// Pressing Escape
+				// Pressing "Pause"
 				if (rdi._ablKeys[0]) {
 
 					// #TODO: Implement pause menu here.
 					// This should be done through additive loading, and called as a function in another script from this class.
 
 					// Save our old state, set our new state, and halt movement.
-					_enLastState = _enPlayerState;
+					_lastState = _playerState;
 
-					_enPlayerState = PlayerState.Paused;
+					_playerState = PlayerState.Paused;
 					SetCursorTo(true);
 
-					_scControl.TrajectoryChange();
+					_charControls.TrajectoryChange();
 
 				}
 
-				// Pressing Enter
+				// Pressing "Spellcast"
 				else if (rdi._ablKeys[1]) {
 
 					// #TODO: Implement spellcasting trigger.
 					// Communicate with CharSpells.cs and begin the 'Spellcasting Phase' from this point.
-					_scSpell.TypeStatus(true);
+					_charSpells.TypeStatus(true);
 
 					// Set our state to spellcasting and halt movement.
-					_enPlayerState = PlayerState.Spellcasting;
-					_scControl.TrajectoryChange();
+					_playerState = PlayerState.Spellcasting;
+					_charControls.TrajectoryChange();
 
 				}
 
 				// If no commands are being pressed, process movement commands
 				else {
-					_scControl.TrajectoryChange(rdi._aflAxis);
+					_charControls.TrajectoryChange(rdi._aflAxis);
 				}
 				
 				break;
@@ -122,7 +142,7 @@ public class InputTranslator : NetworkBehaviour {
 
 					// #TODO: Implement spellcasting 'Abort'.
 					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
-					_scSpell.TypeStatus(false, true);
+					_charSpells.TypeStatus(false, true);
 
 					// Begin the sequence to exit SpellCasting mode. This should be fast when aborting.
 					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0f) );
@@ -134,7 +154,7 @@ public class InputTranslator : NetworkBehaviour {
 
 					// #TODO: Implement spellcasting 'Cast'.
 					// We don't want to instantly transition here. Include an Animation Lock.
-					_scSpell.TypeStatus(false);
+					_charSpells.TypeStatus(false);
 
 					// Begin the sequence to exit SpellCasting mode. This should be animation-dependant.
 					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0.5f) );
@@ -153,7 +173,7 @@ public class InputTranslator : NetworkBehaviour {
 					// Same as the sister function above, except we also want to be able to deload the pause menu. Function should be called from here.
 
 					// Load the state that the player was in before this function was called.
-					_enPlayerState = _enLastState;
+					_playerState = _lastState;
 					SetCursorTo(false);
 
 				}
@@ -175,16 +195,16 @@ public class InputTranslator : NetworkBehaviour {
 	}
 
 	// A small helper function to include an animation lock to State Switching in some circumstances.
-	private IEnumerator AnimationLock(PlayerState _enNewState, RawDataInput rdi, float flWait) {
+	private IEnumerator AnimationLock(PlayerState updatedState, RawDataInput rdi, float flWait) {
 
 		// Make sure we can't further issue commands while we're locked into something.
-		_enPlayerState = PlayerState.Disabled;
+		_playerState = PlayerState.Disabled;
 
 		yield return new WaitForSeconds(flWait);
 		
 		// Change to the newly issued state and correct movement to the last pressed Axis-Keys.
-		_enPlayerState = _enNewState;
-		_scControl.TrajectoryChange(rdi._aflAxis);
+		_playerState = updatedState;
+		_charControls.TrajectoryChange(rdi._aflAxis);
 
 	}
 

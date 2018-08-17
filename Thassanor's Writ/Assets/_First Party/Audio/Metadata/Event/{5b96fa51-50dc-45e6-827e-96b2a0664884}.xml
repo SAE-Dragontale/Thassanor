@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{5b96fa51-50dc-45e6-827e-96b2a0664884}">
         <property name="name">
-            <value>Fire Crackle For In Game</value>
+            <value>windmillAmbience</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{3626128a-fe9c-46b2-a899-b91167c8a804}</destination>
+            <destination>{3af5d53f-12e6-4166-884a-ce4abc7d716f}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{04b585db-0382-4548-9ee9-beb66cff090e}</destination>
@@ -30,9 +30,6 @@
         </relationship>
         <relationship name="timeline">
             <destination>{f09ddcd7-58de-47bb-a2ab-9fdf0c8b3cee}</destination>
-        </relationship>
-        <relationship name="parameters">
-            <destination>{19a481b2-3356-4c62-bdb6-9bfbe2be4a4c}</destination>
         </relationship>
         <relationship name="banks">
             <destination>{ff9d4e8e-800e-49c0-ae87-d20a087ccdb1}</destination>
@@ -77,14 +74,6 @@
             <destination>{7d3b409a-7f27-4951-b14a-2b6b531fd051}</destination>
         </relationship>
     </object>
-    <object class="GameParameter" id="{19a481b2-3356-4c62-bdb6-9bfbe2be4a4c}">
-        <property name="name">
-            <value>Fire Crackle Level</value>
-        </property>
-        <relationship name="automationCurves">
-            <destination>{815cecb8-6d4c-4d3d-b14d-617c837ac66a}</destination>
-        </relationship>
-    </object>
     <object class="EventMixerMaster" id="{f5ad617c-1979-46bb-b385-96164fb61794}">
         <relationship name="effectChain">
             <destination>{dbeaaf06-74ee-422b-8cd2-6fab9ef1b1e5}</destination>
@@ -106,9 +95,6 @@
         <property name="nameOfPropertyBeingAutomated">
             <value>volume</value>
         </property>
-        <relationship name="automationCurves">
-            <destination>{815cecb8-6d4c-4d3d-b14d-617c837ac66a}</destination>
-        </relationship>
         <relationship name="objectBeingAutomated">
             <destination>{4e9523cc-386d-471a-b7de-a86418c44e90}</destination>
         </relationship>
@@ -144,12 +130,6 @@
             <destination>{f5ad617c-1979-46bb-b385-96164fb61794}</destination>
         </relationship>
     </object>
-    <object class="AutomationCurve" id="{815cecb8-6d4c-4d3d-b14d-617c837ac66a}">
-        <relationship name="automationPoints">
-            <destination>{be51006a-42f0-4348-9646-628493004eca}</destination>
-            <destination>{e9a20eb9-67af-4697-85ae-61c7eafcedab}</destination>
-        </relationship>
-    </object>
     <object class="MixerBusEffectChain" id="{dbeaaf06-74ee-422b-8cd2-6fab9ef1b1e5}">
         <relationship name="effects">
             <destination>{cd829c32-4728-41a8-9d1c-8085d5d72071}</destination>
@@ -179,22 +159,6 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{a9f8901e-02bb-4e9c-a4da-e1600d2e437e}"/>
-    <object class="AutomationPoint" id="{be51006a-42f0-4348-9646-628493004eca}">
-        <property name="position">
-            <value>0</value>
-        </property>
-        <property name="value">
-            <value>-80</value>
-        </property>
-    </object>
-    <object class="AutomationPoint" id="{e9a20eb9-67af-4697-85ae-61c7eafcedab}">
-        <property name="position">
-            <value>1</value>
-        </property>
-        <property name="value">
-            <value>0</value>
-        </property>
-    </object>
     <object class="MixerBusFader" id="{cd829c32-4728-41a8-9d1c-8085d5d72071}"/>
     <object class="AutomationPoint" id="{9e8c20ce-5102-4d4a-a579-45bade77b470}">
         <property name="position">

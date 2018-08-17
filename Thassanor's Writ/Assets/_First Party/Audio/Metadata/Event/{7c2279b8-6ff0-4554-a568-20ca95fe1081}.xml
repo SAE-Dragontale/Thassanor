@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{7c2279b8-6ff0-4554-a568-20ca95fe1081}">
         <property name="name">
-            <value>Cast Spell- Warriors</value>
+            <value>castWarrior</value>
         </property>
         <property name="outputFormat">
             <value>1</value>

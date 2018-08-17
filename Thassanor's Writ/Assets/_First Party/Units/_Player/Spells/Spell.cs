@@ -5,8 +5,6 @@
    Description: 	The base inheritance framework for player spells. This class contains any global calls or variables needed to reference by the loadouts.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Spell : ScriptableObject {
@@ -16,13 +14,10 @@ public abstract class Spell : ScriptableObject {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[Tooltip("The name of the spell.")]
-	public string _stSpellName;
-
-	[Tooltip("The mana cost of the spell.")]
-	public float _flManaCost;
+	public string _spellName;
 
 	[Space] [Tooltip("The phrase used to invoke the spell, starting from the easiest difficulty at 0, to the hardest at 3.")]
-	public string[] _astSpellPhrase = new string[4];
+	public string[] _everyDifficultyPhrase = new string[4];
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls

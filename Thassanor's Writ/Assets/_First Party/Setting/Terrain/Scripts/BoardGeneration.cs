@@ -37,16 +37,15 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 
-    float _waterAmount = -0.6f;
+    readonly float _waterAmount = -0.3f;
     [Range(4, 12)]
     public int _waterSize;
 
 	[Space]
 
-    [Tooltip("This value is multiplied by the column size or row size, whichever is biggest. This keeps size & spread dynamic.")]
     [Range(2, 12)]
     public int _townSpread;
-	public int _MaxTownCount = 4;	
+	public int _maxTownCount = 4;	
 	[SerializeField] private int _curTownCount = 0;	
 
 	[Space]
@@ -70,8 +69,9 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 
     public GameObject _navMeshTile;
-	public NavMeshSurface _surface;
-	public Renderer _navTileRend;
+	NavMeshSurface _surface;
+	Renderer _navTileRend;
+	[Space]
 
 	public List<GameObject> _tileList = new List<GameObject>();
 	public List<GameObject> _propList = new List<GameObject>();
@@ -80,8 +80,8 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 	[Header("GameObject References")]
+	public MapData _mapData;
 	public BorderGeneration _borderGenRef;
-
 	public GameObject _tileInstance;
 
     [Space]
@@ -93,14 +93,17 @@ public class BoardGeneration : MonoBehaviour {
     //public SingletonPass _singletonRef;
     void Awake()
 	{
-		//read from singleton
-		//_singletonRef = GameObject.Find("MapSettings").GetComponent<SingletonPass>();
-		//_itSeed = _singletonRef._itSeed;
-		//_columns = _singletonRef._columns;
-		//_rows = _singletonRef._rows;
-		//_waterSize = _singletonRef._waterSize;
-		//_townSpread = _singletonRef._townSpread;
-		//_maxTownCount = _singletonRef._maxTownCount;
+							//read from singleton
+		//_mapData = GameObject.FindObjectOfType
+		
+		//_itSeed = _mapData._itSeed;
+		//_columns = _mapData._columns;
+		//_rows = _mapData._rows;
+		//_waterSize = _mapData._waterSize;
+		//_townSpread = _mapData._townSpread;
+		//_maxTownCount = _mapData._maxTownCount;
+
+		
 	}
 
 	private void Start ()
@@ -115,34 +118,23 @@ public class BoardGeneration : MonoBehaviour {
 
 		_p1Spawn = GameObject.Find("P1 Spawner");
 		_p2Spawn = GameObject.Find("P2 Spawner");
-
-		//sets the surface object as a child of the grid, sets the transform to the center of the board, sets the scale to match the length and height of the grid, and builds a navmesh on the surface.
-		//disables rendered just in case
-		_navTileRend = _navMeshTile.GetComponent<Renderer>();
-		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
-		_navMeshTile.transform.position = new Vector3(_columns/2f -.5f, -0.01f, _rows/2f -.5f);
-		_navMeshTile.transform.localScale = new Vector3(_columns / 9.75f,.1f,_rows / 9.75f);
-		_surface.BuildNavMesh();
-		_navTileRend.enabled = false;
-
-
+               
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
 		_borderGenRef.InstantiateOuterWalls (); 			
-
-/*
-		_txtBoardSize.text = "Columns: " + _columns + " | Rows: " + _rows + " | Ground Tiles: " + _tileList.Count;		
-		_txtTownCount.text = "Towns: " + _curTownCount;	
-		_txtWaterCount.text = "Water Tiles: " + _waterList.Count;
-*/			
+		
 		StartCoroutine(DelayedStart());
 
 	}
 
 	public IEnumerator DelayedStart()
 	{
-		yield return new WaitForSeconds(.7f);
+		yield return new WaitForSeconds(.5f);
+		
+		//generates the nav surface for the board
+		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
+		_surface.BuildNavMesh();
 	}
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
@@ -163,7 +155,6 @@ public class BoardGeneration : MonoBehaviour {
 
 	List<GameObject> mirrorTileList = new List<GameObject>();
 	int mirrorListCount;
-	bool SpawnBaseTile = false;
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
@@ -171,7 +162,7 @@ public class BoardGeneration : MonoBehaviour {
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
 		//keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
-		_townSpread = ((Mathf.Max(_columns,_rows) / 3) * _townSpread);
+
 		if(_townSpread % 2 == 0)
 		{_townSpread -= 1;}
 				
@@ -190,13 +181,11 @@ public class BoardGeneration : MonoBehaviour {
 					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
 					{
 
-						//the actual spawning of the grass tiles
+						//the actual spawning of the grass tiles, this is here too so theres a grass tile under any water or town
 						InstantiateFromArray(_floorTiles,x,z);	
-						SpawnBaseTile = true;
 						mirrorTileList.Add(floorTileInstance);
 						mirrorListCount++;
-
-
+                        
 						//perlin value for water
 						if (_fltPerlinValue < _waterAmount) 
 						{
@@ -204,9 +193,9 @@ public class BoardGeneration : MonoBehaviour {
 						}
 						
 						//perlin value for towns to spawn
-						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f  && townSpreadCur == _townSpread) 
+						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f) 
 						{
-							if (_curTownCount != _MaxTownCount)
+							if (_curTownCount != _maxTownCount && townSpreadCur == _townSpread)
 							{
 								InstantiateTown(_townTiles, x, z);
 								townSpreadCur = 0;
@@ -228,15 +217,14 @@ public class BoardGeneration : MonoBehaviour {
 						townSpreadCur++;
 					}
 					
-						SpawnBaseTile = false;
 				}
 			}
 			else 		//non random half
 			{				
 				//for (int x = _tiles.Length - 1; x >= 0; x--) //this results in a vertical flip, so x town will be to the right of one player, and to the left for the other
 				for (int x = 0; x < _tiles.Length; x++)//  this results in a vertical and horizontal flip, so x town will be to the right of both players
-				{ 						
-					Vector3 position = new Vector3(x, 0f, z);    
+				{
+					Vector3 position = new Vector3(x * 10, 0f, z * 10);    
 
 					floorTileInstance = Instantiate(mirrorTileList[mirrorListCount - 1], position, Quaternion.identity, _tileFolder) as GameObject;
 					floorTileInstance.name = mirrorTileList[mirrorListCount - 1].name;
@@ -261,7 +249,11 @@ public class BoardGeneration : MonoBehaviour {
     
 	GameObject floorTileInstance;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
-	{		
+	{
+
+        xCoord = xCoord * 10f;
+        zCoord = zCoord * 10f;
+
 		//sets the player positions appropriately to their gbo's, when the center bottom tile is creating. 
 		if (xCoord == (_columns/2) && zCoord == 0) 
 		{
@@ -276,24 +268,26 @@ public class BoardGeneration : MonoBehaviour {
 		int index = 0; //if the number of possible grass tiles is 1, then set index to 0 so it wont try spawn soemthing that doesnt exist
 		if(prefabs.Length > 1)
 		{
-			//if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
-			//... it chooses one tile at random from the others and sets that as the index
-			if(Random.value > .92f)
-			{
-				if(SpawnBaseTile == true)
-				{index = 0;}
-				else
-				{index = Random.Range(0, prefabs.Length);}
-			}
-			else
-			{
-				index = 0;
-			}
+            //if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
+            //... it chooses one tile at random from the others and sets that as the index
+            if (_fltPerlinValue > .57f && _fltPerlinValue < .6f)
+            {
+                index = 2;
+
+            }
+            else if (_fltPerlinValue > 0f && _fltPerlinValue < .5f)
+            {
+                index = 1;
+            }
+            else
+            {
+                index = 0;
+            }
 			
 		}			
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
-		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
+		floorTileInstance.name = "Tile _x-" + (xCoord /10) + " _z-" + (zCoord/10);
 
 
         _tileList.Add(floorTileInstance);
@@ -303,6 +297,9 @@ public class BoardGeneration : MonoBehaviour {
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	void InstantiateTown (GameObject[] prefabs, float xCoord, float zCoord)
 	{
+        xCoord = xCoord * 10;
+        zCoord = zCoord * 10;
+
 		// Create a random index for the instantiated tile.
 		int randomIndex = Random.Range(0, prefabs.Length);
 
@@ -311,14 +308,14 @@ public class BoardGeneration : MonoBehaviour {
 		GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
 
 		Vector3 newPos = tileInstance.transform.position;
-		newPos = newPos + new Vector3(0,0.05f,0);
+		newPos = newPos + new Vector3(0,0.3f,0);
 		tileInstance.transform.position = newPos;
 		tileInstance.name = "Town_#" + _curTownCount;
 		_curTownCount++;
 		//adds the tile generated into a list for a reference to each of them
 		_propList.Add (tileInstance);
 
-		RaycastHit hit;
+        RaycastHit hit;
 		if (Physics.Raycast(tileInstance.transform.position,-Vector3.up, out hit) && hit.transform.tag == "Ground")
 		{
 			tileInstance.transform.parent = hit.transform;
@@ -330,7 +327,7 @@ public class BoardGeneration : MonoBehaviour {
 	private int waterNo = 0;		
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		Vector3 position = new Vector3(xCoord,0.05f, zCoord);
+		Vector3 position = new Vector3(xCoord * 10,0.05f, zCoord * 10);
 		
 		//loop to grow the pool
 		for (int it = 0; it < _waterSize; it++)
@@ -364,7 +361,7 @@ public class BoardGeneration : MonoBehaviour {
 				else
                 {
 					//if water is out of bounds, destroy
-					if (tileInstance.transform.position.x < 0 || tileInstance.transform.position.z < 0 || tileInstance.transform.position.x > _tiles.Length-1 || tileInstance.transform.position.z > _tiles[0].Length-1) 
+					if (tileInstance.transform.position.x < -5 || tileInstance.transform.position.z < -5 || tileInstance.transform.position.x > (_tiles.Length * 10)-1 || tileInstance.transform.position.z > (_tiles[0].Length * 10)-1) 
 					{						
 						Destroy(tileInstance);
 					}

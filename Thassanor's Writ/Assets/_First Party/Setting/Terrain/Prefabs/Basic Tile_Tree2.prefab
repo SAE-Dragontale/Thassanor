@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114783684047106006}
   - component: {fileID: 65495454788877860}
   - component: {fileID: 208385380025500222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114527637814088404}
   - component: {fileID: 65838220761951264}
   - component: {fileID: 208403754641537832}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 23046025959024808}
   - component: {fileID: 114206114085923148}
   - component: {fileID: 65339427805959442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Basic Tile_Tree2
   m_TagString: Ground
   m_Icon: {fileID: 0}

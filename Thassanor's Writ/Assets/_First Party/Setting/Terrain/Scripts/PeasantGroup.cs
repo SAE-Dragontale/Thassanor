@@ -7,16 +7,9 @@ public class PeasantGroup : UnitGroup {
 
     Vector3 _patrolDir;
 
-    // Use this for initialization
-    protected override void Start()
-    {
-        base.Start();
-
-    }
-
     protected override void BehaviourLoopPassive()
     {
-        
+        //call co rout u noob
         for (int i = 0; i < _everyUnit.Length; i++)
         {
             //chooses a random patrol direction out of 4 directions

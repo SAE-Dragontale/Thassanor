@@ -20,6 +20,8 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
+        //public GameObject levelOptionsPanel;
+        //public LevelControlsUI levelControlsUI = FindObjectOfType<LevelControlsUI>();
 
         //public GameObject characterDropDown;
         public Dropdown dropDown;
@@ -62,12 +64,10 @@ namespace Prototype.NetworkLobby
 
             if (isLocalPlayer)
             {
-                Debug.Log("Player is local");
                 SetupLocalPlayer();
             }
             else
             {
-                Debug.Log("Player isn't local");
                 SetupOtherPlayer();
             }
 
@@ -117,12 +117,13 @@ namespace Prototype.NetworkLobby
             nameInput.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
+            //levelOptionsPanel.SetActive(true);
+
 
             CheckRemoveButton();
 
             if (playerColor == Color.white)
             {
-                Debug.Log("Player colour is white");
                 CmdColorChange();
             }
 
@@ -229,7 +230,6 @@ namespace Prototype.NetworkLobby
         //so that all client get the new value throught syncvar
         public void OnColorClicked()
         {
-            //Debug.Log("Color Listener Clicked");
             CmdColorChange();
         }
 
@@ -283,8 +283,6 @@ namespace Prototype.NetworkLobby
         [Command]
         public void CmdColorChange()
         {
-            Debug.Log("Sending Command Call " + isLocalPlayer);
-
             int idx = System.Array.IndexOf(Colors, playerColor);
 
             int inUseIdx = _colorInUse.IndexOf(idx);
@@ -335,6 +333,12 @@ namespace Prototype.NetworkLobby
         public void CmdNameChanged(string name)
         {
             playerName = name;
+        }
+
+        [ClientRpc]
+        public void RpcSendCharacterToClient(int Index)
+        {
+            playerCharacterIndex = Index;
         }
 
         [Command]

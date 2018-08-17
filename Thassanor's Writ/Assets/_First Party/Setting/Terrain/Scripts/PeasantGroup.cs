@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class PeasantGroup : UnitGroup {
 
-    bool _oneShotActionActive = false;
     Vector3 _patrolDir;
 
     // Use this for initialization

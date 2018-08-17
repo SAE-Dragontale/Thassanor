@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BorderGeneration : MonoBehaviour {
 
-	public BoardGeneration _boardGeneratorRef;                     
+	public BoardGeneration _boardGeneratorRef;
+    public int _columnLength;
+    public int _rowLength;
 	public GameObject[] _outerWallTiles;  
 	public List<GameObject> _wallList = new List<GameObject>();
 
@@ -19,6 +21,11 @@ public class BorderGeneration : MonoBehaviour {
     {
         _borderFolder = new GameObject("Borders").transform;
         _borderFolder.parent = transform;
+
+        _rowLength = _boardGeneratorRef._rows * 10;
+        _columnLength = _boardGeneratorRef._columns * 10;
+
+        Debug.Log(_rowLength + " " + _columnLength);
     }
 
 
@@ -36,10 +43,10 @@ public class BorderGeneration : MonoBehaviour {
 		// 7 - Top Right Corner
 
 		// The outer walls are one unit left, right, up and down from the board.
-		float leftEdgeX = -1f;
-		float rightEdgeX = _boardGeneratorRef._columns * 10;
-		float bottomEdgeZ = -1f;
-		float topEdgeZ = _boardGeneratorRef._rows * 10;
+		float leftEdgeX = -5f;
+		float rightEdgeX = _columnLength;
+		float bottomEdgeZ = -5f;
+		float topEdgeZ = _rowLength;
 
 		// Instantiate both vertical walls (one on each side).
 		InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeZ, topEdgeZ);
@@ -90,16 +97,16 @@ public class BorderGeneration : MonoBehaviour {
 		Vector3 position = new Vector3(xCoord, 0f , zCoord);
 
 		//checks left wall
-		if (xCoord == -1) 
+		if (xCoord == -5) 
 		{
 			//this checks the left wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _boardGeneratorRef._tiles[0].Length || zCoord == -1) 
+			if (zCoord == _rowLength *10 || zCoord == -5) 
 			{			
-				if (zCoord == _boardGeneratorRef._tiles.Length - 1) 
+				if (zCoord == _columnLength * 10- 1) 
 				{
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
 				}	
-				if (zCoord == -1) 
+				if (zCoord == -5) 
 				{
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [4], position, Quaternion.identity) as GameObject;
 				}
@@ -110,17 +117,17 @@ public class BorderGeneration : MonoBehaviour {
 			}
 		} 
 		//checks right wall
-		else if (xCoord == _boardGeneratorRef._tiles.Length) 
+		else if (xCoord == _columnLength*10) 
 		{
 			//this checks the right wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _boardGeneratorRef._tiles[0].Length || zCoord == -1) 
+			if (zCoord == _rowLength*10 || zCoord == -5) 
 			{			
-				if (zCoord == _boardGeneratorRef._tiles.Length -1) 
+				if (zCoord == _columnLength*10 -1) 
 				{
 					//create corner tile at length
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
-				if (zCoord == -1) 
+				if (zCoord == -5) 
 				{
 					//create corner tile at start
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [5], position, Quaternion.identity) as GameObject;
@@ -134,10 +141,10 @@ public class BorderGeneration : MonoBehaviour {
 		}
 		
 		//checks front wall
-		if (zCoord == -1) 
+		if (zCoord == -5) 
 		{
 			//this stops tiles from generating at the corners of the front line of walls
-			if (xCoord == _boardGeneratorRef._tiles.Length || xCoord == -1) 
+			if (xCoord == _columnLength*10 || xCoord == -5) 
 			{		
 			}  
 			else 
@@ -146,17 +153,17 @@ public class BorderGeneration : MonoBehaviour {
 			}
 		} 
 		//checks back wall with the second element in the jagged array
-		else if (zCoord == _boardGeneratorRef._tiles[0].Length) 
+		else if (zCoord == _rowLength*10) 
 		{
 			//this stops tiles from generating at the corners of the back line of walls
-			if (xCoord == _boardGeneratorRef._tiles.Length || xCoord == -1) 
+			if (xCoord == _columnLength*10 || xCoord == -5) 
 			{			
-				if (xCoord == _boardGeneratorRef._tiles.Length) 
+				if (xCoord == _columnLength*10) 
 				{
 					//create corner tile at length
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
-				if (xCoord == -1) 
+				if (xCoord == -5) 
 				{
 					//create corner tile at start
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;

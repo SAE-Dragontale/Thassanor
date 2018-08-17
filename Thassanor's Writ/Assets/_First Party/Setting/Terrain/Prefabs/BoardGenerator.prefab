@@ -52,29 +52,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8aebb4a24bf1949971a2dbdc5c4c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerRef: {fileID: 0}
+  _playerRef:
+  - {fileID: 0}
   _itSeed: 4812
   _columns: 30
   _rows: 30
-  _waterDensity: -0.5
   _waterSize: 1
   _townSpread: 2
-  _MaxTownCount: 4
+  _maxTownCount: 4
   _curTownCount: 0
   _floorTiles: []
-  _townTiles: []
+  _townTiles:
+  - {fileID: 1720964479548984, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
   _waterTiles: []
-  _boardHolder: {fileID: 0}
+  _p1Spawn: {fileID: 0}
+  _p2Spawn: {fileID: 0}
+  _navMeshTile: {fileID: 0}
   _tileList:
-  - {fileID: 1924837203653086, guid: 7b2094a229775314aa16bd2755667216, type: 2}
-  - {fileID: 1354501862668734, guid: d6cd02f7979586c45ab344f7c1f5397a, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   _propList:
-  - {fileID: 1465338795882398, guid: cbd8da41a579c4146bbc5acdc8be8323, type: 2}
+  - {fileID: 0}
   _waterList:
   - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
-  _txtBoardSize: {fileID: 0}
-  _txtWaterCount: {fileID: 0}
-  _txtTownCount: {fileID: 0}
+  _mapData: {fileID: 0}
   _borderGenRef: {fileID: 0}
   _tileInstance: {fileID: 0}
 --- !u!114 &114333877672462342

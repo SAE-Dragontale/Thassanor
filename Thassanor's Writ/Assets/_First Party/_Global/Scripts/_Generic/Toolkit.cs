@@ -92,7 +92,7 @@ namespace Dragontale {
 				}
 			}
 
-			// After we've finished, we want to return our 'Conclusion' of [stringLength, stringLength] as it contains our Gypsy Russian Magic.
+			// After we've finished, we want to return our 'Conclusion' of [stringLength, stringLength] as it contains our Russian Gypsy Magic.
 			return everyComparison[statementLength, comparisonLength];
 
 		}

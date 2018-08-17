@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.3.0
+   Version:			0.3.1
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -138,7 +138,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
 
-			GameObject unit = Instantiate(_unitTemplate, transform);
+			GameObject unit = Instantiate(_unitTemplate, _anchor);
 			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
 
 		}

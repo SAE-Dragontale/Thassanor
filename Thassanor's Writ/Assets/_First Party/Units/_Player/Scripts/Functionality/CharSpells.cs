@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.4.0
+   Version:			0.4.1
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -104,6 +104,8 @@ public class CharSpells : NetworkBehaviour {
 
 	// Here we evaluate the player's accuracy to what they intended to cast and modify casting time based on this.
 	private void EvaluateTyping() {
+
+		_stringDifference = 999;
 
 		foreach (string comparison in _spellPhrases) {
 

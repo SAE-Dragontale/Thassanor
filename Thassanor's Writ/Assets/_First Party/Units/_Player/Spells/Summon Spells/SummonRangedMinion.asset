@@ -11,13 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e19a55c45699dd45839a17e2a21c201, type: 3}
   m_Name: SummonRangedMinion
   m_EditorClassIdentifier: 
-  _stSpellName: Ranged Minion
-  _flManaCost: 0
-  _astSpellPhrase:
-  - 
-  - 
-  - Heed my call, for bones to throw bones!
-  - 
-  _itTargets: 0
-  _flTimeToComplete: 0
-  _enSummonType: 0
+  _spellName: Summon Ranged Minion
+  _everyDifficultyPhrase:
+  - let death become life
+  - Let death consume you and life come unto me
+  - Let death consume you, by writ and by soul. Your life is mine!
+  - Ne consumat te per breue et per recognicionem meam. Mea est anima tua?
+  _healthRequired: 0
+  _castingDelay: 0
+  _summonType: 0

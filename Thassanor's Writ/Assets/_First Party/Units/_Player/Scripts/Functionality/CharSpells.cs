@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.3.0
+   Version:			0.4.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -16,11 +16,11 @@ public class CharSpells : NetworkBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private Transform _trTypingComponent;	// This is the base root we'll be working with for the Input System.
+	private Transform _typingComponent;		// This is the base root we'll be working with for the Input System.
 	private TMP_InputField _inputField;     // This is the player's Input Field.
 	private TMP_Text _backgroundText;       // Used to show what we think the player is trying to type, or show that another player is typing something.
 
-	private CharVisuals _scVisual;			// The Visual Controller script for the character.
+	private CharVisuals _charVisuals;		// The Visual Controller script for the character.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -28,7 +28,11 @@ public class CharSpells : NetworkBehaviour {
 
 	// The list of spells in our loadout. These should generally be assigned at runtime, however if they aren't, then the defaults are assigned in the inspector.
 	[SerializeField] private Spell[] _spellLoadout;
-	[SerializeField] private string[] _astSpellPhrases;
+	[SerializeField] private string[] _spellPhrases;
+
+	// Casting Prediction and Current Modifier.
+	[SerializeField] private string _closestMatch;
+	[SerializeField] private int _stringDifference;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -38,9 +42,9 @@ public class CharSpells : NetworkBehaviour {
 	private void Awake() {
 
 		// Grab the script project root and it's associated references.
-		_trTypingComponent = transform.Find("PlayerCanvas");
-		_inputField = _trTypingComponent.GetComponentInChildren<TMP_InputField>();
-		_scVisual = GetComponent<CharVisuals>();
+		_typingComponent = transform.Find("PlayerCanvas");
+		_inputField = _typingComponent.GetComponentInChildren<TMP_InputField>();
+		_charVisuals = GetComponent<CharVisuals>();
 
 	}
 
@@ -51,10 +55,10 @@ public class CharSpells : NetworkBehaviour {
 		int difficulty = 1;
 
 		// Take out the corresponding "casting string" from each spell in the player's loadout and store it in something easier to manage later on.
-		_astSpellPhrases = new string[_spellLoadout.Length];
+		_spellPhrases = new string[_spellLoadout.Length];
 		
-		for (int it = 0; it < _spellLoadout.Length; it++)
-			_astSpellPhrases[it] = _spellLoadout[it]._astSpellPhrase[difficulty];
+		for (int i = 0; i < _spellLoadout.Length; i++)
+			_spellPhrases[i] = _spellLoadout[i]._everyDifficultyPhrase[difficulty];
 
 		// Just as a failsafe, we want to make sure we're always starting with the input field disabled.
 		TypeStatus(false, true);
@@ -72,7 +76,7 @@ public class CharSpells : NetworkBehaviour {
 		CallCameraZoom(toggleOn);
 		CallAnimationCasting(toggleOn);
 
-		if (!toggleOn)
+		if (toggleOn)
 			return;
 
 		if (cancelCast)
@@ -92,18 +96,37 @@ public class CharSpells : NetworkBehaviour {
 			return;
 
 		// Identify which spell we're trying to cast by comparing our current string to the string for each equipped spell.
+		EvaluateTyping();
+		
+		AssignSpellMatch();
 
-		// Display the closest matched string visually for the player to see.
+	}
+
+	// Here we evaluate the player's accuracy to what they intended to cast and modify casting time based on this.
+	private void EvaluateTyping() {
+
+		foreach (string comparison in _spellPhrases) {
+
+			if (comparison == null)
+				return;
+
+			int oneDifference = Dragontale.StringFable.Compare(_inputField.text, comparison);
+			_stringDifference = oneDifference < _stringDifference ? oneDifference : _stringDifference;
+
+		}
+
+	}
+
+	// Display the closest matched string visually for the player to see.
+	public void AssignSpellMatch() {
 
 	}
 
 	// Choosing, and then casting the currently selected spell.
 	private void CastSpell() {
 
-		// Identify which spell we cast.
-
-
-		// Determine and assign a value to how accurately we typed our spell.
+		// We don't evaluate anything here, as we've been evaluating through each keypress of the player's input.
+		// Therefore, we already have all the information we need about the correct spell. We simply need to assign it.
 
 
 		// Assign spell targets.
@@ -114,13 +137,6 @@ public class CharSpells : NetworkBehaviour {
 
 		// Finalise casting interface and move back to normal controls.
 		TypeStatus(false, true);
-
-	}
-
-	// Here we evaluate the player's accuracy to what they intended to cast and modify casting time based on this.
-	private float CastEvaluation(float fl) {
-
-		return fl;
 
 	}
 
@@ -137,7 +153,7 @@ public class CharSpells : NetworkBehaviour {
 		if (!hasAuthority)
 			return;
 
-		_trTypingComponent.gameObject.SetActive(toggleOn);
+		_typingComponent.gameObject.SetActive(toggleOn);
 		_inputField.interactable = toggleOn;
 
 		FocusInputField(toggleOn);
@@ -169,13 +185,13 @@ public class CharSpells : NetworkBehaviour {
 		if (!hasAuthority)
 			return;
 
-		_scVisual.CharacterZoom(toggleOn);
+		_charVisuals.CharacterZoom(toggleOn);
 
 	}
 
 	private void CallAnimationCasting(bool toggleOn) {
 
-		_scVisual.AnimCasting(toggleOn);
+		_charVisuals.AnimCasting(toggleOn);
 
 	}
 

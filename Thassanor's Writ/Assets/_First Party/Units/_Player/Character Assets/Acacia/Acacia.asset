@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8cfdea744e71849b3f35eb3bfcc001, type: 3}
   m_Name: Acacia
   m_EditorClassIdentifier: 
-  _stUnitName: Acacia Rico
+  _unitName: Acacia Rico
   _animatorController: {fileID: 9100000, guid: 8151c3eb43325744b973c6c2935ed111, type: 2}

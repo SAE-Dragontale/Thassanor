@@ -54,7 +54,12 @@ public class AudioManager : MonoBehaviour {
 
 		// Initialise the music automatically.
 		BeginMusic();
+
+		ResetMusicTo();
 		MusicToGameplay();
+
+		HealthParam(100f);
+		IntensityParam(1f);
 
 	}
 

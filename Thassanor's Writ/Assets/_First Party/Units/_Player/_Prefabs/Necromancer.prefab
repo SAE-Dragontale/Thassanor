@@ -64,7 +64,7 @@ GameObject:
   m_Layer: 0
   m_Name: RallyPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -405,10 +405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spellLoadout:
   - {fileID: 11400000, guid: 313a32b3479101d4882729d9a31200ca, type: 2}
-  - {fileID: 11400000, guid: 723f05f9b926ba844bafcb586a50c7ef, type: 2}
   - {fileID: 11400000, guid: 6085d4d2db4288a4d9a4d8387be30467, type: 2}
-  - {fileID: 11400000, guid: 5c326e437a6bf8440957b3baf273bf80, type: 2}
-  _astSpellPhrases: []
+  _spellPhrases: []
+  _closestMatch: 
+  _stringDifference: 0
 --- !u!114 &114535247668817328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,15 +594,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114450359450470680}
-        m_MethodName: FocusCursor
-        m_Mode: 1
+        m_MethodName: FocusInputField
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: TMPro.TMP_InputField+SelectionEvent, Unity.TextMeshPro, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

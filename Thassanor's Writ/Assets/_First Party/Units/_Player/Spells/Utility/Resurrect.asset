@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e19a55c45699dd45839a17e2a21c201, type: 3}
   m_Name: Resurrect
   m_EditorClassIdentifier: 
-  _stSpellName: Resurrect
-  _flManaCost: 50
-  _astSpellPhrase:
-  - wake up and live
-  - wake you up and bring you back to life
-  - Wake you up inside, bring you back to life!
-  - Resurrect Lorem
-  _itTargets: 3
-  _flTimeToComplete: 30
-  _enSummonType: 1
+  _spellName: Resurrect
+  _everyDifficultyPhrase:
+  - death is temporary before my power
+  - Death shall not last while my power still remains strong
+  - Death shall not last! My power still remains and you shall submit to my writ!
+  - Mors non stabit coram me. Meum est infinita potentia. Et vos subditi sitis Thassanor
+    breve.
+  _healthRequired: 0
+  _castingDelay: 0
+  _summonType: 0

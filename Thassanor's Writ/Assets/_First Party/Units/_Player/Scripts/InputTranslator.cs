@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.0
+   Version:			0.8.1
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 // We send information to:
-[RequireComponent(typeof(CharSpells),typeof(CharControls))]
+[RequireComponent(typeof(CharSpells),typeof(CharControls),typeof(CharAudio))]
 public class InputTranslator : NetworkBehaviour {
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -20,6 +20,7 @@ public class InputTranslator : NetworkBehaviour {
     // The scripts that control the player's movement, spellcasting, and visual functions. and basic control functionality.
     private CharControls _charControls;
     private CharSpells _charSpells;
+	private CharAudio _charAudio;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -49,14 +50,15 @@ public class InputTranslator : NetworkBehaviour {
 	// This function will trigger with a client gains authority over this object.
 	public override void OnStartAuthority() {
 
-		// So when we gain authority, we're enabling the DeviceTracker to monitor the player's input.
+		// The player who owns this script becomes the target of their input and their camera.
 		GetComponent<DeviceTracker>().enabled = true;
-		SetCursorTo(false);
-
-		// Then, we also want to become the camera's primary transform tracker. We should be located on [0].
 		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
 
+		// We disable the cursor, load our variables
+		SetCursorTo(false);
 		LoadPlayerSettings();
+
+		_charAudio._local = true;
 
 	}
 

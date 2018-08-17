@@ -18,7 +18,6 @@ public class AudioManager : MonoBehaviour {
 	EventInstance mainTheme;
 	ParameterInstance mainThemeHealth;
 	ParameterInstance mainThemeIntensity;
-	ParameterInstance mainThemePausing;
 	ParameterInstance mainThemeScene;
 
 	EventInstance ambienceMenu;
@@ -46,7 +45,6 @@ public class AudioManager : MonoBehaviour {
 
 		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack/Main");
 		mainTheme.getParameter("intensity", out mainThemeIntensity);
-		mainTheme.getParameter("pause", out mainThemePausing);
 		mainTheme.getParameter("health", out mainThemeHealth);
 		mainTheme.getParameter("scene", out mainThemeScene);
 

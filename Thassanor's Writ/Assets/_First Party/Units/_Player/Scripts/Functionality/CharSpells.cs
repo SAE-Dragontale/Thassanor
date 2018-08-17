@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.5.0
+   Version:			0.5.1
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -20,7 +20,8 @@ public class CharSpells : NetworkBehaviour {
 	private TMP_InputField _inputField;     // This is the player's Input Field.
 	private TMP_Text _backgroundText;       // Used to show what we think the player is trying to type, or show that another player is typing something.
 
-	private CharVisuals _charVisuals;		// The Visual Controller script for the character.
+	private CharVisuals _charVisuals;       // The Visual Controller script for the character.
+	private CharAudio _charAudio;			// The Audio Controller script for the character.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -54,7 +55,9 @@ public class CharSpells : NetworkBehaviour {
 		// Grab the script project root and it's associated references.
 		_typingComponent = transform.Find("PlayerCanvas");
 		_inputField = _typingComponent.GetComponentInChildren<TMP_InputField>();
+
 		_charVisuals = GetComponent<CharVisuals>();
+		_charAudio = GetComponent<CharAudio>();
 
 	}
 
@@ -101,7 +104,7 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
-	// Spellcasting Calls
+	// Spellcasting Predictions
 
 	// The Prediction Model that we're using to match the player's currently entered text to the closest matching spell in their loadout.
 	public void PredictSpell() {
@@ -138,6 +141,9 @@ public class CharSpells : NetworkBehaviour {
 
 	}
 
+	/* ----------------------------------------------------------------------------- */
+	// Spellcasting Actions
+
 	// Choosing, and then casting the currently selected spell.
 	private void CastSpell() {
 
@@ -149,7 +155,7 @@ public class CharSpells : NetworkBehaviour {
 
 
 		// Call any functions related to the spell's specific function.
-
+		_charAudio.AudioSummonWarrior();
 
 		// Finalise casting interface and move back to normal controls.
 		TypeStatus(false, true);

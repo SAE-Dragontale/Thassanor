@@ -46,7 +46,7 @@ public class BoardGeneration : MonoBehaviour {
     [Tooltip("This value is multiplied by the column size or row size, whichever is biggest. This keeps size & spread dynamic.")]
     [Range(2, 12)]
     public int _townSpread;
-	public int _MaxTownCount = 4;	
+	public int _maxTownCount = 4;	
 	[SerializeField] private int _curTownCount = 0;	
 
 	[Space]
@@ -70,8 +70,9 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 
     public GameObject _navMeshTile;
-	public NavMeshSurface _surface;
-	public Renderer _navTileRend;
+	NavMeshSurface _surface;
+	Renderer _navTileRend;
+	[Space]
 
 	public List<GameObject> _tileList = new List<GameObject>();
 	public List<GameObject> _propList = new List<GameObject>();
@@ -80,8 +81,8 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 	[Header("GameObject References")]
+	public MapData _mapData;
 	public BorderGeneration _borderGenRef;
-
 	public GameObject _tileInstance;
 
     [Space]
@@ -93,14 +94,15 @@ public class BoardGeneration : MonoBehaviour {
     //public SingletonPass _singletonRef;
     void Awake()
 	{
-		//read from singleton
-		//_singletonRef = GameObject.Find("MapSettings").GetComponent<SingletonPass>();
-		//_itSeed = _singletonRef._itSeed;
-		//_columns = _singletonRef._columns;
-		//_rows = _singletonRef._rows;
-		//_waterSize = _singletonRef._waterSize;
-		//_townSpread = _singletonRef._townSpread;
-		//_maxTownCount = _singletonRef._maxTownCount;
+								//read from singleton
+
+		_mapData = GameObject.Find("[Thassanor]").GetComponent<MapData>();
+		_itSeed = _mapData._itSeed;
+		_columns = _mapData._columns;
+		_rows = _mapData._rows;
+		_waterSize = _mapData._waterSize;
+		_townSpread = _mapData._townSpread;
+		_maxTownCount = _mapData._maxTownCount;
 	}
 
 	private void Start ()
@@ -116,14 +118,6 @@ public class BoardGeneration : MonoBehaviour {
 		_p1Spawn = GameObject.Find("P1 Spawner");
 		_p2Spawn = GameObject.Find("P2 Spawner");
 
-		//sets the surface object as a child of the grid, sets the transform to the center of the board, sets the scale to match the length and height of the grid, and builds a navmesh on the surface.
-		//disables rendered just in case
-		_navTileRend = _navMeshTile.GetComponent<Renderer>();
-		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
-		_navMeshTile.transform.position = new Vector3(_columns/2f -.5f, -0.01f, _rows/2f -.5f);
-		_navMeshTile.transform.localScale = new Vector3(_columns / 9.75f,.1f,_rows / 9.75f);
-		_surface.BuildNavMesh();
-		_navTileRend.enabled = false;
 
 
 		SetupTilesArray ();
@@ -142,7 +136,11 @@ public class BoardGeneration : MonoBehaviour {
 
 	public IEnumerator DelayedStart()
 	{
-		yield return new WaitForSeconds(.7f);
+		yield return new WaitForSeconds(.5f);
+		
+		//generates the nav surface for the board
+		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
+		_surface.BuildNavMesh();
 	}
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
@@ -206,7 +204,7 @@ public class BoardGeneration : MonoBehaviour {
 						//perlin value for towns to spawn
 						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f  && townSpreadCur == _townSpread) 
 						{
-							if (_curTownCount != _MaxTownCount)
+							if (_curTownCount != _maxTownCount)
 							{
 								InstantiateTown(_townTiles, x, z);
 								townSpreadCur = 0;

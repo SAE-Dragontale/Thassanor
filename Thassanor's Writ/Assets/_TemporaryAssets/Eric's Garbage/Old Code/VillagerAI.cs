@@ -38,7 +38,6 @@ public class VillagerAI : MonoBehaviour {
 	float patrolDirX;
 	float patrolDirZ;
 	public float distance;
-	float randTimeValue;
 
 	//update void which holds the state machine for the ally
 	void Update (){
@@ -172,9 +171,7 @@ public class VillagerAI : MonoBehaviour {
 				//chooses a random patrol direction out of 4 directions
 				patrolDirX = Random.Range(-1f,1f);
 				patrolDirZ = Random.Range(-1f,1f);
-
-				//rand value for timer here so it only sets once per patrol state
-				randTimeValue = Random.Range(1f,1.8f);				
+			
 			}
 
 			//move in that patrol direction

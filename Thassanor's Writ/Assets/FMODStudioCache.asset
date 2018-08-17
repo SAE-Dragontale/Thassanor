@@ -42,7 +42,7 @@ MonoBehaviour:
   - {fileID: 114338137785625736}
   MasterBankRef: {fileID: 114485111546009438}
   StringsBankRef: {fileID: 114283262065542054}
-  stringsBankWriteTime: 636700449785325597
+  stringsBankWriteTime: 636701015745199178
   cacheVersion: 2
 --- !u!114 &114002091728069872
 MonoBehaviour:
@@ -88,6 +88,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2718
+--- !u!114 &114011886505628000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Game Intensity
+  Min: 0
+  Max: 4
+  Default: 0
 --- !u!114 &114016330485420136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,18 +178,17 @@ MonoBehaviour:
   Banks:
   - {fileID: 114287033441057234}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114626188857810788}
-  - {fileID: 114496963613193740}
-  - {fileID: 114825643064678212}
-  - {fileID: 114401463322919572}
-  - {fileID: 114562201905494986}
-  - {fileID: 114706696679063496}
-  - {fileID: 114340827718733144}
-  MinDistance: 720
-  MaxDistance: 10000
+  - {fileID: 114767410112240932}
+  - {fileID: 114235709463544828}
+  - {fileID: 114011886505628000}
+  - {fileID: 114530423086382274}
+  - {fileID: 114279542633518910}
+  - {fileID: 114684839396108270}
+  MinDistance: 0
+  MaxDistance: 0
   Length: 336000
 --- !u!114 &114031229980687252
 MonoBehaviour:
@@ -354,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
     Game Sounds.bank
-  lastModified: 636700449798803333
+  lastModified: 636701015754561681
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -531,6 +545,21 @@ MonoBehaviour:
   Min: 0
   Max: 10
   Default: 0
+--- !u!114 &114235709463544828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO MENU
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114244837951368408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +667,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114279542633518910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114283262065542054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,7 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\_First Party\Audio\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636700449785325597
+  lastModified: 636701015745199178
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -691,11 +735,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
     game Soundtrack.bank
-  lastModified: 636700449835351095
+  lastModified: 636701015762215219
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 7141600
+    Value: 7139968
   Exists: 1
 --- !u!114 &114308718616457788
 MonoBehaviour:
@@ -965,6 +1009,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 4926944
   Exists: 1
+--- !u!114 &114450773978039948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Fire Crackle Level
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114460946239842772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,7 +1100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\Master
     Bank.bank
-  lastModified: 636700449785255777
+  lastModified: 636701015745169236
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1144,6 +1203,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 6083488
   Exists: 1
+--- !u!114 &114530423086382274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO CREDITS
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114531310629739166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,7 +1471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
     Menu Soundtrack.bank
-  lastModified: 636700449837238853
+  lastModified: 636701015764060873
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1650,7 +1724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
     Menu UI.bank
-  lastModified: 636700449857267481
+  lastModified: 636701015768859604
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1756,6 +1830,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114684839396108270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GO TO GAMEPLAY
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114690244400162754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1827,7 +1916,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114085682561863438}
+  - {fileID: 114450773978039948}
   MinDistance: 0
   MaxDistance: 0
   Length: 50000
@@ -1894,6 +1983,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3400
+--- !u!114 &114767410112240932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Easter Egg
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114773183524482128
 MonoBehaviour:
   m_ObjectHideFlags: 0

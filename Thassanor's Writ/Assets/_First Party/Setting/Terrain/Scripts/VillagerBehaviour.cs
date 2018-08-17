@@ -5,10 +5,8 @@ using UnityEngine;
 public class VillagerBehaviour : MonoBehaviour {
 
 	SpriteRenderer _mySprite;
-    bool _canMove;
 	float _directionChangeTimer;
 	public float _health = 3f;
-	bool _isAlive = true;
 	[Space]
 
 	public GameObject _townRef;
@@ -37,8 +35,6 @@ public class VillagerBehaviour : MonoBehaviour {
 	{
 		_mySprite = GetComponentInChildren<SpriteRenderer>();
 
-		_canMove = true;
-		_isAlive = true;
 
 		_isIdling = true;
 		_isPatroling = false;
@@ -72,7 +68,6 @@ public class VillagerBehaviour : MonoBehaviour {
 			//sets rotation to 0's
 			transform.rotation = Quaternion.identity;
 			//sets appropriate bools
-			_canMove = false;
 			_isFleeing = false;
 			_isPatroling = false;
 		
@@ -137,7 +132,7 @@ public class VillagerBehaviour : MonoBehaviour {
 	// PATROL
 		if(_isPatroling == true)
 		{
-			_canMove = true;
+			
 			_isFleeing = false;
 			_isIdling = false;				
 			
@@ -205,7 +200,7 @@ public class VillagerBehaviour : MonoBehaviour {
 
 		if(_isFleeing == true)
 		{
-			_canMove = true;
+			
 			_isPatroling = false;
 			_isIdling = false;			
 			

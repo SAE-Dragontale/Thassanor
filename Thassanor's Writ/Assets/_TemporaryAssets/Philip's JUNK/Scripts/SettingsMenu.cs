@@ -15,7 +15,7 @@ public class SettingsMenu : MonoBehaviour
 
     private PlayerOptions playerOptions = new PlayerOptions();
     private Resolution[] allResolutions;
-    private List<Resolution> resolutionsWithRefreshRate = new List<Resolution>();
+    //private List<Resolution> resolutionsWithRefreshRate = new List<Resolution>();
     private Resolution resolution;
 
     private void Awake()

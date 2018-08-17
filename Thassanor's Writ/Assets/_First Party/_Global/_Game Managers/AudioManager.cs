@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour {
 	ParameterInstance mainThemePausing;
 	ParameterInstance mainThemeScene;
 
+	EventInstance ambienceMenu;
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -36,8 +38,7 @@ public class AudioManager : MonoBehaviour {
 	private void Awake() {
 
 		AwakeMusic();
-		AwakeSFX();
-		AwakeUI();
+		AwakeAmbience();
 		
 	}
 
@@ -51,13 +52,9 @@ public class AudioManager : MonoBehaviour {
 
 	}
 
-	private void AwakeSFX() {
+	private void AwakeAmbience() {
 
-
-
-	}
-
-	private void AwakeUI() {
+		ambienceMenu = RuntimeManager.CreateInstance("event:/Ambience/menuAmbience");
 
 	}
 
@@ -70,7 +67,7 @@ public class AudioManager : MonoBehaviour {
 		_gameIntensity = 1;
 
 		// Finally, begin the music.
-		BeginMusic();		
+		BeginMusic();
 
 	}
 
@@ -95,23 +92,48 @@ public class AudioManager : MonoBehaviour {
 	public void MusicToCredits() => mainThemeScene.setValue(3f);
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Ambience Calls
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	// Menu
+	public void BeginMenuAmbience() => ambienceMenu.start();
+	public void StopMenuAmbience() => ambienceMenu.stop(STOP_MODE.ALLOWFADEOUT);
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		SFX Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	// Player Casting
+	public void SingleSpellArcher(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/castArcher", locationFrom);
+	public void SingleSpellWarrior(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/castWarrior", locationFrom);
+	public void SingleSpellResurrection(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/castResurrection", locationFrom);
 
+	// Player Receiving Damage
+	public void SingleDamageArcher(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/charDamageArcher", locationFrom);
+	public void SingleDamageWarrior(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/charDamageWarrior", locationFrom);
+	public void SingleCharDeath(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/charDeath", locationFrom);
+	public void SingleCharTyping(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/charTyping", locationFrom);
+	public void SingleCharHurt(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/charVoiceDamage", locationFrom);
+
+	// Footsteps
+	public void SingleFootsteps(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/footsteps", locationFrom);
+
+	// Skeleton Noises
+	public void SingleSkeletonDeath(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/skeletonDeath", locationFrom);
+	public void SingleSkeletonDamage(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/skeletonDamage", locationFrom);
+
+	// Villager Noises
+	public void SingleVillagerDeath(Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/Gameplay/villagerDeathMale", locationFrom);
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Functions
+		UI Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Update is called once per frame.
-	private void Update () {
-
-		HealthParam(_playerHealth);
-		IntensityParam(_gameIntensity);
-
-	}
+	// Menu UI SFX
+	public void UIButtonClick (Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/UserInterface/buttonClick", locationFrom);
+	public void UIScrollOpen (Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/UserInterface/scrollOpen", locationFrom);
+	public void UIScrollClose (Vector3 locationFrom) => RuntimeManager.PlayOneShot("event:/UserInterface/scrollClose", locationFrom);
 
 	/* ----------------------------------------------------------------------------- */
-	
+
 }

@@ -37,13 +37,12 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 
-    float _waterAmount = -0.6f;
+    readonly float _waterAmount = -0.3f;
     [Range(4, 12)]
     public int _waterSize;
 
 	[Space]
 
-    [Tooltip("This value is multiplied by the column size or row size, whichever is biggest. This keeps size & spread dynamic.")]
     [Range(2, 12)]
     public int _townSpread;
 	public int _maxTownCount = 4;	
@@ -163,7 +162,7 @@ public class BoardGeneration : MonoBehaviour {
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
 		//keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
-		_townSpread = ((Mathf.Max(_columns,_rows) / 3) * _townSpread);
+
 		if(_townSpread % 2 == 0)
 		{_townSpread -= 1;}
 				
@@ -182,12 +181,11 @@ public class BoardGeneration : MonoBehaviour {
 					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
 					{
 
-						//the actual spawning of the grass tiles
+						//the actual spawning of the grass tiles, this is here too so theres a grass tile under any water or town
 						InstantiateFromArray(_floorTiles,x,z);	
 						mirrorTileList.Add(floorTileInstance);
 						mirrorListCount++;
-
-
+                        
 						//perlin value for water
 						if (_fltPerlinValue < _waterAmount) 
 						{
@@ -195,9 +193,9 @@ public class BoardGeneration : MonoBehaviour {
 						}
 						
 						//perlin value for towns to spawn
-						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f  && townSpreadCur == _townSpread) 
+						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f) 
 						{
-							if (_curTownCount != _maxTownCount)
+							if (_curTownCount != _maxTownCount && townSpreadCur == _townSpread)
 							{
 								InstantiateTown(_townTiles, x, z);
 								townSpreadCur = 0;
@@ -225,8 +223,8 @@ public class BoardGeneration : MonoBehaviour {
 			{				
 				//for (int x = _tiles.Length - 1; x >= 0; x--) //this results in a vertical flip, so x town will be to the right of one player, and to the left for the other
 				for (int x = 0; x < _tiles.Length; x++)//  this results in a vertical and horizontal flip, so x town will be to the right of both players
-				{ 						
-					Vector3 position = new Vector3(x, 0f, z);    
+				{
+					Vector3 position = new Vector3(x * 10, 0f, z * 10);    
 
 					floorTileInstance = Instantiate(mirrorTileList[mirrorListCount - 1], position, Quaternion.identity, _tileFolder) as GameObject;
 					floorTileInstance.name = mirrorTileList[mirrorListCount - 1].name;
@@ -251,7 +249,11 @@ public class BoardGeneration : MonoBehaviour {
     
 	GameObject floorTileInstance;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
-	{		
+	{
+
+        xCoord = xCoord * 10f;
+        zCoord = zCoord * 10f;
+
 		//sets the player positions appropriately to their gbo's, when the center bottom tile is creating. 
 		if (xCoord == (_columns/2) && zCoord == 0) 
 		{
@@ -285,7 +287,7 @@ public class BoardGeneration : MonoBehaviour {
 		}			
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
-		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
+		floorTileInstance.name = "Tile _x-" + (xCoord /10) + " _z-" + (zCoord/10);
 
 
         _tileList.Add(floorTileInstance);
@@ -295,6 +297,9 @@ public class BoardGeneration : MonoBehaviour {
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	void InstantiateTown (GameObject[] prefabs, float xCoord, float zCoord)
 	{
+        xCoord = xCoord * 10;
+        zCoord = zCoord * 10;
+
 		// Create a random index for the instantiated tile.
 		int randomIndex = Random.Range(0, prefabs.Length);
 
@@ -303,14 +308,14 @@ public class BoardGeneration : MonoBehaviour {
 		GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
 
 		Vector3 newPos = tileInstance.transform.position;
-		newPos = newPos + new Vector3(0,0.05f,0);
+		newPos = newPos + new Vector3(0,0.3f,0);
 		tileInstance.transform.position = newPos;
 		tileInstance.name = "Town_#" + _curTownCount;
 		_curTownCount++;
 		//adds the tile generated into a list for a reference to each of them
 		_propList.Add (tileInstance);
 
-		RaycastHit hit;
+        RaycastHit hit;
 		if (Physics.Raycast(tileInstance.transform.position,-Vector3.up, out hit) && hit.transform.tag == "Ground")
 		{
 			tileInstance.transform.parent = hit.transform;
@@ -322,7 +327,7 @@ public class BoardGeneration : MonoBehaviour {
 	private int waterNo = 0;		
     void InstantiateWater (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-		Vector3 position = new Vector3(xCoord,0.05f, zCoord);
+		Vector3 position = new Vector3(xCoord * 10,0.05f, zCoord * 10);
 		
 		//loop to grow the pool
 		for (int it = 0; it < _waterSize; it++)
@@ -356,7 +361,7 @@ public class BoardGeneration : MonoBehaviour {
 				else
                 {
 					//if water is out of bounds, destroy
-					if (tileInstance.transform.position.x < 0 || tileInstance.transform.position.z < 0 || tileInstance.transform.position.x > _tiles.Length-1 || tileInstance.transform.position.z > _tiles[0].Length-1) 
+					if (tileInstance.transform.position.x < -5 || tileInstance.transform.position.z < -5 || tileInstance.transform.position.x > (_tiles.Length * 10)-1 || tileInstance.transform.position.z > (_tiles[0].Length * 10)-1) 
 					{						
 						Destroy(tileInstance);
 					}

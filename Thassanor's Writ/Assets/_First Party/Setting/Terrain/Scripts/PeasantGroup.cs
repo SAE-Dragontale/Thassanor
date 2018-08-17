@@ -17,27 +17,24 @@ public class PeasantGroup : UnitGroup {
 
     protected override void BehaviourLoopPassive()
     {
-        //sets this to only occur once in patrol state
-        if (_oneShotActionActive == true)
+        
+        for (int i = 0; i < _everyUnit.Length; i++)
         {
-            for (int i = 0; i < _everyUnit.Length; i++)
-            {
-                //chooses a random patrol direction out of 4 directions
-                float patrolDirX = Random.Range(-1f, 1f);
-                float patrolDirZ = Random.Range(-1f, 1f);
+            //chooses a random patrol direction out of 4 directions
+            float patrolDirX = Random.Range(-1f, 1f);
+            float patrolDirZ = Random.Range(-1f, 1f);
 
-                _patrolDir = new Vector3(patrolDirX, 0, patrolDirZ);
-                MoveUnit(i, _patrolDir);
+            _patrolDir = new Vector3(patrolDirX, 0, patrolDirZ);
+            MoveUnit(i, _patrolDir);
 
-                Debug.Log("Navmesh clamp");
-                NavMeshHit closestHit;
-                if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
-                    _everyUnit[i].gameObject.transform.position = closestHit.position;
+            //Debug.Log("Navmesh clamp");
+            //NavMeshHit closestHit;
+            //if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+            //    _everyUnit[i].gameObject.transform.position = closestHit.position;
 
-            }
-
-            _oneShotActionActive = false;
         }
+
+        
     }
 
     //_unitStyle;           // The type of unit that we contain.

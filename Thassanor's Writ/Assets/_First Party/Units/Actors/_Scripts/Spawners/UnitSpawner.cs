@@ -26,7 +26,7 @@ public class UnitSpawner : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private void Awake() => _spawnToThis._Anchor = transform;
-	private void Start() {
+	private void Thing() {
 
 		// Define our UnitGroup Style
 		_spawnToThis._UnitStyle = _everyUnitStyle[Random.Range(0, _everyUnitStyle.Length - 1)];

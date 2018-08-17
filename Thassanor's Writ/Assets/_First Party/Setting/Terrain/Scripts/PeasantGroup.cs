@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PeasantGroup : UnitGroup {
 
-    float _actionTimer;
+    public float _spawnTimer;
     bool _oneShotActionActive = false;
     Vector3 _patrolDir;
 
@@ -32,11 +32,13 @@ public class PeasantGroup : UnitGroup {
             MoveUnit(0, _patrolDir);
         }
 
-        _actionTimer = _actionTimer + Time.deltaTime;
-        if (_actionTimer >= 4f)
+        _spawnTimer = _spawnTimer + Time.deltaTime;
+        if (_spawnTimer >= 4f)
         {
             //reset action timer, set one shot bool to true because idle has 'play once' elements, and set back to idle 
-            _actionTimer = 0f;
+            
+            AddUnit(_villagersToSpawn);
+            _spawnTimer = 0f;
             _oneShotActionActive = true;
         }
     }

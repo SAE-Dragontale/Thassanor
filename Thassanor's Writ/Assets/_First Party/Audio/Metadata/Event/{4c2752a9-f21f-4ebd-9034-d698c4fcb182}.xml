@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{4c2752a9-f21f-4ebd-9034-d698c4fcb182}">
         <property name="name">
-            <value>Forest Ambience Fire Crackling</value>
+            <value>menuAmbience</value>
         </property>
         <property name="outputFormat">
             <value>1</value>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{801722ca-d402-4b3e-b4bb-2d7fdb566c4c}">
         <property name="name">
-            <value>SOUNDTRACK</value>
+            <value>Main</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
@@ -254,7 +254,7 @@
     </object>
     <object class="GameParameter" id="{d51b679a-8ea0-47ac-a69b-3228370917bb}">
         <property name="name">
-            <value>Health</value>
+            <value>health</value>
         </property>
         <property name="maximum">
             <value>100</value>
@@ -270,7 +270,7 @@
     </object>
     <object class="GameParameter" id="{5b469696-98db-4ac3-be86-0beb523d7157}">
         <property name="name">
-            <value>PAUSE GAME</value>
+            <value>pause</value>
         </property>
         <relationship name="automationCurves">
             <destination>{8b48aefe-d8fd-4771-bd4e-d444b48a790f}</destination>
@@ -281,7 +281,7 @@
     </object>
     <object class="GameParameter" id="{84419623-baf9-4fa8-99dc-e44c28a0d14e}">
         <property name="name">
-            <value>In Game Intensity</value>
+            <value>intensity</value>
         </property>
         <property name="maximum">
             <value>4</value>
@@ -296,7 +296,7 @@
     </object>
     <object class="GameParameter" id="{72342ec3-fc29-4685-8949-779fce7755a9}">
         <property name="name">
-            <value>MENU + GAMEPLAY</value>
+            <value>scene</value>
         </property>
         <property name="maximum">
             <value>3</value>

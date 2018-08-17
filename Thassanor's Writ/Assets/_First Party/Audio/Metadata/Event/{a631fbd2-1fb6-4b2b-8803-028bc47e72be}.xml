@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.09.00">
     <object class="Event" id="{a631fbd2-1fb6-4b2b-8803-028bc47e72be}">
         <property name="name">
-            <value>Type Writer</value>
+            <value>charTyping</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{775859a1-900c-43fb-9c3c-5fe5b2a93981}</destination>
+            <destination>{3626128a-fe9c-46b2-a899-b91167c8a804}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{f9e26de3-7970-4491-ac12-72eb01810127}</destination>

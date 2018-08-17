@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PeasantGroup : UnitGroup {
 
@@ -11,6 +12,7 @@ public class PeasantGroup : UnitGroup {
     protected override void Start()
     {
         base.Start();
+
     }
 
     protected override void BehaviourLoopPassive()
@@ -26,6 +28,11 @@ public class PeasantGroup : UnitGroup {
 
                 _patrolDir = new Vector3(patrolDirX, 0, patrolDirZ);
                 MoveUnit(i, _patrolDir);
+
+                Debug.Log("Navmesh clamp");
+                NavMeshHit closestHit;
+                if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+                    _everyUnit[i].gameObject.transform.position = closestHit.position;
 
             }
 

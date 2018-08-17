@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VillagerSpawn : MonoBehaviour {
 
@@ -26,7 +27,8 @@ public class VillagerSpawn : MonoBehaviour {
             //reset action timer, set one shot bool to true because idle has 'play once' elements, and set back to idle 
 
             _peasantGroup.AddUnit(1);
-            
+
+
             _actionTimer = 0f;
         }
     }

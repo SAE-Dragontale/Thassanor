@@ -30,6 +30,8 @@ public class InputTranslator : NetworkBehaviour {
     [SyncVar] private PlayerState _playerState;
     [SyncVar] private PlayerState _lastState;
 
+	[SerializeField] private bool isDebug = false;
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -61,7 +63,8 @@ public class InputTranslator : NetworkBehaviour {
 	// Assign settings from lobby.
 	private void LoadPlayerSettings() {
 
-		return;
+		if (isDebug)
+			return;
 
 		// Load Game Settings.
 		GetComponent<CharSpells>()._difficulty = FindObjectOfType<MapData>().typingDifficulty;

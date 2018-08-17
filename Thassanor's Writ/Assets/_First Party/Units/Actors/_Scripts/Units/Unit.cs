@@ -111,7 +111,7 @@ public class Unit : MonoBehaviour {
 		// If our new location is the same as our old location, don't run.
 		if (_lastDestination == _destination.position)
 			return;
-        
+
 		_ai?.SetDestination(_destination.position);
 		_lastDestination = _destination.position;			
 

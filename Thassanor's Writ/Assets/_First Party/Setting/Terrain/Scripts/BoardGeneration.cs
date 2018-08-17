@@ -94,15 +94,17 @@ public class BoardGeneration : MonoBehaviour {
     //public SingletonPass _singletonRef;
     void Awake()
 	{
-								//read from singleton
+							//read from singleton
+		//_mapData = GameObject.FindObjectOfType
+		
+		//_itSeed = _mapData._itSeed;
+		//_columns = _mapData._columns;
+		//_rows = _mapData._rows;
+		//_waterSize = _mapData._waterSize;
+		//_townSpread = _mapData._townSpread;
+		//_maxTownCount = _mapData._maxTownCount;
 
-		_mapData = GameObject.Find("[Thassanor]").GetComponent<MapData>();
-		_itSeed = _mapData._itSeed;
-		_columns = _mapData._columns;
-		_rows = _mapData._rows;
-		_waterSize = _mapData._waterSize;
-		_townSpread = _mapData._townSpread;
-		_maxTownCount = _mapData._maxTownCount;
+		
 	}
 
 	private void Start ()
@@ -117,19 +119,12 @@ public class BoardGeneration : MonoBehaviour {
 
 		_p1Spawn = GameObject.Find("P1 Spawner");
 		_p2Spawn = GameObject.Find("P2 Spawner");
-
-
-
+               
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
 		_borderGenRef.InstantiateOuterWalls (); 			
-
-/*
-		_txtBoardSize.text = "Columns: " + _columns + " | Rows: " + _rows + " | Ground Tiles: " + _tileList.Count;		
-		_txtTownCount.text = "Towns: " + _curTownCount;	
-		_txtWaterCount.text = "Water Tiles: " + _waterList.Count;
-*/			
+		
 		StartCoroutine(DelayedStart());
 
 	}
@@ -161,7 +156,6 @@ public class BoardGeneration : MonoBehaviour {
 
 	List<GameObject> mirrorTileList = new List<GameObject>();
 	int mirrorListCount;
-	bool SpawnBaseTile = false;
 	//Function to create a tile
 	void InstantiateTiles ()
 	{		
@@ -190,7 +184,6 @@ public class BoardGeneration : MonoBehaviour {
 
 						//the actual spawning of the grass tiles
 						InstantiateFromArray(_floorTiles,x,z);	
-						SpawnBaseTile = true;
 						mirrorTileList.Add(floorTileInstance);
 						mirrorListCount++;
 
@@ -226,7 +219,6 @@ public class BoardGeneration : MonoBehaviour {
 						townSpreadCur++;
 					}
 					
-						SpawnBaseTile = false;
 				}
 			}
 			else 		//non random half
@@ -274,19 +266,21 @@ public class BoardGeneration : MonoBehaviour {
 		int index = 0; //if the number of possible grass tiles is 1, then set index to 0 so it wont try spawn soemthing that doesnt exist
 		if(prefabs.Length > 1)
 		{
-			//if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
-			//... it chooses one tile at random from the others and sets that as the index
-			if(Random.value > .92f)
-			{
-				if(SpawnBaseTile == true)
-				{index = 0;}
-				else
-				{index = Random.Range(0, prefabs.Length);}
-			}
-			else
-			{
-				index = 0;
-			}
+            //if there's more than 1 possible grass tile to spawn from, other tiles hhave 25% chance to spawn ...
+            //... it chooses one tile at random from the others and sets that as the index
+            if (_fltPerlinValue > .57f && _fltPerlinValue < .6f)
+            {
+                index = 2;
+
+            }
+            else if (_fltPerlinValue > 0f && _fltPerlinValue < .5f)
+            {
+                index = 1;
+            }
+            else
+            {
+                index = 0;
+            }
 			
 		}			
 

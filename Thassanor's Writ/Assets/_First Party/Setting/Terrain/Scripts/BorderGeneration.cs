@@ -37,9 +37,9 @@ public class BorderGeneration : MonoBehaviour {
 
 		// The outer walls are one unit left, right, up and down from the board.
 		float leftEdgeX = -1f;
-		float rightEdgeX = _boardGeneratorRef._columns;
+		float rightEdgeX = _boardGeneratorRef._columns * 10;
 		float bottomEdgeZ = -1f;
-		float topEdgeZ = _boardGeneratorRef._rows;
+		float topEdgeZ = _boardGeneratorRef._rows * 10;
 
 		// Instantiate both vertical walls (one on each side).
 		InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeZ, topEdgeZ);

@@ -126,7 +126,9 @@ public class BoardGeneration : MonoBehaviour {
 		
 		StartCoroutine(DelayedStart());
 
-	}
+       // Debug.Log("Rows_" + _tiles[0].Length);
+       // Debug.Log("Columns" + _tiles.Length);
+    }
 
 	public IEnumerator DelayedStart()
 	{
@@ -180,7 +182,7 @@ public class BoardGeneration : MonoBehaviour {
 					//here to say if we're not on an outer edge tile & instantiate on top of the existing tile
 					if (x != 0 || z != 0 || x != _tiles.Length-1 || z != _tiles[0].Length-1) 
 					{
-
+                        
 						//the actual spawning of the grass tiles, this is here too so theres a grass tile under any water or town
 						InstantiateFromArray(_floorTiles,x,z);	
 						mirrorTileList.Add(floorTileInstance);
@@ -354,9 +356,7 @@ public class BoardGeneration : MonoBehaviour {
 			{				
 				if (position == tile.transform.position)
                 {
-					//destroys overlapping tile and instantiates ground tile in place
 					Destroy(tileInstance);
-					InstantiateFromArray (_floorTiles, xCoord, zCoord);
                 } 
 				else
                 {

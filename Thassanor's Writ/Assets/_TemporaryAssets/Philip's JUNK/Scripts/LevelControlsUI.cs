@@ -11,7 +11,6 @@ using UnityEngine.UI;
 
 public class LevelControlsUI : MonoBehaviour {
 
-    public MapData mapData;
     public GameObject thassanor;
 
     //inspector components

@@ -32,21 +32,21 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        //if (isLocalPlayer)
-        //{
-        //    GetComponent<CarController>().enabled = true;
-        //    SmoothCameraFollow.target = this.transform;
-        //}
+        if (isLocalPlayer)
+        {
+            GetComponent<CarController>().enabled = true;
+            SmoothCameraFollow.target = this.transform;
+        }
 
-        //Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //foreach (Renderer r in renderers)
-        //    r.material.color = playerColor;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+            r.material.color = playerColor;
 
-        //this.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
-	}
+        this.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+    }
 
     private void Update()
     {
-            this.GetComponentInChildren<TextMesh>().text = pname;
+            GetComponentInChildren<TextMesh>().text = pname;
     }
 }

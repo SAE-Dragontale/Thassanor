@@ -1,15 +1,15 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.3.1
+   Version:			0.4.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
 using UnityEngine;
-// using UnityEngine.Networking;
+using UnityEngine.Networking;
 
-public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
+public class UnitGroup : NetworkBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
@@ -18,16 +18,17 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	[Space] [Header("References")]
 
 	[Tooltip("The host is the transform that the UnitGroup is associated with. This can be a player, actor, or even a terrain set.")]
-	[SerializeField] protected Transform _anchor;		// The target the group is following.
+	[SerializeField] protected Transform _anchor;			// The target the group is following.
 	public Transform _Anchor {
 		set { _anchor = value?.Find("RallyPoint") ?? value; }
 	}
 
-	protected Vector3 _lastPosition = new Vector3();		// The last position of the target host. Check against to summise whether we've moved.
+	protected Vector3 _lastPosition = new Vector3();        // The last position of the target host. Check against to summise whether we've moved.
+	protected bool _forcePositionUpdate = false;			// Whether we're ignoring the check and forcing the position to update.
 
-	[SerializeField] protected UnitStyle _unitStyle;	// The type of unit that we contain.
-	[SerializeField] protected GameObject _unitTemplate;		// The basic unit template.
-	[SerializeField] protected Unit[] _everyUnit;		// The units within the group.
+	[SerializeField] protected UnitStyle _unitStyle;		// The type of unit that we contain.
+	[SerializeField] protected GameObject _unitTemplate;	// The basic unit template.
+	[SerializeField] protected Unit[] _everyUnit;			// The units within the group.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Method Variables
@@ -51,7 +52,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	[SerializeField] protected bool _permanent;    // Whether the group will Destroy() if it has no units.
 
 	// Health functionality for UnitGroups.
-	/* [SyncVar] */ [SerializeField] protected float _health;
+	[SyncVar] [SerializeField] protected float _health;
 	public float SetHealth {
 		set {
 			_health = value;
@@ -100,19 +101,17 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[InspectButton]
-	public virtual void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
+	// Change UnitGroup by Unit.
+	public void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
+	public void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
 
-	[InspectButton]
-	public virtual void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
-
-	[InspectButton]
-	public virtual void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
+	// Change UnitGroup by Health.
+	public void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
 
 	// This function is used to update incremental changes to a Unit's health.
-	public virtual void UnitsFromHealth() {
+	protected virtual void UnitsFromHealth() {
 
 		// Health should not drop below zero.
 		_health = Mathf.Max(_health, 0);
@@ -129,12 +128,12 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 			UnitSubtractFromHealth(updatedHealth);
 
 		// Update our UnitList with the hierarchy components.
-		_everyUnit = GetComponentsInChildren<Unit>();
+		UpdateUnitList();
 
 	}
 
 	// We need to spawn units here then. This doesn't need networking commands because it is implicitly networked with a SyncVar.
-	protected virtual void UnitAddFromHealth(int updatedHealth) {
+	protected void UnitAddFromHealth(int updatedHealth) {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
 
@@ -146,7 +145,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	}
 
 	// We need to despawn units instead, which once again is implicitly networked.
-	protected virtual void UnitSubtractFromHealth(int updatedHealth) {
+	protected void UnitSubtractFromHealth(int updatedHealth) {
 
 		// Because Destroy doesn't immediately destroy the object on the current frame, we need to remove it as a parent for the remainder of our code to funciton.
 		for (int i = _everyUnit.Length - updatedHealth; i > 0; i--) {
@@ -161,11 +160,10 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	/* ----------------------------------------------------------------------------- */
 
 	// This function is used to update a collection of units, generally from the editor.
-	[InspectButton]
-	public virtual void UnitsFromChildren() {
+	public void UnitsFromChildren() {
 
 		// Update our UnitList with the hierarchy components.
-		_everyUnit = GetComponentsInChildren<Unit>();
+		UpdateUnitList();
 
 		// Load in our initial health value.
 		_health = _unitStyle._health * _everyUnit.Length;
@@ -173,6 +171,15 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 		// Then iterate through our units and apply our current style to each unit.
 		foreach (Unit unit in _everyUnit)
 			unit._UnitStyle = _unitStyle;
+
+		_forcePositionUpdate = true;
+
+	}
+
+	protected void UpdateUnitList() {
+
+		_everyUnit = GetComponentsInChildren<Unit>();
+		_forcePositionUpdate = true;
 
 	}
 
@@ -247,6 +254,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 
 	protected bool NeedToUpdatePosition(Vector3 positionToCheck) {
 
+
 		// Log our last position.
 		if (setMyLastPosition == null)
 			StartCoroutine(setMyLastPosition = UpdateLastPos(positionToCheck));
@@ -277,7 +285,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	// Move our group towards the Host's Rally Point and adjust our formation as required.
 	// The "Rules of Formation" provide a framework position for the units to move to as an army. They'll be arrayed in columns and rows.
 
-	protected virtual void RulesOfFormation() {
+	protected void RulesOfFormation() {
 
 		int remainingUnits = _everyUnit.Length; // The units that are currently unpositioned in our iteration.
 		int currentUnitIndex = 0;             // How many units we've positioned so far by array index.
@@ -313,7 +321,7 @@ public class UnitGroup : MonoBehaviour {//NetworkBehaviour {
 	protected virtual Vector3 PositionVariance(Vector3 position) => position;
 
 	// And finally, a quick shorthand function to actually move the unit. This is just for clean reading.
-	protected virtual void MoveUnit(int unit, Vector3 moveTo) {
+	protected void MoveUnit(int unit, Vector3 moveTo) {
 
 		_everyUnit[unit]._destination.position = PositionVariance(moveTo);
 

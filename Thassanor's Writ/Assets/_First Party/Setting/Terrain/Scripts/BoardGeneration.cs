@@ -126,8 +126,8 @@ public class BoardGeneration : MonoBehaviour {
 		
 		StartCoroutine(DelayedStart());
 
-        Debug.Log("Rows_" + _tiles[0].Length);
-        Debug.Log("Columns" + _tiles.Length);
+       // Debug.Log("Rows_" + _tiles[0].Length);
+       // Debug.Log("Columns" + _tiles.Length);
     }
 
 	public IEnumerator DelayedStart()

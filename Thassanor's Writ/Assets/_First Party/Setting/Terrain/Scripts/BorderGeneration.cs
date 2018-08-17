@@ -25,7 +25,6 @@ public class BorderGeneration : MonoBehaviour {
         _rowLength = _boardGeneratorRef._rows * 10;
         _columnLength = _boardGeneratorRef._columns * 10;
 
-        Debug.Log(_rowLength + " " + _columnLength);
     }
 
 

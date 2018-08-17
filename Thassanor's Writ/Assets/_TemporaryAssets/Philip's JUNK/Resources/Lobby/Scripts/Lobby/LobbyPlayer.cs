@@ -52,6 +52,7 @@ namespace Prototype.NetworkLobby
 
         public override void OnClientEnterLobby()
         {
+
             base.OnClientEnterLobby();
 
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			MusicManager.cs
-   Version:			0.1.1
+   Version:			0.2.0
    Description: 	For managing all audio components within the game. All audio should be called from this script.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -27,8 +27,8 @@ public class AudioManager : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] [Range(0, 4)] int gameIntensity;
-	[SerializeField] [Range(0, 100)] float playerHealth;
+	[SerializeField] [Range(0, 4)] int _gameIntensity;
+	[SerializeField] [Range(0, 100)] float _playerHealth;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		mainTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Soundtrack/SOUNDTRACK");
+		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack/SOUNDTRACK");
 		mainTheme.getParameterByIndex(0, out mainThemeHealth);
 		mainTheme.getParameterByIndex(1, out mainThemeIntensity);
 		mainTheme.getParameterByIndex(2, out mainThemeSpecialEvent);
@@ -46,27 +46,58 @@ public class AudioManager : MonoBehaviour {
 		mainTheme.getParameterByIndex(5, out mainThemeGameplay);
 
 
+
 	}
 
 	// Called before class calls or functions.
 	private void Start () {
 
-		mainTheme.start();
-		mainThemeGameplay.setValue(1);
+		// Initialise the music automatically.
+		BeginMusic();
+		MusicToGameplay();
 
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Class Calls
+		Music Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	public void BeginMusic() => mainTheme.start();
+	public void StopMusic() => mainTheme.stop(STOP_MODE.ALLOWFADEOUT);
+
+	public void HealthParam(float health) => mainThemeHealth.setValue(health);
+	public void IntensityParam(float intensity) => mainThemeIntensity.setValue(intensity);
+
+	public void MusicToMenu() => mainThemeMenu.setValue(1f);
+	public void MusicToGameplay() => mainThemeGameplay.setValue(1f);
+	public void MusicToCredits() => mainThemeCredits.setValue(1f);
+	public void MusicToSpecial() => mainThemeSpecialEvent.setValue(1f);
+
+	public void ResetMusicTo() {
+				
+		mainThemeMenu.setValue(0f);
+		mainThemeGameplay.setValue(0f);
+		mainThemeCredits.setValue(0f);
+		mainThemeSpecialEvent.setValue(0f);
+
+	}
+
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		SFX Calls
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-	
+
 	// Update is called once per frame.
 	private void Update () {
-		
+
+		HealthParam(_playerHealth);
+		IntensityParam(_gameIntensity);
+
 	}
 
 	/* ----------------------------------------------------------------------------- */

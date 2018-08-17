@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.7.6
+   Version:			0.8.0
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -11,7 +11,6 @@ using UnityEngine.Networking;
 
 // We send information to:
 [RequireComponent(typeof(CharSpells),typeof(CharControls))]
-
 public class InputTranslator : NetworkBehaviour {
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -54,6 +53,24 @@ public class InputTranslator : NetworkBehaviour {
 
 		// Then, we also want to become the camera's primary transform tracker. We should be located on [0].
 		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
+
+		LoadPlayerSettings();
+
+	}
+
+	// Assign settings from lobby.
+	private void LoadPlayerSettings() {
+
+		return;
+
+		// Load Game Settings.
+		GetComponent<CharSpells>()._difficulty = FindObjectOfType<MapData>().typingDifficulty;
+
+		// Load Player Settings.
+		PlayerData settings = FindObjectOfType<PlayerData>();
+		GetComponent<CharVisuals>()._NecromancerStyle = settings.playerCharacter;
+		GetComponent<KeyboardTracker>()._Keybindings = settings.playerHotkeys;
+		GetComponent<CharSpells>()._SpellLoadout = settings.playerSpells;
 
 	}
 

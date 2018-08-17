@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.4.1
+   Version:			0.5.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -30,6 +30,16 @@ public class CharSpells : NetworkBehaviour {
 	[SerializeField] private Spell[] _spellLoadout;
 	[SerializeField] private string[] _spellPhrases;
 
+	public Spell[] _SpellLoadout {
+		set {
+			_spellLoadout = value;
+			InitialiseSpells();
+		}
+	}
+
+	// How difficult the strings are deemed to be.
+	[HideInInspector] public int _difficulty;
+
 	// Casting Prediction and Current Modifier.
 	[SerializeField] private string _closestMatch;
 	[SerializeField] private int _stringDifference;
@@ -51,17 +61,21 @@ public class CharSpells : NetworkBehaviour {
 	// Run at the start of an object's lifetime.
 	private void Start() {
 
+		// Just as a failsafe, we want to make sure we're always starting with the input field disabled.
+		TypeStatus(false, true);
+
+	}
+
+	private void InitialiseSpells() {
+
 		// Aquire Spell Settings from Phil's Implementation.
 		int difficulty = 1;
 
 		// Take out the corresponding "casting string" from each spell in the player's loadout and store it in something easier to manage later on.
 		_spellPhrases = new string[_spellLoadout.Length];
-		
+
 		for (int i = 0; i < _spellLoadout.Length; i++)
 			_spellPhrases[i] = _spellLoadout[i]._everyDifficultyPhrase[difficulty];
-
-		// Just as a failsafe, we want to make sure we're always starting with the input field disabled.
-		TypeStatus(false, true);
 
 	}
 

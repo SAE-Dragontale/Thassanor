@@ -46,7 +46,7 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 		// Then we're going to do the same for our player object.
 		_player.transform.parent = transform;
-		_player.name = _player.GetComponent<CharVisuals>()._necromancerStyle._unitName;
+		//_player.name = _player.GetComponent<CharVisuals>()._necromancerStyle._unitName;
 
 	}
 

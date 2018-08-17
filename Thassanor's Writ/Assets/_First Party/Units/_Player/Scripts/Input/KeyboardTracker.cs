@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			KeyboardTracker.cs
-   Version:			0.5.0
+   Version:			0.6.0
    Description: 	Inheriting from DeviceTracker.cs, this script extends functionality to track the player's Keyboard specifically.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -14,6 +14,12 @@ public class KeyboardTracker : DeviceTracker {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[SerializeField] private KeyboardHotkeys _keybindings;
+	public KeyboardHotkeys _Keybindings {
+		set {
+			_keybindings = value;
+			LoadKeybindings();
+		}
+	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -22,7 +28,7 @@ public class KeyboardTracker : DeviceTracker {
 	// Called before Update().
 	private void Start() {
 
-		LoadKeybindings(_keybindings);
+		LoadKeybindings();
 		_inputData = new RawDataInput( _keybindings._arrayKeyAxis.Length, _keybindings._arrayKeyCode.Length );
 
 	}
@@ -32,9 +38,9 @@ public class KeyboardTracker : DeviceTracker {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// How we load keybindings from the player's preferences.
-	public void LoadKeybindings(KeyboardHotkeys newHotkeys) {
+	public void LoadKeybindings() {
 
-		_keybindings = newHotkeys ?? new KeyboardHotkeys();
+		_keybindings = _keybindings ?? new KeyboardHotkeys();
 
 	}
 

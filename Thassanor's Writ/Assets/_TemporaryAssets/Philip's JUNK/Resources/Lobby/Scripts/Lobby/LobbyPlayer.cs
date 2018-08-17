@@ -62,10 +62,12 @@ namespace Prototype.NetworkLobby
 
             if (isLocalPlayer)
             {
+                Debug.Log("Player is local");
                 SetupLocalPlayer();
             }
             else
             {
+                Debug.Log("Player isn't local");
                 SetupOtherPlayer();
             }
 
@@ -119,7 +121,10 @@ namespace Prototype.NetworkLobby
             CheckRemoveButton();
 
             if (playerColor == Color.white)
+            {
+                Debug.Log("Player colour is white");
                 CmdColorChange();
+            }
 
             ChangeReadyButtonColor(JoinColor);
 
@@ -224,6 +229,7 @@ namespace Prototype.NetworkLobby
         //so that all client get the new value throught syncvar
         public void OnColorClicked()
         {
+            //Debug.Log("Color Listener Clicked");
             CmdColorChange();
         }
 
@@ -277,6 +283,8 @@ namespace Prototype.NetworkLobby
         [Command]
         public void CmdColorChange()
         {
+            Debug.Log("Sending Command Call " + isLocalPlayer);
+
             int idx = System.Array.IndexOf(Colors, playerColor);
 
             int inUseIdx = _colorInUse.IndexOf(idx);
@@ -311,6 +319,16 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
+
+            RpcSendColorToClient(playerColor);
+
+            OnMyColor(playerColor);
+        }
+        
+        [ClientRpc]
+        public void RpcSendColorToClient(Color newColor)
+        {
+            playerColor = newColor;
         }
 
         [Command]

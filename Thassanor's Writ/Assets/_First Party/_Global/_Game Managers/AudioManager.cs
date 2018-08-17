@@ -35,12 +35,30 @@ public class AudioManager : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
+		AwakeMusic();
+		AwakeSFX();
+		AwakeUI();
+		
+	}
+
+	private void AwakeMusic() {
+
 		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack/Main");
 		mainTheme.getParameter("intensity", out mainThemeIntensity);
 		mainTheme.getParameter("pause", out mainThemePausing);
 		mainTheme.getParameter("health", out mainThemeHealth);
 		mainTheme.getParameter("scene", out mainThemeScene);
-		
+
+	}
+
+	private void AwakeSFX() {
+
+
+
+	}
+
+	private void AwakeUI() {
+
 	}
 
 	// Called before class calls or functions.

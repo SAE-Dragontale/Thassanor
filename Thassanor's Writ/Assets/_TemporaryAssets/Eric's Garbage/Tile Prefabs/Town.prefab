@@ -28,6 +28,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1261447246840000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4413410227863378}
+  - component: {fileID: 114134902938324458}
+  m_Layer: 0
+  m_Name: Peasant Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1465338795882398
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,7 +52,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179395264937444}
-  - component: {fileID: 114470524102189172}
   m_Layer: 0
   m_Name: Town
   m_TagString: Untagged
@@ -72,6 +87,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4255059145092884}
+  - {fileID: 4413410227863378}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -89,6 +105,19 @@ Transform:
   m_Father: {fileID: 4179395264937444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4413410227863378
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1261447246840000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4179395264937444}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4870234059856802
 Transform:
   m_ObjectHideFlags: 1
@@ -102,6 +131,28 @@ Transform:
   m_Father: {fileID: 4255059145092884}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114134902938324458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1261447246840000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099c325b28673fb40999ceae0b24cc5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anchor: {fileID: 4255059145092884}
+  _unitStyle: {fileID: 11400000, guid: 5a3b37cef53f68840b17197c4b4f981e, type: 2}
+  _unitTemplate: {fileID: 1207368439219888, guid: 0048ee6cd0666444caa4cac93955b020,
+    type: 2}
+  _everyUnit: []
+  _groupState: 0
+  _permanent: 1
+  _health: 0
+  _formationColumns: 1
+  _formationSpread: 0.5
+  _villagersToSpawn: 1
 --- !u!114 &114136749799678306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,29 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3457de2f7403dc45835b40530f42c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114470524102189172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465338795882398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428e1a9e46c4d39418e88b14acfc54e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anchor: {fileID: 4179395264937444}
-  _unitStyle: {fileID: 11400000, guid: 5a3b37cef53f68840b17197c4b4f981e, type: 2}
-  _unitTemplate: {fileID: 1207368439219888, guid: 0048ee6cd0666444caa4cac93955b020,
-    type: 2}
-  _everyUnit: []
-  _groupState: 0
-  _permanent: 1
-  _health: 10
-  _hasFormation: 0
-  _formationColumns: 0
-  _formationSpread: 0
-  _villagersToSpawn: 3
 --- !u!114 &114689852529029860
 MonoBehaviour:
   m_ObjectHideFlags: 1

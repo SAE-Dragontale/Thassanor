@@ -65,7 +65,6 @@ public class BoardGeneration : MonoBehaviour {
 
 	[Space]
 	[Header("Board Components")]
-	public GameObject _boardHolder;                           // GameObject that acts as a container for all other tiles.
 	public GameObject _p1Spawn;       
 	public GameObject _p2Spawn;       
 	[Space]
@@ -84,11 +83,15 @@ public class BoardGeneration : MonoBehaviour {
 	public BorderGeneration _borderGenRef;
 
 	public GameObject _tileInstance;
-		
- //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
- 
-	//public SingletonPass _singletonRef;
-	void Awake()
+
+    [Space]
+    [Header("Neatness")]
+    private Transform _tileFolder;
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    //public SingletonPass _singletonRef;
+    void Awake()
 	{
 		//read from singleton
 		//_singletonRef = GameObject.Find("MapSettings").GetComponent<SingletonPass>();
@@ -102,11 +105,14 @@ public class BoardGeneration : MonoBehaviour {
 
 	private void Start ()
 	{
-		_borderGenRef = gameObject.GetComponent<BorderGeneration>();
+
+        _tileFolder = new GameObject("Tiles").transform;
+        _tileFolder.parent = transform;
+
+        _borderGenRef = gameObject.GetComponent<BorderGeneration>();
 
         _simplexNoise = new OpenSimplexNoise(_itSeed);
-		// Create the board holder.
-		_boardHolder = new GameObject("BoardHolder");
+
 		_p1Spawn = GameObject.Find("P1 Spawner");
 		_p2Spawn = GameObject.Find("P2 Spawner");
 
@@ -114,7 +120,6 @@ public class BoardGeneration : MonoBehaviour {
 		//disables rendered just in case
 		_navTileRend = _navMeshTile.GetComponent<Renderer>();
 		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
-		_navMeshTile.transform.parent = _boardHolder.transform;
 		_navMeshTile.transform.position = new Vector3(_columns/2f -.5f, -0.01f, _rows/2f -.5f);
 		_navMeshTile.transform.localScale = new Vector3(_columns / 9.75f,.1f,_rows / 9.75f);
 		_surface.BuildNavMesh();
@@ -233,10 +238,9 @@ public class BoardGeneration : MonoBehaviour {
 				{ 						
 					Vector3 position = new Vector3(x, 0f, z);    
 
-					floorTileInstance = Instantiate(mirrorTileList[mirrorListCount - 1], position, Quaternion.identity) as GameObject;
+					floorTileInstance = Instantiate(mirrorTileList[mirrorListCount - 1], position, Quaternion.identity, _tileFolder) as GameObject;
 					floorTileInstance.name = mirrorTileList[mirrorListCount - 1].name;
 					_tileList.Add (floorTileInstance);
-					floorTileInstance.transform.parent = _boardHolder.transform;
 
 					mirrorListCount--;					
 									
@@ -288,12 +292,11 @@ public class BoardGeneration : MonoBehaviour {
 			
 		}			
 
-		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity) as GameObject;
+		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
 		floorTileInstance.name = "Tile _x-" + xCoord + " _z-" + zCoord;
-		
 
-		_tileList.Add (floorTileInstance);	
-		floorTileInstance.transform.parent = _boardHolder.transform;
+
+        _tileList.Add(floorTileInstance);
 
 	}
 

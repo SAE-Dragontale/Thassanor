@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28914483f8cd0a642b6e98aaca44acfe, type: 3}
   m_Name: Peasant
   m_EditorClassIdentifier: 
-  _unitName: 
+  _unitName: Peasant
   _animatorController: {fileID: 9100000, guid: ab11841a04e04634a95dc5cf1aca6e5d, type: 2}
-  _health: 0
+  _health: 10

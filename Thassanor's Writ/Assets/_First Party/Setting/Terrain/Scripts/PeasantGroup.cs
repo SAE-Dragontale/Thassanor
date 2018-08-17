@@ -3,33 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PeasantGroup : UnitGroup {
-    
-	public int _villagersToSpawn = 1;
 
-	[Space]
-	private List<GameObject> _villagerCount = new List<GameObject>();
-    
-	// Use this for initialization
-	void Start () 
-	{
-		for (int it = 0; it < _villagersToSpawn; it++)
-		{			
-			GameObject newVillager;
-			newVillager = Instantiate(_unitTemplate, transform.position, Quaternion.identity, transform) as GameObject;
+    float _actionTimer;
+    bool _oneShotActionActive = false;
+    Vector3 _patrolDir;
 
-			Vector3 newpos = new Vector3(transform.position.x,0.07f,transform.position.z - .5f);
-			//newpos.transform.position = transform.position;
-			newVillager.transform.position = newpos;
-			_villagerCount.Add(newVillager);
-		}
-		
-	}
+    public int _villagersToSpawn = 1;
+
+    // Use this for initialization
+    protected override void Start()
+    {
+        base.Start();
+        AddUnit(_villagersToSpawn);
+    }
+
+    protected override void BehaviourLoopPassive()
+    {
+        //sets this to only occur once in patrol state
+        if (_oneShotActionActive == true)
+        {
+            _oneShotActionActive = false;
+
+            //chooses a random patrol direction out of 4 directions
+            float patrolDirX = Random.Range(-1f, 1f);
+            float patrolDirZ = Random.Range(-1f, 1f);
+
+            _patrolDir = new Vector3(patrolDirX, 0, patrolDirZ);
+            MoveUnit(0, _patrolDir);
+        }
+
+        _actionTimer = _actionTimer + Time.deltaTime;
+        if (_actionTimer >= 4f)
+        {
+            //reset action timer, set one shot bool to true because idle has 'play once' elements, and set back to idle 
+            _actionTimer = 0f;
+            _oneShotActionActive = true;
+        }
+    }
 
     //_unitStyle;           // The type of unit that we contain.
     //_unitTemplate;        // The basic unit template.
     //_everyUnit;           // The units within the group.
 
-    //code to get units to move 
+
+    //  code to get units to move 
     //set health
     //BehaviourLoopPassive
     //NeedToUpdatePosition

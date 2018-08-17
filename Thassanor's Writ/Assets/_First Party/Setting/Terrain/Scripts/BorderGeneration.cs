@@ -8,14 +8,22 @@ public class BorderGeneration : MonoBehaviour {
 	public GameObject[] _outerWallTiles;  
 	public List<GameObject> _wallList = new List<GameObject>();
 
-	private void Awake() 
+    private Transform _borderFolder;
+
+    private void Awake() 
 	{
 		_boardGeneratorRef = gameObject.GetComponent<BoardGeneration>();
 	}
 
+    private void Start()
+    {
+        _borderFolder = new GameObject("Borders").transform;
+        _borderFolder.parent = transform;
+    }
 
-//creates the border
-	public void InstantiateOuterWalls ()
+
+    //creates the border
+    public void InstantiateOuterWalls ()
 	{
 		//Array Elements - 8
 		// 0 - Bottom
@@ -165,7 +173,7 @@ public class BorderGeneration : MonoBehaviour {
 		_wallList.Add (_boardGeneratorRef._tileInstance);
 
 		// Set the tile's parent to the board holder.
-		_boardGeneratorRef._tileInstance.transform.parent = _boardGeneratorRef._boardHolder.transform;
+		_boardGeneratorRef._tileInstance.transform.parent = _borderFolder;
 	}
 
 }

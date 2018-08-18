@@ -297,7 +297,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a05386874194a654e8353ea291d48c64, type: 2}
   - {fileID: 11400000, guid: dda5fd4e03b04834ab7a35ac0c7bfa34, type: 2}
   - {fileID: 11400000, guid: 45c3cfbcaa8cf834a9f8b50026dfab4a, type: 2}
-  _incrementInterval: 10
+  _incrementInterval: 1
   _healthPerIncrement: 10
   _startingHealth: 30
 --- !u!208 &208300191023745002

@@ -42,7 +42,7 @@ GameObject:
   m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -57,7 +57,7 @@ GameObject:
   m_Layer: 0
   m_Name: Destination
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207368439219888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.199999, y: 0, z: 4.5000005}
+  m_LocalPosition: {x: 14.158146, y: 20.176838, z: -2.5599172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4144144214803680}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b125870f6aadadd4696f9f5815bd30f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trDestination: {fileID: 0}
+  _destination: {fileID: 0}
   _unitState: 0
 --- !u!195 &195049410753553328
 NavMeshAgent:

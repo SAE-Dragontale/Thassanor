@@ -47,9 +47,12 @@ public class UnitSpawner : MonoBehaviour {
 
 	private IEnumerator SpawnOverTime() {
 
-		yield return new WaitForSeconds(_incrementInterval);
-		SpawnUnits(_healthPerIncrement);
-
+		
+		while (true)
+		{
+			yield return new WaitForSeconds(_incrementInterval);
+			SpawnUnits(_healthPerIncrement);
+		}
 	}
 
 	/* ----------------------------------------------------------------------------- */

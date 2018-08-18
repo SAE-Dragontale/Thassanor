@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class LevelControlsUI : MonoBehaviour {
 
-    public GameObject thassanor;
+    public Dragontale.Thassanor thassanor;
 
     //inspector components
     public InputField seedField;
@@ -33,7 +33,7 @@ public class LevelControlsUI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        thassanor = GameObject.Find("[Thassanor]");
+        thassanor = FindObjectOfType<Dragontale.Thassanor>();
         seedField.onValueChanged.AddListener(SeedInputField);
         thassanor.GetComponent<MapData>()._columns = 20;
         thassanor.GetComponent<MapData>()._rows = 20;

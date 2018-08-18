@@ -21,6 +21,7 @@ public class SettingsMenu : MonoBehaviour
     private void Awake()
     {
         allResolutions = Screen.resolutions;
+        Debug.Log("loading player options");
         LoadPlayerOptions();
     }
 
@@ -71,9 +72,8 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution (int resolutionIndex)
     {
-
         resolution = allResolutions[resolutionIndex];
-
+        playerOptions.storedResolutionIndex = resolutionIndex;
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("storedResolutionIndex", playerOptions.storedResolutionIndex);
     }

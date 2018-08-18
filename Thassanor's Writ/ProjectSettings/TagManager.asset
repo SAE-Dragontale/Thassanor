@@ -7,6 +7,7 @@ TagManager:
   - Water
   - Ground
   - NetworkedPlayerObj
+  - PlayerInfo
   layers:
   - Default
   - TransparentFX

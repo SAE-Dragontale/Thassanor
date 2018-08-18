@@ -20,14 +20,14 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
-        //public GameObject levelOptionsPanel;
+        public GameObject levelOptionsPanel;
         //public LevelControlsUI levelControlsUI = FindObjectOfType<LevelControlsUI>();
 
         //public GameObject characterDropDown;
         public Dropdown dropDown;
-        private int dropDownValue;
+        public LobbyPlayer hostPlayerInfo;
+ 
         public Text characterSelectText;
-        private string dropDownstring;
 
         public GameObject localIcone;
         public GameObject remoteIcone;
@@ -39,6 +39,9 @@ namespace Prototype.NetworkLobby
         public Color playerColor = Color.white;
         [SyncVar(hook = "OnCharacterSelect")]
         public int playerCharacterIndex = 0;
+
+        private string playerCharacterName = "Shousei";
+ 
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -118,7 +121,12 @@ namespace Prototype.NetworkLobby
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
             //levelOptionsPanel.SetActive(true);
+            hostPlayerInfo = GameObject.FindGameObjectWithTag("PlayerInfo").GetComponent<LobbyPlayer>();
 
+            if (hostPlayerInfo.nameInput.interactable == false)
+            {
+                levelOptionsPanel.
+            }
 
             CheckRemoveButton();
 
@@ -183,6 +191,7 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
+                dropDown.interactable = false;
             }
             else
             {
@@ -194,6 +203,7 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = isLocalPlayer;
                 colorButton.interactable = isLocalPlayer;
                 nameInput.interactable = isLocalPlayer;
+                dropDown.interactable = isLocalPlayer;
             }
         }
 
@@ -219,9 +229,8 @@ namespace Prototype.NetworkLobby
         public void OnCharacterSelect(int newIndex)
         {
             playerCharacterIndex = newIndex;
-            dropDownValue = dropDown.value;
-            dropDownstring = dropDown.options[dropDownValue].text;
-            characterSelectText.text = dropDownstring;
+            playerCharacterName = dropDown.options[newIndex].text;
+            dropDown.captionText.text = playerCharacterName;
         }
 
         //===== UI Handler
@@ -318,16 +327,16 @@ namespace Prototype.NetworkLobby
 
             playerColor = Colors[idx];
 
-            RpcSendColorToClient(playerColor);
+            //RpcSendColorToClient(playerColor);
 
             OnMyColor(playerColor);
         }
         
-        [ClientRpc]
-        public void RpcSendColorToClient(Color newColor)
-        {
-            playerColor = newColor;
-        }
+        //[ClientRpc]
+        //public void RpcSendColorToClient(Color newColor)
+        //{
+        //    playerColor = newColor;
+        //}
 
         [Command]
         public void CmdNameChanged(string name)
@@ -335,16 +344,12 @@ namespace Prototype.NetworkLobby
             playerName = name;
         }
 
-        [ClientRpc]
-        public void RpcSendCharacterToClient(int Index)
-        {
-            playerCharacterIndex = Index;
-        }
-
         [Command]
-        public void CmdCharacterChanged(int Index)
+        public void CmdCharacterChanged(int index)
         {
-            playerCharacterIndex = Index;
+            playerCharacterIndex = index;
+            playerCharacterName = dropDown.options[index].text;
+            OnCharacterSelect(index);
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

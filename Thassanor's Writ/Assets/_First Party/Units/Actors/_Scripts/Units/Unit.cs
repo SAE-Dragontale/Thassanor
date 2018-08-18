@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.3.2
+   Version:			0.4.0
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -52,6 +52,13 @@ public class Unit : MonoBehaviour {
 	// Called before Start().
 	protected void Awake() {
 
+		if (_tr == null)
+			Initialize();
+
+	}
+	
+	protected void Initialize() {
+
 		// Access and save the transform of our Destination.
 		_destination = transform.Find("Destination").GetComponent<Transform>();
 
@@ -65,6 +72,9 @@ public class Unit : MonoBehaviour {
 
 	// Assign our Visual UnitStyles to our character.
 	protected void LoadUnitStyle() {
+
+		if (_tr == null)
+			Initialize();
 
 		_an.runtimeAnimatorController = _unitStyle._animatorController;
 

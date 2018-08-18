@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitSpawner.cs
-   Version:			0.0.2
+   Version:			0.0.3
    Description: 	Simply spawns units to a UnitGroup over time.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -43,8 +43,6 @@ public class UnitSpawner : MonoBehaviour {
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private void SpawnUnits(float health) => _spawnToThis.ChangeHealth(health);
-
 	private IEnumerator SpawnOverTime() {
 
 		while (true) {
@@ -53,6 +51,8 @@ public class UnitSpawner : MonoBehaviour {
 		}
 	}
 
+	private void SpawnUnits(float health) => _spawnToThis.ChangeHealth(health);
+
 	/* ----------------------------------------------------------------------------- */
-	
+
 }

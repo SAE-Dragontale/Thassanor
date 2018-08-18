@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4257883264827294}
   - component: {fileID: 114333877672462342}
   - component: {fileID: 114137187715621740}
+  - component: {fileID: 114975754838623100}
   m_Layer: 0
   m_Name: BoardGenerator
   m_TagString: Untagged
@@ -54,27 +55,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerRef:
   - {fileID: 0}
-  _itSeed: 4812
-  _columns: 30
-  _rows: 30
-  _waterSize: 1
-  _townSpread: 2
-  _maxTownCount: 4
+  _itSeed: 119831
+  _columns: 10
+  _rows: 10
+  _waterSize: 10
+  _townSpread: 8
+  _maxTownCount: 300
   _curTownCount: 0
-  _floorTiles: []
+  _floorTiles:
+  - {fileID: 1789979581523880, guid: 82d707c927dcc8447ab9d7ad4262031a, type: 2}
+  - {fileID: 1088742230620334, guid: 99e9856791dbad14a9ac579594a77060, type: 2}
+  - {fileID: 1527843479951338, guid: 792339e57e063ad4a9901f5514579648, type: 2}
   _townTiles:
-  - {fileID: 1720964479548984, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
-  _waterTiles: []
+  - {fileID: 1294077309262102, guid: c18dea4f1f7772841b947af3e2b8a340, type: 2}
+  _waterTiles:
+  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
   _p1Spawn: {fileID: 0}
   _p2Spawn: {fileID: 0}
-  _navMeshTile: {fileID: 0}
-  _tileList:
-  - {fileID: 0}
-  - {fileID: 0}
-  _propList:
-  - {fileID: 0}
-  _waterList:
-  - {fileID: 1556983768474054, guid: ddf3753e292b2d64d9217ad05b20d117, type: 2}
+  _navMeshTile: {fileID: 1100133362470680}
+  _tileList: []
+  _propList: []
+  _waterList: []
   _mapData: {fileID: 0}
   _borderGenRef: {fileID: 0}
   _tileInstance: {fileID: 0}
@@ -89,7 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eb92697dde5d948a3926dbc2673e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boardGeneratorRef: {fileID: 0}
+  _boardGeneratorRef: {fileID: 114137187715621740}
+  _columnLength: 0
+  _rowLength: 0
   _outerWallTiles:
   - {fileID: 1186601872910216, guid: 1277f7cd2c078cc42a5794276b936303, type: 2}
   - {fileID: 1685684480237132, guid: e120c643a46a8904994fe3b98904d4d6, type: 2}
@@ -100,3 +103,31 @@ MonoBehaviour:
   - {fileID: 1416450918642328, guid: 70cbd3e0a88529d4c81c9b75768e546d, type: 2}
   - {fileID: 1999686806469958, guid: cfe68b27fc1c47d47896a5ea832e1997, type: 2}
   _wallList: []
+--- !u!114 &114975754838623100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100133362470680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.083333336
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}

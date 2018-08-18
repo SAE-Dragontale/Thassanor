@@ -5,33 +5,34 @@ using UnityEngine.AI;
 
 public class VillagerSpawn : MonoBehaviour {
 
-    float _actionTimer;
-    public float _spawnTimer;
+    [SerializeField] float _spawnRate;
 
-    public Unit[] _peasants;
-    [Space]
-
-    public PeasantGroup _peasantGroup;
+	[SerializeField] GameObject _peasant;
+	[SerializeField] GameObject _peasantGroup;
+	[SerializeField] private UnitGroup _thisUnitGroup;
+	[SerializeField] private UnitStyle[] _everyUnitStyle;
 
 
     private void Start()
     {
+		_thisUnitGroup = _peasantGroup.GetComponent<UnitGroup>();
+
+		_thisUnitGroup._UnitStyle = _everyUnitStyle[Random.Range(0, _everyUnitStyle.Length - 1)];
+		
+		StartCoroutine(SpawnOverTime());
     }
 
-    private void Update()
-    {       
+    
+	private IEnumerator SpawnOverTime() {
 
-        _actionTimer = _actionTimer + Time.deltaTime;
-        if (_actionTimer >= _spawnTimer)
-        {
-            //reset action timer, set one shot bool to true because idle has 'play once' elements, and set back to idle 
-
-            _peasantGroup.AddUnit(1);
-
-
-            _actionTimer = 0f;
-        }
-    }
+		
+		while (true)
+		{
+			yield return new WaitForSeconds(_spawnRate);
+           // _thisUnitGroup.AddUnit(1);
+		   Instantiate(_peasant,transform.position,Quaternion.identity,_peasantGroup.transform);
+		}
+	}
 
 	
 }

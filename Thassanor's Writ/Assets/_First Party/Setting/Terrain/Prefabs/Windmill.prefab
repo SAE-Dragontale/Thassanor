@@ -299,7 +299,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45c3cfbcaa8cf834a9f8b50026dfab4a, type: 2}
   _incrementInterval: 10
   _healthPerIncrement: 10
-  _startingHealth: 100
+  _startingHealth: 30
 --- !u!208 &208300191023745002
 NavMeshObstacle:
   m_ObjectHideFlags: 1

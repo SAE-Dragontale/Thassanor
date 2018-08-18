@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114283262065542054}
-  - {fileID: 114378741143690958}
-  - {fileID: 114016265742651166}
-  - {fileID: 114174718932322684}
-  - {fileID: 114793007990032980}
-  - {fileID: 114180569735639064}
+  - {fileID: 114455553441797486}
+  - {fileID: 114044086660545448}
+  - {fileID: 114108136080949066}
+  - {fileID: 114154045358384634}
+  - {fileID: 114328536938805558}
   EditorEvents:
   - {fileID: 114279084392970350}
   - {fileID: 114043259139464116}
@@ -39,9 +39,9 @@ MonoBehaviour:
   - {fileID: 114819504585479976}
   - {fileID: 114871640807864764}
   - {fileID: 114217532922862848}
-  MasterBankRef: {fileID: 114174718932322684}
+  MasterBankRef: {fileID: 114108136080949066}
   StringsBankRef: {fileID: 114283262065542054}
-  stringsBankWriteTime: 636701312504258168
+  stringsBankWriteTime: 636701336237901659
   cacheVersion: 2
 --- !u!114 &114002091728069872
 MonoBehaviour:
@@ -118,7 +118,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 416
-  Exists: 1
+  Exists: 0
 --- !u!114 &114016330485420136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   Path: event:/UserInterface/scrollClose
   guid: 2755b77bca444249aeabdde1fe4426a0
   Banks:
-  - {fileID: 114793007990032980}
+  - {fileID: 114154045358384634}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -249,6 +249,40 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 214
+--- !u!114 &114044086660545448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
+    Menu Soundtrack.bank
+  lastModified: 636701336259617814
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 416
+  Exists: 1
+--- !u!114 &114050205045091982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: pause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114061910983232676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +366,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 727
+--- !u!114 &114108136080949066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636701336237841821
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 12192
+  Exists: 1
 --- !u!114 &114111605735579730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +399,7 @@ MonoBehaviour:
   Path: event:/Gameplay/charDeath
   guid: 70ac28b5faf87740a54eb8dacf1f7d10
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -368,7 +421,7 @@ MonoBehaviour:
   Path: event:/Gameplay/skeletonDeath
   guid: 0b5d92b5df8a284db647c6b82137e035
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -513,6 +566,25 @@ MonoBehaviour:
   - Name: Desktop
     Value: 828
   Exists: 1
+--- !u!114 &114154045358384634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
+    Menu UI.bank
+  lastModified: 636701336263736360
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2205312
+  Exists: 1
 --- !u!114 &114160146026524728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +644,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 12192
-  Exists: 1
+  Exists: 0
 --- !u!114 &114180569735639064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +663,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1384480
-  Exists: 1
+  Exists: 0
 --- !u!114 &114184183379776468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,7 +697,7 @@ MonoBehaviour:
   Path: event:/Gameplay/charDamageWarrior
   guid: 3e276c94d223e34187b1c8726ee3801a
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -698,7 +770,7 @@ MonoBehaviour:
   Path: event:/Gameplay/castArcher
   guid: ac29eda3be22dd4999d4d38f3984e61b
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -720,7 +792,7 @@ MonoBehaviour:
   Path: event:/Ambience/menuAmbience
   guid: a952274c1ff2bd4e9034d698c4fcb182
   Banks:
-  - {fileID: 114793007990032980}
+  - {fileID: 114154045358384634}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -757,7 +829,7 @@ MonoBehaviour:
   Path: event:/UserInterface/scrollOpen
   guid: 4a47d2225978fd469a535c56ef49df32
   Banks:
-  - {fileID: 114793007990032980}
+  - {fileID: 114154045358384634}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -864,7 +936,7 @@ MonoBehaviour:
   Path: event:/Gameplay/charTyping
   guid: d2fb31a6b61f2b4b8803028bc47e72be
   Banks:
-  - {fileID: 114793007990032980}
+  - {fileID: 114154045358384634}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -923,15 +995,15 @@ MonoBehaviour:
   Path: event:/Soundtrack/Main
   guid: ca22178002d43e4bb4bb2d7fdb566c4c
   Banks:
-  - {fileID: 114378741143690958}
+  - {fileID: 114455553441797486}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114581876701014928}
-  - {fileID: 114844961283056862}
-  - {fileID: 114305144812154796}
-  - {fileID: 114352595670719826}
+  - {fileID: 114919202132537118}
+  - {fileID: 114050205045091982}
+  - {fileID: 114945360018850444}
+  - {fileID: 114794606655644896}
   MinDistance: 0
   MaxDistance: 0
   Length: 336000
@@ -962,7 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\_First Party\Audio\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636701312504258168
+  lastModified: 636701336237901659
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1073,6 +1145,25 @@ MonoBehaviour:
   - Name: Desktop
     Value: 862112
   Exists: 1
+--- !u!114 &114328536938805558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
+    Game Sounds.bank
+  lastModified: 636701336248594371
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1384480
+  Exists: 1
 --- !u!114 &114335783117083492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1179,7 +1270,7 @@ MonoBehaviour:
   Path: event:/Gameplay/castWarrior
   guid: b879227cf06f5445a56820ca95fe1081
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1205,7 +1296,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 7139264
-  Exists: 1
+  Exists: 0
 --- !u!114 &114388066186738328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,6 +1467,25 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114455553441797486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Qantm SAE 18T1_2\Thassanor\Thassanor's Writ\Assets\_First Party\Audio\Build\Desktop\In
+    game Soundtrack.bank
+  lastModified: 636701336257534934
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 7139264
+  Exists: 1
 --- !u!114 &114460946239842772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,7 +1563,7 @@ MonoBehaviour:
   Path: event:/Gameplay/charDamageArcher
   guid: a9fcc96ad96b9941b2651f04e378e75c
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1494,7 +1604,7 @@ MonoBehaviour:
   Path: event:/Gameplay/footsteps
   guid: bca8db019ff7944d94853a8d96d58d79
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1612,7 +1722,7 @@ MonoBehaviour:
   Path: event:/UserInterface/buttonClick
   guid: dcbcb0949186644483066ee3c983cd5e
   Banks:
-  - {fileID: 114793007990032980}
+  - {fileID: 114154045358384634}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1879,7 +1989,7 @@ MonoBehaviour:
   Path: event:/Ambience/battleAmbience
   guid: 18592f443a9eb141b2208e5ff25fb4ca
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2039,7 +2149,7 @@ MonoBehaviour:
   Path: event:/Gameplay/villagerDeathMale
   guid: 7d1d0bd32be3dd4ca504684413d19971
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2573,7 +2683,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 2205312
-  Exists: 1
+  Exists: 0
 --- !u!114 &114793138838891396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2595,6 +2705,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 61699
+--- !u!114 &114794606655644896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: scene
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114819504585479976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2609,7 +2734,7 @@ MonoBehaviour:
   Path: event:/Gameplay/charVoiceDamage
   guid: c08d505ec8a8df4898da188d09265c84
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2769,7 +2894,7 @@ MonoBehaviour:
   Path: event:/Gameplay/skeletonDamage
   guid: 96a6e2a17b04a446a6122b553039b016
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2834,7 +2959,7 @@ MonoBehaviour:
   Path: event:/Gameplay/castResurrection
   guid: f951191d295e3f49b27e8c25e16843ac
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2933,7 +3058,7 @@ MonoBehaviour:
   Path: event:/Gameplay/villagerDeathFemale
   guid: 36e557eedc8b1b44943d13257e8b3f52
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2941,6 +3066,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 760
+--- !u!114 &114919202132537118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: intensity
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114923175626551252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2985,7 +3125,7 @@ MonoBehaviour:
   Path: event:/Ambience/windmillAmbience
   guid: 51fa965bdc50e645827e96b2a0664884
   Banks:
-  - {fileID: 114180569735639064}
+  - {fileID: 114328536938805558}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2993,6 +3133,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 50000
+--- !u!114 &114945360018850444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: health
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114946923912660922
 MonoBehaviour:
   m_ObjectHideFlags: 0

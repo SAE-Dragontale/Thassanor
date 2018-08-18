@@ -29,7 +29,8 @@ public class PeasantGroup : UnitGroup {
 
     }
 
-	protected void VillagerMove() {
+	protected void VillagerMove() 
+	{
 
 		for (int i = 0; i < _everyUnit.Length; i++) {
 

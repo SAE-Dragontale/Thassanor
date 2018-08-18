@@ -860,6 +860,7 @@ Transform:
   m_Children:
   - {fileID: 626376261}
   - {fileID: 1622326554}
+  - {fileID: 1438563949}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1153,7 +1154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626376261}
   m_Layer: 0
-  m_Name: Objects
+  m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,7 +1197,6 @@ Transform:
   - {fileID: 112621607}
   - {fileID: 271046144}
   - {fileID: 391232273}
-  - {fileID: 1438563949}
   m_Father: {fileID: 385401083}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1889,7 +1889,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 626376261}
+    m_TransformParent: {fileID: 385401083}
     m_Modifications:
     - target: {fileID: 4396190949828716, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1921,28 +1921,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4396190949828716, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
       propertyPath: m_RootOrder
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 114946990125270978, guid: bb4f34804b2305049a8ba1d9af4eb19e,
-        type: 2}
-      propertyPath: _startingHealth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631638072409944, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4021312407846756, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4021312407846756, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4021312407846756, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1.1000004
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4f34804b2305049a8ba1d9af4eb19e, type: 2}

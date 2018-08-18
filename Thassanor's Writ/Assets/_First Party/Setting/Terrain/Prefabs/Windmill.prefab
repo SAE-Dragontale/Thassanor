@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1723116275786062}
   m_LocalRotation: {x: 0.28978413, y: 0.000000003832418, z: -0.000000012657618, w: 0.95709205}
-  m_LocalPosition: {x: 0, y: 2.3, z: 0.6}
+  m_LocalPosition: {x: 0, y: 2.5, z: 1.1000004}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4894656202465952}
@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720964479548984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.039833, y: 8.42056, z: -4.445496}
+  m_LocalPosition: {x: -13, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4894656202465952}
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anchor: {fileID: 4835446694168036}
-  _unitStyle: {fileID: 11400000, guid: 5a3b37cef53f68840b17197c4b4f981e, type: 2}
+  _unitStyle: {fileID: 11400000, guid: a52ee3318f66c054dbb98c2bc424b408, type: 2}
   _unitTemplate: {fileID: 1207368439219888, guid: 0048ee6cd0666444caa4cac93955b020,
     type: 2}
   _everyUnit: []
@@ -269,6 +269,7 @@ MonoBehaviour:
   _health: 0
   _formationColumns: 10
   _formationSpread: 1
+  _movementPerTick: 1
 --- !u!114 &114815303076310978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,7 +298,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a05386874194a654e8353ea291d48c64, type: 2}
   - {fileID: 11400000, guid: dda5fd4e03b04834ab7a35ac0c7bfa34, type: 2}
   - {fileID: 11400000, guid: 45c3cfbcaa8cf834a9f8b50026dfab4a, type: 2}
-  _incrementInterval: 1
+  _incrementInterval: 10
   _healthPerIncrement: 10
   _startingHealth: 30
 --- !u!208 &208300191023745002

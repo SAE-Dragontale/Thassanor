@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.1
+   Version:			0.8.2
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -41,6 +41,7 @@ public class InputTranslator : NetworkBehaviour {
 
         _charControls = GetComponent<CharControls>();
         _charSpells = GetComponent<CharSpells>();
+		_charAudio = GetComponent<CharAudio>();
 
         _playerState = PlayerState.Idle;
         _lastState = _playerState;

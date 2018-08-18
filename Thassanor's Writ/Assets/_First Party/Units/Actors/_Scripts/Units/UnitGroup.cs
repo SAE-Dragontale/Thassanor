@@ -1,15 +1,15 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.4.0
+   Version:			0.5.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
+// using UnityEngine.Networking;
 
-public class UnitGroup : NetworkBehaviour {
+public class UnitGroup : MonoBehaviour { //NetworkBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
@@ -59,7 +59,7 @@ public class UnitGroup : NetworkBehaviour {
 	[SerializeField] protected bool _permanent;    // Whether the group will Destroy() if it has no units.
 
 	// Health functionality for UnitGroups.
-	[SyncVar] [SerializeField] protected float _health;
+	/*[SyncVar] */[SerializeField] protected float _health;
 	public float SetHealth {
 		set {
 			_health = value;
@@ -109,11 +109,11 @@ public class UnitGroup : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	// Change UnitGroup by Unit.
-	public void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
-	public void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
+	[InspectButton] public void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
+	[InspectButton] public void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
 
 	// Change UnitGroup by Health.
-	public void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
+	[InspectButton] public void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
 
@@ -144,7 +144,7 @@ public class UnitGroup : NetworkBehaviour {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
 
-			GameObject unit = Instantiate(_unitTemplate, transform, _anchor);
+			GameObject unit = Instantiate(_unitTemplate, _anchor.position, Quaternion.identity, transform);
 			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
 
 		}
@@ -167,7 +167,7 @@ public class UnitGroup : NetworkBehaviour {
 	/* ----------------------------------------------------------------------------- */
 
 	// This function is used to update a collection of units, generally from the editor.
-	public void UnitsFromChildren() {
+	protected void UnitsFromChildren() {
 
 		// Update our UnitList with the hierarchy components.
 		UpdateUnitList();
@@ -261,6 +261,11 @@ public class UnitGroup : NetworkBehaviour {
 
 	protected bool NeedToUpdatePosition(Vector3 positionToCheck) {
 
+		// We can manually force a position update if we need to.
+		if (_forcePositionUpdate) {
+			_forcePositionUpdate = false;
+			return true;
+		}
 
 		// Log our last position.
 		if (setMyLastPosition == null)
@@ -312,7 +317,7 @@ public class UnitGroup : NetworkBehaviour {
 				float positionAcross = (((selectedUnits - 1) * _formationSpread) / 2 * -1) + (_formationSpread * i);
 				float positionBehind = (currentUnitIndex / _formationColumns) * _formationSpread;
 
-				MoveUnit(currentUnitIndex + i, PositionVariance(_anchor.TransformPoint(positionAcross, 0, positionBehind)));
+				MoveUnit(currentUnitIndex + i, _anchor.TransformPoint(positionAcross, 0, positionBehind));
 
 			}
 

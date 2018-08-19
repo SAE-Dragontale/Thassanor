@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			NetworkedPlayer.cs
-   Version:			0.1.4
+   Version:			0.1.5
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -46,7 +46,6 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 		// Then we're going to do the same for our player object.
 		_player.transform.parent = transform;
-		//_player.name = _player.GetComponent<CharVisuals>()._necromancerStyle._unitName;
 
 	}
 

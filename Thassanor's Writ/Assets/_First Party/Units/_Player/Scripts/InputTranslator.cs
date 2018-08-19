@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.2
+   Version:			0.8.3
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -37,46 +37,63 @@ public class InputTranslator : NetworkBehaviour {
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public void Awake() {
+	// Declared before Start().
+	private void Awake() {
 
-        _charControls = GetComponent<CharControls>();
-        _charSpells = GetComponent<CharSpells>();
-		_charAudio = GetComponent<CharAudio>();
+		if (_charControls == null)
+			GetReferences();
 
         _playerState = PlayerState.Idle;
         _lastState = _playerState;
 
     }
 
+	// Initialise our player components.
+	private void GetReferences() {
+
+		_charControls = GetComponent<CharControls>();
+		_charSpells = GetComponent<CharSpells>();
+		_charAudio = GetComponent<CharAudio>();
+
+	}
+
+	// Declared before Update().
+	private void Start() {
+
+		SetCursorTo(false);
+
+	}
+
+	// This function will trigger when we gain a connection to the server.
+	public override void OnStartServer() {
+
+		// Make sure we've initialised.
+		if (_charControls == null)
+			GetReferences();
+
+		// Load Game Settings.
+		MapData mapData = FindObjectOfType<MapData>();
+		_charSpells._difficulty = mapData.typingDifficulty;
+
+		// Load Player Settings.
+		PlayerData playerData = FindObjectOfType<PlayerData>();
+		GetComponent<CharVisuals>()._NecromancerStyle = playerData.playerCharacter;
+		GetComponent<KeyboardTracker>()._Keybindings = playerData.playerHotkeys;
+		_charSpells._SpellLoadout = playerData.playerSpells;
+
+	}
+
 	// This function will trigger with a client gains authority over this object.
 	public override void OnStartAuthority() {
 
 		// The player who owns this script becomes the target of their input and their camera.
 		GetComponent<DeviceTracker>().enabled = true;
+
+		// We also want the camera to focus them as the primary camera target.
 		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
 
-		// We disable the cursor, load our variables
-		SetCursorTo(false);
-		LoadPlayerSettings();
-
+		// We declare that our audio should be determined by our stats, and nobody elses.
 		_charAudio._local = true;
-
-	}
-
-	// Assign settings from lobby.
-	private void LoadPlayerSettings() {
-
-		if (isDebug)
-			return;
-
-		// Load Game Settings.
-		GetComponent<CharSpells>()._difficulty = FindObjectOfType<MapData>().typingDifficulty;
-
-		// Load Player Settings.
-		PlayerData settings = FindObjectOfType<PlayerData>();
-		GetComponent<CharVisuals>()._NecromancerStyle = settings.playerCharacter;
-		GetComponent<KeyboardTracker>()._Keybindings = settings.playerHotkeys;
-		GetComponent<CharSpells>()._SpellLoadout = settings.playerSpells;
 
 	}
 
@@ -84,13 +101,14 @@ public class InputTranslator : NetworkBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Command] public void CmdSyncStruct(RawDataInput inputData) {
-		RpcSyncStruct(inputData);
-	}
+	/* ----------------------------------------------------------------------------- */
+	// Networking Player Input.
 
-	[ClientRpc] public void RpcSyncStruct(RawDataInput inputData) {
-		TranslateInput(inputData);
-	}
+	[Command] public void CmdSyncStruct(RawDataInput inputData) => RpcSyncStruct(inputData);
+	[ClientRpc] public void RpcSyncStruct(RawDataInput inputData) => TranslateInput(inputData);
+
+	/* ----------------------------------------------------------------------------- */
+	// Translating that input into game functions.
 
 	// A call that recieves inputs from the associated scripts. Any Inputs we're recieving are presented here and then translated into function-calls.
 	public void TranslateInput(RawDataInput rdi) {
@@ -101,7 +119,7 @@ public class InputTranslator : NetworkBehaviour {
 			/* ----------------------------------------------------------------------------- */
 			case (PlayerState.Idle):
 
-				// Pressing "Pause"
+				/*// Pressing "Pause"
 				if (rdi._ablKeys[0]) {
 
 					// #TODO: Implement pause menu here.
@@ -115,12 +133,11 @@ public class InputTranslator : NetworkBehaviour {
 
 					_charControls.TrajectoryChange();
 
-				}
+				} else */
 
 				// Pressing "Spellcast"
-				else if (rdi._ablKeys[1]) {
+				if (rdi._ablKeys[1]) {
 
-					// #TODO: Implement spellcasting trigger.
 					// Communicate with CharSpells.cs and begin the 'Spellcasting Phase' from this point.
 					_charSpells.TypeStatus(true);
 

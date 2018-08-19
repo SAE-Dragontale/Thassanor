@@ -1,25 +1,31 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
-   File:			CharAudio.cs
-   Version:			0.1.0
-   Description: 	Handles all of the Player's audio requirements.
+   File:			CharStats.cs
+   Version:			0.0.0
+   Description: 	Holds and executes functions based on the Player's Stats.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
 
-public class CharAudio : MonoBehaviour {
+public class CharStats : MonoBehaviour {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	private AudioManager _audio;
+	private CharAudio _charAudio;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[HideInInspector] public bool _local;
+	[Space] [Header("Player Statistics")]
+	[SerializeField] [Range(0,100)] private float _playerHealth;
+	[SerializeField] private string _playerName;
+
+	[Space]
+	[SerializeField] private Transform _opposingPlayer;
+	[SerializeField] private float _distanceToOpponent;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -28,47 +34,46 @@ public class CharAudio : MonoBehaviour {
 	// Called before Start().
 	private void Awake() {
 
-		_audio = FindObjectOfType<AudioManager>();
+		_charAudio = GetComponent<CharAudio>();
 
+	}
+
+	// Called before class calls or functions.
+	private void Start () {
+		
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	/* ----------------------------------------------------------------------------- */
-	// SFX
+	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
+		Class Functions
+	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+	
+	// Update is called once per frame.
+	private void FixedUpdate () {
 
-	public void AudioDeath() {
+		DistanceUpdate();
+		AudioUpdate();
 
-		_audio.SingleCharDeath(transform.position);
-		_audio.SingleCharHurt(transform.position);
+	}
+	
+	// Here we calculate the distance to the opposing player and send that information off to other functions.
+	private void DistanceUpdate() {
+
+		//_distanceToOpponent = Vector3.Distance(transform.position, _opposingPlayer.position);
 
 	}
 
-	public void AudioSummonWarrior() => _audio.SingleSpellWarrior(transform.position);
-	public void AudioSummonArcher() => _audio.SingleSpellArcher(transform.position);
-	public void AudioResurrect() => _audio.SingleSpellResurrection(transform.position);
+	// Here we simply deliver any data that our audio component requires to function.
+	private void AudioUpdate() {
 
-	/* ----------------------------------------------------------------------------- */
-	// Music
-
-	public void UpdateMusic(float health, float proximity) {
-
-		proximity = Mathf.Clamp01(Dragontale.MathFable.Remap(proximity, 0, 100, 1, 0));
-
-		Debug.Log($"My Proximity is {proximity}, and my health is {health}.");
-
-		if (health > 0) {
-			_audio.HealthParam(health);
-			_audio.IntensityParam(proximity);
-
-		} else {
-			_audio.IntensityParam(2);
-		}
+		if (_charAudio._local)
+			_charAudio.UpdateMusic(_playerHealth, _distanceToOpponent);
 
 	}
 
 	/* ----------------------------------------------------------------------------- */
-
+	
 }

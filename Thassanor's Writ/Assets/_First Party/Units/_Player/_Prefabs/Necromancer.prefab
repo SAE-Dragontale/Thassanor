@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 114051461296551960}
   - component: {fileID: 114450359450470680}
   - component: {fileID: 114041299481461328}
+  - component: {fileID: 114469650456852578}
   - component: {fileID: 114058097153828724}
   m_Layer: 0
   m_Name: Necromancer
@@ -424,6 +425,21 @@ MonoBehaviour:
   _difficulty: 0
   _closestMatch: 
   _stringDifference: 0
+--- !u!114 &114469650456852578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153909639333156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e56516d80fc1cd45b684d3cf16383a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHealth: 100
+  _playerName: 
+  _opposingPlayer: {fileID: 0}
+  _distanceToOpponent: 200
 --- !u!114 &114535247668817328
 MonoBehaviour:
   m_ObjectHideFlags: 1

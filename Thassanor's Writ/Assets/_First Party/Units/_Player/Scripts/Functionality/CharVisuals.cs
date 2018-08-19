@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.4.0
+   Version:			0.4.1
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -40,33 +40,23 @@ public class CharVisuals : MonoBehaviour {
 		Initialisation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Reset is called when the user hits the Reset button in the Inspector's context menu or when adding the component the first time.
-	private void Reset() {
+	private void Reset() => GetReferences();
+	private void Awake() => GetReferences();
 
-		// All we really want to do is run the actual Instantiation property.
-		Awake();
+	// Component Grab.
+	private void GetReferences() {
 
-	}
-
-	// Called before Start().
-	private void Awake() {
-
-		// Component Grab.
 		_an = GetComponentInChildren<Animator>();
 		_sr = GetComponentInChildren<SpriteRenderer>();
 		_cp = Camera.main.GetComponent<CameraPlayer>();
-				
+
 	}
 
 	// Called before Update().
 	private void Start() => LoadStyle();
 
-	// Assign Style to Character.
-	private void LoadStyle() {
+	private void LoadStyle() => _an.runtimeAnimatorController = _necromancerStyle._animatorController;
 
-		_an.runtimeAnimatorController = _necromancerStyle._animatorController;
-
-	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls

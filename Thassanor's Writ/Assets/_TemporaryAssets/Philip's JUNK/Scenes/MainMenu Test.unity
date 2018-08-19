@@ -736,8 +736,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 228441125}
   m_Script: {fileID: 11500000, guid: 55721e39d18b61b4ebde69fbc8f15fce, type: 3}
-<<<<<<< HEAD
-=======
 --- !u!1001 &1036469327
 Prefab:
   m_ObjectHideFlags: 0
@@ -856,7 +854,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
   m_IsPrefabAsset: 0
->>>>>>> 60ec3a6ed229e282cc2b8d31f48656bddd1a073b
 --- !u!1 &1207895259
 GameObject:
   m_ObjectHideFlags: 0

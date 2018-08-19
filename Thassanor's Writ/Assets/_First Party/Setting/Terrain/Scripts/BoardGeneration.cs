@@ -86,8 +86,8 @@ public class BoardGeneration : MonoBehaviour {
     //public SingletonPass _singletonRef;
     void Awake()
 	{
-							//read from singleton
-		_mapData = GameObject.FindObjectOfType
+        //read from singleton
+        _mapData = GameObject.FindObjectOfType<MapData>();
 		
 		_itSeed = _mapData._itSeed;
 		_columns = _mapData._columns;

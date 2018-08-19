@@ -93,7 +93,7 @@ public class BorderGeneration : MonoBehaviour {
 	public void InstantiateWallsFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{
 		// The position to be instantiated at is based on the coordinates.
-		Vector3 position = new Vector3(xCoord, 0.01f , zCoord);
+		Vector3 position = new Vector3(xCoord*10, 0.01f , zCoord*10);
 
 		//checks left wall
 		if (xCoord == -5) 

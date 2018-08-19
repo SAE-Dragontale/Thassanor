@@ -129,9 +129,15 @@ public class BoardGeneration : MonoBehaviour {
 		
 		//generates the nav surface for the board
 		_navMeshTile.GetComponent<NavMeshSurface>().BuildNavMesh();
-		
-		
-	}
+
+        yield return new WaitForSeconds(2f);
+        for (int i = 0; i < _tileList.Count; i++)
+        {
+            Destroy(_tileList[i].GetComponent<MeshCollider>());
+        }
+
+
+    }
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
 	void SetupTilesArray ()
@@ -282,6 +288,7 @@ public class BoardGeneration : MonoBehaviour {
 		}			
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
+        floorTileInstance.AddComponent<MeshCollider>();
 		floorTileInstance.name = "Tile _x-" + (xCoord /10) + " _z-" + (zCoord/10);
 
 

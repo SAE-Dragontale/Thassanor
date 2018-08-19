@@ -39,8 +39,6 @@ GameObject:
   - component: {fileID: 33073592661809362}
   - component: {fileID: 23401853938378364}
   - component: {fileID: 114632323275021542}
-  - component: {fileID: 65695080950567018}
-  - component: {fileID: 65556129829036984}
   m_Layer: 9
   m_Name: Basic Tile_Tree1
   m_TagString: Ground
@@ -254,30 +252,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.5, z: 0.7}
   m_Center: {x: 0, y: 0.5, z: 0.35}
---- !u!65 &65556129829036984
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1088742230620334}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 2.220446e-16, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65695080950567018
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1088742230620334}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 2.220446e-16, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114436518442092818
 MonoBehaviour:
   m_ObjectHideFlags: 1

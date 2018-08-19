@@ -87,14 +87,16 @@ public class BoardGeneration : MonoBehaviour {
     void Awake()
 	{
         //read from singleton
-        _mapData = GameObject.FindObjectOfType<MapData>();
-		
-		_itSeed = _mapData._itSeed;
-		_columns = _mapData._columns;
-		_rows = _mapData._rows;
-		_waterSize = _mapData._waterSize;
-		_townSpread = _mapData._townSpread;
-		_maxTownCount = _mapData._maxTownCount;
+        if (_mapData = GameObject.FindObjectOfType<MapData>())
+        {
+            _itSeed = _mapData._itSeed;
+            _columns = _mapData._columns;
+            _rows = _mapData._rows;
+            _waterSize = _mapData._waterSize;
+            _townSpread = _mapData._townSpread;
+            _maxTownCount = _mapData._maxTownCount;
+
+        }
 
 		
 	}

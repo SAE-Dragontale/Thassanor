@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1096815629394588}
+  m_RootGameObject: {fileID: 1743382147148962}
   m_IsPrefabAsset: 1
---- !u!1 &1096815629394588
+--- !u!1 &1743382147148962
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4267092855833134}
-  - component: {fileID: 114273780895222834}
-  - component: {fileID: 114815627915335054}
+  - component: {fileID: 4758968359304078}
+  - component: {fileID: 114030430500421720}
+  - component: {fileID: 114387364731395258}
   m_Layer: 0
   m_Name: PlayerProfile
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4267092855833134
+--- !u!4 &4758968359304078
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096815629394588}
+  m_GameObject: {fileID: 1743382147148962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 383.5133, y: 252.665, z: 5.5593514}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114273780895222834
+--- !u!114 &114030430500421720
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096815629394588}
+  m_GameObject: {fileID: 1743382147148962}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 075a2fb56b118c54caf06ebc50f7ece8, type: 3}
@@ -59,12 +59,12 @@ MonoBehaviour:
   right: {fileID: 0}
   unitCommand: {fileID: 0}
   thassanor: {fileID: 0}
---- !u!114 &114815627915335054
+--- !u!114 &114387364731395258
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096815629394588}
+  m_GameObject: {fileID: 1743382147148962}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 917ceeea594535844a1920518347e4f2, type: 3}
@@ -72,4 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cute: {fileID: 11400000, guid: d6d11ad0c0bd0bf44b7b3a8ebf372e4d, type: 2}
   Soultry: {fileID: 11400000, guid: b78c8dc28cedce347b9f11319d2f6c7b, type: 2}
+  SummonMelee: {fileID: 11400000, guid: 6085d4d2db4288a4d9a4d8387be30467, type: 2}
+  SummonRange: {fileID: 11400000, guid: 5c326e437a6bf8440957b3baf273bf80, type: 2}
+  Resurrect: {fileID: 11400000, guid: 313a32b3479101d4882729d9a31200ca, type: 2}
   thassanor: {fileID: 0}

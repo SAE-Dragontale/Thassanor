@@ -21,7 +21,7 @@ public class KeybindInput : MonoBehaviour
     private GameObject currentKey; //used to store button pressed to change key bindings, targets the keybinding button in UI
     private string filePath;
     public TextMeshProUGUI up, down, left, right, unitCommand;
-    public GameObject thassanor;
+    public Dragontale.Thassanor thassanor;
     private PlayerData playerData;
     //public Text debugLoggerText;
 
@@ -34,7 +34,7 @@ public class KeybindInput : MonoBehaviour
     void Start()
     {
         _keyboardHotkeys = new KeyboardHotkeys();
-        thassanor = GameObject.Find("[Thassanor]");
+        thassanor = FindObjectOfType<Dragontale.Thassanor>();
         LoadKeyLayout();
         thassanor.GetComponent<PlayerData>().playerHotkeys = _keyboardHotkeys;
         /*keys dictionary stores necessary keycodes along with string name which reflects the 

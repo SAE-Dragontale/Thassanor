@@ -29,6 +29,12 @@ namespace Prototype.NetworkLobby
         public void OnClickHost()
         {
             lobbyManager.StartHost();
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = true;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = true;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = true;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().townSpreadField.interactable = true;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = true;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = true;
         }
 
         public void OnClickJoin()

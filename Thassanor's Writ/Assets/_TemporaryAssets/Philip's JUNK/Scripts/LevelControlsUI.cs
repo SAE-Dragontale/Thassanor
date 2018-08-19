@@ -4,6 +4,7 @@
    Version:			0.0.0
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+using Prototype.NetworkLobby;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,24 +22,36 @@ public class LevelControlsUI : MonoBehaviour {
     public InputField maxTownCountField;
     public Dropdown typingDifficultyDropDown;
 
+    public List<GameObject> playerInfoList;
+    public LobbyPlayer localPlayer;
+
     //Level options data
-    public int _itSeed;
-    public float _columns;
-    public float _rows;
-    public int _waterSize;
-    public int _townSpread;
-    public int _maxTownCount;
-    public int typingDifficulty;
+    //public int _itSeed;
+    //public float _columns;
+    //public float _rows;
+    //public int _waterSize;
+    //public int _townSpread;
+    //public int _maxTownCount;
+    //public int typingDifficulty;
 
     // Use this for initialization
     void Start()
     {
         thassanor = FindObjectOfType<Dragontale.Thassanor>();
-        seedField.onValueChanged.AddListener(SeedInputField);
+        //seedField.onValueChanged.AddListener(SeedInputField);
         thassanor.GetComponent<MapData>()._columns = 20;
         thassanor.GetComponent<MapData>()._rows = 20;
         thassanor.GetComponent<MapData>()._waterSize = 4;
         thassanor.GetComponent<MapData>()._townSpread = 2;
+        playerInfoList.AddRange(GameObject.FindGameObjectsWithTag("PlayerInfo"));
+        foreach(GameObject player in playerInfoList)
+        {
+            if(player.GetComponent<LobbyPlayer>().nameInput.interactable == true)
+            {
+                localPlayer = player.GetComponent<LobbyPlayer>();
+            }
+        }
+        
     }
 	
 	// Update is called once per frame
@@ -50,6 +63,7 @@ public class LevelControlsUI : MonoBehaviour {
     {
         //_itSeed = int.Parse(seed);
         thassanor.GetComponent<MapData>()._itSeed = int.Parse(seed);
+        
     }
 
     //sets the amount of tiles the size of the map will be depending on option selected
@@ -59,23 +73,16 @@ public class LevelControlsUI : MonoBehaviour {
         {
             thassanor.GetComponent<MapData>()._columns = 20;
             thassanor.GetComponent<MapData>()._rows = 20;
-            _columns = 20f;
-            _rows = 20f;
-
         }
         else if(mapSize == 1)
         {
             thassanor.GetComponent<MapData>()._columns = 40;
             thassanor.GetComponent<MapData>()._rows = 40;
-            _columns = 40f;
-            _rows = 40f;
         }
         else if(mapSize == 2)
         {
             thassanor.GetComponent<MapData>()._columns = 80;
             thassanor.GetComponent<MapData>()._rows = 80;
-            _columns = 80f;
-            _rows = 80f;
         }
     }
 
@@ -99,14 +106,16 @@ public class LevelControlsUI : MonoBehaviour {
     {
         //_maxTownCount = int.Parse(maxTownCount);
         //_maxTownCount = Mathf.Clamp(_maxTownCount, 1, Mathf.RoundToInt(_columns * 0.2f));
-        thassanor.GetComponent<MapData>()._maxTownCount = Mathf.Clamp(int.Parse(maxTownCount), 1, Mathf.RoundToInt(_columns * 0.2f));
+        thassanor.GetComponent<MapData>()._maxTownCount = Mathf.Clamp(int.Parse(maxTownCount), 1, Mathf.RoundToInt(thassanor.GetComponent<MapData>()._columns * 0.2f));
         maxTownCountField.text = thassanor.GetComponent<MapData>()._maxTownCount.ToString();
     }
 
-    public void TypingDifficulty(int Index)
+    public void TypingDifficulty(int index)
     {
         //typingDifficulty = Index;
-        thassanor.GetComponent<MapData>().typingDifficulty = Index;
+        thassanor.GetComponent<MapData>().typingDifficulty = index;
+        //localPlayer.typingDifficulty = index;
+        //localPlayer.CmdTypingDifficultyChanged(index);
     }
 
 

@@ -20,14 +20,26 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
+        public Dropdown spell1DropDown;
+        public Dropdown spell2DropDown;
+
+        public InputField seedField;
+        public Dropdown mapSizeDropDown;
+        public InputField waterSizeField;
+        public InputField townSpreadField;
+        public InputField maxTownCountField;
+        public Dropdown typingDifficultyDropDown;
 
         public List<GameObject> playerInfoList;
+        public GameObject hostLobbyInfo;
         public GameObject levelOptionsPanel;
         public LevelControlsUI levelControlsUI;
 
+        public Dragontale.Thassanor thassanor;
+
         //public GameObject characterDropDown;
         public Dropdown dropDown;
- 
+
         public Text characterSelectText;
 
         public GameObject localIcone;
@@ -42,9 +54,15 @@ namespace Prototype.NetworkLobby
         public Color playerColor = Color.white;
         [SyncVar(hook = "OnCharacterSelect")]
         public int playerCharacterIndex = 0;
+        [SyncVar(hook = "OnSpell1Change")]
+        public int spell1Index = 0;
+        [SyncVar(hook = "OnSpell2Change")]
+        public int spell2Index = 1;
+        [SyncVar(hook = "OnDifficultyChange")]
+        public int typingDifficulty = 0;
 
-        [SyncVar]
-        public int typingDifficulty;
+        public int storedDifficulty;
+
         [SyncVar]
         public int _itSeed;
         [SyncVar]
@@ -59,11 +77,14 @@ namespace Prototype.NetworkLobby
         public int _maxTownCount;
 
         private string playerCharacterName;
+        public string levelDifficultyString;
+        private string spell1Name;
+        private string spell2Name;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
-        static Color JoinColor = new Color(255.0f/255.0f, 0.0f, 101.0f/255.0f,1.0f);
+        static Color JoinColor = new Color(255.0f / 255.0f, 0.0f, 101.0f / 255.0f, 1.0f);
         static Color NotReadyColor = new Color(34.0f / 255.0f, 44 / 255.0f, 55.0f / 255.0f, 1.0f);
         static Color ReadyColor = new Color(0.0f, 204.0f / 255.0f, 204.0f / 255.0f, 1.0f);
         static Color TransparentColor = new Color(0, 0, 0, 0);
@@ -74,8 +95,11 @@ namespace Prototype.NetworkLobby
         private void Awake()
         {
             playerCharacterName = "Shousei";
+            levelDifficultyString = "Easy";
             levelOptionsPanel = GameObject.FindGameObjectWithTag("LevelOptions");
             levelControlsUI = FindObjectOfType<LevelControlsUI>();
+            thassanor = FindObjectOfType<Dragontale.Thassanor>();
+            thassanor.GetComponent<LobbyPlayer>().typingDifficulty = 20;
         }
 
 
@@ -89,6 +113,22 @@ namespace Prototype.NetworkLobby
             LobbyPlayerList._instance.DisplayDirectServerWarning(isServer && LobbyManager.s_Singleton.matchMaker == null);
 
             playerInfoList.AddRange(GameObject.FindGameObjectsWithTag("PlayerInfo"));
+            seedField = levelControlsUI.seedField;
+            mapSizeDropDown = levelControlsUI.mapSizeDropDown;
+            waterSizeField = levelControlsUI.waterSizeField;
+            townSpreadField = levelControlsUI.townSpreadField;
+            maxTownCountField = levelControlsUI.maxTownCountField;
+            typingDifficultyDropDown = levelControlsUI.typingDifficultyDropDown;
+            FindObjectOfType<CharacterSelect>().spell1DropDown = spell1DropDown;
+            FindObjectOfType<CharacterSelect>().spell2DropDown = spell2DropDown;
+
+            foreach (var player in playerInfoList)
+            {
+                if (player.GetComponent<LobbyPlayer>().isHost)
+                {
+                    hostLobbyInfo = player;
+                }
+            }
 
             if (isLocalPlayer)
             {
@@ -106,6 +146,9 @@ namespace Prototype.NetworkLobby
             OnMyName(playerName);
             OnMyColor(playerColor);
             OnCharacterChanged(playerCharacterIndex);
+            OnDifficultyChange(typingDifficulty);
+            OnSpell1Change(spell1Index);
+            OnSpell2Change(spell2Index);
         }
 
         public override void OnStartAuthority()
@@ -133,6 +176,8 @@ namespace Prototype.NetworkLobby
             nameInput.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
             dropDown.interactable = false;
+            spell1DropDown.interactable = false;
+            spell2DropDown.interactable = false;
 
             ChangeReadyButtonColor(NotReadyColor);
 
@@ -152,7 +197,7 @@ namespace Prototype.NetworkLobby
             if (playerInfoList[0].GetComponent<LobbyPlayer>().nameInput.interactable == false)
             {
                 Debug.Log("Player is Host");
-                isHost = true;
+                isHost = false;
                 SetUpLevelOptionsPanel();
             }
 
@@ -170,12 +215,14 @@ namespace Prototype.NetworkLobby
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
-                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
+                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
 
             //we switch from simple name display to name input
             colorButton.interactable = true;
             nameInput.interactable = true;
             dropDown.interactable = true;
+            spell1DropDown.interactable = true;
+            spell2DropDown.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
@@ -189,13 +236,22 @@ namespace Prototype.NetworkLobby
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
 
+            typingDifficultyDropDown.onValueChanged.RemoveAllListeners();
+            typingDifficultyDropDown.onValueChanged.AddListener(OnDifficultyChanged);
+
+            spell1DropDown.onValueChanged.RemoveAllListeners();
+            spell1DropDown.onValueChanged.AddListener(OnSpell1Changed);
+
+            spell2DropDown.onValueChanged.RemoveAllListeners();
+            spell2DropDown.onValueChanged.AddListener(OnSpell2Changed);
+
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
         }
 
         private void SetUpLevelOptionsPanel()
-        { 
+        {
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = false;
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = false;
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = false;
@@ -203,18 +259,9 @@ namespace Prototype.NetworkLobby
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = false;
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = false;
         }
-            //else if (isHost)
-            //{
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = true;
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = true;
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = true;
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().townSpreadField.interactable = true;
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = true;
-            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = true;
-            //}
 
-        //This enable/disable the remove button depending on if that is the only local player or not
-        public void CheckRemoveButton()
+    //This enable/disable the remove button depending on if that is the only local player or not
+    public void CheckRemoveButton()
         {
             if (!isLocalPlayer)
                 return;
@@ -280,6 +327,29 @@ namespace Prototype.NetworkLobby
             dropDown.captionText.text = playerCharacterName;
         }
 
+        public void OnSpell1Change(int newIndex)
+        {
+            spell1Index = newIndex;
+            spell1Name = spell1DropDown.options[newIndex].text;
+            spell1DropDown.captionText.text = spell1Name;
+        }
+        public void OnSpell2Change(int newIndex)
+        {
+            spell2Index = newIndex;
+            spell2Name = spell2DropDown.options[newIndex].text;
+            spell2DropDown.captionText.text = spell2Name;
+        }
+
+        public void OnDifficultyChange(int num)
+        {
+            Debug.Log("Difficulty changed");
+            typingDifficulty = num;
+            levelDifficultyString = levelOptionsPanel.GetComponent<Dropdown>().options[num].text;
+            levelOptionsPanel.GetComponent<Dropdown>().captionText.text = levelDifficultyString;
+            storedDifficulty = hostLobbyInfo.GetComponent<LobbyPlayer>().typingDifficulty;
+            Debug.Log(storedDifficulty);
+        }
+
         //===== UI Handler
 
         //Note that those handler use Command function, as we need to change the value on the server not locally
@@ -302,6 +372,21 @@ namespace Prototype.NetworkLobby
         public void OnCharacterChanged(int index)
         {
             CmdCharacterChanged(index);
+        }
+
+        public void OnSpell1Changed(int index)
+        {
+            CmdSpell1Changed(index);
+        }
+
+        public void OnSpell2Changed(int index)
+        {
+            CmdSpell2Changed(index);
+        }
+
+        public void OnDifficultyChanged(int num)
+        {
+            CmdTypingDifficultyChanged(num);
         }
 
         public void OnRemovePlayerClick()
@@ -397,6 +482,80 @@ namespace Prototype.NetworkLobby
             playerCharacterIndex = index;
             playerCharacterName = dropDown.options[index].text;
             OnCharacterSelect(index);
+        }
+
+        [Command]
+        public void CmdSpell1Changed (int index)
+        {
+            spell1Index = index;
+            spell1Name = spell1DropDown.options[index].text;
+            OnSpell1Change(index);
+        }
+
+        [Command]
+        public void CmdSpell2Changed(int index)
+        {
+            spell2Index = index;
+            spell2Name = spell2DropDown.options[index].text;
+            OnSpell2Change(index);
+        }
+
+        [Command]
+        public void CmdTypingDifficultyChanged(int num)
+        {
+            Debug.Log("sending difficulty to server");
+            //typingDifficulty = num;
+            Debug.Log(typingDifficulty);
+            levelDifficultyString = typingDifficultyDropDown.options[num].text;
+            OnDifficultyChange(num);
+        }
+
+        //[SyncVar]
+        //public int typingDifficulty;
+        //[SyncVar]
+        //public int _itSeed;
+        //[SyncVar]
+        //public int _columns;
+        //[SyncVar]
+        //public int _rows;
+        //[SyncVar]
+        //public int _waterSize;
+        //[SyncVar]
+        //public int _townSpread;
+        //[SyncVar]
+        //public int _maxTownCount;
+
+
+
+        [Command]
+        public void CmdSeedChanged(int num)
+        {
+            _itSeed = num;
+        }
+
+        [Command]
+        public void CmdColumnsChanged(int num)
+        {
+            _columns = num;
+            _rows = num;
+        }
+
+        [Command]
+        public void CmdWaterSizeChanged(int num)
+        {
+            _waterSize = num;
+        }
+
+        [Command]
+        public void CmdTownSpreadChanged(int num)
+        {
+            _townSpread = num;
+        }
+
+        [Command]
+        public void CmdMaxTownCountChanged(int num)
+        {
+            _maxTownCount = num;
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

@@ -18,21 +18,13 @@ public class GrabPlayerProfile : MonoBehaviour {
         characterSelect.CharacterSelection(value);
     }
 
-    //private void Update()
-    //{
-    //    switch (characterDropDown.value)
-    //    {
-    //        case 1:
-    //            characterSelect.CharacterSelection(characterDropDown.value);
-    //            break;
-    //        case 2:
-    //            characterSelect.CharacterSelection(characterDropDown.value);
-    //            break;
-    //    }
-    //}
+    public void SpellSelection1(int value)
+    {
+        characterSelect.SpellLoadout1(value);
+    }
 
-    //EventTrigger.Entry entry1 = new EventTrigger.Entry();
-    //entry1.eventID = EventTriggerType.Drag; // Here would not be drag as you need buttons and not joystick
-    //entry1.callback.AddListener((eventData) => { GetComponent<PlayerMovement>().OnJoystickDrag(); }); // here you call whatever method you want that belongs to script that is attached to this gameobject
-    //joystick.GetComponent<EventTrigger>().triggers[0] = entry1; // assign event that you setup to event trigger
+    public void SpellSelection2(int value)
+    {
+        characterSelect.SpellLoadout2(value);
+    }
 }

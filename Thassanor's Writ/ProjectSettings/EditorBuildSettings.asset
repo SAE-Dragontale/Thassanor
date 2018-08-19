@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_First Party/Scenes/MainMenu.unity
     guid: 1899673168b87c64fa69347756f91734
-  - enabled: 0
-    path: Assets/_First Party/Scenes/Multiplayer.unity
-    guid: 5619f90892e19f24ebcb33e96da14bee
   - enabled: 1
     path: Assets/_TemporaryAssets/Philip's JUNK/Scenes/MainMenu Test.unity
     guid: 50fb8d86fb649f741bb853a35fdadb14
   - enabled: 1
+    path: Assets/_First Party/Scenes/Multiplayer.unity
+    guid: 5619f90892e19f24ebcb33e96da14bee
+  - enabled: 0
     path: Assets/_TemporaryAssets/Eric's Garbage/DevGridGenerator.unity
     guid: dd26024ca9b7b38449ccbb10eb9383ac
   - enabled: 0

@@ -5,9 +5,11 @@ using UnityEngine;
 public class BorderGeneration : MonoBehaviour {
 
 	public BoardGeneration _boardGeneratorRef;
+    [HideInInspector] public float _columnStart;
     [HideInInspector] public int _columnLength;
-   [HideInInspector] public int _rowLength;
-	public GameObject[] _outerWallTiles;  
+    [HideInInspector] public float _rowStart;
+    [HideInInspector] public int _rowLength;
+    public GameObject[] _outerWallTiles;  
 	public List<GameObject> _wallList = new List<GameObject>();
 
     private Transform _borderFolder;
@@ -15,17 +17,21 @@ public class BorderGeneration : MonoBehaviour {
     private void Awake() 
 	{
 		_boardGeneratorRef = gameObject.GetComponent<BoardGeneration>();
-	}
-
-    private void Start()
-    {
         _borderFolder = new GameObject("Borders").transform;
         _borderFolder.parent = transform;
+        
+        //sets the start position of the rows and columns
+        _columnStart = -5f;
+        _rowStart = -5;
 
+        //adjustment made because of tile size being 10 ((mulity vlaue = to that of tile size)
         _rowLength = _boardGeneratorRef._rows * 10;
         _columnLength = _boardGeneratorRef._columns * 10;
-
+        //sets the max length tiles can create to appropriate length and -5, to to compensate for half the width of a tile
+        _rowLength -= 5;
+        _columnLength -= 5;
     }
+
 
 
     //creates the border
@@ -42,24 +48,26 @@ public class BorderGeneration : MonoBehaviour {
 		// 7 - Top Right Corner
 
 		// The outer walls are one unit left, right, up and down from the board.
-		float leftEdgeX = -5f;
+		float leftEdgeX = _columnStart;
 		float rightEdgeX = _columnLength;
-		float bottomEdgeZ = -5f;
+		float bottomEdgeZ = _rowStart;
 		float topEdgeZ = _rowLength;
 
-		// Instantiate both vertical walls (one on each side).
-		InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeZ, topEdgeZ);
+        // Instantiate both horizontal walls, these are one in left and right from the outer walls.
+        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeZ);
+        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeZ);
+
+        // Instantiate both vertical walls (back and front).
+        InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeZ, topEdgeZ);
 		InstantiateVerticalOuterWall(rightEdgeX, bottomEdgeZ, topEdgeZ);
 
-		// Instantiate both horizontal walls, these are one in left and right from the outer walls.
-		InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeZ);
-		InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeZ);
+
 	}
 
 	//creates the border on the left and right hand sides
 	public void InstantiateVerticalOuterWall (float xCoord, float startingZ, float endingZ)
 	{
-		
+
 		// Start the loop at the starting value for Y.
 		float currentZ = startingZ;
 
@@ -93,19 +101,19 @@ public class BorderGeneration : MonoBehaviour {
 	public void InstantiateWallsFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{
 		// The position to be instantiated at is based on the coordinates.
-		Vector3 position = new Vector3(xCoord*10, 0.01f , zCoord*10);
+		Vector3 position = new Vector3(xCoord, 0.01f , zCoord);
 
 		//checks left wall
-		if (xCoord == -5) 
+		if (xCoord == _columnStart) 
 		{
 			//this checks the left wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _rowLength *10 || zCoord == -5) 
-			{			
-				if (zCoord == _columnLength * 10- 1) 
+			if (zCoord == _rowLength || zCoord == _rowStart) 
+			{
+				if (zCoord == _columnLength- 1) 
 				{
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
 				}	
-				if (zCoord == -5) 
+				if (zCoord == _rowStart) 
 				{
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [4], position, Quaternion.identity) as GameObject;
 				}
@@ -116,17 +124,17 @@ public class BorderGeneration : MonoBehaviour {
 			}
 		} 
 		//checks right wall
-		else if (xCoord == _columnLength*10) 
+		else if (xCoord == _columnLength) 
 		{
 			//this checks the right wall, and says at the top and botttom wall piece, generate a corner tile
-			if (zCoord == _rowLength*10 || zCoord == -5) 
+			if (zCoord == _rowLength || zCoord == _rowStart) 
 			{			
-				if (zCoord == _columnLength*10 -1) 
+				if (zCoord == _columnLength -1) 
 				{
 					//create corner tile at length
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
-				if (zCoord == -5) 
+				if (zCoord == _columnStart) 
 				{
 					//create corner tile at start
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [5], position, Quaternion.identity) as GameObject;
@@ -140,10 +148,10 @@ public class BorderGeneration : MonoBehaviour {
 		}
 		
 		//checks front wall
-		if (zCoord == -5) 
+		if (zCoord == _rowStart) 
 		{
 			//this stops tiles from generating at the corners of the front line of walls
-			if (xCoord == _columnLength*10 || xCoord == -5) 
+			if (xCoord == _columnLength || xCoord == _columnStart) 
 			{		
 			}  
 			else 
@@ -152,17 +160,17 @@ public class BorderGeneration : MonoBehaviour {
 			}
 		} 
 		//checks back wall with the second element in the jagged array
-		else if (zCoord == _rowLength*10) 
+		else if (zCoord == _rowLength) 
 		{
 			//this stops tiles from generating at the corners of the back line of walls
-			if (xCoord == _columnLength*10 || xCoord == -5) 
+			if (xCoord == _columnLength || xCoord == _columnStart) 
 			{			
-				if (xCoord == _columnLength*10) 
+				if (xCoord == _columnLength) 
 				{
 					//create corner tile at length
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [7], position, Quaternion.identity) as GameObject;
 				}	
-				if (xCoord == -5) 
+				if (xCoord == _columnStart) 
 				{
 					//create corner tile at start
 					_boardGeneratorRef._tileInstance = Instantiate (prefabs [6], position, Quaternion.identity) as GameObject;
@@ -175,7 +183,7 @@ public class BorderGeneration : MonoBehaviour {
 			}
 		}
 		
-		_boardGeneratorRef._tileInstance.name = "Wall _x-" + xCoord + " _z-" + zCoord;
+		_boardGeneratorRef._tileInstance.name = "Wall X: " + xCoord + " | Z: " + zCoord;
 		_wallList.Add (_boardGeneratorRef._tileInstance);
 
 		// Set the tile's parent to the board holder.

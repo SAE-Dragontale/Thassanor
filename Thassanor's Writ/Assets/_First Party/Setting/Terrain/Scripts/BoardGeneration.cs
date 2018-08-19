@@ -289,7 +289,7 @@ public class BoardGeneration : MonoBehaviour {
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
         floorTileInstance.AddComponent<MeshCollider>();
-		floorTileInstance.name = "Tile _x-" + (xCoord /10) + " _z-" + (zCoord/10);
+		floorTileInstance.name = "Tile X: " + (xCoord /10) + " | Z: " + (zCoord/10);
 
 
         _tileList.Add(floorTileInstance);

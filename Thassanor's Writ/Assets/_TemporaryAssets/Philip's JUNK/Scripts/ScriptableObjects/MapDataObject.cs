@@ -1,12 +1,16 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Philip Ong
-   File:			LevelData.cs
+   File:			MapDataObject.cs
    Version:			0.0.1
-   Description: 	
+   Description: 	MapData scriptable object containig 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class MapData : MonoBehaviour {
+[CreateAssetMenu(fileName = "New MapData Object", menuName = "MapData")]
+public class MapDataObject : ScriptableObject
+{
     public int typingDifficulty;
     public int _itSeed;
     public int _columns;

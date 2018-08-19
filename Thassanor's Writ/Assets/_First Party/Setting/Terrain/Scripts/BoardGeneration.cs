@@ -86,15 +86,15 @@ public class BoardGeneration : MonoBehaviour {
     //public SingletonPass _singletonRef;
     void Awake()
 	{
-							//read from singleton
-		//_mapData = GameObject.FindObjectOfType
+        //read from singleton
+        _mapData = GameObject.FindObjectOfType<MapData>();
 		
-		//_itSeed = _mapData._itSeed;
-		//_columns = _mapData._columns;
-		//_rows = _mapData._rows;
-		//_waterSize = _mapData._waterSize;
-		//_townSpread = _mapData._townSpread;
-		//_maxTownCount = _mapData._maxTownCount;
+		_itSeed = _mapData._itSeed;
+		_columns = _mapData._columns;
+		_rows = _mapData._rows;
+		_waterSize = _mapData._waterSize;
+		_townSpread = _mapData._townSpread;
+		_maxTownCount = _mapData._maxTownCount;
 
 		
 	}
@@ -115,7 +115,7 @@ public class BoardGeneration : MonoBehaviour {
 		SetupTilesArray ();
 	
 		InstantiateTiles ();
-		_borderGenRef.InstantiateOuterWalls (); 			
+		_borderGenRef.StartBorderGen(); 			
 		
 		StartCoroutine(DelayedStart());
 
@@ -289,7 +289,7 @@ public class BoardGeneration : MonoBehaviour {
 
 		floorTileInstance = Instantiate(prefabs[index], position, Quaternion.identity, _tileFolder) as GameObject;
         floorTileInstance.AddComponent<MeshCollider>();
-		floorTileInstance.name = "Tile _x-" + (xCoord /10) + " _z-" + (zCoord/10);
+		floorTileInstance.name = "Tile X: " + (xCoord /10) + " | Z: " + (zCoord/10);
 
 
         _tileList.Add(floorTileInstance);

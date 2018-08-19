@@ -15,11 +15,11 @@ public class LevelControlsUI : MonoBehaviour {
 
     //inspector components
     public InputField seedField;
-    //public Dropdown mapSizeDropDown;
+    public Dropdown mapSizeDropDown;
     public InputField waterSizeField;
     public InputField townSpreadField;
     public InputField maxTownCountField;
-    //public Dropdown typingDifficultyDropDown;
+    public Dropdown typingDifficultyDropDown;
 
     //Level options data
     public int _itSeed;

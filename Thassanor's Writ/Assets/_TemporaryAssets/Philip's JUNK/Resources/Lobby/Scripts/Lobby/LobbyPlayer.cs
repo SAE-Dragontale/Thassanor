@@ -20,17 +20,20 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
+
+        public List<GameObject> playerInfoList;
         public GameObject levelOptionsPanel;
-        //public LevelControlsUI levelControlsUI = FindObjectOfType<LevelControlsUI>();
+        public LevelControlsUI levelControlsUI;
 
         //public GameObject characterDropDown;
         public Dropdown dropDown;
-        public LobbyPlayer hostPlayerInfo;
  
         public Text characterSelectText;
 
         public GameObject localIcone;
         public GameObject remoteIcone;
+
+        public bool isHost = true;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
         [SyncVar(hook = "OnMyName")]
@@ -40,8 +43,22 @@ namespace Prototype.NetworkLobby
         [SyncVar(hook = "OnCharacterSelect")]
         public int playerCharacterIndex = 0;
 
-        private string playerCharacterName = "Shousei";
- 
+        [SyncVar]
+        public int typingDifficulty;
+        [SyncVar]
+        public int _itSeed;
+        [SyncVar]
+        public int _columns;
+        [SyncVar]
+        public int _rows;
+        [SyncVar]
+        public int _waterSize;
+        [SyncVar]
+        public int _townSpread;
+        [SyncVar]
+        public int _maxTownCount;
+
+        private string playerCharacterName;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -54,10 +71,16 @@ namespace Prototype.NetworkLobby
         //static Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
+        private void Awake()
+        {
+            playerCharacterName = "Shousei";
+            levelOptionsPanel = GameObject.FindGameObjectWithTag("LevelOptions");
+            levelControlsUI = FindObjectOfType<LevelControlsUI>();
+        }
+
 
         public override void OnClientEnterLobby()
         {
-
             base.OnClientEnterLobby();
 
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
@@ -65,12 +88,16 @@ namespace Prototype.NetworkLobby
             LobbyPlayerList._instance.AddPlayer(this);
             LobbyPlayerList._instance.DisplayDirectServerWarning(isServer && LobbyManager.s_Singleton.matchMaker == null);
 
+            playerInfoList.AddRange(GameObject.FindGameObjectsWithTag("PlayerInfo"));
+
             if (isLocalPlayer)
             {
+                Debug.Log("Player is local");
                 SetupLocalPlayer();
             }
             else
             {
+                Debug.Log("Player is NOT local");
                 SetupOtherPlayer();
             }
 
@@ -120,12 +147,13 @@ namespace Prototype.NetworkLobby
             nameInput.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
-            //levelOptionsPanel.SetActive(true);
-            hostPlayerInfo = GameObject.FindGameObjectWithTag("PlayerInfo").GetComponent<LobbyPlayer>();
+            levelOptionsPanel.SetActive(true);
 
-            if (hostPlayerInfo.nameInput.interactable == false)
+            if (playerInfoList[0].GetComponent<LobbyPlayer>().nameInput.interactable == false)
             {
-               // levelOptionsPanel
+                Debug.Log("Player is Host");
+                isHost = true;
+                SetUpLevelOptionsPanel();
             }
 
             CheckRemoveButton();
@@ -165,6 +193,25 @@ namespace Prototype.NetworkLobby
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
         }
+
+        private void SetUpLevelOptionsPanel()
+        { 
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = false;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = false;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = false;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().townSpreadField.interactable = false;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = false;
+            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = false;
+        }
+            //else if (isHost)
+            //{
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = true;
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = true;
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = true;
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().townSpreadField.interactable = true;
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = true;
+            //    GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = true;
+            //}
 
         //This enable/disable the remove button depending on if that is the only local player or not
         public void CheckRemoveButton()
@@ -374,3 +421,4 @@ namespace Prototype.NetworkLobby
         }
     }
 }
+

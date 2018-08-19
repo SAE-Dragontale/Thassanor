@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - NetworkedPlayerObj
   - PlayerInfo
+  - LevelOptions
   layers:
   - Default
   - TransparentFX

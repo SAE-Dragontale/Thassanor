@@ -14,7 +14,7 @@ public class BorderGeneration : MonoBehaviour {
 
     private Transform _borderFolder;
 
-    private void Awake() 
+    public void StartBorderGen() 
 	{
 		_boardGeneratorRef = gameObject.GetComponent<BoardGeneration>();
         _borderFolder = new GameObject("Borders").transform;
@@ -30,6 +30,8 @@ public class BorderGeneration : MonoBehaviour {
         //sets the max length tiles can create to appropriate length and -5, to to compensate for half the width of a tile
         _rowLength -= 5;
         _columnLength -= 5;
+
+        InstantiateOuterWalls();
     }
 
 

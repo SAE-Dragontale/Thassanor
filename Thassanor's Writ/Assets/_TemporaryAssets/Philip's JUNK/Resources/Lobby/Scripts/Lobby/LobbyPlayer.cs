@@ -125,7 +125,7 @@ namespace Prototype.NetworkLobby
 
             if (hostPlayerInfo.nameInput.interactable == false)
             {
-                levelOptionsPanel.
+               // levelOptionsPanel
             }
 
             CheckRemoveButton();

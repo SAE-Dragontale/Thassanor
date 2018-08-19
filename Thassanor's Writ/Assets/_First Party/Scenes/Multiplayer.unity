@@ -255,7 +255,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1337061847
+--- !u!1001 &1486516971
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -276,15 +276,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_LocalRotation.w
@@ -292,7 +292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4257883264827294, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1100133362470680, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
       propertyPath: m_Name
@@ -300,28 +300,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
-      propertyPath: _townTiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
-        type: 2}
       propertyPath: _columns
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _rows
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
-        type: 2}
-      propertyPath: _waterSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
-        type: 2}
-      propertyPath: _townSpread
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
@@ -414,7 +399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4744556576599416, guid: f94bee7d7a94fbc4aa63de6f676fc0f5, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f94bee7d7a94fbc4aa63de6f676fc0f5, type: 2}

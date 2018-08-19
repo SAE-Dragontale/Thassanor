@@ -18,10 +18,6 @@ public class BoardGeneration : MonoBehaviour {
 		Wall, Floor,
 	}
 
-	[Space]
-
-	//player reference
-	public GameObject[] _playerRef;
 
     [Header("Grid Components")]	
     public int _itSeed;                                         //grid seed for generation
@@ -69,8 +65,7 @@ public class BoardGeneration : MonoBehaviour {
 	[Space]
 
     public GameObject _navMeshTile;
-	NavMeshSurface _surface;
-	Renderer _navTileRend;
+	
 	[Space]
 
 	public List<GameObject> _tileList = new List<GameObject>();
@@ -78,11 +73,9 @@ public class BoardGeneration : MonoBehaviour {
     public List<GameObject> _waterList = new List<GameObject>();
 	public TileType[][] _tiles;                               // A jagged array of tile types representing the board, like a grid.
 
-	[Space]
-	[Header("GameObject References")]
-	public MapData _mapData;
-	public BorderGeneration _borderGenRef;
-	public GameObject _tileInstance;
+	[HideInInspector] public MapData _mapData;
+	[HideInInspector] public BorderGeneration _borderGenRef;
+	[HideInInspector] public GameObject _tileInstance;
 
     [Space]
     [Header("Neatness")]
@@ -135,8 +128,9 @@ public class BoardGeneration : MonoBehaviour {
 		yield return new WaitForSeconds(.5f);
 		
 		//generates the nav surface for the board
-		_surface = _navMeshTile.GetComponent<NavMeshSurface>();
-		_surface.BuildNavMesh();
+		_navMeshTile.GetComponent<NavMeshSurface>().BuildNavMesh();
+		
+		
 	}
  //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//Function to set length of grid directions
@@ -252,18 +246,17 @@ public class BoardGeneration : MonoBehaviour {
 	GameObject floorTileInstance;
 	void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{
-
-        xCoord = xCoord * 10f;
-        zCoord = zCoord * 10f;
-
-		//sets the player positions appropriately to their gbo's, when the center bottom tile is creating. 
+	//sets the player positions appropriately to their gbo's, when the center bottom tile is creating. 
 		if (xCoord == (_columns/2) && zCoord == 0) 
 		{
-			_p1Spawn.transform.position = new Vector3(xCoord,.6f,zCoord);
-			_p2Spawn.transform.position = new Vector3(xCoord,.6f,_tiles[0].Length - 1);
+			_p1Spawn.transform.position = new Vector3(xCoord * 10,.6f,zCoord);
+			_p2Spawn.transform.position = new Vector3(xCoord * 10,.6f,(_tiles[0].Length * 10) - 10);
 
-		}		
-				
+		}
+
+		//Mulitpplies the x and z coords to match the distance required to seperate grid tiles
+        xCoord = xCoord * 10f;
+        zCoord = zCoord * 10f;
 
 		Vector3 position = new Vector3(xCoord, 0f, zCoord);    
 		

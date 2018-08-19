@@ -5,8 +5,8 @@ using UnityEngine;
 public class BorderGeneration : MonoBehaviour {
 
 	public BoardGeneration _boardGeneratorRef;
-    public int _columnLength;
-    public int _rowLength;
+    [HideInInspector] public int _columnLength;
+   [HideInInspector] public int _rowLength;
 	public GameObject[] _outerWallTiles;  
 	public List<GameObject> _wallList = new List<GameObject>();
 
@@ -93,7 +93,7 @@ public class BorderGeneration : MonoBehaviour {
 	public void InstantiateWallsFromArray (GameObject[] prefabs, float xCoord, float zCoord)
 	{
 		// The position to be instantiated at is based on the coordinates.
-		Vector3 position = new Vector3(xCoord, 0f , zCoord);
+		Vector3 position = new Vector3(xCoord, 0.01f , zCoord);
 
 		//checks left wall
 		if (xCoord == -5) 

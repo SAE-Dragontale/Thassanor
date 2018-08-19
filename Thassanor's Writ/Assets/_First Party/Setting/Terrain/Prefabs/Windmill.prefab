@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4835446694168036}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RallyPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4816552466815928}
   - component: {fileID: 114330917959830132}
   - component: {fileID: 114814234889327644}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PeasantGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,6 @@ GameObject:
   - component: {fileID: 4021312407846756}
   - component: {fileID: 212608357901017988}
   - component: {fileID: 114067688217216976}
-  - component: {fileID: 114560809665829420}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -250,18 +249,6 @@ MonoBehaviour:
     i15: 158
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114560809665829420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1723116275786062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1423c5d3bff8664b9f5d435588a0c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 10
 --- !u!114 &114814234889327644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,7 +360,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0ed25b0c3ba168f49b0daf4e38705182, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -430,4 +417,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0

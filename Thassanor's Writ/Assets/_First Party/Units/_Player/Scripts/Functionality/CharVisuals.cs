@@ -1,10 +1,11 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.4.1
+   Version:			0.5.0
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharVisuals : MonoBehaviour {
@@ -16,10 +17,12 @@ public class CharVisuals : MonoBehaviour {
 	// Hierarchy Components
 	private Animator _an;
 	private SpriteRenderer _sr;
-	private CameraPlayer _cp;
+	private CameraPlayer _cm;
 
 	[Space] [Header("References")]
+
 	[SerializeField] private NecromancerStyle _necromancerStyle;
+
 	public NecromancerStyle _NecromancerStyle {
 		set {
 			_necromancerStyle = value;
@@ -27,14 +30,20 @@ public class CharVisuals : MonoBehaviour {
 		}
 	}
 
-
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[Space] [Header("Character Zoom")]
-	[SerializeField] private Vector3 _v3PlayerOffset = new Vector3(0,0,0);
-	[SerializeField] private Vector3 _v3PlayerPanning = new Vector3(0, 0, 0);
+	[Space] [Header("Camera")]
+
+	private bool _characterInFocus;
+
+	[Space]
+	[SerializeField] private Vector3 _cameraOffset = new Vector3(0,0,0);
+	[SerializeField] private Vector3 _cameraPanning = new Vector3(0, 0, 0);
+
+	[Space]
+	private List<Transform> _everyCameraFocus;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Initialisation
@@ -48,7 +57,10 @@ public class CharVisuals : MonoBehaviour {
 
 		_an = GetComponentInChildren<Animator>();
 		_sr = GetComponentInChildren<SpriteRenderer>();
-		_cp = Camera.main.GetComponent<CameraPlayer>();
+		_cm = Camera.main.GetComponent<CameraPlayer>();
+
+		ResetCamera();
+		ResetFocals();
 
 	}
 
@@ -65,20 +77,20 @@ public class CharVisuals : MonoBehaviour {
 	/* ----------------------------------------------------------------------------- */
 	// Animation Controllers
 
-	public void AnimMovement(float[] aflMovement = null) {
+	public void AnimMovement(float[] movementValues = null) {
 	
 		// If no value is passed to the function we should substitute {0,0} instead.
-		aflMovement = aflMovement ?? new float[2];
+		movementValues = movementValues ?? new float[2];
 
 		
 		// First we need to determine whether we're running or not and change our animator as needed.
-		_an.SetBool("isRunning", (aflMovement[0] != 0 || aflMovement[1] != 0) );
+		_an.SetBool("isRunning", (movementValues[0] != 0 || movementValues[1] != 0) );
 
 		// Here we only want to change our facing direction if we've got implicit movement direction (0<) plugged in.
-		if (aflMovement[1] > 0)
+		if (movementValues[1] > 0)
 			_sr.flipX = false;
 
-		else if (aflMovement[1] < 0) 
+		else if (movementValues[1] < 0) 
 			_sr.flipX = true;
 
 	}
@@ -92,10 +104,49 @@ public class CharVisuals : MonoBehaviour {
 	/* ----------------------------------------------------------------------------- */
 	// Camera Calls
 
-	public void CharacterZoom(bool isZooming) {
+	// Some easy fucntions that allow us to manipulate the camera without resetting anything crucial.
+	public void ResetCamera() => _cm._PrimaryFocus = transform;
+	private void ResetFocals() => _everyCameraFocus = new List<Transform>() { transform };
+	private void LoadFocals() => _cm._everyFocus = _everyCameraFocus;
 
-		_cp._v3PlayerOffset = isZooming ? _v3PlayerOffset : new Vector3 (0,0,0);
-		_cp._v3PlayerPanning = isZooming ? _v3PlayerPanning : new Vector3(0, 0, 0);
+	// Controls the magnification effect when our character needs to be brought into focus.
+	public void CharacterZoom(bool isClose) {
+
+		_characterInFocus = isClose;
+
+		if (isClose)
+			ResetCamera();
+
+		else
+			LoadFocals();
+
+		_cm._additionalOffset = isClose ? _cameraOffset : new Vector3 (0, 0, 0);
+		_cm._focalOffset = isClose ? _cameraPanning : new Vector3 (0, 0, 0);
+
+	}
+
+	// We should add items we want to include in our focus here.
+	public void AddCameraFocus(Transform focus) {
+
+		_everyCameraFocus.Add(focus);
+
+		if (!_characterInFocus)
+			LoadFocals();
+
+	}
+
+	// This is kind of costly instead of just resetting our focus, but otherwise it iterates through our foci and removes when it finds a match.
+	public void RemoveCameraFocus(Transform focus) {
+
+		foreach (Transform cameraFocus in _everyCameraFocus) {
+
+			if (cameraFocus == focus) {
+
+				_everyCameraFocus.Remove(cameraFocus);
+				return;
+
+			}
+		}
 
 	}
 

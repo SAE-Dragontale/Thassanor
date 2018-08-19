@@ -33,7 +33,7 @@ public class CharSpells : NetworkBehaviour {
 
 	public Spell[] _SpellLoadout {
 		set {
-			_spellLoadout = value;
+			//_spellLoadout = value;
 			InitialiseSpells();
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.3
+   Version:			0.8.4
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -21,6 +21,8 @@ public class InputTranslator : NetworkBehaviour {
     private CharControls _charControls;
     private CharSpells _charSpells;
 	private CharAudio _charAudio;
+	private CharVisuals _charVisuals;
+	private CharStats _charStats;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -30,8 +32,6 @@ public class InputTranslator : NetworkBehaviour {
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
     [SyncVar] private PlayerState _playerState;
     [SyncVar] private PlayerState _lastState;
-
-	[SerializeField] private bool isDebug = false;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -54,6 +54,8 @@ public class InputTranslator : NetworkBehaviour {
 		_charControls = GetComponent<CharControls>();
 		_charSpells = GetComponent<CharSpells>();
 		_charAudio = GetComponent<CharAudio>();
+		_charVisuals = GetComponent<CharVisuals>();
+		_charStats = GetComponent<CharStats>();
 
 	}
 
@@ -77,9 +79,10 @@ public class InputTranslator : NetworkBehaviour {
 
 		// Load Player Settings.
 		PlayerData playerData = FindObjectOfType<PlayerData>();
-		GetComponent<CharVisuals>()._NecromancerStyle = playerData.playerCharacter;
+		_charVisuals._NecromancerStyle = playerData.playerCharacter;
+		_charSpells._SpellLoadout = playerData.playerSpells;	
+		
 		GetComponent<KeyboardTracker>()._Keybindings = playerData.playerHotkeys;
-		_charSpells._SpellLoadout = playerData.playerSpells;
 
 	}
 
@@ -89,10 +92,8 @@ public class InputTranslator : NetworkBehaviour {
 		// The player who owns this script becomes the target of their input and their camera.
 		GetComponent<DeviceTracker>().enabled = true;
 
-		// We also want the camera to focus them as the primary camera target.
-		Camera.main.GetComponent<CameraPlayer>()._ltrCameraFocus.Add(transform);
-
-		// We declare that our audio should be determined by our stats, and nobody elses.
+		// We also want to declare that we are the primary target of the aesthetic elements in the game.
+		_charVisuals.ResetCamera();
 		_charAudio._local = true;
 
 	}
@@ -160,7 +161,6 @@ public class InputTranslator : NetworkBehaviour {
 				// Pressing Escape
 				if (rdi._ablKeys[0]) {
 
-					// #TODO: Implement spellcasting 'Abort'.
 					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
 					_charSpells.TypeStatus(false, true);
 
@@ -172,7 +172,6 @@ public class InputTranslator : NetworkBehaviour {
 				// Pressing Enter
 				else if (rdi._ablKeys[1]) {
 
-					// #TODO: Implement spellcasting 'Cast'.
 					// We don't want to instantly transition here. Include an Animation Lock.
 					_charSpells.TypeStatus(false);
 
@@ -184,7 +183,7 @@ public class InputTranslator : NetworkBehaviour {
 				break;
 
 			/* ----------------------------------------------------------------------------- */
-			case (PlayerState.Paused):
+			/*case (PlayerState.Paused):
 
 				// Pressing Escape
 				if (rdi._ablKeys[0]) {
@@ -198,7 +197,7 @@ public class InputTranslator : NetworkBehaviour {
 
 				}
 				
-				break;
+				break;*/
 		}
 	}
 

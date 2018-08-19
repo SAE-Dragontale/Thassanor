@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CameraBase.cs
-   Version:			0.0.1
+   Version:			0.0.2
    Description: 	Contains all of the base functions for the any camera. Things such as camera shake, scene transitioning, etc.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -13,7 +13,7 @@ public abstract class CameraBase : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	protected Vector3 _v3Desired;   // Our Desired Camera Position.
+	protected Vector3 desiredPosition;   // Our Desired Camera Position.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls

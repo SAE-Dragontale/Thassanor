@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 114041299481461328}
   - component: {fileID: 114469650456852578}
   - component: {fileID: 114058097153828724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Necromancer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -254,7 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d973c62bc8e7145bf5f3ce8866ae96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 1
 --- !u!114 &114041299481461328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,8 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _necromancerStyle: {fileID: 11400000, guid: b78c8dc28cedce347b9f11319d2f6c7b, type: 2}
-  _v3PlayerOffset: {x: 0, y: -7.5, z: 8}
-  _v3PlayerPanning: {x: 0, y: 0.25, z: 0}
+  _cameraOffset: {x: 0, y: -12.5, z: 7.5}
+  _cameraPanning: {x: 0, y: -0.15, z: 3}
 --- !u!114 &114051461296551960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -440,6 +439,8 @@ MonoBehaviour:
   _playerName: 
   _opposingPlayer: {fileID: 0}
   _distanceToOpponent: 200
+  _searchRadius: 0
+  _lastScanResults: []
 --- !u!114 &114535247668817328
 MonoBehaviour:
   m_ObjectHideFlags: 1

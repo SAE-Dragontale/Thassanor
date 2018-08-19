@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharAudio.cs
-   Version:			0.1.0
+   Version:			0.2.0
    Description: 	Handles all of the Player's audio requirements.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -19,7 +19,7 @@ public class CharAudio : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[HideInInspector] public bool _local;
+	public bool _local;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -54,18 +54,11 @@ public class CharAudio : MonoBehaviour {
 	// Music
 
 	public void UpdateMusic(float health, float proximity) {
+		
+		proximity = Mathf.Clamp01(Dragontale.MathFable.Remap(proximity, 15, 50, 1, 0));
 
-		proximity = Mathf.Clamp01(Dragontale.MathFable.Remap(proximity, 0, 100, 1, 0));
-
-		Debug.Log($"My Proximity is {proximity}, and my health is {health}.");
-
-		if (health > 0) {
-			_audio.HealthParam(health);
-			_audio.IntensityParam(proximity);
-
-		} else {
-			_audio.IntensityParam(2);
-		}
+		_audio.HealthParam(health);
+		_audio.IntensityParam(health > 0 ? proximity : 2);
 
 	}
 

@@ -3034,6 +3034,52 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a4407f4e0889d49bf6f8c71d33da17, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &1458011638
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1611833846}
+    m_Modifications:
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334244908978878, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+      propertyPath: m_Name
+      value: CameraNecromancer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1464175653
 Prefab:
   m_ObjectHideFlags: 0
@@ -3151,57 +3197,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4126812236701014, guid: 29a4407f4e0889d49bf6f8c71d33da17,
     type: 2}
   m_PrefabInternal: {fileID: 786716630}
---- !u!1001 &1556639266
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1611833846}
-    m_Modifications:
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1334244908978878, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-      propertyPath: m_Name
-      value: CameraNecromancer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!4 &1556639267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4223192912970478, guid: fc8a43c235a91034aa11bf97e5e2a53a,
     type: 2}
-  m_PrefabInternal: {fileID: 1556639266}
+  m_PrefabInternal: {fileID: 1458011638}
 --- !u!1001 &1562712722
 Prefab:
   m_ObjectHideFlags: 0

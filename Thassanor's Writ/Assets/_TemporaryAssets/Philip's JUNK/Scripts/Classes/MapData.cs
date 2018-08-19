@@ -7,11 +7,11 @@
 using UnityEngine;
 
 public class MapData : MonoBehaviour {
-    public int typingDifficulty;
     public int _itSeed;
     public int _columns;
     public int _rows;
     public int _waterSize;
     public int _townSpread;
     public int _maxTownCount;
+    public int typingDifficulty;
 }

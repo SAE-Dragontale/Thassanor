@@ -264,6 +264,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _columns
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _rows
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}
   m_IsPrefabAsset: 0
@@ -491,7 +501,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1308781524}
-  - component: {fileID: 1308781523}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -499,17 +508,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1308781523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1308781522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42399dd3ff739746a49eab18d5a0157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1308781524
 Transform:
   m_ObjectHideFlags: 0
@@ -622,17 +620,17 @@ Prefab:
     - target: {fileID: 20596137847540764, guid: fc8a43c235a91034aa11bf97e5e2a53a,
         type: 2}
       propertyPath: m_BackGroundColor.r
-      value: 0
+      value: 0.2830189
       objectReference: {fileID: 0}
     - target: {fileID: 20596137847540764, guid: fc8a43c235a91034aa11bf97e5e2a53a,
         type: 2}
       propertyPath: m_BackGroundColor.g
-      value: 0
+      value: 0.2830189
       objectReference: {fileID: 0}
     - target: {fileID: 20596137847540764, guid: fc8a43c235a91034aa11bf97e5e2a53a,
         type: 2}
       propertyPath: m_BackGroundColor.b
-      value: 0
+      value: 0.2830189
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}

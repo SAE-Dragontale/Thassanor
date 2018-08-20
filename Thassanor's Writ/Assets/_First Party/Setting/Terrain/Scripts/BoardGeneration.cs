@@ -126,13 +126,12 @@ public class BoardGeneration : MonoBehaviour {
     }
 
 	public IEnumerator DelayedStart()
-	{
-		yield return new WaitForSeconds(.5f);
-		
+    {
+        	
 		//generates the nav surface for the board
 		_navMeshTile.GetComponent<NavMeshSurface>().BuildNavMesh();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < _tileList.Count; i++)
         {
             Destroy(_tileList[i].GetComponent<MeshCollider>());

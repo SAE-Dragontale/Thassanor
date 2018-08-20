@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			MusicManager.cs
-   Version:			0.3.0
+   Version:			0.3.1
    Description: 	For managing all audio components within the game. All audio should be called from this script.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -21,13 +21,6 @@ public class AudioManager : MonoBehaviour {
 	ParameterInstance mainThemeScene;
 
 	EventInstance ambienceMenu;
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Variables
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	[SerializeField] [Range(0, 4)] int _gameIntensity;
-	[SerializeField] [Range(0, 100)] float _playerHealth;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -61,8 +54,6 @@ public class AudioManager : MonoBehaviour {
 
 		// Initialise default music parameters.
 		MusicToGameplay();
-		_playerHealth = 100f;
-		_gameIntensity = 1;
 
 		// Finally, begin the music.
 		BeginMusic();

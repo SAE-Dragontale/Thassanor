@@ -94,6 +94,7 @@ public class InputTranslator : NetworkBehaviour {
 
 		// We also want to declare that we are the primary target of the aesthetic elements in the game.
 		_charVisuals.ResetCamera();
+		_charVisuals.ResetFocals();
 		_charAudio._local = true;
 
 	}
@@ -160,7 +161,7 @@ public class InputTranslator : NetworkBehaviour {
 
 				// Pressing Escape
 				if (rdi._ablKeys[0]) {
-
+					
 					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
 					_charSpells.TypeStatus(false, true);
 
@@ -228,7 +229,3 @@ public class InputTranslator : NetworkBehaviour {
 	}
 
 }
-
-
-
- 

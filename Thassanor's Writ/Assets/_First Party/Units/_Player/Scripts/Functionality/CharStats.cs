@@ -15,6 +15,7 @@ public class CharStats : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private CharAudio _charAudio;
+	private BoxCollider _collider;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -41,11 +42,17 @@ public class CharStats : MonoBehaviour {
 	private void Awake() {
 
 		_charAudio = GetComponent<CharAudio>();
+		_collider = GetComponent<BoxCollider>();
 
 	}
 
 	// Called before class calls or functions.
-	private void Start() => StartCoroutine("AreaScan");
+	private void Start() {
+
+		StartCoroutine(PlayerScan());
+		StartCoroutine(PeasantScan());
+
+	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
@@ -89,8 +96,10 @@ public class CharStats : MonoBehaviour {
 
 		while (_opposingPlayer == null) {
 
-			_scanForPlayer = Physics.OverlapSphere(transform.position, _searchRadius * 2f, 11);
-			_opposingPlayer = _scanForPlayer?[0]?.transform ?? null;
+			_scanForPlayer = Physics.OverlapSphere(transform.position, _searchRadius * 2f, 1 << 11);
+
+			if (_scanForPlayer.Length > 1)
+				_opposingPlayer =  _scanForPlayer?[1]?.transform ?? null;
 
 			yield return new WaitForSeconds(2f);
 
@@ -102,7 +111,7 @@ public class CharStats : MonoBehaviour {
 
 		while (true) {
 
-			_scanForVillagers = Physics.OverlapSphere(transform.position, _searchRadius, 13);
+			_scanForVillagers = Physics.OverlapSphere(transform.position, _searchRadius, 1 << 13, QueryTriggerInteraction.Collide);
 			yield return new WaitForSeconds(1f);
 
 		}

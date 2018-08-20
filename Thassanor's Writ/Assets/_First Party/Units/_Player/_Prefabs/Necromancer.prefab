@@ -439,8 +439,9 @@ MonoBehaviour:
   _playerName: 
   _opposingPlayer: {fileID: 0}
   _distanceToOpponent: 200
-  _searchRadius: 0
-  _lastScanResults: []
+  _searchRadius: 50
+  _scanForPlayer: []
+  _scanForVillagers: []
 --- !u!114 &114535247668817328
 MonoBehaviour:
   m_ObjectHideFlags: 1

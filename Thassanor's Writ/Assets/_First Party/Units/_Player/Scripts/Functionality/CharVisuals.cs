@@ -59,9 +59,6 @@ public class CharVisuals : MonoBehaviour {
 		_sr = GetComponentInChildren<SpriteRenderer>();
 		_cm = Camera.main.GetComponent<CameraPlayer>();
 
-		ResetCamera();
-		ResetFocals();
-
 	}
 
 	// Called before Update().
@@ -81,7 +78,6 @@ public class CharVisuals : MonoBehaviour {
 	
 		// If no value is passed to the function we should substitute {0,0} instead.
 		movementValues = movementValues ?? new float[2];
-
 		
 		// First we need to determine whether we're running or not and change our animator as needed.
 		_an.SetBool("isRunning", (movementValues[0] != 0 || movementValues[1] != 0) );
@@ -95,18 +91,14 @@ public class CharVisuals : MonoBehaviour {
 
 	}
 
-	public void AnimCasting(bool isSpelling = true) {
-
-		_an.SetBool("isSpelling", isSpelling);
-
-	}
+	public void AnimCasting(bool isSpelling = true) => _an.SetBool("isSpelling", isSpelling);
 
 	/* ----------------------------------------------------------------------------- */
 	// Camera Calls
 
 	// Some easy fucntions that allow us to manipulate the camera without resetting anything crucial.
 	public void ResetCamera() => _cm._PrimaryFocus = transform;
-	private void ResetFocals() => _everyCameraFocus = new List<Transform>() { transform };
+	public void ResetFocals() => _everyCameraFocus = new List<Transform>() { transform };
 	private void LoadFocals() => _cm._everyFocus = _everyCameraFocus;
 
 	// Controls the magnification effect when our character needs to be brought into focus.

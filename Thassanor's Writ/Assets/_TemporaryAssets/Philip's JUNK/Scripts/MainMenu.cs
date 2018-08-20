@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour {
     public GameObject multiplayerMenu;
     public GameObject playMenu;
     public GameObject hotkeyMenu;
+    public GameObject canvas;
 
     [Header("Focus Buttons")]
     [Tooltip("Store all Focus buttons here.")]
@@ -106,7 +107,7 @@ public class MainMenu : MonoBehaviour {
     public void ButtonBackMultiplayer()
     {
         multiplayerMenu.SetActive(false);
-        playMenu.SetActive(true);
+        canvas.SetActive(true);
         EventSystem.current.SetSelectedGameObject(newgameButton);
     }
 
@@ -133,7 +134,7 @@ public class MainMenu : MonoBehaviour {
 
     public void ButtonMultiplayerPlay()
     {
-        playMenu.SetActive(false);
+        canvas.SetActive(false);
         multiplayerMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(createButton);
     }

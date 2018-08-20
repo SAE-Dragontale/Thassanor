@@ -89,6 +89,8 @@ public class CharSpells : NetworkBehaviour {
 	// Called when we're starting to type. Contains all activation code and executes any runtime requirements.
 	public void TypeStatus(bool toggleOn, bool cancelCast = false) {
 
+		_charVisuals.PostProcessSpelling(toggleOn);
+
 		ShowInputField(toggleOn);
 		CallCameraZoom(toggleOn);
 		CallAnimationCasting(toggleOn);

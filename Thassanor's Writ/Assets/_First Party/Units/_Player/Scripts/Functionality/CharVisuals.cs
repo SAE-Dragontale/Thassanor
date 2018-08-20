@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CharVisuals : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class CharVisuals : MonoBehaviour {
 	private SpriteRenderer _sr;
 	private CameraPlayer _cm;
 
-	[Space] [Header("References")]
+	[Space] [Header("Customisation")]
 
 	[SerializeField] private NecromancerStyle _necromancerStyle;
 
@@ -30,6 +31,11 @@ public class CharVisuals : MonoBehaviour {
 		}
 	}
 
+	[Space] [Header("Post Processing")]
+
+	private PostProcessVolume _ppDeath;
+	private PostProcessVolume _ppSpellcasting;
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -39,7 +45,7 @@ public class CharVisuals : MonoBehaviour {
 	private bool _characterInFocus;
 
 	[Space]
-	[SerializeField] private Vector3 _cameraOffset = new Vector3(0,0,0);
+	[SerializeField] private Vector3 _cameraOffset = new Vector3(0, 0, 0);
 	[SerializeField] private Vector3 _cameraPanning = new Vector3(0, 0, 0);
 
 	[Space]
@@ -57,7 +63,11 @@ public class CharVisuals : MonoBehaviour {
 
 		_an = GetComponentInChildren<Animator>();
 		_sr = GetComponentInChildren<SpriteRenderer>();
+
 		_cm = Camera.main.GetComponent<CameraPlayer>();
+
+		_ppDeath = _cm.transform.Find("DeathEffects").GetComponent<PostProcessVolume>();;
+		_ppSpellcasting = _cm.transform.Find("SpellcastEffects").GetComponent<PostProcessVolume>();
 
 	}
 
@@ -141,5 +151,12 @@ public class CharVisuals : MonoBehaviour {
 		}
 
 	}
+
+	/* ----------------------------------------------------------------------------- */
+	// Post Processing Calls
+
+	public void PostProcessDeath(float health) => _ppDeath.weight = Dragontale.MathFable.Remap(health, 0, 100, 1, 0);
+
+	public void PostProcessSpelling(bool isCasting) => _ppSpellcasting.weight = isCasting ? 1f : 0f;
 
 }

@@ -15,6 +15,8 @@ public class CharStats : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private CharAudio _charAudio;
+	private CharVisuals _charVisuals;
+
 	private BoxCollider _collider;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -42,6 +44,8 @@ public class CharStats : MonoBehaviour {
 	private void Awake() {
 
 		_charAudio = GetComponent<CharAudio>();
+		_charVisuals = GetComponent<CharVisuals>();
+
 		_collider = GetComponent<BoxCollider>();
 
 	}
@@ -67,6 +71,7 @@ public class CharStats : MonoBehaviour {
 
 		DistanceUpdate();
 		AudioUpdate();
+		PostProcessingUpdate();
 
 	}
 	
@@ -88,6 +93,9 @@ public class CharStats : MonoBehaviour {
 
 	}
 
+	// Our health directly correlates to the PostProcessing weight here.
+	private void PostProcessingUpdate() => _charVisuals.PostProcessDeath(_playerHealth);
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Scan Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -99,7 +107,7 @@ public class CharStats : MonoBehaviour {
 			_scanForPlayer = Physics.OverlapSphere(transform.position, _searchRadius * 2f, 1 << 11);
 
 			if (_scanForPlayer.Length > 1)
-				_opposingPlayer =  _scanForPlayer?[1]?.transform ?? null;
+				_opposingPlayer =  _scanForPlayer?[0]?.transform ?? null;
 
 			yield return new WaitForSeconds(2f);
 

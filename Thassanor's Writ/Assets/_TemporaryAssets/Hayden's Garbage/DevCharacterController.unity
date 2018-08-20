@@ -3077,6 +3077,16 @@ Prefab:
       propertyPath: m_Name
       value: CameraNecromancer
       objectReference: {fileID: 0}
+    - target: {fileID: 114962746543048808, guid: fc8a43c235a91034aa11bf97e5e2a53a,
+        type: 2}
+      propertyPath: weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114555080079329816, guid: fc8a43c235a91034aa11bf97e5e2a53a,
+        type: 2}
+      propertyPath: volumeLayer.m_Bits
+      value: 15895
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8a43c235a91034aa11bf97e5e2a53a, type: 2}
   m_IsPrefabAsset: 0

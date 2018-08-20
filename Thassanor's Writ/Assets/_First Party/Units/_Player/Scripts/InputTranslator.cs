@@ -162,22 +162,16 @@ public class InputTranslator : NetworkBehaviour {
 				// Pressing Escape
 				if (rdi._ablKeys[0]) {
 					
-					// We want to do a little more than just shunt the PlayerState back to Idle. Call function here that represents the same command later.
 					_charSpells.TypeStatus(false, true);
-
-					// Begin the sequence to exit SpellCasting mode. This should be fast when aborting.
-					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0f) );
+					_playerState = PlayerState.Idle;
 
 				}
 
 				// Pressing Enter
 				else if (rdi._ablKeys[1]) {
 
-					// We don't want to instantly transition here. Include an Animation Lock.
 					_charSpells.TypeStatus(false);
-
-					// Begin the sequence to exit SpellCasting mode. This should be animation-dependant.
-					StartCoroutine( AnimationLock(PlayerState.Idle, rdi, 0.5f) );
+					_playerState = PlayerState.Idle;
 
 				}
 
@@ -214,7 +208,7 @@ public class InputTranslator : NetworkBehaviour {
 
 	}
 
-	// A small helper function to include an animation lock to State Switching in some circumstances.
+	/*// A small helper function to include an animation lock to State Switching in some circumstances.
 	private IEnumerator AnimationLock(PlayerState updatedState, RawDataInput rdi, float flWait) {
 
 		// Make sure we can't further issue commands while we're locked into something.
@@ -226,6 +220,6 @@ public class InputTranslator : NetworkBehaviour {
 		_playerState = updatedState;
 		_charControls.TrajectoryChange(rdi._aflAxis);
 
-	}
+	}*/
 
 }

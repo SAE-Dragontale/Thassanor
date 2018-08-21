@@ -2,7 +2,7 @@
    Author: 			Erix Cox
    Contributors:	Hayden Reeve
    File:			PeasantGroup.cs
-   Version:			0.2.0
+   Version:			0.2.1
    Description: 	Inheritance structure that allows peasants to move freely around the village's range.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -47,17 +47,24 @@ public class PeasantGroup : UnitGroup {
 		_forcePositionUpdate = false;
 
 	}
-	
-    //_unitStyle;           // The type of unit that we contain.
-    //_unitTemplate;        // The basic unit template.
-    //_everyUnit;           // The units within the group.
+
+	// Method specifically for killing summonable-entities. We pass information to make turning the undead easier to deal with.
+	public void SacrificeToSummon(int healthDamage, ref UnitGroup unitGroup) {
+
+		ChangeHealth(healthDamage);
+		
+	}
+
+	//_unitStyle;           // The type of unit that we contain.
+	//_unitTemplate;        // The basic unit template.
+	//_everyUnit;           // The units within the group.
 
 
-    //  code to get units to move 
-    //set health
-    //BehaviourLoopPassive
-    //NeedToUpdatePosition
-    //PositionVariance
-    //MoveUnit
-	
+	//  code to get units to move 
+	//set health
+	//BehaviourLoopPassive
+	//NeedToUpdatePosition
+	//PositionVariance
+	//MoveUnit
+
 }

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.5.2
+   Version:			0.6.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -18,17 +18,17 @@ public class UnitGroup : NetworkBehaviour {
 	[Space] [Header("References")]
 
 	[Tooltip("The host is the transform that the UnitGroup is associated with. This can be a player, actor, or even a terrain set.")]
-	[SerializeField] protected Transform _anchor;			// The target the group is following.
+	[SerializeField] protected Transform _anchor;           // The target the group is following.
 	public Transform _Anchor {
 		set { _anchor = value?.Find("RallyPoint") ?? value; }
 	}
 
 	protected Vector3 _lastPosition = new Vector3();        // The last position of the target host. Check against to summise whether we've moved.
-	protected bool _forcePositionUpdate = false;			// Whether we're ignoring the check and forcing the position to update.
+	protected bool _forcePositionUpdate = false;            // Whether we're ignoring the check and forcing the position to update.
 
-	[SerializeField] protected UnitStyle _unitStyle;		// The type of unit that we contain.
-	[SerializeField] protected GameObject _unitTemplate;	// The basic unit template.
-	[SerializeField] protected Unit[] _everyUnit;			// The units within the group.
+	[SerializeField] protected UnitStyle _unitStyle;        // The type of unit that we contain.
+	[SerializeField] protected GameObject _unitTemplate;    // The basic unit template.
+	[SerializeField] protected Unit[] _everyUnit;           // The units within the group.
 
 	public UnitStyle _UnitStyle {
 		set {
@@ -42,37 +42,60 @@ public class UnitGroup : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	protected enum GroupState {
-		Passive,	// Idle movement and will not engage in combat.
-		Idle,       // Idle movement but will defend themselves.
-		Active      // Stand at attention and engage all hostiles.
+		Passive,    // Idle movement and will not engage in combat.
+		Idle,       // Idle movement but will engage like Active.
+		Active,     // Stand at attention and engage all hostiles.
+		Aggro       // Currently aggro'd onto an enemy and engaging.
 	};
 
-	protected IEnumerator setMyLastPosition;   // Reclusive reference for UpdateLastPos().
+	protected IEnumerator _setMyLastPosition;   // Reclusive reference for UpdateLastPos().
+
+	protected IEnumerator _sitRep;              // This is used to control how often we recheck for opposing collisions after we've started to fight.
+	protected IEnumerator _dealDamage;       // This is used to increment damage over time to an opponent.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Data Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-	
-	[Space] [Header("Variables")]
-	[SerializeField] protected GroupState _groupState;  // The current state of the group.
 
-	[SerializeField] protected bool _permanent;    // Whether the group will Destroy() if it has no units.
+	[Space]
+	[Header("Status")]
 
-	// Health functionality for UnitGroups.
-	[SyncVar] [SerializeField] protected float _health;
+	[SerializeField] protected GroupState _groupState;      // The current state of the group.
+	[SerializeField] protected GroupState _defaultState;    // The 'original' state of the group.
+
+	[SerializeField] protected bool _permanent;             // Whether the group is removed when it's health reaches 0, or simply just waits until populated again.
+	[SyncVar] [SerializeField] protected float _health;     // The health is a direct sum of all units within. Each health increment is effectively one unit.
 
 	public float SetHealth {
 		set { _health = value; UnitsFromHealth(); }
 		get { return _health; }
 	}
 
+	[Space]
+	[Header("Offensive Statistics")]
+
+	[SerializeField] protected Collider _target;            // The reference to our area-scan target. While this is not null, we are fighting.
+	[SerializeField] protected float _opposingHealth;       // SHould be used as a 'ref' to the current target's health value.
+
+	[Space]
+	[SerializeField] protected float _weaponRange;          // The range at which we swing our sword, or fire our bows.
+	[SerializeField] protected float _aggroRange;           // The range at which it is acceptable to assault your enemies.
+	[SerializeField] protected float _disengageRange;       // The range at which is considered "too far" to continue fighting.
+
+	[Space]
+	[SerializeField] protected float _attackRate;			// The delay in seconds between dealing damage.
+	[SerializeField] protected float _combatTickRate;		// How evenly is our damage distributed between our _attackRate ticks.
+	[SerializeField] protected float _checkToContinue;      // How often we check to see if we should continue fighting.
+
 	[Space] [Header("Rules of Formations")]
 
 	[Range(1, 30)]
 	[SerializeField] protected int _formationColumns;   // This controls how many columns are present within the UnitGroup formation.
 
-	[Range(0.5f,3)]
+	[Range(0.5f, 3)]
 	[SerializeField] protected float _formationSpread;  // The amount of space in Vector Math between each unit. Horizontal and Vertical.
+
+	private Vector3 _nextSpawn;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -87,11 +110,14 @@ public class UnitGroup : NetworkBehaviour {
 		// If a UnitGroup starts pre-initialised, we have to recognise this.
 		UnitsFromChildren();
 
+		// Save our default state.
+		_defaultState = _groupState;
+
 	}
 
 	// Just make a few quick checks to safeguard us from err.
 	protected virtual void LogErrorsOnStart() {
-		
+
 		if (_unitStyle._health == 0)
 			Debug.LogError($"The health value for your UnitStyle cannot be {_unitStyle._health}.");
 
@@ -107,11 +133,16 @@ public class UnitGroup : NetworkBehaviour {
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Change UnitGroup by Unit.
-	public void AddUnit(int numberOf = 0) => ChangeHealth(_unitStyle._health * numberOf);
-	public void MinusUnit(int numberOf = 0) => ChangeHealth(-_unitStyle._health * numberOf);
+	// Adding units takes the optional 'location' parameter, as the often-use case for this is to spawn one unit at a time.
+	public void AddUnit(int numberOf = 1, Vector3? spawnLocation = null) {
 
-	// Change UnitGroup by Health.
+		_nextSpawn = spawnLocation ?? _anchor.position;
+		ChangeHealth(_unitStyle._health * numberOf);
+
+	}
+
+	// These health increments will always default to _anchor.position as their spawn location for ease of use.
+	public void MinusUnit(int numberOf = 1) => ChangeHealth(-_unitStyle._health * numberOf);
 	public void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
@@ -121,7 +152,7 @@ public class UnitGroup : NetworkBehaviour {
 
 		// Health should not drop below zero.
 		_health = Mathf.Max(_health, 0);
-		
+
 		// How many units does our health indicate that we should have?
 		int updatedHealth = Mathf.CeilToInt(_health / _unitStyle._health);
 
@@ -143,7 +174,7 @@ public class UnitGroup : NetworkBehaviour {
 
 		for (int i = updatedHealth - _everyUnit.Length; i > 0; i--) {
 
-			GameObject unit = Instantiate(_unitTemplate, _anchor.position, Quaternion.identity, transform);
+			GameObject unit = Instantiate(_unitTemplate, _nextSpawn, Quaternion.identity, transform);
 			unit.GetComponent<Unit>()._UnitStyle = _unitStyle;
 
 		}
@@ -184,8 +215,12 @@ public class UnitGroup : NetworkBehaviour {
 
 	protected void UpdateUnitList() {
 
+		// Refresh our currently generated list of units.
 		_everyUnit = GetComponentsInChildren<Unit>();
+
+		// Make sure we update and reset our default values for the next loop.
 		_forcePositionUpdate = true;
+		_nextSpawn = _anchor.position;
 
 	}
 
@@ -202,11 +237,15 @@ public class UnitGroup : NetworkBehaviour {
 			if (!_permanent)
 				DestroyNonPermanent();
 
-			return;				
-			
+			return;
+
 		}
 
 		switch (_groupState) {
+
+			case (GroupState.Aggro):
+				BehaviourLoopAggro();
+				return;
 
 			case (GroupState.Active):
 				BehaviourLoopActive();
@@ -225,12 +264,30 @@ public class UnitGroup : NetworkBehaviour {
 	}
 
 	/* ----------------------------------------------------------------------------- */
+	// Unit priority: All units gain 'freedom of movement' within the Host's Area of Influence.
+
+	protected virtual void BehaviourLoopAggro() {
+
+		if (_sitRep == null)
+			SitRep();
+
+		if (_target == null)
+			CancelAssault();
+
+		else
+			ThreatAssessement(_target);
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
 	// Formation priority: All units maintain their formation and await further commands from their Host.
 
 	protected virtual void BehaviourLoopActive() {
 
 		if (NeedToUpdatePosition(_anchor.position))
 			RulesOfFormation();
+
+		WatchForHostiles(_aggroRange);
 
 	}
 
@@ -247,6 +304,98 @@ public class UnitGroup : NetworkBehaviour {
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	/* ----------------------------------------------------------------------------- */
+	// Surroundings functions.
+
+	// Scans the area for the opposing player.
+	protected virtual Collider[] ScanForHostiles(int layer, float radius) => Physics.OverlapSphere(transform.position, _aggroRange, 1 << layer, QueryTriggerInteraction.Collide);
+
+	// Checks the situation every few seconds and orders a rescan of the area at an enlarged radius.
+	protected IEnumerator SitRep() {
+
+		yield return new WaitForSeconds(_checkToContinue);
+		WatchForHostiles(_disengageRange);
+
+		_sitRep = null;
+
+	}
+
+	// Called to assess the current situation after an area scan.
+	protected virtual void WatchForHostiles(float range) {
+
+		_target = null;
+
+		Collider[] thingsWithinAggro = ScanForHostiles(12, range);
+
+		if (thingsWithinAggro.Length == 0)
+			return;
+
+		_target = thingsWithinAggro[0];
+		_groupState = GroupState.Aggro;
+
+	}
+
+	// When we're aggro'd, we call constant threat assessements to choose our priority target.
+	// Warriors get chosen first, then Archers, and then finally the Necromancer themselves.
+
+	protected virtual void ThreatAssessement(Collider threat) {
+
+		var everyHostile = threat.transform.parent.GetComponent<CharSpells>()._minions;
+
+		foreach (UnitGroup hostile in everyHostile) {
+			if (hostile._health > 0) {
+
+				TargetMinions(hostile);
+				return;
+
+			}
+		}
+
+		TargetNecromancer(threat.transform.parent.GetComponent<CharStats>());
+
+	}
+
+	protected void TargetMinions(UnitGroup currentTarget) {
+
+		
+
+	}
+
+	protected void TargetNecromancer(CharStats enemyNecromancer) {
+
+		
+
+	}
+
+	protected IEnumerator DealDamage() {
+
+		while (true) {
+
+			yield return new WaitForSeconds(_attackRate);
+
+			float damage = _unitStyle._damage * _everyUnit.Length;
+			_opposingHealth -= damage;
+
+		}
+	}
+
+	protected void AssaultTarget(Vector3[] assaultPosition) {
+
+		if (_dealDamage == null)
+			StartCoroutine(DealDamage());
+
+
+	}
+
+	protected void CancelAssault() {
+
+		StopCoroutine(DealDamage());
+		_dealDamage = null;
+
+		_groupState = _defaultState;
+
+	}
 
 	/* ----------------------------------------------------------------------------- */
 	// Health functions.
@@ -267,8 +416,8 @@ public class UnitGroup : NetworkBehaviour {
 		}
 
 		// Log our last position.
-		if (setMyLastPosition == null)
-			StartCoroutine(setMyLastPosition = UpdateLastPos(positionToCheck));
+		if (_setMyLastPosition == null)
+			StartCoroutine(_setMyLastPosition = UpdateLastPos(positionToCheck));
 
 		// If we are at the same location as before, we don't need to update our unit's destinations.
 		if (positionToCheck == _lastPosition)
@@ -288,7 +437,7 @@ public class UnitGroup : NetworkBehaviour {
 		yield return new WaitForFixedUpdate();
 
 		_lastPosition = lastPosition;
-		setMyLastPosition = null;
+		_setMyLastPosition = null;
 
 	}
 

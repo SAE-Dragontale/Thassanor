@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharControls.cs
-   Version:			0.5.0
+   Version:			0.5.1
    Description: 	Recieves movement input and controls the player's position.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -80,22 +80,7 @@ public class CharControls : MonoBehaviour {
 		Class Runtime
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	// Fixed Update is called once per fixed frame.
-	private void FixedUpdate() {
-
-		EricMapDebug();
-
-		// Apply new Vector3 to velocity.
-		_rb.velocity += _v3Trajectory.normalized;
-
-	}
-
-	private void EricMapDebug() {
-
-		RaycastHit hit;
-		if (Physics.Raycast(transform.position, -Vector3.up, out hit) && hit.transform.tag == "Water") {
-		}
-
-	}
+	// Apply new Vector3 to velocity.
+	private void FixedUpdate() => _rb.velocity += _v3Trajectory.normalized; 
 
 }

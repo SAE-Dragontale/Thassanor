@@ -87,3 +87,11 @@ MonoBehaviour:
   _playerPrefab: {fileID: 1153909639333156, guid: 87a35592f891d6848af8df48b2affd68,
     type: 2}
   _player: {fileID: 0}
+  _unitPrefab: {fileID: 1546219129939706, guid: 71070946c78c1b24980a435c9b064ac0,
+    type: 2}
+  _everyGroup:
+  - {fileID: 0}
+  - {fileID: 0}
+  _everyStyle:
+  - {fileID: 11400000, guid: 0ccc23c446991e747a7d03007c1d346e, type: 2}
+  - {fileID: 11400000, guid: 13097ab3e4671ad4f87655dd29b8ec00, type: 2}

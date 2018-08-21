@@ -619,6 +619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161fa12233149d148aa55c79dc865f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warriors: {fileID: 0}
+  _archers: {fileID: 0}
   _toggleOn: {fileID: 2100000, guid: f9a22d8d288e19f429000172824a0dbe, type: 2}
   _toggleOff: {fileID: 2100000, guid: e8dc9c32d88284f4faf8a0fc9a3ae094, type: 2}
   _spellLoadout:

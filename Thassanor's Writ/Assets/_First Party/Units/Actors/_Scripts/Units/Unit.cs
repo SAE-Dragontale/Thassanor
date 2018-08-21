@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.4.1
+   Version:			0.4.2
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -148,16 +148,18 @@ public class Unit : MonoBehaviour {
 	protected void AnimatorMovement() {
 
 		// Change the facing of the sprite based on the x velocity.
-		if (_ai.velocity.x < -0.25f)
+		if (_ai.velocity.x < -0.5f)
 			_sr.flipX = true;
 
-		else if (_ai.velocity.x > 0.25f)
+		else if (_ai.velocity.x > 0.5f)
 			_sr.flipX = false;
 
 		// Then we'll use the "overall speed" of the velocity and convert it roughly into a percentage.
-		_an.SetFloat("flVelocity01", Dragontale.MathFable.Remap( _ai.velocity.sqrMagnitude, 0f, 100f, 0f, 1.5f));
+		_an.SetFloat("flVelocity01", Dragontale.MathFable.Remap(GetProximity(), 0f, 100f, 0f, 2.5f));
 
 	}
+
+	protected float GetProximity() => _ai.velocity.sqrMagnitude;
 
 	protected void AnimatorAttack() {
 

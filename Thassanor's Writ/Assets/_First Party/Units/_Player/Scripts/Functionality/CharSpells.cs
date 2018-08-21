@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.8.1
+   Version:			0.8.2
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -23,7 +23,9 @@ public class CharSpells : NetworkBehaviour {
 	private TextMeshProUGUI _accuracyDisplay;	// Where we present the user with their typing accuracy.
 	
 	private CharVisuals _charVisuals;	// The Visual Controller script for the character.
-	private CharAudio _charAudio;		// The Audio Controller script for the character.
+	private CharAudio _charAudio;       // The Audio Controller script for the character.
+
+	[SerializeField] public UnitGroup[] _minions = new UnitGroup[2];	// Our summoned unitGroups.
 
 	[SerializeField] private Material _toggleOn;	// The shader preset for the closest matching string.
 	[SerializeField] private Material _toggleOff;	// The shader preset for the other one.
@@ -172,11 +174,7 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	// Grade our current typing attempt.
-	private float TypingAccuracy() {
-
-		return Mathf.Clamp(Dragontale.MathFable.Remap(_distanceToClosest, _closestMatch.Length, 0, 0, 100), 0, 100);
-
-	}
+	private float TypingAccuracy() => Mathf.Clamp(Dragontale.MathFable.Remap(_distanceToClosest, _closestMatch.Length, 0, 0, 100), 0, 100);
 
 	/* ----------------------------------------------------------------------------- */
 	// Spellcasting Actions
@@ -188,7 +186,8 @@ public class CharSpells : NetworkBehaviour {
 		// Therefore, we already have all the information we need about the correct spell. We simply need to assign it.
 
 		// Assign spell targets.
-
+		_minions[0].AddUnit();
+		_minions[1].AddUnit();
 
 		// Call any functions related to the spell's specific function.
 		_charAudio.AudioSummonWarrior();

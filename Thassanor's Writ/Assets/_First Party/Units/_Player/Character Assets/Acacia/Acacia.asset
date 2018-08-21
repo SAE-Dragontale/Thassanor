@@ -13,3 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: Acacia Rico
   _animatorController: {fileID: 9100000, guid: 8151c3eb43325744b973c6c2935ed111, type: 2}
+  _splashArt: {fileID: 21300000, guid: 420aed07f82e3634b873d7a120930257, type: 3}
+  _eventWin: {fileID: 21300000, guid: 0fd814bca20e74147ba595cb1cd2f059, type: 3}
+  _eventLose: {fileID: 21300000, guid: 4efe8d578b38f414b991058dbc9fcbaa, type: 3}

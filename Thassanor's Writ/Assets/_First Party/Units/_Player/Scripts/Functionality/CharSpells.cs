@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.7.1
+   Version:			0.8.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -19,7 +19,8 @@ public class CharSpells : NetworkBehaviour {
 	private Transform _typingComponent;		// This is the base root we'll be working with for the Input System.
 
 	private TMP_InputField _inputField;			// This is the player's Input Field.
-	private TextMeshProUGUI[] _textDisplays;	// The locations to display the loadout strings.
+	private TextMeshProUGUI[] _textDisplays;    // The locations to display the loadout strings.
+	private TextMeshProUGUI _accuracyDisplay;	// Where we present the user with their typing accuracy.
 	
 	private CharVisuals _charVisuals;	// The Visual Controller script for the character.
 	private CharAudio _charAudio;		// The Audio Controller script for the character.
@@ -44,7 +45,8 @@ public class CharSpells : NetworkBehaviour {
 	private string[] _spellPhrases;	// The total list of all of our spell phrases, taken from spell loadout.
 	private int _smallestLength;	// The length of the smallest string from the above.
 
-	[SerializeField] private string _closestMatch;	// The current closest matching string compared to what we are typing.
+	[SerializeField] private string _closestMatch;		// The current closest matching string compared to what we are typing.
+	[SerializeField] private int _distanceToClosest;	// How far in Levenshtein units are we to our current target.
 
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -62,6 +64,8 @@ public class CharSpells : NetworkBehaviour {
 		_textDisplays = new TextMeshProUGUI[2];
 		_textDisplays[0] = _typingComponent.Find("Prediction1").GetComponent<TextMeshProUGUI>();
 		_textDisplays[1] = _typingComponent.Find("Prediction2").GetComponent<TextMeshProUGUI>();
+
+		_accuracyDisplay = _typingComponent.Find("Accuracy").GetComponent<TextMeshProUGUI>();
 
 		_charVisuals = GetComponent<CharVisuals>();
 		_charAudio = GetComponent<CharAudio>();
@@ -147,6 +151,8 @@ public class CharSpells : NetworkBehaviour {
 				_closestMatch = comparison;
 				lowestDifference = differenceBetween[i];
 
+				_distanceToClosest = lowestDifference;
+
 			}
 		
 		}
@@ -159,6 +165,15 @@ public class CharSpells : NetworkBehaviour {
 
 		else if (differenceBetween[1] + _differenceToFade < differenceBetween[0])
 			_textDisplays[0].fontMaterial = _toggleOff;
+
+		_accuracyDisplay.text = $"{Mathf.CeilToInt(TypingAccuracy()).ToString()}%";
+
+	}
+
+	// Grade our current typing attempt.
+	private float TypingAccuracy() {
+
+		return Mathf.Clamp(Dragontale.MathFable.Remap(_distanceToClosest, _closestMatch.Length, 0, 0, 100), 0, 100);
 
 	}
 

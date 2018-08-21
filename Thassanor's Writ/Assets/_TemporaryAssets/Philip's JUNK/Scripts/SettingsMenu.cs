@@ -21,8 +21,8 @@ public class SettingsMenu : MonoBehaviour
     private void Awake()
     {
         allResolutions = Screen.resolutions;
-        Debug.Log("loading player options");
         LoadPlayerOptions();
+        Debug.Log("loading player options");
     }
 
     private void Start()
@@ -45,55 +45,39 @@ public class SettingsMenu : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
-
-        //for (int i = 0; i < allResolutions.Length; i++)
-        //{
-        //    if (allResolutions[i].refreshRate == Screen.currentResolution.refreshRate)
-        //    {
-        //        resolutionsWithRefreshRate.Add(allResolutions[i]);
-        //    }
-        //}
-
-        //foreach (var res in resolutionsWithRefreshRate)
-        //{
-        //    string option = $"{res.width} x {res.height} @ {res.refreshRate}";
-        //    options.Add(option);
-
-        //    if (res.width == Screen.currentResolution.width && res.height == Screen.currentResolution.height)
-        //    {
-        //        currentResolutionIndex = resolutionsWithRefreshRate.IndexOf(res);
-        //    }
-        //}
-
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
     }
 
-    public void SetResolution (int resolutionIndex)
+    //[Commented Code]
+    //for (int i = 0; i < allResolutions.Length; i++)
+    //{
+    //    if (allResolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+    //    {
+    //        resolutionsWithRefreshRate.Add(allResolutions[i]);
+    //    }
+    //}
+
+    //foreach (var res in resolutionsWithRefreshRate)
+    //{
+    //    string option = $"{res.width} x {res.height} @ {res.refreshRate}";
+    //    options.Add(option);
+
+    //    if (res.width == Screen.currentResolution.width && res.height == Screen.currentResolution.height)
+    //    {
+    //        currentResolutionIndex = resolutionsWithRefreshRate.IndexOf(res);
+    //    }
+    //}
+
+    #region ScreenOptions
+    public void SetResolution(int resolutionIndex)
     {
         resolution = allResolutions[resolutionIndex];
         playerOptions.storedResolutionIndex = resolutionIndex;
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        PlayerPrefs.SetInt("storedResolutionIndex", playerOptions.storedResolutionIndex);
     }
 
-    public void SetVolume(float volume)
-    {
-        volumeText.text = $"Volume: {volume.ToString("F2")}";
-        audiomixer.SetFloat("volume", volume);
-        playerOptions.storedVolume = volume;
-        PlayerPrefs.SetFloat("storedVolume", playerOptions.storedVolume);
-    }
-
-    public void SetQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
-        PlayerPrefs.SetInt("storedQualityIndex", playerOptions.storedQualityIndex);
-    }
-
-    //toggling windowed mode.
-    //Initially Screen.fullScreen = !Screen.fullScreen was used but ran into problems even though this was noted in the unity API
     public void SetFullScreen(bool fullScreenBool)
     {
         Screen.SetResolution(resolution.width, resolution.height, fullScreenBool);
@@ -105,8 +89,42 @@ public class SettingsMenu : MonoBehaviour
         {
             playerOptions.storedIsFullScreen = 0;
         }
-        PlayerPrefs.SetInt("storedIsFullScreen", playerOptions.storedIsFullScreen);
     }
+
+    public void SaveScreenOptions()
+    {
+        PlayerPrefs.SetInt("storedIsFullScreen", playerOptions.storedIsFullScreen);
+        PlayerPrefs.SetInt("storedResolutionIndex", playerOptions.storedResolutionIndex);
+    }
+    #endregion
+
+    #region Save Volume
+    public void SetVolume(float volume)
+    {
+        volumeText.text = $"Volume: {volume.ToString("F2")}";
+        audiomixer.SetFloat("volume", volume);
+        playerOptions.storedVolume = volume;
+    }
+
+    public void SaveVolume()
+    {
+        PlayerPrefs.SetFloat("storedVolume", playerOptions.storedVolume);
+    }
+    #endregion
+
+    //[Commented Code]
+    //public void SetQuality(int qualityIndex)
+    //{
+    //    QualitySettings.SetQualityLevel(qualityIndex);
+    //}
+
+    //public void SaveQuality(int qualityIndex)
+    //{
+    //    PlayerPrefs.SetInt("storedQualityIndex", playerOptions.storedQualityIndex);
+    //}
+
+    //toggling windowed mode.
+    //Initially Screen.fullScreen = !Screen.fullScreen was used but ran into problems even though this was noted in the unity API
 
     private void LoadPlayerOptions()
     {
@@ -140,9 +158,9 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    public void DeleteAllPlayerPrefs()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+    //public void DeleteAllPlayerPrefs()
+    //{
+    //    PlayerPrefs.DeleteAll();
+    //}
 }
     

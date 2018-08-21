@@ -31,7 +31,7 @@ namespace Prototype.NetworkLobby
         public LobbyCountdownPanel countdownPanel;
         public GameObject addPlayerButton;
 
-        protected RectTransform currentPanel;
+        public RectTransform currentPanel;
 
         public Button backButton;
 

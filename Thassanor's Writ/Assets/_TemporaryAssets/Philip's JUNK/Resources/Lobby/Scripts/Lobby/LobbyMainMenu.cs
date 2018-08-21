@@ -11,6 +11,7 @@ namespace Prototype.NetworkLobby
 
         public RectTransform lobbyServerList;
         public RectTransform lobbyPanel;
+        public RectTransform lobbyScroll;
 
         public InputField ipInput;
         public InputField matchNameInput;

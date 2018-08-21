@@ -113,7 +113,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4737180263008450}
-  m_Layer: 0
+  - component: {fileID: 65487624843433062}
+  m_Layer: 12
   m_Name: RallyPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,6 +344,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.5, z: 0.25}
   m_Center: {x: 0, y: -0.25, z: -0.175}
+--- !u!65 &65487624843433062
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233576324679572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95612573798636660
 Animator:
   serializedVersion: 3
@@ -619,8 +632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161fa12233149d148aa55c79dc865f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warriors: {fileID: 0}
-  _archers: {fileID: 0}
+  _minions:
+  - {fileID: 0}
+  - {fileID: 0}
   _toggleOn: {fileID: 2100000, guid: f9a22d8d288e19f429000172824a0dbe, type: 2}
   _toggleOff: {fileID: 2100000, guid: e8dc9c32d88284f4faf8a0fc9a3ae094, type: 2}
   _spellLoadout:

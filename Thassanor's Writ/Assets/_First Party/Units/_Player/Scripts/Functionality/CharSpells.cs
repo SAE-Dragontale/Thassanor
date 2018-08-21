@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.8.0
+   Version:			0.8.1
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -137,20 +137,21 @@ public class CharSpells : NetworkBehaviour {
 		_textDisplays[1].fontMaterial = _toggleOn;
 
 		for (int i = 0; i < _spellPhrases.Length; i++) {
-
-			string comparison = _spellPhrases?[i].Substring(0, _smallestLength) ?? null;
+					   
+			string comparison = _spellPhrases[i].Substring(0, Mathf.Min(_inputField.text.Length,_spellPhrases[i].Length)) ?? null;
 
 			if (comparison == null)
 				return;
 
 			string typing = _difficulty > 0 ? _inputField.text : _inputField.text.ToLower();
+
 			differenceBetween[i] = Dragontale.StringFable.Compare(typing, comparison);
 
 			if (differenceBetween[i] < lowestDifference) {
-
-				_closestMatch = comparison;
+								
 				lowestDifference = differenceBetween[i];
 
+				_closestMatch = comparison;
 				_distanceToClosest = lowestDifference;
 
 			}
@@ -166,7 +167,7 @@ public class CharSpells : NetworkBehaviour {
 		else if (differenceBetween[1] + _differenceToFade < differenceBetween[0])
 			_textDisplays[0].fontMaterial = _toggleOff;
 
-		_accuracyDisplay.text = $"{Mathf.CeilToInt(TypingAccuracy()).ToString()}%";
+		_accuracyDisplay.text = _inputField.text.Length > 0 ? $"{Mathf.CeilToInt(TypingAccuracy()).ToString()}%" : "100%";
 
 	}
 

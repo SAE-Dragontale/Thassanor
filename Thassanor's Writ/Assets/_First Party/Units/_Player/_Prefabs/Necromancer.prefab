@@ -586,16 +586,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161fa12233149d148aa55c79dc865f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textDisplays: []
   _toggleOn: {fileID: 2100000, guid: f9a22d8d288e19f429000172824a0dbe, type: 2}
   _toggleOff: {fileID: 2100000, guid: e8dc9c32d88284f4faf8a0fc9a3ae094, type: 2}
   _spellLoadout:
   - {fileID: 11400000, guid: 313a32b3479101d4882729d9a31200ca, type: 2}
   - {fileID: 11400000, guid: 6085d4d2db4288a4d9a4d8387be30467, type: 2}
-  _spellPhrases: []
   _difficulty: 0
+  _differenceToFade: 0
   _closestMatch: 
-  _stringDifference: 0
 --- !u!114 &114463107472872810
 MonoBehaviour:
   m_ObjectHideFlags: 1

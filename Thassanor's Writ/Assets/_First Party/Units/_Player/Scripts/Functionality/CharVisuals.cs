@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharVisuals.cs
-   Version:			0.5.0
+   Version:			0.5.1
    Description: 	Called by player scripts that need to execute visual functions. Should not directly recieve player input.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -102,6 +102,8 @@ public class CharVisuals : MonoBehaviour {
 	}
 
 	public void AnimCasting(bool isSpelling = true) => _an.SetBool("isSpelling", isSpelling);
+
+	public void Death() => _an.SetBool("isDead", true);
 
 	/* ----------------------------------------------------------------------------- */
 	// Camera Calls

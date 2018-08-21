@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.7.0
+   Version:			0.7.1
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -142,16 +142,13 @@ public class CharSpells : NetworkBehaviour {
 			string typing = _difficulty > 0 ? _inputField.text : _inputField.text.ToLower();
 			differenceBetween[i] = Dragontale.StringFable.Compare(typing, comparison);
 
-			Debug.Log($"{differenceBetween} letters difference between '{comparison}' and '{typing}'.");
-			Debug.Log($"{differenceBetween} > {comparison.Length} - {typing.Length}");
-
 			if (differenceBetween[i] < lowestDifference) {
 
 				_closestMatch = comparison;
 				lowestDifference = differenceBetween[i];
 
-			}				
-
+			}
+		
 		}
 
 		_textDisplays[0].fontMaterial = _toggleOn;

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.4.0
+   Version:			0.4.1
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -39,10 +39,7 @@ public class Unit : MonoBehaviour {
 
 	public UnitStyle _UnitStyle {
 		get { return _unitStyle; }
-		set {
-			_unitStyle = value;
-			LoadUnitStyle();
-		}
+		set { _unitStyle = value; LoadUnitStyle(); }
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //

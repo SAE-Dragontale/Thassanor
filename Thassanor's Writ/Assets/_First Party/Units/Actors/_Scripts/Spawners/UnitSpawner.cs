@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitSpawner.cs
-   Version:			0.0.3
+   Version:			0.0.4
    Description: 	Simply spawns units to a UnitGroup over time.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -20,6 +20,7 @@ public class UnitSpawner : MonoBehaviour {
 	[SerializeField] private float _incrementInterval;
 	[SerializeField] private float _healthPerIncrement;
 	[SerializeField] private float _startingHealth;
+	[SerializeField] private float _maximumHealth;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -46,8 +47,12 @@ public class UnitSpawner : MonoBehaviour {
 	private IEnumerator SpawnOverTime() {
 
 		while (true) {
+
 			yield return new WaitForSeconds(_incrementInterval);
-			SpawnUnits(_healthPerIncrement);
+
+			if (_spawnToThis.SetHealth < _maximumHealth)
+				SpawnUnits(_healthPerIncrement);
+
 		}
 	}
 

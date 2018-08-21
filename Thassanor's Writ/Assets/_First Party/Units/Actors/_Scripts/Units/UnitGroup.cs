@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.5.1
+   Version:			0.5.2
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -60,11 +60,10 @@ public class UnitGroup : NetworkBehaviour {
 
 	// Health functionality for UnitGroups.
 	[SyncVar] [SerializeField] protected float _health;
+
 	public float SetHealth {
-		set {
-			_health = value;
-			UnitsFromHealth();
-		}
+		set { _health = value; UnitsFromHealth(); }
+		get { return _health; }
 	}
 
 	[Space] [Header("Rules of Formations")]
@@ -127,7 +126,7 @@ public class UnitGroup : NetworkBehaviour {
 		int updatedHealth = Mathf.CeilToInt(_health / _unitStyle._health);
 
 		// If our total health pool exceeds the maximum health pool of our units...
-		if (updatedHealth  > _everyUnit.Length)
+		if (updatedHealth > _everyUnit.Length)
 			UnitAddFromHealth(updatedHealth);
 
 		// If our total health pool leaves a unit without any remaining health...
@@ -200,8 +199,10 @@ public class UnitGroup : NetworkBehaviour {
 		// If we have no health remaining, then stop running functionality and 
 		if (_health <= 0) {
 
-			if (_permanent) { return; } 
-			else { RemoveGroup(); }
+			if (!_permanent)
+				DestroyNonPermanent();
+
+			return;				
 			
 		}
 
@@ -248,17 +249,15 @@ public class UnitGroup : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	/* ----------------------------------------------------------------------------- */
+	// Health functions.
+
 	// This is executed in place of the standard update loop when the UnitGroup has no health.
-
-	protected virtual void RemoveGroup() {
-
-		Destroy(gameObject);
-
-	}
+	protected virtual void DestroyNonPermanent() => Destroy(gameObject);
 
 	/* ----------------------------------------------------------------------------- */
-	// Before we do anything complicated, check whether we even need to update our position to start with.
+	// Movement Functions
 
+	// Before we do anything complicated, check whether we even need to update our position to start with.
 	protected bool NeedToUpdatePosition(Vector3 positionToCheck) {
 
 		// We can manually force a position update if we need to.
@@ -293,7 +292,6 @@ public class UnitGroup : NetworkBehaviour {
 
 	}
 
-	/* ----------------------------------------------------------------------------- */
 	// Move our group towards the Host's Rally Point and adjust our formation as required.
 	// The "Rules of Formation" provide a framework position for the units to move to as an army. They'll be arrayed in columns and rows.
 

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			SpellSummon.cs
-   Version:			0.1.0
+   Version:			0.2.0
    Description: 	The basic spell modification that summons the undead. This spell handles killing, and resurrecting neutral actors.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -14,12 +14,16 @@ public class SpellSummon : Spell {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	public enum SummonType {Necromancy, Resurrection};
+	[Space] [Header("Summon Data")]
+	public Sprite _splashArt;
+
+	public enum SummonType { Necromancy, Resurrection };
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	[Space]
 	[Tooltip("The number of targets that this spell can target at maximum.")]
 	public int _healthRequired;
 

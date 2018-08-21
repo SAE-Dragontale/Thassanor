@@ -197,6 +197,8 @@ public class InputTranslator : NetworkBehaviour {
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+	public void Death() => _playerState = PlayerState.Disabled;
+	
 	// When we need to assign the player's cursor to either active or inactive within the hierarchy.
 	private void SetCursorTo(bool isCursor) {
 

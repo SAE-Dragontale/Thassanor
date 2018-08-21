@@ -11,12 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e19a55c45699dd45839a17e2a21c201, type: 3}
   m_Name: SummonMeleeMinion
   m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: e2e87276a55b6534fb08cc1e4a9083f6, type: 3}
   _spellName: Summon Melee Minion
   _everyDifficultyPhrase:
   - arise servants of the damned
   - Arise servants of the damned and heed my call
   - Arise, servants of the damned! Heed my call! By writ I claim your souls!
   - Sed vade, et ex servis domini impiarum animarum! Ore exibit gladius acutus potestas!
+  _splashArt: {fileID: 21300000, guid: 38cdf8342e1ecc24ab82a17ed636afbd, type: 3}
   _healthRequired: 50
   _castingDelay: 60
   _summonType: 0

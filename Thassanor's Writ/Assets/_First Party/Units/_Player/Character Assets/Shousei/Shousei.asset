@@ -13,3 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: Shousei Kiina
   _animatorController: {fileID: 9100000, guid: 22aaf87980519f549a062425563b58f2, type: 2}
+  _splashArt: {fileID: 21300000, guid: c62a39630306220468f81b2b694cb881, type: 3}
+  _eventWin: {fileID: 21300000, guid: 37bfa8df3d890c34c91c46ac78133cd6, type: 3}
+  _eventLose: {fileID: 21300000, guid: 0934a40e75f1a954d983b4d13176d220, type: 3}

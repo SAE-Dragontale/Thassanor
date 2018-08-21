@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharStats.cs
-   Version:			0.1.1
+   Version:			0.2.0
    Description: 	Holds and executes functions based on the Player's Stats.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -68,6 +68,19 @@ public class CharStats : MonoBehaviour {
 		DistanceUpdate();
 		AudioUpdate();
 		PostProcessingUpdate();
+
+		CheckForDeath();
+
+	}
+
+	// Are we dead?
+	private void CheckForDeath() {
+
+		if (_playerHealth > 0f)
+			return;
+
+		_charVisuals.Death();
+		GetComponent<InputTranslator>().Death();
 
 	}
 	

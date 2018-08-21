@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharStats.cs
-   Version:			0.1.0
+   Version:			0.1.1
    Description: 	Holds and executes functions based on the Player's Stats.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -16,8 +16,6 @@ public class CharStats : MonoBehaviour {
 
 	private CharAudio _charAudio;
 	private CharVisuals _charVisuals;
-
-	private BoxCollider _collider;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -45,8 +43,6 @@ public class CharStats : MonoBehaviour {
 
 		_charAudio = GetComponent<CharAudio>();
 		_charVisuals = GetComponent<CharVisuals>();
-
-		_collider = GetComponent<BoxCollider>();
 
 	}
 

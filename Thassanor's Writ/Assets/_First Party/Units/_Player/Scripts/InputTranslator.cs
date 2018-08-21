@@ -1,11 +1,10 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.4
+   Version:			0.8.5
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,7 +21,6 @@ public class InputTranslator : NetworkBehaviour {
     private CharSpells _charSpells;
 	private CharAudio _charAudio;
 	private CharVisuals _charVisuals;
-	private CharStats _charStats;
 
     /* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Variables
@@ -31,7 +29,7 @@ public class InputTranslator : NetworkBehaviour {
 	// PlayerState Containers.
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
     [SyncVar] private PlayerState _playerState;
-    [SyncVar] private PlayerState _lastState;
+    //[SyncVar] private PlayerState _lastState;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -44,7 +42,7 @@ public class InputTranslator : NetworkBehaviour {
 			GetReferences();
 
         _playerState = PlayerState.Idle;
-        _lastState = _playerState;
+        //_lastState = _playerState;
 
     }
 
@@ -55,7 +53,6 @@ public class InputTranslator : NetworkBehaviour {
 		_charSpells = GetComponent<CharSpells>();
 		_charAudio = GetComponent<CharAudio>();
 		_charVisuals = GetComponent<CharVisuals>();
-		_charStats = GetComponent<CharStats>();
 
 	}
 

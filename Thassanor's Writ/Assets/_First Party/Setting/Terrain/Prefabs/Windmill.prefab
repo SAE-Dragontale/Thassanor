@@ -324,6 +324,7 @@ MonoBehaviour:
   _incrementInterval: 10
   _healthPerIncrement: 10
   _startingHealth: 50
+  _maximumHealth: 150
 --- !u!208 &208300191023745002
 NavMeshObstacle:
   m_ObjectHideFlags: 1

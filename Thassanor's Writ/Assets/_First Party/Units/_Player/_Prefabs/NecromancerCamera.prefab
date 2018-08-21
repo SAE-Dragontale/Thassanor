@@ -213,7 +213,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 7
   far clip plane: 1000
   field of view: 20
   orthographic: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 4542881751481492}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 7735
+    m_Bits: 15895
   stopNaNPropagation: 1
   antialiasingMode: 0
   temporalAntialiasing:

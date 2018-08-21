@@ -1,10 +1,11 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			CharSpells.cs
-   Version:			0.5.1
+   Version:			0.6.0
    Description: 	Controls all functions related to the Typing Elements within the game.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
@@ -17,8 +18,10 @@ public class CharSpells : NetworkBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private Transform _typingComponent;		// This is the base root we'll be working with for the Input System.
+
 	private TMP_InputField _inputField;     // This is the player's Input Field.
-	private TMP_Text _backgroundText;       // Used to show what we think the player is trying to type, or show that another player is typing something.
+	private TMP_Text[] _comparedText;		// The locations to display the loadout strings.
+	
 
 	private CharVisuals _charVisuals;       // The Visual Controller script for the character.
 	private CharAudio _charAudio;			// The Audio Controller script for the character.
@@ -30,6 +33,8 @@ public class CharSpells : NetworkBehaviour {
 	// The list of spells in our loadout. These should generally be assigned at runtime, however if they aren't, then the defaults are assigned in the inspector.
 	[SerializeField] private Spell[] _spellLoadout;
 	[SerializeField] private string[] _spellPhrases;
+
+	private List<string> _comparedString;   // The strings beloning to the spell phrases, sorted into closest match.
 
 	public Spell[] _SpellLoadout {
 		set {
@@ -54,7 +59,9 @@ public class CharSpells : NetworkBehaviour {
 
 		// Grab the script project root and it's associated references.
 		_typingComponent = transform.Find("PlayerCanvas");
+
 		_inputField = _typingComponent.GetComponentInChildren<TMP_InputField>();
+		_comparedText = _typingComponent.GetComponentsInChildren<TMP_Text>();
 
 		_charVisuals = GetComponent<CharVisuals>();
 		_charAudio = GetComponent<CharAudio>();
@@ -62,12 +69,7 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	// Run at the start of an object's lifetime.
-	private void Start() {
-
-		// Just as a failsafe, we want to make sure we're always starting with the input field disabled.
-		TypeStatus(false, true);
-
-	}
+	private void Start() => TypeStatus(toggleOn: false, cancelCast: true);
 
 	private void InitialiseSpells() {
 
@@ -105,42 +107,54 @@ public class CharSpells : NetworkBehaviour {
 
 	}
 
+
+
 	/* ----------------------------------------------------------------------------- */
 	// Spellcasting Predictions
 
 	// The Prediction Model that we're using to match the player's currently entered text to the closest matching spell in their loadout.
+	// Identify which spell we're trying to cast by comparing our current string to the string for each equipped spell.
+
 	public void PredictSpell() {
 
 		if (!hasAuthority)
 			return;
-
-		// Identify which spell we're trying to cast by comparing our current string to the string for each equipped spell.
+				
 		EvaluateTyping();
-		
-		AssignSpellMatch();
+		VisualiseComparisons();
 
 	}
 
+	
 	// Here we evaluate the player's accuracy to what they intended to cast and modify casting time based on this.
 	private void EvaluateTyping() {
 
 		_stringDifference = 999;
 
-		foreach (string comparison in _spellPhrases) {
+		for (int i = 0; i < _spellPhrases.Length; i++) {
+
+			string comparison = _spellPhrases?[i] ?? null;
 
 			if (comparison == null)
 				return;
 
 			int oneDifference = Dragontale.StringFable.Compare(_inputField.text, comparison);
-			_stringDifference = oneDifference < _stringDifference ? oneDifference : _stringDifference;
+
+			if (oneDifference < _stringDifference) {
+
+				_stringDifference = oneDifference;
+				_closestMatch = comparison;
+
+				_comparedString.Insert(0, comparison);				
+
+			} else {
+
+				_comparedString.Add(comparison);
+
+			}
 
 		}
-
-	}
-
-	// Display the closest matched string visually for the player to see.
-	public void AssignSpellMatch() {
-
+		
 	}
 
 	/* ----------------------------------------------------------------------------- */
@@ -151,7 +165,6 @@ public class CharSpells : NetworkBehaviour {
 
 		// We don't evaluate anything here, as we've been evaluating through each keypress of the player's input.
 		// Therefore, we already have all the information we need about the correct spell. We simply need to assign it.
-
 
 		// Assign spell targets.
 
@@ -198,6 +211,15 @@ public class CharSpells : NetworkBehaviour {
 			_inputField.DeactivateInputField();
 
 		}
+
+	}
+
+	/* ----------------------------------------------------------------------------- */
+	// String Comparison Calls
+
+	private void VisualiseComparisons() {
+
+
 
 	}
 

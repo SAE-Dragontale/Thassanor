@@ -70,7 +70,7 @@ public class InputTranslator : NetworkBehaviour {
 
 		// Load Game Settings.
 		MapData mapData = FindObjectOfType<MapData>();
-		_charSpells._difficulty = mapData.typingDifficulty;
+		_charSpells._difficulty = 2; //mapData.typingDifficulty;
 
 		// Load Player Settings.
 		PlayerData playerData = FindObjectOfType<PlayerData>();
@@ -91,6 +91,11 @@ public class InputTranslator : NetworkBehaviour {
 		_charVisuals.ResetCamera();
 		_charVisuals.ResetFocals();
 		_charAudio._local = true;
+
+		// We're taking --our-- anchor's layer and changing it to something we don't identify with an opponent.
+		// Since this change is only local, and both players will execute the change, both players will only identify each other as opponents.
+		
+		transform.Find("RallyPoint").gameObject.layer = 0 >> 0;
 
 	}
 

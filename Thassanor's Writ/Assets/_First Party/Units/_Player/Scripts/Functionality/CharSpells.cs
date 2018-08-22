@@ -42,9 +42,10 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	[HideInInspector] public int _difficulty;		// What is the current difficulty level set by the lobby?
-	[SerializeField] private int _differenceToFade;	// How much padding do we need between one prediction and the other before we grey one of them out.
+	[SerializeField] private int _differenceToFade; // How much padding do we need between one prediction and the other before we grey one of them out.
 
-	private string[] _spellPhrases;	// The total list of all of our spell phrases, taken from spell loadout.
+
+	[SerializeField] private string[] _spellPhrases;	// The total list of all of our spell phrases, taken from spell loadout.
 	private int _smallestLength;	// The length of the smallest string from the above.
 
 	[SerializeField] private string _closestMatch;		// The current closest matching string compared to what we are typing.
@@ -75,7 +76,10 @@ public class CharSpells : NetworkBehaviour {
 	}
 
 	// Run at the start of an object's lifetime.
-	private void Start() => TypeStatus(toggleOn: false, cancelCast: true);
+	private void Start() {
+		TypeStatus(toggleOn: false, cancelCast: true);
+		InitialiseSpells();
+	}
 
 	private void InitialiseSpells() {
 

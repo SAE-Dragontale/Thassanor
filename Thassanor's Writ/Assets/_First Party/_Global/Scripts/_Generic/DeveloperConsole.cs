@@ -21,7 +21,7 @@ namespace ByteSprite.Development {
 		}
 
 		void Log(string logString, string stackTrace, LogType type) {
-			log.Insert(0, FormatString(logString, type));
+			log.Insert(0, FormatString(logString + "\n" + stackTrace, type));
 
 			if (log.Count > logMaxLength) {
 				log.RemoveRange(logMaxLength, log.Count - logMaxLength);

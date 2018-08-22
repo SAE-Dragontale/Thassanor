@@ -124,15 +124,6 @@ public class UnitGroup : NetworkBehaviour {
 
 	}
 
-	public override void OnStartAuthority() {
-
-		// We're taking --our-- anchor's layer and changing it to something we don't identify with an opponent.
-		// Since this change is only local, and both players will execute the change, both players will only identify each other as opponents.
-
-		_anchor.gameObject.layer = 1 >> 0;
-
-	}
-
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -147,7 +138,7 @@ public class UnitGroup : NetworkBehaviour {
 
 	// These health increments will always default to _anchor.position as their spawn location for ease of use.
 	public void MinusUnit(int numberOf = 1) => ChangeHealth(-_unitStyle._health * numberOf);
-	public void ChangeHealth(float _healthModification) => Health = _health + _healthModification;
+	public void ChangeHealth(float _healthModification) => Health += _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
 
@@ -187,6 +178,10 @@ public class UnitGroup : NetworkBehaviour {
 
 	// We need to despawn units instead, which once again is implicitly networked.
 	protected void UnitSubtractFromHealth(int updatedHealth) {
+
+		// Don't reduce health if we're already fookin' dead mate.
+		if (_health < 1)
+			return;
 
 		// Because Destroy doesn't immediately destroy the object on the current frame, we need to remove it as a parent for the remainder of our code to funciton.
 		for (int i = _everyUnit.Length - updatedHealth; i > 0; i--) {

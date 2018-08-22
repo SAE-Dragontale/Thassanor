@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804683501047678}
   - component: {fileID: 114587260798860936}
-  - component: {fileID: 114720103034987550}
+  - component: {fileID: 114343250651001044}
   m_Layer: 0
   m_Name: NetworkedPlayer
   m_TagString: NetworkedPlayerObj
@@ -41,6 +41,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114343250651001044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723918250245136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b083f3e07f18f5a46a05c2fdd1083cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 1153909639333156, guid: 87a35592f891d6848af8df48b2affd68,
+    type: 2}
+  _player: {fileID: 0}
+  _unitPrefab: {fileID: 1546219129939706, guid: 71070946c78c1b24980a435c9b064ac0,
+    type: 2}
+  _everyGroup:
+  - {fileID: 0}
+  - {fileID: 0}
+  _everyStyle:
+  - {fileID: 11400000, guid: 0ccc23c446991e747a7d03007c1d346e, type: 2}
+  - {fileID: 11400000, guid: 13097ab3e4671ad4f87655dd29b8ec00, type: 2}
 --- !u!114 &114587260798860936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,25 +95,3 @@ MonoBehaviour:
     i15: 110
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114720103034987550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1723918250245136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9857b4a6d533743a4004c8ed125573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 1153909639333156, guid: 87a35592f891d6848af8df48b2affd68,
-    type: 2}
-  _player: {fileID: 0}
-  _unitPrefab: {fileID: 1546219129939706, guid: 71070946c78c1b24980a435c9b064ac0,
-    type: 2}
-  _everyGroup:
-  - {fileID: 0}
-  - {fileID: 0}
-  _everyStyle:
-  - {fileID: 11400000, guid: 0ccc23c446991e747a7d03007c1d346e, type: 2}
-  - {fileID: 11400000, guid: 13097ab3e4671ad4f87655dd29b8ec00, type: 2}

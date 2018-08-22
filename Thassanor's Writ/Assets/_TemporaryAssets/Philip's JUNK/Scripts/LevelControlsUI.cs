@@ -22,6 +22,8 @@ public class LevelControlsUI : MonoBehaviour {
     public InputField maxTownCountField;
     public Dropdown typingDifficultyDropDown;
 
+    public int mapSizeDefaultSelect;
+
     public List<GameObject> playerInfoList;
     public LobbyPlayer localPlayer;
 
@@ -35,16 +37,23 @@ public class LevelControlsUI : MonoBehaviour {
     //public int typingDifficulty;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
         thassanor = FindObjectOfType<Dragontale.Thassanor>();
-        thassanor.GetComponent<MapData>()._columns = 5;
-        thassanor.GetComponent<MapData>()._rows = 5;
+    }
+
+    void Start()
+    {
+        mapSizeDefaultSelect = 0;
+
+        MapSize(mapSizeDefaultSelect);
+        //thassanor.GetComponent<MapData>()._columns = mapSizeInt;
+        //thassanor.GetComponent<MapData>()._rows = mapSizeInt;
         thassanor.GetComponent<MapData>()._waterSize = 4;
         thassanor.GetComponent<MapData>()._townSpread = 2;
         thassanor.GetComponent<MapData>().typingDifficulty = 1;
         thassanor.GetComponent<MapData>()._itSeed = 123123;
-        thassanor.GetComponent<MapData>()._maxTownCount = 4;
+        //thassanor.GetComponent<MapData>()._maxTownCount = 2;
 
         playerInfoList.AddRange(GameObject.FindGameObjectsWithTag("PlayerInfo"));
         foreach(GameObject player in playerInfoList)
@@ -74,18 +83,30 @@ public class LevelControlsUI : MonoBehaviour {
     {
         if(mapSize == 0)
         {
-            thassanor.GetComponent<MapData>()._columns = 5;
-            thassanor.GetComponent<MapData>()._rows = 5;
+            //thassanor.GetComponent<MapData>()._columns = 4;
+            //thassanor.GetComponent<MapData>()._rows = 4;
+            thassanor.GetComponent<MapData>()._columns = 4;
+            thassanor.GetComponent<MapData>()._rows = 4;
+            thassanor.GetComponent<MapData>()._maxTownCount = 2;
+
+
         }
         else if(mapSize == 1)
         {
-            thassanor.GetComponent<MapData>()._columns = 10;
-            thassanor.GetComponent<MapData>()._rows = 10;
+            //thassanor.GetComponent<MapData>()._columns = 8;
+            //thassanor.GetComponent<MapData>()._rows = 8;
+
+            thassanor.GetComponent<MapData>()._columns = 8;
+            thassanor.GetComponent<MapData>()._rows = 8;
+            thassanor.GetComponent<MapData>()._maxTownCount = 4;
         }
         else if(mapSize == 2)
         {
-            thassanor.GetComponent<MapData>()._columns = 15;
-            thassanor.GetComponent<MapData>()._rows = 15;
+            //thassanor.GetComponent<MapData>()._columns = 12;
+            //thassanor.GetComponent<MapData>()._rows = 12;
+            thassanor.GetComponent<MapData>()._columns = 12;
+            thassanor.GetComponent<MapData>()._rows = 12;
+            thassanor.GetComponent<MapData>()._maxTownCount = 6;
         }
     }
 

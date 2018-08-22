@@ -223,8 +223,8 @@ namespace Prototype.NetworkLobby
             colorButton.interactable = true;
             nameInput.interactable = true;
             dropDown.interactable = true;
-            spell1DropDown.interactable = true;
-            spell2DropDown.interactable = true;
+            spell1DropDown.interactable = false;
+            spell2DropDown.interactable = false;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);

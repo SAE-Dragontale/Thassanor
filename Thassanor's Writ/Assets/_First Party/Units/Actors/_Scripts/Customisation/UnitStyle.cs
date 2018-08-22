@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UndeadStyle.cs
-   Version:			0.0.3
+   Version:			0.0.4
    Description: 	A Style-Container that simple holds different variations of the assets used by the Undead.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -15,7 +15,8 @@ public class UnitStyle : Stylize {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	public float _health;	// Health Per Unit.
-	public float _damage;	// Damage Per Unit.
+	public float _damage;   // Damage Per Unit.
+	public float _range;	// The distance that the unit attacks from.
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls

@@ -50,7 +50,7 @@ public class UnitSpawner : MonoBehaviour {
 
 			yield return new WaitForSeconds(_incrementInterval);
 
-			if (_spawnToThis.SetHealth < _maximumHealth)
+			if (_spawnToThis.Health < _maximumHealth)
 				SpawnUnits(_healthPerIncrement);
 
 		}

@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitGroup.cs
-   Version:			0.6.0
+   Version:			0.7.0
    Description: 	The primary container for the Unit-Group-Controller. This handles groups of units and allocates mechanics between them.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -51,7 +51,8 @@ public class UnitGroup : NetworkBehaviour {
 	protected IEnumerator _setMyLastPosition;   // Reclusive reference for UpdateLastPos().
 
 	protected IEnumerator _sitRep;              // This is used to control how often we recheck for opposing collisions after we've started to fight.
-	protected IEnumerator _dealDamage;       // This is used to increment damage over time to an opponent.
+	protected IEnumerator _dealDamagePlayer;	// This is used to increment damage over time to an opponent.
+	protected IEnumerator _dealDamageUnit;		// 
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Data Variables
@@ -66,7 +67,7 @@ public class UnitGroup : NetworkBehaviour {
 	[SerializeField] protected bool _permanent;             // Whether the group is removed when it's health reaches 0, or simply just waits until populated again.
 	[SyncVar] [SerializeField] protected float _health;     // The health is a direct sum of all units within. Each health increment is effectively one unit.
 
-	public float SetHealth {
+	public float Health {
 		set { _health = value; UnitsFromHealth(); }
 		get { return _health; }
 	}
@@ -75,10 +76,8 @@ public class UnitGroup : NetworkBehaviour {
 	[Header("Offensive Statistics")]
 
 	[SerializeField] protected Collider _target;            // The reference to our area-scan target. While this is not null, we are fighting.
-	[SerializeField] protected float _opposingHealth;       // SHould be used as a 'ref' to the current target's health value.
 
 	[Space]
-	[SerializeField] protected float _weaponRange;          // The range at which we swing our sword, or fire our bows.
 	[SerializeField] protected float _aggroRange;           // The range at which it is acceptable to assault your enemies.
 	[SerializeField] protected float _disengageRange;       // The range at which is considered "too far" to continue fighting.
 
@@ -104,13 +103,9 @@ public class UnitGroup : NetworkBehaviour {
 	// Called before Update().
 	protected virtual void Start() {
 
-		// If shit is broken, fucking warn me please.
-		LogErrorsOnStart();
+		LogErrorsOnStart(); // If shit is broken, fucking warn me please.
+		UnitsFromChildren(); // If a UnitGroup starts pre-initialised, we have to recognise this.
 
-		// If a UnitGroup starts pre-initialised, we have to recognise this.
-		UnitsFromChildren();
-
-		// Save our default state.
 		_defaultState = _groupState;
 
 	}
@@ -129,6 +124,15 @@ public class UnitGroup : NetworkBehaviour {
 
 	}
 
+	public override void OnStartAuthority() {
+
+		// We're taking --our-- anchor's layer and changing it to something we don't identify with an opponent.
+		// Since this change is only local, and both players will execute the change, both players will only identify each other as opponents.
+
+		_anchor.gameObject.layer = 1 >> 0;
+
+	}
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -143,7 +147,7 @@ public class UnitGroup : NetworkBehaviour {
 
 	// These health increments will always default to _anchor.position as their spawn location for ease of use.
 	public void MinusUnit(int numberOf = 1) => ChangeHealth(-_unitStyle._health * numberOf);
-	public void ChangeHealth(float _healthModification) => SetHealth = _health + _healthModification;
+	public void ChangeHealth(float _healthModification) => Health = _health + _healthModification;
 
 	/* ----------------------------------------------------------------------------- */
 
@@ -356,45 +360,75 @@ public class UnitGroup : NetworkBehaviour {
 
 	}
 
+	// Targetting a unitgroup of the opposing player.
+
 	protected void TargetMinions(UnitGroup currentTarget) {
 
-		
+		if (_dealDamagePlayer != null)
+			CancelPlayerDamage();
+
+		if (_dealDamageUnit == null)
+			StartCoroutine(DealDamageUnit(currentTarget));
+
+		for (int i = 0; i < _everyUnit.Length; i++)
+			FindTarget(currentTarget._everyUnit);
 
 	}
 
-	protected void TargetNecromancer(CharStats enemyNecromancer) {
-
-		
-
-	}
-
-	protected IEnumerator DealDamage() {
+	protected IEnumerator DealDamageUnit(UnitGroup currentTarget) {
 
 		while (true) {
-
-			yield return new WaitForSeconds(_attackRate);
-
-			float damage = _unitStyle._damage * _everyUnit.Length;
-			_opposingHealth -= damage;
-
+			yield return new WaitForSeconds(_attackRate / _everyUnit.Length);
+			currentTarget.Health -= _unitStyle._damage;
 		}
 	}
 
-	protected void AssaultTarget(Vector3[] assaultPosition) {
+	// Targeting the opposing Player.
 
-		if (_dealDamage == null)
-			StartCoroutine(DealDamage());
+	protected void TargetNecromancer(CharStats enemyNecromancer) {
 
+		if (_dealDamageUnit != null)
+			CancelUnitDamage();
+
+		if (_dealDamagePlayer == null)
+			StartCoroutine(DealDamagePlayer(enemyNecromancer));
+		
+		for (int i = 0; i < _everyUnit.Length; i++)
+			MoveUnit(i, FindTarget(enemyNecromancer));
 
 	}
 
-	protected void CancelAssault() {
+	protected IEnumerator DealDamagePlayer(CharStats enemyNecromancer) {
 
-		StopCoroutine(DealDamage());
-		_dealDamage = null;
+		while (true) {
+			yield return new WaitForSeconds(_attackRate / _everyUnit.Length);
+			enemyNecromancer._playerHealth -= _unitStyle._damage;
+		}
+	}
+
+	// Position our units so they visually represent what is going on.
+	protected Vector3 FindTarget(Unit[] targets) => targets[Random.Range(0, targets.Length - 1)].transform.position;
+	protected Vector3 FindTarget(CharStats target) => target.transform.position;
+
+	// End whatever madness that we've started.
+
+	protected void CancelAssault() {
+		
+		CancelUnitDamage();
+		CancelPlayerDamage();		
 
 		_groupState = _defaultState;
 
+	}
+
+	protected void CancelUnitDamage() {
+		StopCoroutine(DealDamageUnit(null));
+		_dealDamageUnit = null;
+	}
+
+	protected void CancelPlayerDamage() {
+		StopCoroutine(DealDamagePlayer(null));
+		_dealDamagePlayer = null;
 	}
 
 	/* ----------------------------------------------------------------------------- */

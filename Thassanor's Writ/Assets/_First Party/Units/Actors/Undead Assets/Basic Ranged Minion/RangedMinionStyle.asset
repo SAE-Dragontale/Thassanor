@@ -14,3 +14,5 @@ MonoBehaviour:
   _unitName: Archers
   _animatorController: {fileID: 9100000, guid: b9116b04fcf5c4342b2a914be8542feb, type: 2}
   _health: 10
+  _damage: 4
+  _range: 12

@@ -22,7 +22,7 @@ public class CharStats : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	[Space] [Header("Player Statistics")]
-	[SerializeField] [Range(0,100)] private float _playerHealth;
+	[SerializeField] [Range(0,100)] public float _playerHealth;
 	[SerializeField] private string _playerName;
 
 	[Space] [Header("Opponent")]

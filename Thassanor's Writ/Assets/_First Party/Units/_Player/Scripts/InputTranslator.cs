@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			InputTranslator.cs
-   Version:			0.8.5
+   Version:			0.8.6
    Description: 	Translates the input provided by Tracker.cs Scripts into actual game functions that are located on the player object.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -29,7 +29,6 @@ public class InputTranslator : NetworkBehaviour {
 	// PlayerState Containers.
     private enum PlayerState {Idle, Spellcasting, Paused, Disabled};
     [SyncVar] private PlayerState _playerState;
-    //[SyncVar] private PlayerState _lastState;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -42,7 +41,6 @@ public class InputTranslator : NetworkBehaviour {
 			GetReferences();
 
         _playerState = PlayerState.Idle;
-        //_lastState = _playerState;
 
     }
 
@@ -118,22 +116,6 @@ public class InputTranslator : NetworkBehaviour {
 			/* ----------------------------------------------------------------------------- */
 			case (PlayerState.Idle):
 
-				/*// Pressing "Pause"
-				if (rdi._ablKeys[0]) {
-
-					// #TODO: Implement pause menu here.
-					// This should be done through additive loading, and called as a function in another script from this class.
-
-					// Save our old state, set our new state, and halt movement.
-					_lastState = _playerState;
-
-					_playerState = PlayerState.Paused;
-					SetCursorTo(true);
-
-					_charControls.TrajectoryChange();
-
-				} else */
-
 				// Pressing "Spellcast"
 				if (rdi._ablKeys[1]) {
 
@@ -174,22 +156,6 @@ public class InputTranslator : NetworkBehaviour {
 
 				break;
 
-			/* ----------------------------------------------------------------------------- */
-			/*case (PlayerState.Paused):
-
-				// Pressing Escape
-				if (rdi._ablKeys[0]) {
-
-					// #TODO: Implement ability to dismiss pause menu here.
-					// Same as the sister function above, except we also want to be able to deload the pause menu. Function should be called from here.
-
-					// Load the state that the player was in before this function was called.
-					_playerState = _lastState;
-					SetCursorTo(false);
-
-				}
-				
-				break;*/
 		}
 	}
 
@@ -206,19 +172,5 @@ public class InputTranslator : NetworkBehaviour {
 		Cursor.lockState = isCursor ? CursorLockMode.Confined : CursorLockMode.Locked;
 
 	}
-
-	/*// A small helper function to include an animation lock to State Switching in some circumstances.
-	private IEnumerator AnimationLock(PlayerState updatedState, RawDataInput rdi, float flWait) {
-
-		// Make sure we can't further issue commands while we're locked into something.
-		_playerState = PlayerState.Disabled;
-
-		yield return new WaitForSeconds(flWait);
-		
-		// Change to the newly issued state and correct movement to the last pressed Axis-Keys.
-		_playerState = updatedState;
-		_charControls.TrajectoryChange(rdi._aflAxis);
-
-	}*/
 
 }

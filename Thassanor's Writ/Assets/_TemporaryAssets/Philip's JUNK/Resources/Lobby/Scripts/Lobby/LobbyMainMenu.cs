@@ -17,6 +17,11 @@ namespace Prototype.NetworkLobby
 
         public PlayerData playerData;
 
+        public void Start()
+        {
+            playerData = FindObjectOfType<Dragontale.Thassanor>().GetComponent<PlayerData>();
+        }
+
         public void OnEnable()
         {
             lobbyManager.topPanel.ToggleVisibility(true);
@@ -26,8 +31,6 @@ namespace Prototype.NetworkLobby
 
             matchNameInput.onEndEdit.RemoveAllListeners();
             matchNameInput.onEndEdit.AddListener(onEndEditGameName);
-
-            playerData = FindObjectOfType<Dragontale.Thassanor>().GetComponent<PlayerData>(); ;
         }
 
         public void OnClickHost()

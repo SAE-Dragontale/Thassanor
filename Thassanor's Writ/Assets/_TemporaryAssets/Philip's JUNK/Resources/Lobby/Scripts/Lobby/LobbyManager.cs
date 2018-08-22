@@ -67,6 +67,8 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Offline", "None");
         }
 
+        //OnLobbyServerSceneChanged ??
+
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
             if (SceneManager.GetSceneAt(0).name == lobbyScene)

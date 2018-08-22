@@ -54,27 +54,25 @@ namespace Prototype.NetworkLobby
         public Color playerColor = Color.white;
         [SyncVar(hook = "OnCharacterSelect")]
         public int playerCharacterIndex = 0;
-        [SyncVar(hook = "OnSpell1Change")]
-        public int spell1Index = 0;
-        [SyncVar(hook = "OnSpell2Change")]
-        public int spell2Index = 1;
-        [SyncVar(hook = "OnDifficultyChange")]
-        public int typingDifficulty = 0;
+        //[SyncVar(hook = "OnSpell1Change")]
+        //public int spell1Index = 0;
+        //[SyncVar(hook = "OnSpell2Change")]
+        //public int spell2Index = 1;
+        //[SyncVar(hook = "OnDifficultyChange")]
+        //public int typingDifficulty = 0;
 
-        public int storedDifficulty;
-
-        [SyncVar]
-        public int _itSeed;
-        [SyncVar]
-        public int _columns;
-        [SyncVar]
-        public int _rows;
-        [SyncVar]
-        public int _waterSize;
-        [SyncVar]
-        public int _townSpread;
-        [SyncVar]
-        public int _maxTownCount;
+        //[SyncVar]
+        //public int _itSeed;
+        //[SyncVar]
+        //public int _columns;
+        //[SyncVar]
+        //public int _rows;
+        //[SyncVar]
+        //public int _waterSize;
+        //[SyncVar]
+        //public int _townSpread;
+        //[SyncVar]
+        //public int _maxTownCount;
 
         private string playerCharacterName;
         public string levelDifficultyString;
@@ -99,7 +97,6 @@ namespace Prototype.NetworkLobby
             levelOptionsPanel = GameObject.FindGameObjectWithTag("LevelOptions");
             levelControlsUI = FindObjectOfType<LevelControlsUI>();
             thassanor = FindObjectOfType<Dragontale.Thassanor>();
-            thassanor.GetComponent<LobbyPlayer>().typingDifficulty = 20;
         }
 
 
@@ -148,9 +145,9 @@ namespace Prototype.NetworkLobby
             OnMyName(playerName);
             OnMyColor(playerColor);
             OnCharacterChanged(playerCharacterIndex);
-            OnDifficultyChange(typingDifficulty);
-            OnSpell1Change(spell1Index);
-            OnSpell2Change(spell2Index);
+            //OnDifficultyChange(typingDifficulty);
+            //OnSpell1Change(spell1Index);
+            //OnSpell2Change(spell2Index);
         }
 
         public override void OnStartAuthority()
@@ -223,8 +220,8 @@ namespace Prototype.NetworkLobby
             colorButton.interactable = true;
             nameInput.interactable = true;
             dropDown.interactable = true;
-            spell1DropDown.interactable = true;
-            spell2DropDown.interactable = true;
+            spell1DropDown.interactable = false;
+            spell2DropDown.interactable = false;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
@@ -238,14 +235,14 @@ namespace Prototype.NetworkLobby
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
 
-            typingDifficultyDropDown.onValueChanged.RemoveAllListeners();
-            typingDifficultyDropDown.onValueChanged.AddListener(OnDifficultyChanged);
+            //typingDifficultyDropDown.onValueChanged.RemoveAllListeners();
+            //typingDifficultyDropDown.onValueChanged.AddListener(OnDifficultyChanged);
 
-            spell1DropDown.onValueChanged.RemoveAllListeners();
-            spell1DropDown.onValueChanged.AddListener(OnSpell1Changed);
+            //spell1DropDown.onValueChanged.RemoveAllListeners();
+            //spell1DropDown.onValueChanged.AddListener(OnSpell1Changed);
 
-            spell2DropDown.onValueChanged.RemoveAllListeners();
-            spell2DropDown.onValueChanged.AddListener(OnSpell2Changed);
+            //spell2DropDown.onValueChanged.RemoveAllListeners();
+            //spell2DropDown.onValueChanged.AddListener(OnSpell2Changed);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -329,28 +326,28 @@ namespace Prototype.NetworkLobby
             dropDown.captionText.text = playerCharacterName;
         }
 
-        public void OnSpell1Change(int newIndex)
-        {
-            spell1Index = newIndex;
-            spell1Name = spell1DropDown.options[newIndex].text;
-            spell1DropDown.captionText.text = spell1Name;
-        }
-        public void OnSpell2Change(int newIndex)
-        {
-            spell2Index = newIndex;
-            spell2Name = spell2DropDown.options[newIndex].text;
-            spell2DropDown.captionText.text = spell2Name;
-        }
+        //public void OnSpell1Change(int newIndex)
+        //{
+        //    spell1Index = newIndex;
+        //    spell1Name = spell1DropDown.options[newIndex].text;
+        //    spell1DropDown.captionText.text = spell1Name;
+        //}
+        //public void OnSpell2Change(int newIndex)
+        //{
+        //    spell2Index = newIndex;
+        //    spell2Name = spell2DropDown.options[newIndex].text;
+        //    spell2DropDown.captionText.text = spell2Name;
+        //}
 
-        public void OnDifficultyChange(int num)
-        {
-            Debug.Log("Difficulty changed");
-            typingDifficulty = num;
-            levelDifficultyString = levelOptionsPanel.GetComponent<Dropdown>().options[num].text;
-            levelOptionsPanel.GetComponent<Dropdown>().captionText.text = levelDifficultyString;
-            storedDifficulty = hostLobbyInfo.GetComponent<LobbyPlayer>().typingDifficulty;
-            Debug.Log(storedDifficulty);
-        }
+        //public void OnDifficultyChange(int num)
+        //{
+        //    Debug.Log("Difficulty changed");
+        //    typingDifficulty = num;
+        //    levelDifficultyString = levelOptionsPanel.GetComponent<Dropdown>().options[num].text;
+        //    levelOptionsPanel.GetComponent<Dropdown>().captionText.text = levelDifficultyString;
+        //    storedDifficulty = hostLobbyInfo.GetComponent<LobbyPlayer>().typingDifficulty;
+        //    Debug.Log(storedDifficulty);
+        //}
 
         //===== UI Handler
 
@@ -376,20 +373,20 @@ namespace Prototype.NetworkLobby
             CmdCharacterChanged(index);
         }
 
-        public void OnSpell1Changed(int index)
-        {
-            CmdSpell1Changed(index);
-        }
+        //public void OnSpell1Changed(int index)
+        //{
+        //    CmdSpell1Changed(index);
+        //}
 
-        public void OnSpell2Changed(int index)
-        {
-            CmdSpell2Changed(index);
-        }
+        //public void OnSpell2Changed(int index)
+        //{
+        //    CmdSpell2Changed(index);
+        //}
 
-        public void OnDifficultyChanged(int num)
-        {
-            CmdTypingDifficultyChanged(num);
-        }
+        //public void OnDifficultyChanged(int num)
+        //{
+        //    CmdTypingDifficultyChanged(num);
+        //}
 
         public void OnRemovePlayerClick()
         {
@@ -486,79 +483,62 @@ namespace Prototype.NetworkLobby
             OnCharacterSelect(index);
         }
 
-        [Command]
-        public void CmdSpell1Changed(int index)
-        {
-            spell1Index = index;
-            spell1Name = spell1DropDown.options[index].text;
-            OnSpell1Change(index);
-        }
+        //[Command]
+        //public void CmdSpell1Changed(int index)
+        //{
+        //    spell1Index = index;
+        //    spell1Name = spell1DropDown.options[index].text;
+        //    OnSpell1Change(index);
+        //}
 
-        [Command]
-        public void CmdSpell2Changed(int index)
-        {
-            spell2Index = index;
-            spell2Name = spell2DropDown.options[index].text;
-            OnSpell2Change(index);
-        }
+        //[Command]
+        //public void CmdSpell2Changed(int index)
+        //{
+        //    spell2Index = index;
+        //    spell2Name = spell2DropDown.options[index].text;
+        //    OnSpell2Change(index);
+        //}
 
-        [Command]
-        public void CmdTypingDifficultyChanged(int num)
-        {
-            Debug.Log("sending difficulty to server");
-            //typingDifficulty = num;
-            Debug.Log(typingDifficulty);
-            levelDifficultyString = typingDifficultyDropDown.options[num].text;
-            OnDifficultyChange(num);
-        }
+        //[Command]
+        //public void CmdTypingDifficultyChanged(int num)
+        //{
+        //    Debug.Log("sending difficulty to server");
+        //    //typingDifficulty = num;
+        //    Debug.Log(typingDifficulty);
+        //    levelDifficultyString = typingDifficultyDropDown.options[num].text;
+        //    OnDifficultyChange(num);
+        //}
 
-        //[SyncVar]
-        //public int typingDifficulty;
-        //[SyncVar]
-        //public int _itSeed;
-        //[SyncVar]
-        //public int _columns;
-        //[SyncVar]
-        //public int _rows;
-        //[SyncVar]
-        //public int _waterSize;
-        //[SyncVar]
-        //public int _townSpread;
-        //[SyncVar]
-        //public int _maxTownCount;
+        //[Command]
+        //public void CmdSeedChanged(int num)
+        //{
+        //    _itSeed = num;
+        //}
 
+        //[Command]
+        //public void CmdColumnsChanged(int num)
+        //{
+        //    _columns = num;
+        //    _rows = num;
+        //}
 
+        //[Command]
+        //public void CmdWaterSizeChanged(int num)
+        //{
+        //    _waterSize = num;
+        //}
 
-        [Command]
-        public void CmdSeedChanged(int num)
-        {
-            _itSeed = num;
-        }
+        //[Command]
+        //public void CmdTownSpreadChanged(int num)
+        //{
+        //    _townSpread = num;
+        //}
 
-        [Command]
-        public void CmdColumnsChanged(int num)
-        {
-            _columns = num;
-            _rows = num;
-        }
-
-        [Command]
-        public void CmdWaterSizeChanged(int num)
-        {
-            _waterSize = num;
-        }
-
-        [Command]
-        public void CmdTownSpreadChanged(int num)
-        {
-            _townSpread = num;
-        }
-
-        [Command]
-        public void CmdMaxTownCountChanged(int num)
-        {
-            _maxTownCount = num;
-        }
+        //[Command]
+        //public void CmdMaxTownCountChanged(int num)
+        //{
+        //    _maxTownCount = num;
+        //}
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
         public void OnDestroy()

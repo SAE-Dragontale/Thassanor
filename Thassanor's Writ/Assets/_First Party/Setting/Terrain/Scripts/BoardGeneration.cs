@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
 
 
@@ -111,8 +112,11 @@ public class BoardGeneration : MonoBehaviour {
 
         _simplexNoise = new OpenSimplexNoise(_itSeed);
 
-		_p1Spawn = GameObject.Find("P1 Spawner");
-		_p2Spawn = GameObject.Find("P2 Spawner");
+
+        //_p1Spawn = GameObject.Find("P1 Spawner");
+        //_p2Spawn = GameObject.Find("P2 Spawner");
+
+
                
 		SetupTilesArray ();
 	

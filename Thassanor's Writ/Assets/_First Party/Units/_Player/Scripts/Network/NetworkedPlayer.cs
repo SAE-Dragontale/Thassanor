@@ -6,6 +6,7 @@
    Description: 	
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -30,22 +31,35 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 	private int playerCount;
 
+    private bool isStart;
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	private void Start() {
 		netManager = FindObjectOfType<NetworkManager>();
+        isStart = true;
+        //if (isServer)
+        //{
+        //    CmdCreatePlayer();
+        //}
+    }
 
-		//if (isServer) {
-		//	CmdCreatePlayer();
-		//}
-	}
+    IEnumerator WaitForReady()
+    {
+        while (!connectionToClient.isReady)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+        CmdCreatePlayer();
+    }
 
-	// Called before class calls or functions.
-	public override void OnStartAuthority() {
+    // Called before class calls or functions.
+    public override void OnStartAuthority() {
 
-		CmdCreatePlayer();
+
+        CmdCreatePlayer();
 
 		for (int i = 0; i < _everyGroup.Length; i++)
 			CmdCreateUnitGroup(_everyStyle[i], i);
@@ -61,6 +75,15 @@ public class NetworkedPlayer : NetworkBehaviour {
 
 	private void Update() {
 		SendPlayerData();
+        if (isStart)
+        {
+            CmdCreatePlayer();
+
+            for (int i = 0; i < _everyGroup.Length; i++)
+                CmdCreateUnitGroup(_everyStyle[i], i);
+
+            isStart = false;
+        }
 	}
 
 	void SendPlayerData() {
@@ -76,17 +99,24 @@ public class NetworkedPlayer : NetworkBehaviour {
 	// In order to properly instantiate our player, we need to call it through a Networked method.
 	[Command]
 	private void CmdCreatePlayer() {
+        if (connectionToClient.isReady)
+        {
+            Debug.Log("Assign player");
+            // We're taking our instantiated player and we're asking the server to spawn it for us under our authority.
+            _player = Instantiate(_playerPrefab);
+            NetworkServer.SpawnWithClientAuthority(_player, connectionToClient);
 
-		if (_player) {
+            //AssignPlayer(_player);
+            RpcAssignPlayer(_player);
+        }
+        else
+        {
+            StartCoroutine(WaitForReady());
+        }
+        if (_player) {
 			return;
 		}
-		Debug.Log("Assign player");
-		// We're taking our instantiated player and we're asking the server to spawn it for us under our authority.
-		_player = Instantiate(_playerPrefab);
-		NetworkServer.SpawnWithClientAuthority(_player, connectionToClient);
-
-		//AssignPlayer(_player);
-		RpcAssignPlayer(_player);
+		
 
 	}
 

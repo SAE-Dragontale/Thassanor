@@ -94,10 +94,10 @@ MonoBehaviour:
   _permanent: 1
   _health: 0
   _target: {fileID: 0}
-  _aggroRange: 0
-  _disengageRange: 0
-  _attackRate: 0
+  _aggroRange: 10
+  _disengageRange: 20
+  _attackRate: 1
   _combatTickRate: 0
-  _checkToContinue: 0
+  _checkToContinue: 5
   _formationColumns: 5
   _formationSpread: 1

@@ -75,7 +75,7 @@ public class InputTranslator : NetworkBehaviour {
 		// Load Player Settings.
 		PlayerData playerData = FindObjectOfType<PlayerData>();
 		_charVisuals._NecromancerStyle = playerData.playerCharacter;
-		_charSpells._SpellLoadout = playerData.playerSpells;	
+		//_charSpells._SpellLoadout = playerData.playerSpells;
 		
 		GetComponent<KeyboardTracker>()._Keybindings = playerData.playerHotkeys;
 

@@ -24,6 +24,7 @@ public class CharSpells : NetworkBehaviour {
 	
 	private CharVisuals _charVisuals;	// The Visual Controller script for the character.
 	private CharAudio _charAudio;       // The Audio Controller script for the character.
+	private CharStats _charStats;		// The statistics of the player. We use this to search for shit around us.
 
 	[SerializeField] public UnitGroup[] _minions = new UnitGroup[2];	// Our summoned unitGroups.
 
@@ -48,7 +49,8 @@ public class CharSpells : NetworkBehaviour {
 	[SerializeField] private string[] _spellPhrases;	// The total list of all of our spell phrases, taken from spell loadout.
 	private int _smallestLength;	// The length of the smallest string from the above.
 
-	[SerializeField] private string _closestMatch;		// The current closest matching string compared to what we are typing.
+	[SerializeField] private string _closestMatch;      // The current closest matching string compared to what we are typing.
+	[SerializeField] private int _closestMatchIndex;	// The index of the closest match.
 	[SerializeField] private int _distanceToClosest;	// How far in Levenshtein units are we to our current target.
 
 
@@ -158,6 +160,7 @@ public class CharSpells : NetworkBehaviour {
 				lowestDifference = differenceBetween[i];
 
 				_closestMatch = comparison;
+				_closestMatchIndex = i;
 				_distanceToClosest = lowestDifference;
 
 			}
@@ -190,16 +193,28 @@ public class CharSpells : NetworkBehaviour {
 		// Therefore, we already have all the information we need about the correct spell. We simply need to assign it.
 
 		// Assign spell targets.
-		_minions[0].AddUnit();
-		_minions[1].AddUnit();
+		PeasantGroup villager = (PeasantGroup)_charStats._GetVillagerInRange.GetComponent<UnitSpawner>()._spawnToThis;
 
-		// Call any functions related to the spell's specific function.
-		_charAudio.AudioSummonWarrior();
+		if (villager == null)
+			return;
+
+		SpellSummon summonSpell = _spellLoadout[_closestMatchIndex] as SpellSummon;
+
+		Vector3[] placesToSpawn = villager.MurderedVillagerLocation(summonSpell._healthRequired, AccuracyToModifier());
+
+		UnitGroup groupToSpawn = (summonSpell._unitStyle == _minions[0]._UnitStyle) ? _minions[0] : _minions[1];
+
+		foreach (Vector3 spawnLocation in placesToSpawn) {
+			groupToSpawn.AddUnit(1, spawnLocation);
+			_charAudio.AudioSummonWarrior();
+		}
 
 		// Finalise casting interface and move back to normal controls.
 		TypeStatus(false, true);
 
 	}
+
+	private float AccuracyToModifier() => Mathf.Clamp(Dragontale.MathFable.Remap(_distanceToClosest, _closestMatch.Length, 0, 0, 2), 0, 2);
 
 	/* ----------------------------------------------------------------------------- */
 	// Input Field Calls

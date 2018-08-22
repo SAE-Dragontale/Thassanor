@@ -1,12 +1,13 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			SpellSummon.cs
-   Version:			0.2.0
+   Version:			0.2.2
    Description: 	The basic spell modification that summons the undead. This spell handles killing, and resurrecting neutral actors.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "New Summon Minion", menuName = "Spells/Summon")]
 public class SpellSummon : Spell {
 
@@ -32,6 +33,8 @@ public class SpellSummon : Spell {
 
 	[Tooltip("The Summon-Type this spell is. Necromancy kills alive units and resurrects them. Resurrection simply revives previously undead units.")]
 	public SummonType _summonType;
+
+	public UnitStyle _unitStyle;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Calls

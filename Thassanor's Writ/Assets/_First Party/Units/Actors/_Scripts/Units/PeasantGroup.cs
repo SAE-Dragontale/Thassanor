@@ -6,6 +6,8 @@
    Description: 	Inheritance structure that allows peasants to move freely around the village's range.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PeasantGroup : UnitGroup {
@@ -49,9 +51,20 @@ public class PeasantGroup : UnitGroup {
 	}
 
 	// Method specifically for killing summonable-entities. We pass information to make turning the undead easier to deal with.
-	public void SacrificeToSummon(int healthDamage, ref UnitGroup unitGroup) {
+	public Vector3[] MurderedVillagerLocation(int summonCost, float accuracyModifier) {
 
-		ChangeHealth(healthDamage);
+		int arrayLength = Mathf.Max(Mathf.CeilToInt(summonCost * accuracyModifier),0);
+
+		var someList = _everyUnit.ToList();
+
+		List<Vector3> vectorList = new List<Vector3>();
+
+		for (int i = Mathf.Min(arrayLength,_everyUnit.Length); i > 0; i--) {
+			vectorList.Add(_everyUnit[i].transform.position);
+		}
+
+		MinusUnit(Mathf.Min(arrayLength, _everyUnit.Length));
+		return vectorList.ToArray();
 		
 	}
 

@@ -34,6 +34,10 @@ public class CharStats : MonoBehaviour {
 	[SerializeField] private Collider[] _scanForPlayer;
 	[SerializeField] private Collider[] _scanForVillagers;
 
+	public Collider _GetVillagerInRange {
+		get { return (_scanForVillagers.Length > 0) ? _scanForVillagers?[0] : null; }
+	}
+
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */

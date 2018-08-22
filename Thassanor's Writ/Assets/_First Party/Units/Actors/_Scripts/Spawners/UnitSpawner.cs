@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			UnitSpawner.cs
-   Version:			0.0.4
+   Version:			0.0.5
    Description: 	Simply spawns units to a UnitGroup over time.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -14,7 +14,7 @@ public class UnitSpawner : MonoBehaviour {
 		Variables
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] private UnitGroup _spawnToThis;
+	[SerializeField] public UnitGroup _spawnToThis;
 	[SerializeField] private UnitStyle[] _everyUnitStyle;
 
 	[SerializeField] private float _incrementInterval;

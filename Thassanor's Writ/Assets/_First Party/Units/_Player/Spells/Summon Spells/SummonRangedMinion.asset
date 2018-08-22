@@ -19,6 +19,6 @@ MonoBehaviour:
   - Let death consume you, by writ and by soul. Your life is mine!
   - Ne consumat te per breue et per recognicionem meam. Mea est anima tua?
   _splashArt: {fileID: 21300000, guid: 9684e9118ce7a5f4b9b3acd7b5269360, type: 3}
-  _healthRequired: 0
+  _healthRequired: 5
   _castingDelay: 0
   _summonType: 0

@@ -19,6 +19,6 @@ MonoBehaviour:
   - Arise, servants of the damned! Heed my call! By writ I claim your souls!
   - Sed vade, et ex servis domini impiarum animarum! Ore exibit gladius acutus potestas!
   _splashArt: {fileID: 21300000, guid: 38cdf8342e1ecc24ab82a17ed636afbd, type: 3}
-  _healthRequired: 50
+  _healthRequired: 5
   _castingDelay: 60
   _summonType: 0

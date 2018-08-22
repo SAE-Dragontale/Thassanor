@@ -1,12 +1,13 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Spell.cs
-   Version:			0.2.0
+   Version:			0.2.1
    Description: 	The base inheritance framework for player spells. This class contains any global calls or variables needed to reference by the loadouts.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
 
+[System.Serializable]
 public abstract class Spell : ScriptableObject {
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //

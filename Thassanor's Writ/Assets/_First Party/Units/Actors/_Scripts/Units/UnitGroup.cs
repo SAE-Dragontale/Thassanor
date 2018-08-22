@@ -31,10 +31,8 @@ public class UnitGroup : NetworkBehaviour {
 	[SerializeField] protected Unit[] _everyUnit;           // The units within the group.
 
 	public UnitStyle _UnitStyle {
-		set {
-			_unitStyle = value;
-			UnitsFromChildren();
-		}
+		set { _unitStyle = value; UnitsFromChildren(); }
+		get { return _unitStyle; }
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -187,7 +185,7 @@ public class UnitGroup : NetworkBehaviour {
 		for (int i = _everyUnit.Length - updatedHealth; i > 0; i--) {
 
 			_everyUnit[i].transform.parent = null;
-			Destroy(_everyUnit[i].gameObject);
+			_everyUnit[i].Kill();
 
 		}
 

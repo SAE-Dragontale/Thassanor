@@ -1,7 +1,7 @@
 ﻿/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
    Author: 			Hayden Reeve
    File:			Unit.cs
-   Version:			0.4.2
+   Version:			0.4.3
    Description: 	The base container class for all non player character actors. This script handles invidiual behaviour, which is limited to: Visuals
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -28,8 +28,8 @@ public class Unit : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 	protected enum UnitState {
-		Moving,	// When the unit is simply moving towards its destination.
-		Attacking,	// When the unit is engaged in combat.
+		Following,	// When the unit is simply moving towards its destination.
+		Assaulting,	// When the unit is engaged in combat.
 		Dead		// If the unit has been killed and is awaiting resurrection.
 	}
 
@@ -90,28 +90,9 @@ public class Unit : MonoBehaviour {
 	// Update is called once per frame.
 	protected void Update () {
 
-		switch (_unitState) {
-
-			case (UnitState.Moving):
-				BehaviourLoopFollowing();
-				return;
-
-			case (UnitState.Attacking):
-				BehaviourLoopAttacking();
-				return;
-
-			case (UnitState.Dead):
-				BehaviourLoopDead();
-				return;
-
-		}
-
-	}
-
-	/* ----------------------------------------------------------------------------- */
-	// Following
-
-	protected void BehaviourLoopFollowing() {
+		// If we're dead, exit update.
+		if (_unitState == UnitState.Dead)
+			return;
 
 		AnimatorMovement();
 
@@ -119,30 +100,22 @@ public class Unit : MonoBehaviour {
 		if (_lastDestination == _destination.position)
 			return;
 
-		_ai?.SetDestination(_destination.position);
-		_lastDestination = _destination.position;			
+		_ai.SetDestination(_destination.position);
+		_lastDestination = _destination.position;
 
-	}
+		// Now, conditionally change what we're doing depending on our state.
+		_ai.stoppingDistance = (_unitState == UnitState.Assaulting) ? _unitStyle._range : 0f;
 
-	/* ----------------------------------------------------------------------------- */
-	// Attacking
-
-	protected void BehaviourLoopAttacking() {
-
-		AnimatorMovement();
-
-	}
-
-	/* ----------------------------------------------------------------------------- */
-	// Dead
-
-	protected void BehaviourLoopDead() {
+		if (_unitState == UnitState.Assaulting)
+			AnimatorAttack(_ai.remainingDistance <= _unitStyle._range);
 
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Class Functions
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+	protected float GetProximity() => _ai.velocity.sqrMagnitude;
 
 	// Here we're making sure to update the current animator variables according to our movement.
 	protected void AnimatorMovement() {
@@ -159,19 +132,15 @@ public class Unit : MonoBehaviour {
 
 	}
 
-	protected float GetProximity() => _ai.velocity.sqrMagnitude;
+	public void Kill() {
 
-	protected void AnimatorAttack() {
-
-
-
-	}
-
-	protected void AnimatorDeath() {
-
-
+		AnimatorDeath();
+		_unitState = UnitState.Dead;
 
 	}
+
+	protected void AnimatorAttack(bool toggle) => _an.SetBool("flVelocity", toggle);
+	protected void AnimatorDeath() => _an.SetBool("isDead", true);
 
 	/* ----------------------------------------------------------------------------- */
 

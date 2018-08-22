@@ -38,11 +38,14 @@ public class LevelControlsUI : MonoBehaviour {
     void Start()
     {
         thassanor = FindObjectOfType<Dragontale.Thassanor>();
-        //seedField.onValueChanged.AddListener(SeedInputField);
-        thassanor.GetComponent<MapData>()._columns = 20;
-        thassanor.GetComponent<MapData>()._rows = 20;
+        thassanor.GetComponent<MapData>()._columns = 5;
+        thassanor.GetComponent<MapData>()._rows = 5;
         thassanor.GetComponent<MapData>()._waterSize = 4;
         thassanor.GetComponent<MapData>()._townSpread = 2;
+        thassanor.GetComponent<MapData>().typingDifficulty = 1;
+        thassanor.GetComponent<MapData>()._itSeed = 123123;
+        thassanor.GetComponent<MapData>()._maxTownCount = 4;
+
         playerInfoList.AddRange(GameObject.FindGameObjectsWithTag("PlayerInfo"));
         foreach(GameObject player in playerInfoList)
         {
@@ -71,18 +74,18 @@ public class LevelControlsUI : MonoBehaviour {
     {
         if(mapSize == 0)
         {
-            thassanor.GetComponent<MapData>()._columns = 20;
-            thassanor.GetComponent<MapData>()._rows = 20;
+            thassanor.GetComponent<MapData>()._columns = 5;
+            thassanor.GetComponent<MapData>()._rows = 5;
         }
         else if(mapSize == 1)
         {
-            thassanor.GetComponent<MapData>()._columns = 40;
-            thassanor.GetComponent<MapData>()._rows = 40;
+            thassanor.GetComponent<MapData>()._columns = 10;
+            thassanor.GetComponent<MapData>()._rows = 10;
         }
         else if(mapSize == 2)
         {
-            thassanor.GetComponent<MapData>()._columns = 80;
-            thassanor.GetComponent<MapData>()._rows = 80;
+            thassanor.GetComponent<MapData>()._columns = 15;
+            thassanor.GetComponent<MapData>()._rows = 15;
         }
     }
 

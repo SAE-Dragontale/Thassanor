@@ -134,11 +134,13 @@ namespace Prototype.NetworkLobby
             {
                 Debug.Log("Player is local");
                 SetupLocalPlayer();
+                SetUpLevelOptionsPanel();
             }
             else
             {
                 Debug.Log("Player is NOT local");
                 SetupOtherPlayer();
+                SetUpLevelOptionsPanel();
             }
 
             //setup the player data on UI. The value are SyncVar so the player
@@ -260,8 +262,8 @@ namespace Prototype.NetworkLobby
             GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = false;
         }
 
-    //This enable/disable the remove button depending on if that is the only local player or not
-    public void CheckRemoveButton()
+        //This enable/disable the remove button depending on if that is the only local player or not
+        public void CheckRemoveButton()
         {
             if (!isLocalPlayer)
                 return;
@@ -302,7 +304,7 @@ namespace Prototype.NetworkLobby
         }
 
         public void OnPlayerListChanged(int idx)
-        { 
+        {
             GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
         }
 
@@ -397,7 +399,7 @@ namespace Prototype.NetworkLobby
             }
             else if (isServer)
                 LobbyManager.s_Singleton.KickPlayer(connectionToClient);
-                
+
         }
 
         public void ToggleJoinButton(bool enabled)
@@ -463,7 +465,7 @@ namespace Prototype.NetworkLobby
 
             OnMyColor(playerColor);
         }
-        
+
         //[ClientRpc]
         //public void RpcSendColorToClient(Color newColor)
         //{
@@ -485,7 +487,7 @@ namespace Prototype.NetworkLobby
         }
 
         [Command]
-        public void CmdSpell1Changed (int index)
+        public void CmdSpell1Changed(int index)
         {
             spell1Index = index;
             spell1Name = spell1DropDown.options[index].text;

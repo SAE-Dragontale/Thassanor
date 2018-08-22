@@ -15,6 +15,8 @@ namespace Prototype.NetworkLobby
         public InputField ipInput;
         public InputField matchNameInput;
 
+        public PlayerData playerData;
+
         public void OnEnable()
         {
             lobbyManager.topPanel.ToggleVisibility(true);
@@ -24,15 +26,19 @@ namespace Prototype.NetworkLobby
 
             matchNameInput.onEndEdit.RemoveAllListeners();
             matchNameInput.onEndEdit.AddListener(onEndEditGameName);
+
+            playerData = FindObjectOfType<Dragontale.Thassanor>().GetComponent<PlayerData>(); ;
         }
 
         public void OnClickHost()
         {
             lobbyManager.StartHost();
+            playerData.isHost = true;
         }
 
         public void OnClickJoin()
         {
+            playerData.isHost = false;
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;
@@ -56,6 +62,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickCreateMatchmakingGame()
         {
+            playerData.isHost = true;
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
                 matchNameInput.text,
@@ -73,6 +80,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickOpenServerList()
         {
+            playerData.isHost = false;
             lobbyManager.StartMatchMaker();
             lobbyManager.backDelegate = lobbyManager.SimpleBackClbk;
             lobbyManager.ChangeTo(lobbyServerList);

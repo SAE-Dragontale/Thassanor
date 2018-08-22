@@ -38,7 +38,7 @@ public class CharSpells : NetworkBehaviour {
 	[SerializeField] private Spell[] _spellLoadout;
 
 	public Spell[] _SpellLoadout {
-		set { /*_spellLoadout = value;*/ InitialiseSpells(); }
+		set { _spellLoadout = value; InitialiseSpells(); }
 	}
 
 	[HideInInspector] public int _difficulty;		// What is the current difficulty level set by the lobby?

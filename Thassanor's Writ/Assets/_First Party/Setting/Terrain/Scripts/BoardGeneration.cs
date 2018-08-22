@@ -164,7 +164,19 @@ public class BoardGeneration : MonoBehaviour {
 
 		//the amount of tiles which spreads the towns apart
 		int townSpreadCur = 0;
-		//keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
+        //keeps this a constant size compared to the grid/map size, this is the number of steps in tiles it takes until another town can spawn
+
+        //avoids the town spread being so high on small grid sizes, that towns just dont spawn
+        if (_townSpread > _columns * 2 || _townSpread > _rows * 2)
+        {
+            _townSpread = Mathf.Max(_columns, _rows);
+        }
+
+        //stops there from being an over abundance of towns 
+        if (_maxTownCount > _columns / 2 || _maxTownCount > _rows / 2)
+        {
+            _maxTownCount = Mathf.Max(_columns, _rows) / 2;
+        }
 
 		if(_townSpread % 2 == 0)
 		{_townSpread -= 1;}
@@ -190,10 +202,10 @@ public class BoardGeneration : MonoBehaviour {
 						mirrorListCount++;
                         
 						//perlin value for water
-						if (_fltPerlinValue < _waterAmount) 
-						{
-							InstantiateWater (_waterTiles, x, z);									
-						}
+						//if (_fltPerlinValue < _waterAmount) 
+						//{
+						//	InstantiateWater (_waterTiles, x, z);									
+						//}
 						
 						//perlin value for towns to spawn
 						if (_fltPerlinValue < .3f && _fltPerlinValue > -.3f) 

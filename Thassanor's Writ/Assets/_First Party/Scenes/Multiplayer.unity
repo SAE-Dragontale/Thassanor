@@ -301,12 +301,22 @@ Prefab:
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _columns
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
         type: 2}
       propertyPath: _rows
-      value: 10
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _townSpread
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114137187715621740, guid: 8bcd844316c76b1479aaaba667ee844f,
+        type: 2}
+      propertyPath: _maxTownCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcd844316c76b1479aaaba667ee844f, type: 2}

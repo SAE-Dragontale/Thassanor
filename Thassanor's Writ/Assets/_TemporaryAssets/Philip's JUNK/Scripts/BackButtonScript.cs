@@ -10,17 +10,20 @@ using UnityEngine;
 
 public class BackButtonScript : MonoBehaviour {
 
-    public int disableNum;
-    public int enableNum;
+    //public int disableNum;
+    //public int enableNum;
+    public string disableName;
+    public string enableName;
     public int focusNum;
     public MainMenu mainMenu;
 
     public void Start()
     {
-        disableNum = mainMenu.enableNum;
-        enableNum = mainMenu.disableNum;
-         focusNum = mainMenu.previousFocusNum;
-
+        //disableNum = mainMenu.enableNum;
+        //enableNum = mainMenu.disableNum;
+        disableName = mainMenu.enableName;
+        enableName = mainMenu.disableName;
+        focusNum = mainMenu.previousFocusNum;
     }
 
     public void OnEnable()

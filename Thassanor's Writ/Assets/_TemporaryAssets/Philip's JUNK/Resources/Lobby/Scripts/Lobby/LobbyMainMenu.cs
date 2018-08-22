@@ -11,10 +11,11 @@ namespace Prototype.NetworkLobby
 
         public RectTransform lobbyServerList;
         public RectTransform lobbyPanel;
-        public RectTransform lobbyScroll;
 
         public InputField ipInput;
         public InputField matchNameInput;
+
+        public PlayerData playerData;
 
         public void OnEnable()
         {
@@ -25,21 +26,19 @@ namespace Prototype.NetworkLobby
 
             matchNameInput.onEndEdit.RemoveAllListeners();
             matchNameInput.onEndEdit.AddListener(onEndEditGameName);
+
+            playerData = FindObjectOfType<Dragontale.Thassanor>().GetComponent<PlayerData>(); ;
         }
 
         public void OnClickHost()
         {
             lobbyManager.StartHost();
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().seedField.interactable = true;
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().mapSizeDropDown.interactable = true;
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().waterSizeField.interactable = true;
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().townSpreadField.interactable = true;
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().maxTownCountField.interactable = true;
-            GameObject.FindGameObjectWithTag("LevelOptions").GetComponent<LevelControlsUI>().typingDifficultyDropDown.interactable = true;
+            playerData.isHost = true;
         }
 
         public void OnClickJoin()
         {
+            playerData.isHost = false;
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;
@@ -63,6 +62,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickCreateMatchmakingGame()
         {
+            playerData.isHost = true;
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
                 matchNameInput.text,
@@ -80,6 +80,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickOpenServerList()
         {
+            playerData.isHost = false;
             lobbyManager.StartMatchMaker();
             lobbyManager.backDelegate = lobbyManager.SimpleBackClbk;
             lobbyManager.ChangeTo(lobbyServerList);

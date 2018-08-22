@@ -39,20 +39,24 @@ public class MainMenu : MonoBehaviour {
     [Tooltip("Store all windows here, window named 'MainMenu' will be set active on runtime.")]
     //array storing all the UI windows 
     public GameObject[] windowsUI;
-    public int disableNum;
-    public int enableNum;
+    //public int disableNum;
+    //public int enableNum;
+    public string disableName;
+    public string enableName;
     public int focusNum;
     public int previousFocusNum;
     public int lobbyManagerIndex;
     public int serverListIndex;
     private bool startAnim;
+    public RectTransform transform;
+
+    public AudioManager audioManager;
 
     private void Awake()
     {
         scrollAnimator = GetComponent<Animator>();
         menuContainers = GameObject.FindGameObjectsWithTag("Menu Objects");
         focusElements = GameObject.FindGameObjectsWithTag("Focus");
-
         for (int i = 1; i < menuContainers.Length; i++)
         {
             if(menuContainers[i].name == "LobbyManager")
@@ -77,6 +81,7 @@ public class MainMenu : MonoBehaviour {
 
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         MakeMainMenuActive();
         focusElements[5].SetActive(true);
     }
@@ -93,21 +98,34 @@ public class MainMenu : MonoBehaviour {
     //    menuContainers[lobbyManagerIndex].SetActive(true);
     //}
 
-    public void uiEnable(int i)
+    //public void uiEnable(int i)
+    //{
+    //    enableNum = i;
+    //}
+
+    //public void uiDisable(int i)
+    //{
+    //    disableNum = i;
+    //}
+
+    public void UIEnable(string name)
     {
-        //menuContainers[i].SetActive(true);
-        enableNum = i;
+        enableName = name;
     }
 
-    public void uiDisable(int i)
+    public void UIDisable(string name)
     {
-        //menuContainers[i].SetActive(false);
-        disableNum = i;
+        disableName = name;
     }
 
     public void uiFocusElement(int i)
     {
         focusNum = i;
+    }
+
+    public void ButtonTransform(RectTransform passedObject)
+    {
+        transform = passedObject;
     }
 
     public void PreviousButtonFocus(GameObject button)
@@ -130,18 +148,45 @@ public class MainMenu : MonoBehaviour {
         scrollAnimator.SetBool("StartAnimation", true);
     }
 
+    //public void ActiveUI()
+    //{
+    //    menuContainers[enableNum].SetActive(true);
+    //    menuContainers[disableNum].SetActive(false);
+    //    EventSystem.current.SetSelectedGameObject(focusElements[focusNum]);
+    //    scrollAnimator.SetBool("StartAnimation", false);
+    //}
+
     public void ActiveUI()
     {
-        menuContainers[enableNum].SetActive(true);
-        menuContainers[disableNum].SetActive(false);
+        //audioManager.UIButtonClick(new Vector3 (transform.position.x, transform.position.y, transform.position.z));
+        foreach (GameObject menuItem in menuContainers)
+        {
+            if (menuItem.name == disableName)
+            {
+                menuItem.SetActive(false);
+            }
+            else if (menuItem.name == enableName)
+            {
+                menuItem.SetActive(true);
+            }
+        }
+
         EventSystem.current.SetSelectedGameObject(focusElements[focusNum]);
         scrollAnimator.SetBool("StartAnimation", false);
     }
 
+    //public void BackButton(BackButtonScript script)
+    //{
+    //    enableNum = script.enableNum;
+    //    disableNum = script.disableNum;
+    //    focusNum = script.focusNum;
+    //    StartAnimation();
+    //}
+
     public void BackButton(BackButtonScript script)
     {
-        enableNum = script.enableNum;
-        disableNum = script.disableNum;
+        enableName = script.enableName;
+        disableName = script.disableName;
         focusNum = script.focusNum;
         StartAnimation();
     }
@@ -154,15 +199,15 @@ public class MainMenu : MonoBehaviour {
     //    EventSystem.current.SetSelectedGameObject(newgameButton);
     //}
 
-        //public void ButtonLore()
-        //{
+    //public void ButtonLore()
+    //{
 
-        //}
+    //}
 
-        //public void ButtonHelp()
-        //{
+    //public void ButtonHelp()
+    //{
 
-        //}
+    //}
 
     //public void ButtonOptions()
     //{
